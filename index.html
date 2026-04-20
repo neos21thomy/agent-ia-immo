@@ -1345,6 +1345,148 @@
       transform: scale(1.03);
       box-shadow: 0 0 60px rgba(139,92,246,.45);
     }
+
+    /* ══ TEMPS GAGNÉ PAR SEMAINE ══════════════════════════════════════ */
+    .time-saved {
+      margin: 3rem auto 0;
+      max-width: 640px;
+      background: linear-gradient(135deg, rgba(139,92,246,.08) 0%, rgba(109,40,217,.04) 100%);
+      border: 1px solid rgba(139,92,246,.3);
+      border-radius: 16px;
+      padding: 1.4rem 1.6rem;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .time-saved::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -10%;
+      width: 120%;
+      height: 200%;
+      background: radial-gradient(ellipse at center, rgba(139,92,246,.12) 0%, transparent 60%);
+      pointer-events: none;
+      animation: timeGlow 6s ease-in-out infinite;
+    }
+
+    @keyframes timeGlow {
+      0%, 100% { opacity: .6; transform: translateY(0); }
+      50%      { opacity: 1; transform: translateY(-10px); }
+    }
+
+    .time-saved-top {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+      flex-wrap: wrap;
+    }
+
+    .time-saved-icon {
+      font-size: 1.8rem;
+      filter: drop-shadow(0 0 10px rgba(139,92,246,.5));
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .time-saved-text {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-width: 180px;
+      text-align: left;
+    }
+
+    .time-saved-hours {
+      font-size: 2rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--v300), #e879f9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+
+    .time-saved-label {
+      font-size: .85rem;
+      color: var(--muted);
+      margin-top: .25rem;
+      font-weight: 500;
+    }
+
+    .time-saved-badge {
+      background: rgba(74,222,128,.12);
+      border: 1px solid rgba(74,222,128,.35);
+      color: #4ade80;
+      padding: .35rem .8rem;
+      border-radius: 999px;
+      font-size: .75rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .time-saved-bar {
+      position: relative;
+      z-index: 1;
+      height: 14px;
+      background: rgba(139,92,246,.08);
+      border: 1px solid rgba(139,92,246,.2);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: .5rem;
+    }
+
+    .time-saved-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--v700) 0%, var(--v500) 50%, #e879f9 100%);
+      border-radius: 999px;
+      transition: width 2.5s cubic-bezier(.2,.8,.2,1);
+      box-shadow: 0 0 12px rgba(139,92,246,.5);
+      position: relative;
+    }
+
+    .time-saved-fill::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 14px;
+      height: 100%;
+      background: rgba(255,255,255,.5);
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(255,255,255,.8);
+      filter: blur(3px);
+    }
+
+    .time-saved-ticks {
+      display: flex;
+      justify-content: space-between;
+      font-size: .68rem;
+      color: var(--muted);
+      padding: 0 2px;
+      letter-spacing: .5px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .time-saved-caption {
+      margin-top: .8rem;
+      font-size: .75rem;
+      color: var(--muted);
+      text-align: center;
+      font-style: italic;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 600px) {
+      .time-saved { padding: 1.2rem; }
+      .time-saved-hours { font-size: 1.6rem; }
+      .time-saved-badge { font-size: .7rem; padding: .25rem .6rem; }
+      .time-saved-top { gap: .7rem; }
+    }
   </style>
 </head>
 <body>
@@ -1395,6 +1537,26 @@
         <div class="stat-label">Pour démarrer</div>
       </div>
     </div>
+
+    <!-- Temps gagné par semaine -->
+    <div class="time-saved fade-up">
+      <div class="time-saved-top">
+        <span class="time-saved-icon">⏱</span>
+        <div class="time-saved-text">
+          <span class="time-saved-hours">0h</span>
+          <span class="time-saved-label">gagnées par semaine avec ton assistant IA</span>
+        </div>
+        <span class="time-saved-badge">≈ 1 journée de travail</span>
+      </div>
+      <div class="time-saved-bar">
+        <div class="time-saved-fill"></div>
+        <div class="time-saved-ticks">
+          <span>0h</span><span>2h</span><span>4h</span><span>6h</span><span>8h</span><span>10h</span><span>12h</span>
+        </div>
+      </div>
+      <p class="time-saved-caption">Moyenne constatée sur la base des 16 conseillers utilisateurs — posts, commentaires, messages, publications GMB & LinkedIn inclus.</p>
+    </div>
+
   </div>
   <div class="scroll-indicator">↓</div>
 </section>
@@ -2042,7 +2204,7 @@
           <span class="phone-dot"></span>
           Appeler · RDV offert
         </a>
-        <a href="mailto:favard1@icloud.com" class="btn-primary" style="display:inline-block">
+        <a href="mailto:thomas@leadengineai.fr" class="btn-primary" style="display:inline-block">
           Envoyer un email →
         </a>
       </div>
@@ -2126,17 +2288,56 @@
     requestAnimationFrame(step);
   };
 
-  const statNums = document.querySelectorAll('.stat-num');
-  const statObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        const original = e.target.textContent;
-        animateCount(e.target, original);
-        statObs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.5 });
-  statNums.forEach(el => statObs.observe(el));
+  /* Seul le premier compteur (16 Conseillers actifs) s'anime — les autres restent figés */
+  const firstStat = document.querySelector('.stat-num');
+  if (firstStat) {
+    const statObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const original = e.target.textContent;
+          animateCount(e.target, original);
+          statObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    statObs.observe(firstStat);
+  }
+
+  /* Barre de temps gagné — remplissage progressif au scroll */
+  const timeBar = document.querySelector('.time-saved-fill');
+  if (timeBar) {
+    const barObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          timeBar.style.width = '85%';
+          barObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    barObs.observe(timeBar);
+  }
+
+  /* Compteur d'heures gagnées */
+  const hoursEl = document.querySelector('.time-saved-hours');
+  if (hoursEl) {
+    const hoursObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          let n = 0;
+          const tick = setInterval(() => {
+            n += 0.5;
+            hoursEl.textContent = n + 'h';
+            if (n >= 10) {
+              hoursEl.textContent = '10h';
+              clearInterval(tick);
+            }
+          }, 150);
+          hoursObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    hoursObs.observe(hoursEl);
+  }
 
   /* ── PARALLAXE LÉGER SUR HERO ── */
   const hero = document.querySelector('.hero');
