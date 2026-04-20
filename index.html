@@ -180,10 +180,13 @@
 
     .hero-sub {
       max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
       font-size: 1.15rem;
       color: var(--muted);
       margin-bottom: 2.5rem;
       line-height: 1.7;
+      text-align: center;
     }
 
     .hero-actions {
@@ -459,6 +462,43 @@
       font-size: 2.4rem;
       font-weight: 900;
       color: var(--v300);
+    }
+
+    /* Bouton "Nous contacter" en mini pill cliquable */
+    a.price-contact {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .88rem;
+      font-weight: 600;
+      color: var(--v300);
+      background: rgba(139,92,246,.1);
+      border: 1px solid rgba(139,92,246,.3);
+      padding: .45rem .9rem;
+      border-radius: 999px;
+      text-decoration: none;
+      letter-spacing: .3px;
+      animation: subtleZoom 2.4s ease-in-out infinite;
+      transition: background .25s, border-color .25s, transform .2s;
+    }
+
+    a.price-contact:hover {
+      background: rgba(139,92,246,.18);
+      border-color: var(--v500);
+      transform: scale(1.06);
+      animation: none;
+    }
+
+    a.price-contact .price-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 6px #4ade80;
+    }
+
+    @keyframes subtleZoom {
+      0%, 100% { transform: scale(1); }
+      50%      { transform: scale(1.04); }
     }
 
     .price-suffix {
@@ -1452,7 +1492,10 @@
           <div class="pack-name">Starter</div>
           <div class="pack-tagline">Pour démarrer ta présence locale sur les réseaux</div>
           <div class="pack-price">
-            <span class="price-amount">Nous contacter</span>
+            <a href="tel:+33647438492" class="price-contact">
+              <span class="price-dot"></span>
+              Nous contacter
+            </a>
           </div>
         </div>
         <div class="pack-body">
@@ -1501,7 +1544,10 @@
           <div class="pack-name">Essentiel</div>
           <div class="pack-tagline">Le pack complet pour développer ta notoriété locale</div>
           <div class="pack-price">
-            <span class="price-amount">Nous contacter</span>
+            <a href="tel:+33647438492" class="price-contact">
+              <span class="price-dot"></span>
+              Nous contacter
+            </a>
           </div>
         </div>
         <div class="pack-body">
@@ -1559,7 +1605,10 @@
           <div class="pack-name">Premium</div>
           <div class="pack-tagline">L'arsenal complet pour dominer ton marché local</div>
           <div class="pack-price">
-            <span class="price-amount">Nous contacter</span>
+            <a href="tel:+33647438492" class="price-contact">
+              <span class="price-dot"></span>
+              Nous contacter
+            </a>
           </div>
         </div>
         <div class="pack-body">
@@ -1997,17 +2046,7 @@
           Envoyer un email →
         </a>
       </div>
-      <div class="contact-info fade-up">
-        <a href="tel:+33647438492" class="contact-chip">
-          <span class="icon">📞</span>
-          06 47 43 84 92
-        </a>
-        <a href="mailto:favard1@icloud.com" class="contact-chip">
-          <span class="icon">✉️</span>
-          favard1@icloud.com
-        </a>
-      </div>
-      <p style="margin-top:1rem;font-size:.82rem;color:var(--muted);background:rgba(139,92,246,.07);border:1px solid var(--border);border-radius:8px;padding:.6rem 1rem;display:inline-block;" class="fade-up">
+      <p style="margin-top:1.5rem;font-size:.82rem;color:var(--muted);background:rgba(139,92,246,.07);border:1px solid var(--border);border-radius:8px;padding:.6rem 1rem;display:inline-block;" class="fade-up">
         📞 Un conseiller vous rappelle sous <strong style="color:var(--v300)">48h</strong> après votre prise de contact
       </p>
       <p style="margin-top:1.5rem;font-size:.8rem;color:var(--muted)" class="fade-up">
@@ -2070,7 +2109,7 @@
   }, { passive: true });
 
   /* ── COMPTEURS ANIMÉS (hero stats) ── */
-  const animateCount = (el, target, duration = 1500) => {
+  const animateCount = (el, target, duration = 3500) => {
     const isMin = /min/i.test(target);
     const num = parseInt(target, 10);
     if (!num) { el.textContent = target; return; }
