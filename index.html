@@ -636,21 +636,95 @@
       background: linear-gradient(180deg, var(--black) 0%, var(--dark) 100%);
     }
 
+    /* ── TESTIMONIALS CAROUSEL (horizontal scroll) ── */
+    .testi-wrapper {
+      position: relative;
+      margin: 0 -2rem;
+      padding: 0 2rem;
+    }
+
     .testi-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      display: flex;
       gap: 1.5rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-padding: 2rem;
+      padding: 1rem .5rem 2rem .5rem;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: var(--v600) var(--dark);
+    }
+
+    .testi-grid::-webkit-scrollbar { height: 8px; }
+    .testi-grid::-webkit-scrollbar-track {
+      background: rgba(139,92,246,.08);
+      border-radius: 10px;
+      margin: 0 2rem;
+    }
+    .testi-grid::-webkit-scrollbar-thumb {
+      background: linear-gradient(90deg, var(--v700), var(--v500));
+      border-radius: 10px;
+    }
+    .testi-grid::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(90deg, var(--v600), var(--v400));
     }
 
     .testi-card {
+      flex: 0 0 340px;
+      scroll-snap-align: start;
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 14px;
+      border-radius: 16px;
       padding: 1.75rem;
-      transition: border-color .3s;
+      transition: transform .35s cubic-bezier(.2,.8,.2,1), border-color .3s, box-shadow .35s;
+      position: relative;
+      overflow: hidden;
     }
 
-    .testi-card:hover { border-color: var(--v600); }
+    .testi-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(139,92,246,.08), transparent);
+      transition: left .7s ease;
+    }
+
+    .testi-card:hover {
+      border-color: var(--v500);
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(109,40,217,.25);
+    }
+
+    .testi-card:hover::before { left: 100%; }
+
+    .testi-scroll-hint {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      margin-top: .5rem;
+      color: var(--v400);
+      font-size: .82rem;
+      font-weight: 500;
+      letter-spacing: .3px;
+      opacity: .85;
+    }
+
+    .testi-scroll-hint .arrow-anim {
+      display: inline-block;
+      animation: slideRight 1.6s ease-in-out infinite;
+    }
+
+    @keyframes slideRight {
+      0%, 100% { transform: translateX(0); opacity: .6; }
+      50%      { transform: translateX(8px); opacity: 1; }
+    }
+
+    @media (max-width: 700px) {
+      .testi-card { flex: 0 0 85%; }
+    }
 
     .testi-stars {
       color: var(--v400);
@@ -1059,6 +1133,178 @@
     @media (max-width: 700px) {
       .about-box { grid-template-columns: 1fr; gap: 1.5rem; padding: 1.5rem; }
     }
+
+    /* ══ ANIMATIONS GÉNÉRALES ══════════════════════════════════════════ */
+
+    /* Float subtil pour les icônes des étapes */
+    .step-icon {
+      animation: float 4s ease-in-out infinite;
+    }
+    .step:nth-child(2) .step-icon { animation-delay: .3s; }
+    .step:nth-child(3) .step-icon { animation-delay: .6s; }
+    .step:nth-child(4) .step-icon { animation-delay: .9s; }
+    .step:nth-child(5) .step-icon { animation-delay: 1.2s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-6px); }
+    }
+
+    /* Glow animé sur le bouton principal */
+    .btn-primary, .nav-cta, .pack-cta.cta-solid {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::after, .nav-cta::after, .pack-cta.cta-solid::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.25), transparent);
+      transition: left .6s ease;
+    }
+
+    .btn-primary:hover::after, .nav-cta:hover::after, .pack-cta.cta-solid:hover::after {
+      left: 100%;
+    }
+
+    /* Hover des packs plus vif */
+    .pack {
+      transition: transform .35s cubic-bezier(.2,.8,.2,1), border-color .3s, box-shadow .35s;
+    }
+    .pack:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 60px rgba(109,40,217,.3);
+    }
+    .pack.featured:hover {
+      transform: translateY(-14px) scale(1.01);
+    }
+
+    /* Hover des étapes — scale + glow */
+    .step {
+      transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s, border-color .3s;
+    }
+    .step:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(109,40,217,.25);
+    }
+
+    /* Gradient animé du titre hero */
+    .hero h1 .gradient, .section-title .gradient {
+      background: linear-gradient(135deg, var(--v300) 0%, var(--v500) 40%, #e879f9 70%, var(--v300) 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientShift 6s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50%      { background-position: 100% 50%; }
+    }
+
+    /* Orbes flottantes décoratives dans le hero */
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(139,92,246,.18) 0%, transparent 70%);
+      top: 20%; right: -200px;
+      pointer-events: none;
+      animation: orbFloat 12s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33%      { transform: translate(-40px, 30px) scale(1.1); }
+      66%      { transform: translate(30px, -20px) scale(.95); }
+    }
+
+    /* Pulse animé sur le dot vert (dispo) */
+    .phone-dot, .rdv-dot, .dispo-dot {
+      animation: pulseDot 1.8s ease-in-out infinite !important;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(74,222,128,.6); }
+      50%      { opacity: .8; transform: scale(.85); box-shadow: 0 0 0 10px rgba(74,222,128,0); }
+    }
+
+    /* Hover sur les cartes contact, FAQ, témoins — effet de relief */
+    .faq-item {
+      transition: border-color .3s, box-shadow .3s, transform .25s;
+    }
+    .faq-item:hover {
+      border-color: var(--v500);
+      box-shadow: 0 6px 20px rgba(109,40,217,.15);
+    }
+
+    /* Effet parallaxe léger sur le nav au scroll */
+    nav {
+      transition: padding .3s ease, background .3s ease;
+    }
+    nav.scrolled {
+      padding: .6rem 2.5rem;
+      background: rgba(7,7,15,.95);
+    }
+
+    /* Animation d'entrée plus smooth pour fade-up */
+    .fade-up {
+      transition: opacity .8s cubic-bezier(.2,.8,.2,1), transform .8s cubic-bezier(.2,.8,.2,1) !important;
+    }
+
+    /* Badges about — pulse au hover */
+    .about-badge {
+      transition: transform .2s, background .3s;
+      cursor: default;
+    }
+    .about-badge:hover {
+      transform: translateY(-2px);
+      background: rgba(139,92,246,.2);
+    }
+
+    /* Scroll indicator hero (petite flèche qui pulse) */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--v400);
+      font-size: 1.4rem;
+      opacity: .6;
+      animation: scrollBounce 2s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    @keyframes scrollBounce {
+      0%, 100% { transform: translate(-50%, 0); opacity: .5; }
+      50%      { transform: translate(-50%, 10px); opacity: 1; }
+    }
+
+    /* Logo nav qui pulse légèrement */
+    .nav-logo {
+      transition: text-shadow .3s, transform .2s;
+    }
+    .nav-logo:hover {
+      transform: scale(1.03);
+      text-shadow: 0 0 20px rgba(139,92,246,.6);
+    }
+
+    /* Photo Thomas — hover effet */
+    .about-photo img {
+      transition: transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .5s;
+    }
+    .about-photo img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 60px rgba(139,92,246,.45);
+    }
   </style>
 </head>
 <body>
@@ -1110,6 +1356,7 @@
       </div>
     </div>
   </div>
+  <div class="scroll-indicator">↓</div>
 </section>
 
 <!-- ══ TRUST BAR ══════════════════════════════════════════════════════ -->
@@ -1497,6 +1744,12 @@
     <h2 class="section-title fade-up">Résultats concrets, terrain réel</h2>
     <p class="section-sub fade-up">Des agents immobiliers qui ont testé et qui témoignent.</p>
 
+    <div class="testi-scroll-hint fade-up">
+      <span>Fais défiler</span>
+      <span class="arrow-anim">→</span>
+    </div>
+
+    <div class="testi-wrapper">
     <div class="testi-grid">
       <div class="testi-card fade-up">
         <div class="testi-stars">★★★★★</div>
@@ -1531,6 +1784,91 @@
           </div>
         </div>
       </div>
+
+      <div class="testi-card fade-up">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Je partais de zéro sur LinkedIn. En deux mois avec le pack Starter, j'ai doublé mon réseau local et reçu 5 demandes de contact de vendeurs potentiels. Le ROI est indiscutable."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">JD</div>
+          <div>
+            <div class="testi-name">Julien D.</div>
+            <div class="testi-role">Conseiller immo · SAFTI · Tulle (19) · Pack Starter · Fév. 2026</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card fade-up">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Le plus impressionnant c'est la personnalisation. Thomas a passé du temps à comprendre ma zone, mes cibles, mon ton. Résultat : l'IA écrit comme moi, mes prospects ne voient pas la différence."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">CM</div>
+          <div>
+            <div class="testi-name">Caroline M.</div>
+            <div class="testi-role">Conseillère immo · Capifrance · Bordeaux (33) · Pack Premium · Janv. 2026</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card fade-up">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Ce que j'aime c'est que ce n'est pas un bot qui tourne seul. Je supervise, je valide, je garde le contrôle. Et en 20 min je fais ce qui me prenait une matinée entière."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">PL</div>
+          <div>
+            <div class="testi-name">Pierre L.</div>
+            <div class="testi-role">Conseiller immo · BSK Immobilier · Toulouse (31) · Pack Essentiel · Mars 2026</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card fade-up">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"J'étais sceptique au début — encore un outil qui promet monts et merveilles. Mais la vraie différence c'est le suivi. Thomas répond sous 48h, toujours dispo, c'est rare aujourd'hui."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">NF</div>
+          <div>
+            <div class="testi-name">Nathalie F.</div>
+            <div class="testi-role">Conseillère immo · Dr House Immo · Clermont-Ferrand (63) · Pack Premium · Fév. 2026</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card fade-up">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Les rapports de bien générés par l'IA ont changé ma vie. Mes clients reçoivent des analyses premium en 5 minutes, au lieu de 2h de rédaction. Ils sont bluffés, je signe plus de mandats."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">LB</div>
+          <div>
+            <div class="testi-name">Ludovic B.</div>
+            <div class="testi-role">Conseiller immo · IAD · Nantes (44) · Pack Premium · Janv. 2026</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card fade-up">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Pour moi qui déteste écrire sur les réseaux, c'est la solution parfaite. L'IA propose, j'ajuste, je publie. Mon mur Facebook est enfin vivant sans que ça me prenne des heures."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">ED</div>
+          <div>
+            <div class="testi-name">Émilie D.</div>
+            <div class="testi-role">Conseillère immo · Optimhome · Angoulême (16) · Pack Starter · Mars 2026</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card fade-up">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"En 6 semaines j'ai signé 2 mandats grâce à ma visibilité LinkedIn renforcée. Le pack Essentiel s'est amorti en une transaction. Je recommande à tous mes collègues du réseau."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">RG</div>
+          <div>
+            <div class="testi-name">Romain G.</div>
+            <div class="testi-role">Conseiller immo · Propriétés Privées · Bergerac (24) · Pack Essentiel · Fév. 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
     </div>
   </div>
 </section>
@@ -1723,6 +2061,54 @@
   setTimeout(() => {
     document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
   }, 800);
+
+  /* ── NAV SCROLL EFFECT ── */
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  }, { passive: true });
+
+  /* ── COMPTEURS ANIMÉS (hero stats) ── */
+  const animateCount = (el, target, duration = 1500) => {
+    const isMin = /min/i.test(target);
+    const num = parseInt(target, 10);
+    if (!num) { el.textContent = target; return; }
+    let start = 0;
+    const startTime = performance.now();
+    const step = (now) => {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.floor(num * eased);
+      el.textContent = current + (isMin ? ' min' : '');
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = target;
+    };
+    requestAnimationFrame(step);
+  };
+
+  const statNums = document.querySelectorAll('.stat-num');
+  const statObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const original = e.target.textContent;
+        animateCount(e.target, original);
+        statObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  statNums.forEach(el => statObs.observe(el));
+
+  /* ── PARALLAXE LÉGER SUR HERO ── */
+  const hero = document.querySelector('.hero');
+  if (hero) {
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (y < window.innerHeight) {
+        hero.style.backgroundPositionY = y * 0.3 + 'px';
+      }
+    }, { passive: true });
+  }
 </script>
 
 </body>
