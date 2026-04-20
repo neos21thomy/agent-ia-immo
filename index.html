@@ -323,17 +323,29 @@
 
     .steps {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
     }
 
     .step {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 2rem 1.5rem;
+      padding: 1.5rem 1rem;
       position: relative;
       transition: border-color .3s, box-shadow .3s;
+    }
+
+    .step h3 { font-size: .95rem !important; }
+    .step p  { font-size: .82rem !important; line-height: 1.55 !important; }
+
+    @media (max-width: 1100px) {
+      .steps { grid-template-columns: repeat(5, 1fr); gap: .6rem; }
+      .step  { padding: 1.2rem .8rem; }
+      .step h3 { font-size: .85rem !important; }
+      .step p  { font-size: .75rem !important; }
+      .step-num  { font-size: 1.8rem !important; }
+      .step-icon { font-size: 1.4rem !important; }
     }
 
     .step:hover {
@@ -997,6 +1009,9 @@
       .footer-inner { flex-direction: column; text-align: center; }
 
       .steps { grid-template-columns: 1fr; }
+      .step { padding: 1.5rem 1.25rem; }
+      .step h3 { font-size: 1rem !important; }
+      .step p  { font-size: .88rem !important; }
     }
 
     /* ── TRUST BAR ── */
@@ -1487,6 +1502,230 @@
       .time-saved-badge { font-size: .7rem; padding: .25rem .6rem; }
       .time-saved-top { gap: .7rem; }
     }
+
+    /* ══ LAISSER UN AVIS — CTA + MODALE ═══════════════════════════════ */
+    .leave-review-cta {
+      margin: 2.5rem auto 0;
+      max-width: 640px;
+      background: linear-gradient(135deg, rgba(139,92,246,.12) 0%, rgba(124,58,237,.05) 100%);
+      border: 1px dashed rgba(139,92,246,.4);
+      border-radius: 16px;
+      padding: 1.4rem 1.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .lr-text {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      font-size: .95rem;
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .lr-emoji {
+      font-size: 1.4rem;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .btn-leave-review {
+      background: linear-gradient(135deg, var(--v700), var(--v500));
+      color: #fff;
+      border: none;
+      padding: .75rem 1.5rem;
+      border-radius: 999px;
+      font-size: .9rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      transition: transform .2s, box-shadow .3s;
+      box-shadow: 0 4px 20px rgba(109,40,217,.4);
+    }
+
+    .btn-leave-review:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(139,92,246,.6);
+    }
+
+    .btn-leave-review span {
+      color: #fbbf24;
+      font-size: 1rem;
+    }
+
+    /* MODALE */
+    .review-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(7,7,15,.8);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      overflow-y: auto;
+    }
+
+    .review-modal.open { display: flex; }
+
+    .review-modal-box {
+      background: var(--card);
+      border: 1px solid var(--v500);
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      max-width: 520px;
+      width: 100%;
+      position: relative;
+      box-shadow: 0 20px 80px rgba(109,40,217,.4);
+      animation: modalIn .4s cubic-bezier(.2,.8,.2,1);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(30px) scale(.95); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .review-close {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      background: rgba(139,92,246,.15);
+      border: 1px solid var(--border);
+      color: var(--white);
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      line-height: 1;
+      transition: background .2s;
+    }
+    .review-close:hover { background: rgba(139,92,246,.3); }
+
+    .review-modal-box h3 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--v300);
+      margin-bottom: .3rem;
+    }
+
+    .review-subtitle {
+      font-size: .88rem;
+      color: var(--muted);
+      margin-bottom: 1.75rem;
+    }
+
+    .review-row {
+      margin-bottom: 1.1rem;
+    }
+
+    .review-row label {
+      display: block;
+      font-size: .8rem;
+      color: var(--v300);
+      margin-bottom: .35rem;
+      font-weight: 600;
+      letter-spacing: .3px;
+    }
+
+    .review-row label span { color: #ef4444; }
+
+    .review-row input,
+    .review-row select,
+    .review-row textarea {
+      width: 100%;
+      background: var(--dark);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: .7rem .9rem;
+      color: var(--white);
+      font-size: .92rem;
+      font-family: inherit;
+      transition: border-color .2s;
+    }
+
+    .review-row input:focus,
+    .review-row select:focus,
+    .review-row textarea:focus {
+      outline: none;
+      border-color: var(--v500);
+      box-shadow: 0 0 0 3px rgba(139,92,246,.15);
+    }
+
+    .review-row textarea { resize: vertical; min-height: 90px; }
+
+    /* Étoiles interactives */
+    .review-stars {
+      display: inline-flex;
+      flex-direction: row-reverse;
+      gap: .25rem;
+    }
+    .review-stars input { display: none; }
+    .review-stars label {
+      font-size: 1.8rem;
+      color: rgba(139,92,246,.25);
+      cursor: pointer;
+      transition: color .2s, transform .15s;
+      margin: 0;
+      padding: 0;
+    }
+    .review-stars label:hover,
+    .review-stars label:hover ~ label,
+    .review-stars input:checked ~ label { color: #fbbf24; transform: scale(1.1); }
+
+    .review-submit {
+      width: 100%;
+      background: linear-gradient(135deg, var(--v700), var(--v500));
+      color: #fff;
+      border: none;
+      padding: .95rem 1.5rem;
+      border-radius: 12px;
+      font-size: .98rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: .5rem;
+      transition: box-shadow .3s, transform .2s;
+      box-shadow: 0 4px 20px rgba(109,40,217,.4);
+    }
+
+    .review-submit:hover {
+      box-shadow: 0 8px 30px rgba(139,92,246,.65);
+      transform: translateY(-2px);
+    }
+
+    .review-success {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      background: rgba(74,222,128,.1);
+      border: 1px solid rgba(74,222,128,.35);
+      border-radius: 10px;
+      color: #4ade80;
+      font-size: .9rem;
+      text-align: center;
+    }
+
+    .review-success.show { display: block; }
+
+    .review-footnote {
+      margin-top: 1.25rem;
+      font-size: .75rem;
+      color: var(--muted);
+      text-align: center;
+      font-style: italic;
+    }
+
+    @media (max-width: 560px) {
+      .review-modal-box { padding: 2rem 1.25rem; }
+      .leave-review-cta { padding: 1.2rem; text-align: center; }
+      .lr-text { justify-content: center; }
+    }
   </style>
 </head>
 <body>
@@ -1969,7 +2208,7 @@
           <div class="testi-avatar">SC</div>
           <div>
             <div class="testi-name">Sophie C.</div>
-            <div class="testi-role">Conseillère immo · IAD · Limoges (87) · Pack Essentiel · Mars 2026</div>
+            <div class="testi-role">Conseillère immo · Limoges (87) · Pack Essentiel · Mars 2026</div>
           </div>
         </div>
       </div>
@@ -1980,7 +2219,7 @@
           <div class="testi-avatar">MR</div>
           <div>
             <div class="testi-name">Marc R.</div>
-            <div class="testi-role">Conseiller immo · Optimhome · Brive (19) · Pack Premium · Fév. 2026</div>
+            <div class="testi-role">Conseiller immo · Brive (19) · Pack Premium · Fév. 2026</div>
           </div>
         </div>
       </div>
@@ -1991,7 +2230,7 @@
           <div class="testi-avatar">AL</div>
           <div>
             <div class="testi-name">Aurélie L.</div>
-            <div class="testi-role">Conseillère immo · Propriétés Privées · Périgueux (24) · Pack Essentiel · Mars 2026</div>
+            <div class="testi-role">Conseillère immo · Périgueux (24) · Pack Essentiel · Mars 2026</div>
           </div>
         </div>
       </div>
@@ -2003,7 +2242,7 @@
           <div class="testi-avatar">JD</div>
           <div>
             <div class="testi-name">Julien D.</div>
-            <div class="testi-role">Conseiller immo · SAFTI · Tulle (19) · Pack Starter · Fév. 2026</div>
+            <div class="testi-role">Conseiller immo · Tulle (19) · Pack Starter · Fév. 2026</div>
           </div>
         </div>
       </div>
@@ -2015,7 +2254,7 @@
           <div class="testi-avatar">CM</div>
           <div>
             <div class="testi-name">Caroline M.</div>
-            <div class="testi-role">Conseillère immo · Capifrance · Bordeaux (33) · Pack Premium · Janv. 2026</div>
+            <div class="testi-role">Conseillère immo · Bordeaux (33) · Pack Premium · Janv. 2026</div>
           </div>
         </div>
       </div>
@@ -2027,7 +2266,7 @@
           <div class="testi-avatar">PL</div>
           <div>
             <div class="testi-name">Pierre L.</div>
-            <div class="testi-role">Conseiller immo · BSK Immobilier · Toulouse (31) · Pack Essentiel · Mars 2026</div>
+            <div class="testi-role">Conseiller immo · Toulouse (31) · Pack Essentiel · Mars 2026</div>
           </div>
         </div>
       </div>
@@ -2039,7 +2278,7 @@
           <div class="testi-avatar">NF</div>
           <div>
             <div class="testi-name">Nathalie F.</div>
-            <div class="testi-role">Conseillère immo · Dr House Immo · Clermont-Ferrand (63) · Pack Premium · Fév. 2026</div>
+            <div class="testi-role">Conseillère immo · Clermont-Ferrand (63) · Pack Premium · Fév. 2026</div>
           </div>
         </div>
       </div>
@@ -2051,7 +2290,7 @@
           <div class="testi-avatar">LB</div>
           <div>
             <div class="testi-name">Ludovic B.</div>
-            <div class="testi-role">Conseiller immo · IAD · Nantes (44) · Pack Premium · Janv. 2026</div>
+            <div class="testi-role">Conseiller immo · Nantes (44) · Pack Premium · Janv. 2026</div>
           </div>
         </div>
       </div>
@@ -2063,7 +2302,7 @@
           <div class="testi-avatar">ED</div>
           <div>
             <div class="testi-name">Émilie D.</div>
-            <div class="testi-role">Conseillère immo · Optimhome · Angoulême (16) · Pack Starter · Mars 2026</div>
+            <div class="testi-role">Conseillère immo · Angoulême (16) · Pack Starter · Mars 2026</div>
           </div>
         </div>
       </div>
@@ -2075,11 +2314,22 @@
           <div class="testi-avatar">RG</div>
           <div>
             <div class="testi-name">Romain G.</div>
-            <div class="testi-role">Conseiller immo · Propriétés Privées · Bergerac (24) · Pack Essentiel · Fév. 2026</div>
+            <div class="testi-role">Conseiller immo · Bergerac (24) · Pack Essentiel · Fév. 2026</div>
           </div>
         </div>
       </div>
     </div>
+    </div>
+
+    <!-- CTA pour laisser un avis -->
+    <div class="leave-review-cta fade-up">
+      <div class="lr-text">
+        <span class="lr-emoji">💬</span>
+        <span>Tu es client ? Partage ton expérience</span>
+      </div>
+      <a href="mailto:thomas@leadengineai.fr?subject=Mon%20avis%20sur%20Agent%20IA%20Immo&body=Bonjour%20Thomas%2C%0A%0A---%20Mon%20avis%20---%0A%0APr%C3%A9nom%20%2B%20initiale%20nom%20%3A%20%0AVille%20%3A%20%0APack%20utilis%C3%A9%20(Starter%20%2F%20Essentiel%20%2F%20Premium)%20%3A%20%0ANote%20sur%205%20%3A%20%0A%0AMon%20t%C3%A9moignage%20%3A%0A%0A(%C3%A9cris%20ici%20ton%20ressenti%2C%20ce%20que%20tu%20as%20gagn%C3%A9%2C%20ce%20que%20tu%20recommandes...)%0A%0A---%0A%0ATu%20peux%20publier%20cet%20avis%20sur%20le%20site%20leadengineai.fr%20%3A%20%5B%20%5D%20Oui%20%20%5B%20%5D%20Non%0A%0AMerci%20!" class="btn-leave-review">
+        Laisser un avis <span>★</span>
+      </a>
     </div>
   </div>
 </section>
