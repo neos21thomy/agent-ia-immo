@@ -92,23 +92,48 @@
       color: var(--muted);
       text-decoration: none;
       font-size: .9rem;
-      transition: color .2s;
+      position: relative;
+      padding: .3rem 0;
+      transition: color .25s;
     }
 
-    .nav-links a:hover { color: var(--v300); }
+    .nav-links a::before {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--v500), #e879f9);
+      transition: width .3s ease, left .3s ease;
+      border-radius: 2px;
+    }
+
+    .nav-links a:hover {
+      color: var(--v300);
+    }
+
+    .nav-links a:hover::before {
+      width: 100%;
+      left: 0;
+    }
+
+    /* pas de soulignement sur le bouton Contact (nav-cta) */
+    .nav-links a.nav-cta::before { display: none; }
 
     .nav-cta {
-      background: var(--v600);
+      background: linear-gradient(135deg, var(--v700), var(--v500)) !important;
       color: #fff !important;
-      padding: .45rem 1.1rem;
-      border-radius: 6px;
-      font-weight: 600;
-      transition: background .2s, box-shadow .2s !important;
+      padding: .5rem 1.2rem;
+      border-radius: 8px;
+      font-weight: 700;
+      transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s !important;
+      box-shadow: 0 0 0 rgba(139,92,246,0);
     }
 
     .nav-cta:hover {
-      background: var(--v500) !important;
-      box-shadow: 0 0 18px var(--glow);
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 6px 25px rgba(139,92,246,.55);
     }
 
     /* ── HERO ── */
@@ -284,8 +309,7 @@
     }
 
     /* ── SECTION WRAPPER ── */
-    section { position: relative; z-index: 1; scroll-margin-top: 90px; }
-    html { scroll-padding-top: 90px; }
+    section { position: relative; z-index: 1; }
 
     .section-inner {
       max-width: 1100px;
@@ -2590,17 +2614,18 @@
     hoursObs.observe(hoursEl);
   }
 
-  /* ── SCROLL PRÉCIS SUR LIENS ANCRE NAV ── */
-  document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
+  /* ── SCROLL PRÉCIS SUR LES LIENS NAV (FAQ, Contact, etc.) ── */
+  document.querySelectorAll('.nav-links a[href^="#"], .nav-logo[href^="#"]').forEach(link => {
     link.addEventListener('click', (e) => {
       const id = link.getAttribute('href');
-      if (id.length <= 1) return;
+      if (!id || id === '#') return;
       const target = document.querySelector(id);
       if (!target) return;
       e.preventDefault();
-      const navHeight = document.querySelector('nav').offsetHeight;
-      const top = target.getBoundingClientRect().top + window.scrollY - navHeight - 20;
-      window.scrollTo({ top, behavior: 'smooth' });
+      const navEl = document.querySelector('nav');
+      const navH = navEl ? navEl.offsetHeight : 70;
+      const y = target.getBoundingClientRect().top + window.scrollY - navH - 16;
+      window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
     });
   });
 
