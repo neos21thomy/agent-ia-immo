@@ -1866,19 +1866,16 @@
       -webkit-backdrop-filter: blur(10px) saturate(1.2);
     }
 
-    /* BORDURE ROTATIVE pack featured */
-    .pack.featured { position: relative; background: var(--card); }
-    .pack.featured::before {
-      content: ''; position: absolute; inset: -2px; padding: 2px;
-      border-radius: inherit;
-      background: conic-gradient(from 0deg, var(--v700), #e879f9, var(--v500), var(--v700));
-      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      -webkit-mask-composite: xor; mask-composite: exclude;
-      animation: borderSpin 6s linear infinite;
-      z-index: 0; opacity: .8;
+    /* Badge "populaire" bien placé (au-dessus du pack, centré en haut) */
+    .pack.featured .pack-badge-top {
+      top: -14px !important;
+      right: 50% !important;
+      transform: translateX(50%);
+      z-index: 10;
+      box-shadow: 0 4px 14px rgba(109,40,217,.5);
+      padding: .35rem 1rem !important;
+      font-size: .72rem !important;
     }
-    @keyframes borderSpin { to { transform: rotate(360deg); } }
-    .pack.featured > * { position: relative; z-index: 1; }
 
     /* MARQUEE */
     .marquee {
@@ -1939,13 +1936,32 @@
       transition-duration: .45s !important;
     }
 
-    /* PHOTO REVEAL ROBOT — ultra subtil (petite loupe) */
-    .photo-reveal {
-      position: relative; overflow: hidden; border-radius: 24px;
+    /* PHOTO REVEAL ROBOT — cadre fixe sur la tête (portrait recadré) */
+    .about-photo.photo-reveal {
+      aspect-ratio: 1 / 1;
+      max-width: 240px;
+      max-height: 240px;
+      width: 100%;
+      margin: 0 auto;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(139,92,246,.35);
+      box-shadow: 0 0 40px rgba(109,40,217,.25);
       cursor: crosshair;
       --rx: 50%; --ry: 50%; --reveal-r: 0px;
+      position: relative;
     }
-    .photo-reveal img { display: block; width: 100%; height: auto; transition: transform .6s cubic-bezier(.2,.8,.2,1); }
+    .about-photo.photo-reveal img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      object-position: center 18% !important;
+      max-height: none !important;
+      border: none !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      display: block;
+    }
     .photo-reveal .photo-human {
       position: relative; z-index: 2;
       -webkit-mask-image: radial-gradient(circle var(--reveal-r) at var(--rx) var(--ry), transparent 0%, transparent 85%, #000 100%);
@@ -1954,8 +1970,6 @@
     }
     .photo-reveal .photo-robot {
       position: absolute; inset: 0; z-index: 1;
-      object-fit: cover; object-position: center top;
-      width: 100%; height: 100%;
       filter: saturate(1.1) contrast(1.05);
     }
     .photo-reveal::after {

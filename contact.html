@@ -340,10 +340,10 @@
       object-fit: cover;
       object-position: top;
       -webkit-mask-image: radial-gradient(circle var(--reveal-r) at var(--rx) var(--ry),
-                          transparent 0%, transparent 70%, #000 100%);
+                          transparent 0%, transparent 85%, #000 100%);
               mask-image: radial-gradient(circle var(--reveal-r) at var(--rx) var(--ry),
-                          transparent 0%, transparent 70%, #000 100%);
-      transition: -webkit-mask-image .15s, mask-image .15s;
+                          transparent 0%, transparent 85%, #000 100%);
+      transition: -webkit-mask-image .1s, mask-image .1s;
     }
     .photo-reveal .photo-robot {
       position: absolute;
@@ -366,14 +366,15 @@
       content: '';
       position: absolute;
       top: var(--ry); left: var(--rx);
-      width: var(--reveal-r); height: var(--reveal-r);
+      width: calc(var(--reveal-r) * 2); height: calc(var(--reveal-r) * 2);
       transform: translate(-50%, -50%);
       border-radius: 50%;
-      box-shadow: 0 0 40px rgba(34,211,238,.6), 0 0 80px rgba(139,92,246,.4);
+      border: 1px solid rgba(34,211,238,.35);
+      box-shadow: 0 0 12px rgba(34,211,238,.3);
       pointer-events: none;
       z-index: 3;
       opacity: 0;
-      transition: opacity .2s;
+      transition: opacity .25s;
     }
     .photo-reveal:hover::after { opacity: 1; }
     .photo-hint {
@@ -475,7 +476,7 @@
 
 <script>
 document.querySelectorAll('.photo-reveal').forEach(el => {
-  const MAX_R = 260;
+  const MAX_R = 55;
   const set = (x, y, r) => {
     el.style.setProperty('--rx', x + 'px');
     el.style.setProperty('--ry', y + 'px');
