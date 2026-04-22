@@ -1866,15 +1866,24 @@
       -webkit-backdrop-filter: blur(10px) saturate(1.2);
     }
 
-    /* Badge "populaire" bien placé (au-dessus du pack, centré en haut) */
+    /* Badge "populaire" — centré en haut, DANS le pack (pas coupé) */
+    .pack.featured {
+      overflow: visible !important;  /* permet au badge de dépasser si besoin */
+    }
     .pack.featured .pack-badge-top {
-      top: -14px !important;
-      right: 50% !important;
-      transform: translateX(50%);
+      top: 12px !important;
+      left: 50% !important;
+      right: auto !important;
+      transform: translateX(-50%);
       z-index: 10;
       box-shadow: 0 4px 14px rgba(109,40,217,.5);
-      padding: .35rem 1rem !important;
-      font-size: .72rem !important;
+      padding: .3rem 1rem !important;
+      font-size: .68rem !important;
+      white-space: nowrap;
+    }
+    /* Décale le header du pack featured pour laisser la place au badge centré */
+    .pack.featured .pack-header {
+      padding-top: 3rem !important;
     }
 
     /* MARQUEE */
@@ -1945,8 +1954,14 @@
     }
     .photo-reveal .photo-human {
       position: relative; z-index: 2;
-      -webkit-mask-image: radial-gradient(circle var(--reveal-r) at var(--rx) var(--ry), transparent 0%, transparent 85%, #000 100%);
-              mask-image: radial-gradient(circle var(--reveal-r) at var(--rx) var(--ry), transparent 0%, transparent 85%, #000 100%);
+      -webkit-mask-image: radial-gradient(circle at var(--rx) var(--ry),
+                          transparent 0,
+                          transparent var(--reveal-r),
+                          #000 calc(var(--reveal-r) + 8px));
+              mask-image: radial-gradient(circle at var(--rx) var(--ry),
+                          transparent 0,
+                          transparent var(--reveal-r),
+                          #000 calc(var(--reveal-r) + 8px));
       transition: -webkit-mask-image .1s, mask-image .1s;
     }
     .photo-reveal .photo-robot {
