@@ -1936,31 +1936,12 @@
       transition-duration: .45s !important;
     }
 
-    /* PHOTO REVEAL ROBOT — cadre fixe sur la tête (portrait recadré) */
-    .about-photo.photo-reveal {
-      aspect-ratio: 1 / 1;
-      max-width: 240px;
-      max-height: 240px;
-      width: 100%;
-      margin: 0 auto;
-      border-radius: 20px;
+    /* PHOTO REVEAL ROBOT — conserve le cadre d'origine */
+    .photo-reveal {
+      position: relative;
       overflow: hidden;
-      border: 1px solid rgba(139,92,246,.35);
-      box-shadow: 0 0 40px rgba(109,40,217,.25);
       cursor: crosshair;
       --rx: 50%; --ry: 50%; --reveal-r: 0px;
-      position: relative;
-    }
-    .about-photo.photo-reveal img {
-      width: 100% !important;
-      height: 100% !important;
-      object-fit: cover !important;
-      object-position: center 18% !important;
-      max-height: none !important;
-      border: none !important;
-      border-radius: 0 !important;
-      box-shadow: none !important;
-      display: block;
     }
     .photo-reveal .photo-human {
       position: relative; z-index: 2;
@@ -1969,7 +1950,15 @@
       transition: -webkit-mask-image .1s, mask-image .1s;
     }
     .photo-reveal .photo-robot {
-      position: absolute; inset: 0; z-index: 1;
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      max-height: 300px;
+      border-radius: 16px;
       filter: saturate(1.1) contrast(1.05);
     }
     .photo-reveal::after {
