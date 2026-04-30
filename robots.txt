@@ -1,0 +1,20 @@
+# Robots.txt — Agent IA Immo
+# https://leadengineai.fr
+
+User-agent: *
+Allow: /
+
+# Pages légales — accessibles mais pas prioritaires
+# (déjà taguées noindex en HTML)
+
+# Bloquer les fichiers techniques et sauvegardes
+Disallow: /_backups/
+Disallow: /.claude/
+Disallow: /*.txt$
+Disallow: /index-*.html
+
+# Sitemap pour aider Google
+Sitemap: https://leadengineai.fr/sitemap.xml
+
+# Délai entre requêtes (poli)
+Crawl-delay: 1
