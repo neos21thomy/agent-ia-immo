@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Agent IA Immo</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/png" href="favicon.png?v=2" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:  #07070f;
+      --dark:   #0d0d1a;
+      --card:   #11111f;
+      --v700:   #6d28d9;
+      --v600:   #7c3aed;
+      --v500:   #8b5cf6;
+      --v400:   #a78bfa;
+      --v300:   #c4b5fd;
+      --white:  #f0f0ff;
+      --muted:  #9090b8;
+      --border: rgba(139,92,246,.25);
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--black);
+      color: var(--white);
+      min-height: 100vh;
+      letter-spacing: -0.005em;
+    }
+    body::before {
+      content:''; position:fixed; inset:0; z-index:-1; pointer-events:none;
+      background:
+        radial-gradient(circle 700px at 80% 10%, rgba(124,58,237,.18), transparent 70%),
+        radial-gradient(circle 600px at 10% 80%, rgba(232,121,249,.1), transparent 70%);
+    }
+
+    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.02em; }
+
+    /* ── PIN GATE ── */
+    .pin-gate {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .pin-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 3rem 2.5rem;
+      text-align: center;
+      max-width: 420px;
+      width: 100%;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 20px 80px rgba(109,40,217,.3);
+    }
+    .pin-logo {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .pin-box h1 {
+      font-size: 1.5rem;
+      margin-bottom: .5rem;
+    }
+    .pin-box p {
+      color: var(--muted);
+      font-size: .95rem;
+      margin-bottom: 2rem;
+    }
+    .pin-input {
+      width: 100%;
+      padding: 1rem;
+      background: var(--dark);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--white);
+      font-size: 1.5rem;
+      font-family: monospace;
+      letter-spacing: .5rem;
+      text-align: center;
+      margin-bottom: 1rem;
+      transition: border-color .2s;
+    }
+    .pin-input:focus {
+      outline: none;
+      border-color: var(--v500);
+      box-shadow: 0 0 0 3px rgba(139,92,246,.2);
+    }
+    .pin-error {
+      color: #ef4444;
+      font-size: .85rem;
+      margin-bottom: 1rem;
+      min-height: 1.2em;
+    }
+    .btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--v700), var(--v500));
+      color: #fff;
+      border: none;
+      padding: 1rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(139,92,246,.5);
+    }
+
+    /* ── EDITOR ── */
+    .editor {
+      display: none;
+      min-height: 100vh;
+      padding: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .editor.show { display: block; }
+
+    .editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .editor-header h1 { font-size: 1.7rem; }
+    .logout {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: .5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: .85rem;
+      transition: all .2s;
+    }
+    .logout:hover { border-color: var(--v500); color: var(--white); }
+
+    .form-row { margin-bottom: 1.5rem; }
+    .form-row label {
+      display: block;
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--v300);
+      margin-bottom: .5rem;
+      letter-spacing: .3px;
+    }
+    .form-row input,
+    .form-row textarea,
+    .form-row select {
+      width: 100%;
+      padding: .9rem 1rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--white);
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      transition: border-color .2s;
+    }
+    .form-row input:focus,
+    .form-row textarea:focus,
+    .form-row select:focus {
+      outline: none;
+      border-color: var(--v500);
+      box-shadow: 0 0 0 3px rgba(139,92,246,.15);
+    }
+    .form-row textarea {
+      min-height: 400px;
+      resize: vertical;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+    }
+    .form-row .hint {
+      font-size: .8rem;
+      color: var(--muted);
+      margin-top: .35rem;
+    }
+
+    /* TOOLBAR markdown */
+    .md-toolbar {
+      display: flex;
+      gap: .5rem;
+      padding: .75rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-bottom: none;
+      border-radius: 10px 10px 0 0;
+      flex-wrap: wrap;
+    }
+    .md-toolbar button {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--white);
+      padding: .4rem .7rem;
+      border-radius: 6px;
+      font-size: .85rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all .2s;
+    }
+    .md-toolbar button:hover {
+      background: var(--v600);
+      border-color: var(--v600);
+    }
+    #articleContent {
+      border-top: none;
+      border-radius: 0 0 10px 10px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .btn-secondary {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--white);
+      flex: 1;
+    }
+    .btn-secondary:hover {
+      border-color: var(--v500);
+      box-shadow: 0 4px 20px rgba(139,92,246,.2);
+    }
+
+    .info-box {
+      background: rgba(139,92,246,.08);
+      border-left: 3px solid var(--v500);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 2rem;
+      font-size: .9rem;
+      color: var(--white);
+    }
+    .info-box strong { color: var(--v300); }
+    .info-box code {
+      background: rgba(0,0,0,.3);
+      padding: .15rem .4rem;
+      border-radius: 4px;
+      font-size: .85rem;
+    }
+
+    .preview {
+      display: none;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-top: 1rem;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+    .preview.show { display: block; }
+    .preview h2 { font-size: 1.4rem; margin: 1.5rem 0 .75rem; color: var(--v300); }
+    .preview h3 { font-size: 1.1rem; margin: 1rem 0 .5rem; }
+    .preview p { margin-bottom: 1rem; line-height: 1.7; }
+    .preview ul, .preview ol { margin-left: 1.5rem; margin-bottom: 1rem; }
+    .preview li { margin-bottom: .4rem; }
+    .preview strong { color: var(--v300); }
+
+    .success-msg {
+      background: rgba(74,222,128,.1);
+      border: 1px solid rgba(74,222,128,.3);
+      color: #4ade80;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-top: 1rem;
+      display: none;
+    }
+    .success-msg.show { display: block; }
+
+    @media (max-width: 600px) {
+      .editor { padding: 1rem; }
+      .actions { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ━━━━━━━━━━ PIN GATE ━━━━━━━━━━ -->
+<div class="pin-gate" id="pinGate">
+  <div class="pin-box">
+    <div class="pin-logo">🔒</div>
+    <h1>Admin Agent IA Immo</h1>
+    <p>Entre ton code à 6 chiffres pour accéder à l'éditeur d'articles.</p>
+    <input type="password" id="pinInput" class="pin-input" placeholder="••••••" maxlength="6" inputmode="numeric" pattern="[0-9]*" />
+    <div class="pin-error" id="pinError"></div>
+    <button class="btn" onclick="checkPin()">Entrer</button>
+  </div>
+</div>
+
+<!-- ━━━━━━━━━━ EDITOR ━━━━━━━━━━ -->
+<div class="editor" id="editor">
+
+  <div class="editor-header">
+    <h1>📝 Nouvel article</h1>
+    <button class="logout" onclick="logout()">Déconnexion</button>
+  </div>
+
+  <div class="info-box">
+    💡 <strong>Comment ça marche</strong> : remplis les champs, écris ton article, clique <strong>"Générer le fichier"</strong>. Tu télécharges un fichier HTML que tu uploades dans le dossier <code>blog/</code> de ton GitHub. <strong>Article en ligne en 1 min.</strong>
+  </div>
+
+  <!-- TITRE -->
+  <div class="form-row">
+    <label>📌 Titre de l'article</label>
+    <input type="text" id="articleTitle" placeholder="Ex : Comment rédiger un descriptif de bien avec l'IA" />
+    <p class="hint">Format conseillé : court et accrocheur (max 80 caractères)</p>
+  </div>
+
+  <!-- SLUG / URL -->
+  <div class="form-row">
+    <label>🔗 URL (sans espace, en minuscules)</label>
+    <input type="text" id="articleSlug" placeholder="redaction-descriptif-bien-ia" />
+    <p class="hint">Ce sera l'adresse : leadengineai.fr/blog/<strong>ton-url</strong>.html</p>
+  </div>
+
+  <!-- DESCRIPTION SEO -->
+  <div class="form-row">
+    <label>📝 Description SEO (pour Google)</label>
+    <textarea id="articleDescription" style="min-height: 80px;" placeholder="Apprends à rédiger des descriptifs de bien percutants en 5 minutes grâce à l'IA. Méthode pratique pour conseillers immobiliers."></textarea>
+    <p class="hint">Cette phrase apparaîtra sous le titre dans Google (max 160 caractères)</p>
+  </div>
+
+  <!-- DATE -->
+  <div class="form-row">
+    <label>📅 Date de publication</label>
+    <input type="date" id="articleDate" />
+  </div>
+
+  <!-- EMOJI COVER -->
+  <div class="form-row">
+    <label>🎨 Emoji de couverture</label>
+    <input type="text" id="articleEmoji" placeholder="📝" maxlength="4" value="📝" />
+    <p class="hint">Choisis un emoji qui représente ton article (ex : 🚀 📊 💡 🏠 📈)</p>
+  </div>
+
+  <!-- TEMPS DE LECTURE -->
+  <div class="form-row">
+    <label>⏱ Temps de lecture estimé</label>
+    <input type="text" id="articleReadTime" placeholder="5" value="5" />
+    <p class="hint">Nombre de minutes (ex : 5)</p>
+  </div>
+
+  <!-- INTRO -->
+  <div class="form-row">
+    <label>💬 Introduction (1-2 phrases impactantes)</label>
+    <textarea id="articleIntro" style="min-height: 120px;" placeholder="L'introduction qui apparaîtra en gros au début de l'article. Doit donner envie de lire la suite."></textarea>
+  </div>
+
+  <!-- CONTENU PRINCIPAL -->
+  <div class="form-row">
+    <label>📖 Contenu de l'article</label>
+    <div class="md-toolbar">
+      <button onclick="insertMd('## Titre\n')" type="button">H2</button>
+      <button onclick="insertMd('### Sous-titre\n')" type="button">H3</button>
+      <button onclick="insertMd('**texte en gras**')" type="button"><b>B</b></button>
+      <button onclick="insertMd('*texte en italique*')" type="button"><i>I</i></button>
+      <button onclick="insertMd('\n- Item liste\n- Item liste\n')" type="button">Liste</button>
+      <button onclick="insertMd('\n1. Étape un\n2. Étape deux\n')" type="button">Liste num.</button>
+      <button onclick="insertMd('[texte du lien](https://exemple.fr)')" type="button">Lien</button>
+      <button onclick="insertMd('\n> Citation\n')" type="button">Citation</button>
+    </div>
+    <textarea id="articleContent" placeholder="## Premier titre
+
+Mon premier paragraphe...
+
+### Sous-titre
+
+Plus de contenu...
+
+- Premier point
+- Deuxième point
+
+**Important** : ceci est en gras."></textarea>
+    <p class="hint">Utilise les boutons ci-dessus pour formater. Tu peux aussi écrire en <strong>markdown</strong> directement.</p>
+  </div>
+
+  <div id="successMsg" class="success-msg">
+    ✅ Fichier téléchargé ! Va sur GitHub → ton repo → dossier <strong>blog/</strong> → "Add file → Upload files" → glisse le fichier → "Commit changes". Vercel publie en 1 min.
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-secondary" onclick="togglePreview()">👁 Aperçu</button>
+    <button class="btn" onclick="generateArticle()">📥 Générer le fichier HTML</button>
+  </div>
+
+  <div class="preview" id="preview"></div>
+
+</div>
+
+<script>
+const PIN = '024611';
+
+// Date par défaut = aujourd'hui
+document.getElementById('articleDate').valueAsDate = new Date();
+
+// Auto-générer le slug à partir du titre
+document.getElementById('articleTitle').addEventListener('input', (e) => {
+  const slug = e.target.value
+    .toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g, '') // remove accents
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+  document.getElementById('articleSlug').value = slug;
+});
+
+// Auto-login si déjà authentifié dans cette session
+if (sessionStorage.getItem('agent_admin') === 'ok') {
+  showEditor();
+}
+
+document.getElementById('pinInput').addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') checkPin();
+});
+
+function checkPin() {
+  const v = document.getElementById('pinInput').value;
+  const err = document.getElementById('pinError');
+  if (v === PIN) {
+    sessionStorage.setItem('agent_admin', 'ok');
+    showEditor();
+  } else {
+    err.textContent = '❌ Code incorrect';
+    document.getElementById('pinInput').value = '';
+    setTimeout(() => err.textContent = '', 2000);
+  }
+}
+
+function showEditor() {
+  document.getElementById('pinGate').style.display = 'none';
+  document.getElementById('editor').classList.add('show');
+}
+
+function logout() {
+  sessionStorage.removeItem('agent_admin');
+  location.reload();
+}
+
+function insertMd(text) {
+  const ta = document.getElementById('articleContent');
+  const start = ta.selectionStart;
+  const end = ta.selectionEnd;
+  ta.value = ta.value.substring(0, start) + text + ta.value.substring(end);
+  ta.focus();
+  ta.selectionStart = ta.selectionEnd = start + text.length;
+}
+
+// Mini parseur markdown → HTML
+function mdToHtml(md) {
+  let html = md;
+  // Échappe les < et > pour éviter le HTML cassé
+  html = html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  // Headings
+  html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+  html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+  // Bold + italic
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+  // Liens
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+  // Citations
+  html = html.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>');
+  // Listes non numérotées
+  html = html.replace(/(?:^- .+(?:\n|$))+/gm, (match) => {
+    const items = match.trim().split('\n').map(l => '<li>' + l.replace(/^- /, '') + '</li>').join('');
+    return '<ul>' + items + '</ul>';
+  });
+  // Listes numérotées
+  html = html.replace(/(?:^\d+\. .+(?:\n|$))+/gm, (match) => {
+    const items = match.trim().split('\n').map(l => '<li>' + l.replace(/^\d+\. /, '') + '</li>').join('');
+    return '<ol>' + items + '</ol>';
+  });
+  // Paragraphes (double saut de ligne)
+  html = html.split(/\n\n+/).map(block => {
+    block = block.trim();
+    if (!block) return '';
+    if (block.match(/^<(h2|h3|ul|ol|blockquote)/)) return block;
+    return '<p>' + block.replace(/\n/g, '<br>') + '</p>';
+  }).join('\n');
+  return html;
+}
+
+function togglePreview() {
+  const p = document.getElementById('preview');
+  if (p.classList.contains('show')) {
+    p.classList.remove('show');
+  } else {
+    const intro = document.getElementById('articleIntro').value;
+    const content = mdToHtml(document.getElementById('articleContent').value);
+    p.innerHTML =
+      '<p style="font-size:1.2rem;color:var(--v300);padding:1rem 1.25rem;background:rgba(139,92,246,.05);border-left:3px solid var(--v500);border-radius:0 8px 8px 0;margin-bottom:1.5rem;">' + intro + '</p>' +
+      content;
+    p.classList.add('show');
+  }
+}
+
+function generateArticle() {
+  const title = document.getElementById('articleTitle').value.trim();
+  const slug = document.getElementById('articleSlug').value.trim();
+  const desc = document.getElementById('articleDescription').value.trim();
+  const date = document.getElementById('articleDate').value;
+  const emoji = document.getElementById('articleEmoji').value.trim() || '📝';
+  const readTime = document.getElementById('articleReadTime').value.trim() || '5';
+  const intro = document.getElementById('articleIntro').value.trim();
+  const content = document.getElementById('articleContent').value.trim();
+
+  if (!title || !slug || !date || !intro || !content) {
+    alert('Merci de remplir tous les champs obligatoires (titre, URL, date, intro, contenu).');
+    return;
+  }
+
+  const dateFormatted = new Date(date).toLocaleDateString('fr-FR', {day: 'numeric', month: 'long', year: 'numeric'});
+  const contentHtml = mdToHtml(content);
+  const url = 'https://leadengineai.fr/blog/' + slug + '.html';
+
+  const html = `<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>${title} — Agent IA Immo</title>
+  <meta name="description" content="${desc.replace(/"/g, '&quot;')}" />
+  <meta property="og:title" content="${title.replace(/"/g, '&quot;')}" />
+  <meta property="og:description" content="${desc.replace(/"/g, '&quot;')}" />
+  <meta property="og:url" content="${url}" />
+  <meta property="og:image" content="https://leadengineai.fr/og-image.jpg" />
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="${date}" />
+  <meta property="article:author" content="Thomas Favard" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="${url}" />
+  <link rel="icon" type="image/png" href="../favicon.png?v=2" />
+  <link rel="shortcut icon" href="../favicon.ico?v=2" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "${title.replace(/"/g, '\\"')}",
+    "description": "${desc.replace(/"/g, '\\"')}",
+    "image": "https://leadengineai.fr/og-image.jpg",
+    "datePublished": "${date}",
+    "dateModified": "${date}",
+    "author": { "@type": "Person", "name": "Thomas Favard", "url": "https://leadengineai.fr/" },
+    "publisher": { "@type": "Organization", "name": "Agent IA Immo", "logo": { "@type": "ImageObject", "url": "https://leadengineai.fr/favicon.png" } }
+  }
+  </${''}script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--black:#07070f;--dark:#0d0d1a;--card:#11111f;--v700:#6d28d9;--v600:#7c3aed;--v500:#8b5cf6;--v400:#a78bfa;--v300:#c4b5fd;--white:#f0f0ff;--muted:#9090b8;--border:rgba(139,92,246,.25)}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',system-ui,sans-serif;background:var(--black);color:var(--white);line-height:1.8;letter-spacing:-0.005em;font-size:1.05rem}
+    h1,h2,h3{font-family:'Space Grotesk','Inter',sans-serif;letter-spacing:-0.02em}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(circle 700px at 80% 10%,rgba(124,58,237,.15),transparent 70%),radial-gradient(circle 600px at 10% 80%,rgba(232,121,249,.08),transparent 70%)}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 2.5rem;background:rgba(7,7,15,.65);backdrop-filter:blur(24px) saturate(1.3);border-bottom:1px solid var(--border)}
+    .nav-logo{font-size:1.1rem;font-weight:700;color:var(--v300);text-decoration:none}
+    .nav-logo span{color:var(--white)}
+    .nav-links{display:flex;gap:1.5rem;list-style:none}
+    .nav-links a{color:var(--muted);text-decoration:none;font-size:.9rem;transition:color .25s}
+    .nav-links a:hover{color:var(--v300)}
+    .article-hero{max-width:800px;margin:0 auto;padding:7rem 1.5rem 2.5rem;text-align:center}
+    .breadcrumb{font-size:.85rem;color:var(--muted);margin-bottom:1.5rem}
+    .breadcrumb a{color:var(--v400);text-decoration:none}
+    .article-title{font-size:clamp(2rem,5vw,3.4rem);font-weight:800;line-height:1.1;margin-bottom:1.5rem}
+    .article-title .gradient{background:linear-gradient(135deg,var(--v300) 0%,#e879f9 60%,var(--v400) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .article-meta-info{display:inline-flex;gap:1rem;align-items:center;font-size:.9rem;color:var(--muted);flex-wrap:wrap;justify-content:center}
+    .article-meta-info .author{color:var(--v300);font-weight:600}
+    .article-cover{max-width:900px;margin:0 auto 3rem;height:280px;background:linear-gradient(135deg,var(--v700) 0%,var(--v500) 50%,#e879f9 100%);border-radius:24px;position:relative;overflow:hidden;box-shadow:0 20px 60px rgba(109,40,217,.35)}
+    .cover-emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:7rem}
+    .article-content{max-width:720px;margin:0 auto;padding:0 1.5rem 4rem}
+    .article-content .intro{font-size:1.2rem;color:var(--v300);line-height:1.7;margin-bottom:2.5rem;padding:1.5rem 1.75rem;background:rgba(139,92,246,.05);border-left:3px solid var(--v500);border-radius:0 12px 12px 0}
+    .article-content h2{font-size:1.8rem;font-weight:700;margin:3rem 0 1rem;padding-bottom:.5rem;border-bottom:2px solid rgba(139,92,246,.2)}
+    .article-content h3{font-size:1.25rem;font-weight:700;margin:2rem 0 .75rem;color:var(--v300)}
+    .article-content p{margin-bottom:1.25rem}
+    .article-content ul,.article-content ol{margin:1rem 0 1.5rem 1.5rem}
+    .article-content li{margin-bottom:.6rem}
+    .article-content strong{color:var(--v300);font-weight:700}
+    .article-content a{color:var(--v400);text-decoration:underline;text-underline-offset:3px}
+    .article-content blockquote{border-left:3px solid var(--v500);padding:1rem 1.5rem;margin:1.5rem 0;background:rgba(139,92,246,.05);border-radius:0 8px 8px 0;font-style:italic;color:var(--muted)}
+    .article-cta{max-width:720px;margin:3rem auto;padding:2.5rem 2rem;text-align:center;background:linear-gradient(135deg,rgba(139,92,246,.1),rgba(232,121,249,.05));border:1px solid var(--v500);border-radius:20px}
+    .article-cta h3{font-size:1.6rem;font-weight:700;margin-bottom:.75rem}
+    .article-cta p{color:var(--muted);margin-bottom:1.5rem}
+    .btn-primary{display:inline-block;background:linear-gradient(135deg,var(--v700),var(--v500));color:#fff;text-decoration:none;padding:.95rem 2rem;border-radius:12px;font-weight:700;font-size:1rem;box-shadow:0 4px 20px rgba(109,40,217,.4);transition:transform .3s,box-shadow .3s}
+    .btn-primary:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 8px 30px rgba(139,92,246,.6)}
+    .article-author{max-width:720px;margin:4rem auto 2rem;padding:1.5rem;background:var(--card);border:1px solid var(--border);border-radius:16px;display:flex;gap:1.25rem;align-items:center}
+    .article-author img{width:64px;height:64px;border-radius:50%;object-fit:cover;border:1px solid rgba(139,92,246,.4)}
+    .article-author-info .name{font-weight:700;color:var(--v300);margin-bottom:.25rem}
+    .article-author-info .role{font-size:.85rem;color:var(--muted)}
+    footer{background:var(--dark);border-top:1px solid var(--border);padding:1.5rem;text-align:center}
+    .footer-copy{font-size:.8rem;color:var(--muted)}
+    .footer-copy a{color:var(--v400);text-decoration:none}
+    @media(max-width:600px){nav{padding:1rem 1.25rem}.nav-links{display:none}.article-cover{height:200px}.cover-emoji{font-size:5rem}}
+  </style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="../index.html">Agent IA <span>Immo</span></a>
+  <ul class="nav-links">
+    <li><a href="../blog.html">Blog</a></li>
+    <li><a href="../index.html#packs">Les packs</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+<section class="article-hero">
+  <p class="breadcrumb"><a href="../index.html">Accueil</a> · <a href="../blog.html">Blog</a> · Article</p>
+  <h1 class="article-title">${title}</h1>
+  <div class="article-meta-info">
+    <span class="author">Par Thomas Favard</span>
+    <span>•</span>
+    <span>${dateFormatted}</span>
+    <span>•</span>
+    <span>${readTime} min de lecture</span>
+  </div>
+</section>
+<div class="article-cover"><div class="cover-emoji">${emoji}</div></div>
+<article class="article-content">
+  <p class="intro">${intro}</p>
+${contentHtml}
+</article>
+<div class="article-cta">
+  <h3>Tu veux passer à l'IA pour ton activité ?</h3>
+  <p>17 conseillers immobiliers utilisent déjà leur assistant IA personnalisé. RDV de présentation offert.</p>
+  <a href="../index.html#packs" class="btn-primary">Découvrir les packs →</a>
+</div>
+<div class="article-author">
+  <img src="../thomas.jpg" alt="Thomas Favard" />
+  <div class="article-author-info">
+    <p class="name">Thomas Favard</p>
+    <p class="role">Co-fondateur d'Agent IA Immo · Brive-la-Gaillarde</p>
+  </div>
+</div>
+<footer>
+  <p class="footer-copy">© 2026 Thomas Favard · <a href="../blog.html">Retour au blog</a> · <a href="../index.html">Retour au site</a></p>
+</footer>
+</body>
+</html>
+`;
+
+  // Télécharger le fichier
+  const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = slug + '.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+
+  // Show success
+  document.getElementById('successMsg').classList.add('show');
+  setTimeout(() => document.getElementById('successMsg').classList.remove('show'), 8000);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
