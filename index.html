@@ -1196,6 +1196,57 @@
       color: var(--v300);
       font-weight: 600;
     }
+
+    /* ── BOUTONS RÉSEAUX SOCIAUX ── */
+    .about-socials {
+      display: flex;
+      align-items: center;
+      gap: .85rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+    .about-socials-label {
+      font-size: .85rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .5rem 1rem;
+      background: linear-gradient(135deg, var(--v700), var(--v500));
+      color: #fff !important;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: .85rem;
+      font-weight: 600;
+      transition: transform .25s, box-shadow .25s;
+      box-shadow: 0 4px 14px rgba(109,40,217,.25);
+    }
+    .social-btn:hover {
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 6px 22px rgba(139,92,246,.5);
+    }
+    .social-btn svg {
+      flex-shrink: 0;
+    }
+    .social-linkedin {
+      background: linear-gradient(135deg, #0a66c2, #1e88e5);
+      box-shadow: 0 4px 14px rgba(10,102,194,.3);
+    }
+    .social-linkedin:hover {
+      box-shadow: 0 6px 22px rgba(10,102,194,.5);
+    }
+    .social-facebook {
+      background: linear-gradient(135deg, #1877f2, #4267b2);
+      box-shadow: 0 4px 14px rgba(24,119,242,.3);
+    }
+    .social-facebook:hover {
+      box-shadow: 0 6px 22px rgba(24,119,242,.5);
+    }
     @media (max-width: 700px) {
       .about-box { grid-template-columns: 1fr; gap: 1.5rem; padding: 1.5rem; }
     }
@@ -2879,6 +2930,13 @@
           <span class="about-badge">✅ 17 conseillers actifs</span>
           <span class="about-badge">✅ Multi-réseaux</span>
           <span class="about-badge">✅ Brive · Corrèze · et au-delà</span>
+        </div>
+        <div class="about-socials">
+          <span class="about-socials-label">Suis-moi :</span>
+          <a href="https://www.linkedin.com/in/thomas-favard-immo/" target="_blank" rel="noopener" class="social-btn social-linkedin" aria-label="LinkedIn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            <span>LinkedIn</span>
+          </a>
         </div>
       </div>
     </div>
