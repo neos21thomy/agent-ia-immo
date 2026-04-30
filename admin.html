@@ -564,10 +564,9 @@ function showEditor() {
 }
 
 /* ── LISTE & EDITION DES ARTICLES EXISTANTS ── */
-const REPO = 'neos21thomy/agent-ia-immo';
-const BRANCH = 'main';
-
 async function loadArticlesList() {
+  const REPO = 'neos21thomy/agent-ia-immo';
+  const BRANCH = 'main';
   const container = document.getElementById('articlesList');
   container.innerHTML = '<div class="loading-spinner">⏳ Chargement…</div>';
   try {
