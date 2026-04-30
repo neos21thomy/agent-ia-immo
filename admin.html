@@ -133,6 +133,113 @@
       border-bottom: 1px solid var(--border);
     }
     .editor-header h1 { font-size: 1.7rem; }
+
+    /* ── LISTE D'ARTICLES ── */
+    .articles-list-section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .articles-list-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+    }
+    .articles-list-header h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--v300);
+    }
+    .btn-new {
+      background: linear-gradient(135deg, var(--v700), var(--v500));
+      color: #fff;
+      border: none;
+      padding: .5rem 1rem;
+      border-radius: 8px;
+      font-size: .85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .25s;
+    }
+    .btn-new:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(139,92,246,.4);
+    }
+    .articles-list {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+    .article-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: .85rem 1rem;
+      background: var(--dark);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      transition: border-color .2s, transform .2s;
+    }
+    .article-row:hover {
+      border-color: var(--v500);
+      transform: translateX(3px);
+    }
+    .article-row-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .article-row-title {
+      color: var(--white);
+      font-size: .95rem;
+      font-weight: 600;
+      margin-bottom: .15rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .article-row-meta {
+      font-size: .75rem;
+      color: var(--muted);
+    }
+    .article-row-actions {
+      display: flex;
+      gap: .5rem;
+      flex-shrink: 0;
+    }
+    .article-row-btn {
+      background: rgba(139,92,246,.1);
+      border: 1px solid var(--border);
+      color: var(--v300);
+      padding: .4rem .7rem;
+      border-radius: 6px;
+      font-size: .78rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background .2s, border-color .2s;
+    }
+    .article-row-btn:hover {
+      background: rgba(139,92,246,.2);
+      border-color: var(--v500);
+    }
+    .article-row-btn.view { color: var(--v400); }
+    .loading-spinner {
+      text-align: center;
+      color: var(--muted);
+      padding: 1rem;
+      font-size: .9rem;
+    }
+    .articles-empty {
+      text-align: center;
+      color: var(--muted);
+      padding: 1.5rem;
+      font-size: .9rem;
+      font-style: italic;
+    }
     .logout {
       background: transparent;
       border: 1px solid var(--border);
@@ -305,12 +412,23 @@
 <div class="editor" id="editor">
 
   <div class="editor-header">
-    <h1>📝 Nouvel article</h1>
+    <h1 id="editorTitle">📝 Nouvel article</h1>
     <button class="logout" onclick="logout()">Déconnexion</button>
   </div>
 
+  <!-- ━━━━━━━━━━ LISTE DES ARTICLES EXISTANTS ━━━━━━━━━━ -->
+  <div class="articles-list-section">
+    <div class="articles-list-header">
+      <h2>📚 Tes articles publiés</h2>
+      <button type="button" class="btn-new" onclick="newArticle()">+ Nouvel article</button>
+    </div>
+    <div id="articlesList" class="articles-list">
+      <div class="loading-spinner">⏳ Chargement…</div>
+    </div>
+  </div>
+
   <div class="info-box">
-    💡 <strong>Comment ça marche</strong> : remplis les champs, écris ton article, clique <strong>"Générer le fichier"</strong>. Tu télécharges un fichier HTML que tu uploades dans le dossier <code>blog/</code> de ton GitHub. <strong>Article en ligne en 1 min.</strong>
+    💡 <strong>Pour créer</strong> : remplis les champs ci-dessous, clique <strong>"Générer le fichier"</strong>, uploade le fichier sur GitHub dans le dossier <code>blog/</code>. <strong>Pour modifier</strong> : clique "Modifier" sur un article ci-dessus, change ce que tu veux, génère, uploade <strong>avec le même nom</strong> → ça remplace l'ancien.
   </div>
 
   <!-- TITRE -->
@@ -442,6 +560,153 @@ function checkPin() {
 function showEditor() {
   document.getElementById('pinGate').style.display = 'none';
   document.getElementById('editor').classList.add('show');
+  loadArticlesList();
+}
+
+/* ── LISTE & EDITION DES ARTICLES EXISTANTS ── */
+const REPO = 'neos21thomy/agent-ia-immo';
+const BRANCH = 'main';
+
+async function loadArticlesList() {
+  const container = document.getElementById('articlesList');
+  container.innerHTML = '<div class="loading-spinner">⏳ Chargement…</div>';
+  try {
+    const res = await fetch(`https://api.github.com/repos/${REPO}/contents/blog?ref=${BRANCH}`);
+    if (!res.ok) throw new Error('GitHub API erreur ' + res.status);
+    const files = await res.json();
+    const articles = files.filter(f => f.name.endsWith('.html') && f.type === 'file');
+    if (articles.length === 0) {
+      container.innerHTML = '<div class="articles-empty">Aucun article publié pour le moment.</div>';
+      return;
+    }
+    // Récupère titre + date via metadata pour chaque article
+    container.innerHTML = '';
+    for (const article of articles) {
+      const slug = article.name.replace(/\.html$/, '');
+      const url = `https://leadengineai.fr/blog/${article.name}`;
+      const row = document.createElement('div');
+      row.className = 'article-row';
+      row.innerHTML = `
+        <div class="article-row-info">
+          <div class="article-row-title">${escapeHtml(slug)}</div>
+          <div class="article-row-meta">📄 ${article.name}</div>
+        </div>
+        <div class="article-row-actions">
+          <a class="article-row-btn view" href="${url}" target="_blank" rel="noopener">👁 Voir</a>
+          <button class="article-row-btn" onclick="editArticle('${article.name}')">✏️ Modifier</button>
+        </div>
+      `;
+      container.appendChild(row);
+    }
+  } catch (e) {
+    container.innerHTML = `<div class="articles-empty">⚠️ Impossible de charger : ${e.message}</div>`;
+  }
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+async function editArticle(filename) {
+  const container = document.getElementById('articlesList');
+  const editorTitle = document.getElementById('editorTitle');
+  try {
+    const res = await fetch(`https://leadengineai.fr/blog/${filename}?_t=${Date.now()}`);
+    if (!res.ok) throw new Error('Article introuvable');
+    const html = await res.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+
+    // Extraire les champs
+    const title = (doc.querySelector('.article-title')?.textContent || '').trim();
+    const slug = filename.replace(/\.html$/, '');
+    const desc = doc.querySelector('meta[name="description"]')?.content || '';
+    const date = doc.querySelector('meta[property="article:published_time"]')?.content || new Date().toISOString().slice(0,10);
+    const emoji = (doc.querySelector('.cover-emoji')?.textContent || '📝').trim();
+    const readTimeMatch = (doc.querySelector('.article-meta-info')?.textContent || '').match(/(\d+)\s*min/);
+    const readTime = readTimeMatch ? readTimeMatch[1] : '5';
+    const intro = (doc.querySelector('.article-content .intro')?.textContent || '').trim();
+
+    // Conversion HTML → markdown du contenu
+    const articleContent = doc.querySelector('.article-content');
+    let body = '';
+    if (articleContent) {
+      const clone = articleContent.cloneNode(true);
+      // Retire l'intro qui est gérée séparément
+      const introEl = clone.querySelector('.intro');
+      if (introEl) introEl.remove();
+      body = htmlToMarkdown(clone);
+    }
+
+    // Pré-remplir le formulaire
+    document.getElementById('articleTitle').value = title;
+    document.getElementById('articleSlug').value = slug;
+    document.getElementById('articleDescription').value = desc;
+    document.getElementById('articleDate').value = date.slice(0, 10);
+    document.getElementById('articleEmoji').value = emoji;
+    document.getElementById('articleReadTime').value = readTime;
+    document.getElementById('articleIntro').value = intro;
+    document.getElementById('articleContent').value = body;
+
+    // Change le titre de l'éditeur
+    editorTitle.textContent = '✏️ Modifier : ' + title.substring(0, 50);
+
+    // Scroll vers l'éditeur
+    document.querySelector('.form-row').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } catch (e) {
+    alert('Erreur : ' + e.message);
+  }
+}
+
+function htmlToMarkdown(el) {
+  let out = '';
+  for (const node of el.childNodes) {
+    if (node.nodeType === 3) {
+      // Texte
+      out += node.textContent;
+    } else if (node.nodeType === 1) {
+      const tag = node.tagName.toLowerCase();
+      const txt = htmlToMarkdown(node);
+      if (tag === 'h2') out += '\n## ' + txt.trim() + '\n\n';
+      else if (tag === 'h3') out += '\n### ' + txt.trim() + '\n\n';
+      else if (tag === 'p') out += txt.trim() + '\n\n';
+      else if (tag === 'strong' || tag === 'b') out += '**' + txt + '**';
+      else if (tag === 'em' || tag === 'i') out += '*' + txt + '*';
+      else if (tag === 'a') out += '[' + txt + '](' + (node.getAttribute('href') || '#') + ')';
+      else if (tag === 'ul') {
+        for (const li of node.querySelectorAll(':scope > li')) {
+          out += '- ' + htmlToMarkdown(li).trim() + '\n';
+        }
+        out += '\n';
+      } else if (tag === 'ol') {
+        let i = 1;
+        for (const li of node.querySelectorAll(':scope > li')) {
+          out += i + '. ' + htmlToMarkdown(li).trim() + '\n';
+          i++;
+        }
+        out += '\n';
+      } else if (tag === 'blockquote') out += '> ' + txt.trim().replace(/\n/g, '\n> ') + '\n\n';
+      else if (tag === 'br') out += '\n';
+      else out += txt;
+    }
+  }
+  return out;
+}
+
+function newArticle() {
+  // Reset form for a new article
+  document.getElementById('articleTitle').value = '';
+  document.getElementById('articleSlug').value = '';
+  document.getElementById('articleDescription').value = '';
+  document.getElementById('articleDate').valueAsDate = new Date();
+  document.getElementById('articleEmoji').value = '📝';
+  document.getElementById('articleReadTime').value = '5';
+  document.getElementById('articleIntro').value = '';
+  document.getElementById('articleContent').value = '';
+  document.getElementById('editorTitle').textContent = '📝 Nouvel article';
+  document.getElementById('successMsg').classList.remove('show');
+  document.getElementById('preview').classList.remove('show');
+  document.querySelector('.form-row').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function logout() {
