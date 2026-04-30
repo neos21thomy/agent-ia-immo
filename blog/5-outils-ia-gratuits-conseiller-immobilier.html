@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5 outils IA gratuits pour gagner du temps en immobilier en 2026 — Agent IA Immo</title>
+  <meta name="description" content="Découvrez les 5 outils IA gratuits indispensables pour les conseillers immobiliers en 2026 : ChatGPT, Claude, Canva, Notion, Perplexity. Mode d'emploi pratique." />
+  <meta name="keywords" content="outils IA conseiller immobilier, ChatGPT immobilier, IA gratuite immo, intelligence artificielle agent immobilier, Claude immo" />
+
+  <meta property="og:title" content="5 outils IA gratuits pour gagner du temps en immobilier" />
+  <meta property="og:description" content="ChatGPT, Claude, Canva, Notion, Perplexity : les 5 outils IA gratuits que tout conseiller immobilier devrait connaître." />
+  <meta property="og:url" content="https://leadengineai.fr/blog/5-outils-ia-gratuits-conseiller-immobilier.html" />
+  <meta property="og:image" content="https://leadengineai.fr/og-image.jpg" />
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2026-04-30" />
+  <meta property="article:author" content="Thomas Favard" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="canonical" href="https://leadengineai.fr/blog/5-outils-ia-gratuits-conseiller-immobilier.html" />
+  <link rel="icon" type="image/png" href="../favicon.png?v=2" />
+  <link rel="shortcut icon" href="../favicon.ico?v=2" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Schema.org Article -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "5 outils IA gratuits pour gagner du temps en immobilier en 2026",
+    "description": "Les 5 outils IA gratuits indispensables aux conseillers immobiliers : ChatGPT, Claude, Canva, Notion, Perplexity.",
+    "image": "https://leadengineai.fr/og-image.jpg",
+    "datePublished": "2026-04-30",
+    "dateModified": "2026-04-30",
+    "author": {
+      "@type": "Person",
+      "name": "Thomas Favard",
+      "url": "https://leadengineai.fr/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Agent IA Immo",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://leadengineai.fr/favicon.png"
+      }
+    }
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:  #07070f;
+      --dark:   #0d0d1a;
+      --card:   #11111f;
+      --v700:   #6d28d9;
+      --v600:   #7c3aed;
+      --v500:   #8b5cf6;
+      --v400:   #a78bfa;
+      --v300:   #c4b5fd;
+      --white:  #f0f0ff;
+      --muted:  #9090b8;
+      --border: rgba(139,92,246,.25);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--black);
+      color: var(--white);
+      line-height: 1.8;
+      letter-spacing: -0.005em;
+      font-size: 1.05rem;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+      letter-spacing: -0.02em;
+      color: var(--white);
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--dark); }
+    ::-webkit-scrollbar-thumb { background: var(--v600); border-radius: 3px; }
+
+    /* Fond animé subtil */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background:
+        radial-gradient(circle 700px at 80% 10%, rgba(124,58,237,.15), transparent 70%),
+        radial-gradient(circle 600px at 10% 80%, rgba(232,121,249,.08), transparent 70%);
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(7,7,15,.65);
+      backdrop-filter: blur(24px) saturate(1.3);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--v300);
+      text-decoration: none;
+      transition: transform .25s;
+    }
+    .nav-logo span { color: var(--white); }
+    .nav-logo:hover { transform: scale(1.03); }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .9rem;
+      transition: color .25s;
+    }
+    .nav-links a:hover { color: var(--v300); }
+
+    /* HERO ARTICLE */
+    .article-hero {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 7rem 1.5rem 2.5rem;
+      text-align: center;
+    }
+    .breadcrumb {
+      font-size: .85rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .breadcrumb a {
+      color: var(--v400);
+      text-decoration: none;
+    }
+    .breadcrumb a:hover { color: var(--v300); }
+
+    .article-title {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+    .article-title .gradient {
+      background: linear-gradient(135deg, var(--v300) 0%, #e879f9 60%, var(--v400) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .article-meta-info {
+      display: inline-flex;
+      gap: 1rem;
+      align-items: center;
+      font-size: .9rem;
+      color: var(--muted);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .article-meta-info .author {
+      color: var(--v300);
+      font-weight: 600;
+    }
+
+    /* COVER */
+    .article-cover {
+      max-width: 900px;
+      margin: 0 auto 3rem;
+      height: 280px;
+      background: linear-gradient(135deg, var(--v700) 0%, var(--v500) 50%, #e879f9 100%);
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(109,40,217,.35);
+    }
+    .article-cover::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 30% 40%, rgba(255,255,255,.18), transparent 40%),
+        radial-gradient(circle at 70% 60%, rgba(255,255,255,.12), transparent 40%);
+    }
+    .cover-emoji {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 7rem;
+      filter: drop-shadow(0 8px 30px rgba(0,0,0,.4));
+    }
+
+    /* CONTENU ARTICLE */
+    .article-content {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    .article-content > .intro {
+      font-size: 1.2rem;
+      color: var(--v300);
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      padding: 1.5rem 1.75rem;
+      background: rgba(139,92,246,.05);
+      border-left: 3px solid var(--v500);
+      border-radius: 0 12px 12px 0;
+    }
+
+    .article-content h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 3rem 0 1rem;
+      padding-bottom: .5rem;
+      border-bottom: 2px solid rgba(139,92,246,.2);
+    }
+    .article-content h2 .num {
+      color: var(--v400);
+      font-weight: 800;
+      margin-right: .5rem;
+    }
+    .article-content h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 2rem 0 .75rem;
+      color: var(--v300);
+    }
+    .article-content p {
+      margin-bottom: 1.25rem;
+      color: var(--white);
+    }
+    .article-content ul, .article-content ol {
+      margin: 1rem 0 1.5rem 1.5rem;
+      color: var(--white);
+    }
+    .article-content li {
+      margin-bottom: .6rem;
+    }
+    .article-content strong {
+      color: var(--v300);
+      font-weight: 700;
+    }
+    .article-content a {
+      color: var(--v400);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .article-content a:hover { color: var(--v300); }
+
+    /* Carte de mise en avant outil */
+    .tool-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      backdrop-filter: blur(10px);
+    }
+    .tool-card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .tool-card-emoji {
+      font-size: 2rem;
+    }
+    .tool-card-info {
+      flex: 1;
+    }
+    .tool-card-info strong {
+      display: block;
+      color: var(--white);
+      font-size: 1.1rem;
+    }
+    .tool-card-info span {
+      font-size: .85rem;
+      color: var(--muted);
+    }
+    .tool-card-pros li {
+      list-style: none;
+      padding-left: 1.5rem;
+      position: relative;
+      margin-bottom: .4rem;
+    }
+    .tool-card-pros li::before {
+      content: '✅';
+      position: absolute;
+      left: 0;
+    }
+    .tool-card-cta {
+      display: inline-block;
+      margin-top: .75rem;
+      color: var(--v300);
+      font-weight: 600;
+      font-size: .9rem;
+      text-decoration: none;
+      border-bottom: 1px solid var(--v500);
+    }
+
+    /* Encadré jaune (astuce) */
+    .tip-box {
+      background: rgba(251,191,36,.05);
+      border-left: 3px solid #fbbf24;
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 12px 12px 0;
+      margin: 1.5rem 0;
+    }
+    .tip-box strong { color: #fbbf24; }
+
+    /* CTA en bas d'article */
+    .article-cta {
+      max-width: 720px;
+      margin: 3rem auto;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(139,92,246,.1), rgba(232,121,249,.05));
+      border: 1px solid var(--v500);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+    }
+    .article-cta h3 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: .75rem;
+    }
+    .article-cta p {
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--v700), var(--v500));
+      color: #fff;
+      text-decoration: none;
+      padding: .95rem 2rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 0 4px 20px rgba(109,40,217,.4);
+      transition: transform .3s, box-shadow .3s;
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 30px rgba(139,92,246,.6);
+    }
+
+    /* AUTHOR FOOTER */
+    .article-author {
+      max-width: 720px;
+      margin: 4rem auto 2rem;
+      padding: 1.5rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+    }
+    .article-author img {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid rgba(139,92,246,.4);
+    }
+    .article-author-info .name {
+      font-weight: 700;
+      color: var(--v300);
+      margin-bottom: .25rem;
+    }
+    .article-author-info .role {
+      font-size: .85rem;
+      color: var(--muted);
+    }
+
+    footer {
+      background: var(--dark);
+      border-top: 1px solid var(--border);
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .footer-copy {
+      font-size: .8rem;
+      color: var(--muted);
+    }
+    .footer-copy a { color: var(--v400); text-decoration: none; }
+
+    @media (max-width: 600px) {
+      nav { padding: 1rem 1.25rem; }
+      .nav-links { display: none; }
+      .article-cover { height: 200px; }
+      .cover-emoji { font-size: 5rem; }
+      .article-content { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="../index.html">Agent IA <span>Immo</span></a>
+  <ul class="nav-links">
+    <li><a href="../blog.html">Blog</a></li>
+    <li><a href="../index.html#packs">Les packs</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="article-hero">
+  <p class="breadcrumb"><a href="../index.html">Accueil</a> · <a href="../blog.html">Blog</a> · Article</p>
+  <h1 class="article-title">5 outils IA gratuits pour gagner du temps <span class="gradient">en immobilier en 2026</span></h1>
+  <div class="article-meta-info">
+    <span class="author">Par Thomas Favard</span>
+    <span>•</span>
+    <span>30 avril 2026</span>
+    <span>•</span>
+    <span>8 min de lecture</span>
+  </div>
+</section>
+
+<div class="article-cover">
+  <div class="cover-emoji">🚀</div>
+</div>
+
+<article class="article-content">
+
+  <p class="intro">
+    Si tu es conseiller immobilier en 2026 et que tu n'utilises pas encore l'IA, tu prends du retard. Pas pour faire le buzz : <strong>parce que tu passes 2 à 3 heures par jour à des tâches que l'IA peut faire en 5 minutes</strong>. Voici 5 outils 100 % gratuits qui vont changer ton quotidien.
+  </p>
+
+  <h2><span class="num">1.</span> Claude — Pour rédiger 10x plus vite</h2>
+  <p>
+    Développé par Anthropic, <strong>Claude</strong> est probablement l'IA conversationnelle la plus naturelle aujourd'hui. Tu lui parles comme à un assistant humain, et il rédige descriptifs de bien, posts Facebook, emails clients, négociations… avec un ton qui colle à ta personnalité.
+  </p>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <span class="tool-card-emoji">🤖</span>
+      <div class="tool-card-info">
+        <strong>Claude (Anthropic)</strong>
+        <span>Gratuit · web · Mac/Windows/Mobile</span>
+      </div>
+    </div>
+    <ul class="tool-card-pros">
+      <li>Génère un descriptif de bien en 30 secondes à partir de tes notes</li>
+      <li>Rédige tes posts LinkedIn / Facebook dans ton style</li>
+      <li>Analyse et résume tes échanges clients</li>
+      <li>Excellente compréhension du français nuancé</li>
+    </ul>
+    <a href="https://claude.ai" target="_blank" rel="noopener" class="tool-card-cta">→ claude.ai</a>
+  </div>
+
+  <h3>Cas d'usage concret</h3>
+  <p>
+    Tu rentres d'une visite. Tu dictes à Claude : <em>"Maison T4 100m² Brive, jardin 500m², travaux faits 2024, prix 245k€, vendeur veut vendre vite"</em>. En 30 secondes, tu as un descriptif complet, soigné, prêt à publier sur SeLoger ou ton site agence. Et si tu veux le ton plus chaleureux, plus pro ou plus court : tu lui demandes, il s'adapte.
+  </p>
+
+  <div class="tip-box">
+    💡 <strong>Astuce</strong> : commence chaque conversation Claude par <em>"Tu es un conseiller immobilier expérimenté à [ta ville]. Tu écris dans un ton naturel, jamais commercial."</em> — la qualité de ses réponses est multipliée par 3.
+  </div>
+
+  <h2><span class="num">2.</span> ChatGPT — Le couteau suisse de l'IA</h2>
+  <p>
+    <strong>ChatGPT</strong> (OpenAI) reste la référence grand public. Plus polyvalent que Claude sur certains points (génération d'images, navigation web), il est aussi excellent pour rédiger, brainstormer, calculer.
+  </p>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <span class="tool-card-emoji">💬</span>
+      <div class="tool-card-info">
+        <strong>ChatGPT (OpenAI)</strong>
+        <span>Gratuit · web · Mac/Windows/Mobile</span>
+      </div>
+    </div>
+    <ul class="tool-card-pros">
+      <li>Génère des images de "home staging" virtuel (DALL-E intégré)</li>
+      <li>Calcule les frais de notaire, taxe foncière, mensualités emprunt</li>
+      <li>Traduit tes annonces en anglais/espagnol pour vendeurs internationaux</li>
+      <li>Brainstorme des idées de contenu pour ton mois Instagram</li>
+    </ul>
+    <a href="https://chatgpt.com" target="_blank" rel="noopener" class="tool-card-cta">→ chatgpt.com</a>
+  </div>
+
+  <h3>Cas d'usage concret</h3>
+  <p>
+    Tu as un mandat compliqué, un appartement vétuste à vendre. Tu donnes à ChatGPT une photo et tu lui demandes <em>"montre-moi à quoi ça ressemblerait après travaux et home staging"</em>. En 1 minute, tu as 4 visualisations à montrer aux acheteurs hésitants. <strong>Conversion +40 % observé sur ce type de bien.</strong>
+  </p>
+
+  <h2><span class="num">3.</span> Canva — Visuels pros sans être designer</h2>
+  <p>
+    <strong>Canva</strong> n'est pas une IA pure mais sa fonction <em>"Magic Studio"</em> avec génération d'images, retouche photo automatique et création de templates IA en font un outil indispensable. Tu crées tes flyers, posts réseaux, bannières LinkedIn en 5 minutes au lieu de 2 heures sur Photoshop.
+  </p>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <span class="tool-card-emoji">🎨</span>
+      <div class="tool-card-info">
+        <strong>Canva</strong>
+        <span>Gratuit (Pro à 12€/mois) · web · Mac/Windows/Mobile</span>
+      </div>
+    </div>
+    <ul class="tool-card-pros">
+      <li>Magic Eraser : efface un objet d'une photo en 1 clic</li>
+      <li>Background Remover : enlève le fond d'une photo automatiquement</li>
+      <li>Templates immobiliers prêts à l'emploi (flyers, posts, brochures)</li>
+      <li>Magic Write : génère du texte adapté au format</li>
+    </ul>
+    <a href="https://canva.com" target="_blank" rel="noopener" class="tool-card-cta">→ canva.com</a>
+  </div>
+
+  <h3>Cas d'usage concret</h3>
+  <p>
+    Tu reçois une photo de salon avec une vieille télé qui prend 30 % du cadre. Tu uploades dans Canva, tu cliques sur "Magic Eraser", tu sélectionnes la télé… elle disparaît, le mur est reconstitué. Photo prête pour ton annonce. <strong>Économie : 0€ vs un graphiste à 50€/photo.</strong>
+  </p>
+
+  <h2><span class="num">4.</span> Notion AI — Pour organiser ton activité</h2>
+  <p>
+    <strong>Notion</strong> est devenu l'outil de gestion préféré des indépendants. Sa version IA peut résumer tes notes de visite, générer ta checklist client, créer des modèles d'emails à partir de quelques mots clés.
+  </p>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <span class="tool-card-emoji">📋</span>
+      <div class="tool-card-info">
+        <strong>Notion AI</strong>
+        <span>Gratuit (limité) · IA payante 8€/mois</span>
+      </div>
+    </div>
+    <ul class="tool-card-pros">
+      <li>CRM léger pour suivre tes vendeurs/acheteurs</li>
+      <li>Génère automatiquement les fiches récap après chaque visite</li>
+      <li>Templates immobiliers pré-faits (mandat de vente, dossier vendeur)</li>
+      <li>Synchronisation entre tous tes appareils</li>
+    </ul>
+    <a href="https://notion.so" target="_blank" rel="noopener" class="tool-card-cta">→ notion.so</a>
+  </div>
+
+  <h2><span class="num">5.</span> Perplexity — Le Google des décisions rapides</h2>
+  <p>
+    <strong>Perplexity AI</strong> est une IA de recherche. Au lieu de te donner 10 liens à lire, il te donne directement une réponse synthétisée avec ses sources. Indispensable pour les questions techniques et juridiques de l'immobilier.
+  </p>
+
+  <div class="tool-card">
+    <div class="tool-card-header">
+      <span class="tool-card-emoji">🔍</span>
+      <div class="tool-card-info">
+        <strong>Perplexity</strong>
+        <span>Gratuit · web · Mobile</span>
+      </div>
+    </div>
+    <ul class="tool-card-pros">
+      <li>Réponses sourcées (toujours citer ses sources)</li>
+      <li>Idéal pour vérifier une info DPE, urbanisme, droit immo</li>
+      <li>Cherche dans l'actualité immobilière en temps réel</li>
+      <li>Plus rapide que Google + plus complet que ChatGPT</li>
+    </ul>
+    <a href="https://perplexity.ai" target="_blank" rel="noopener" class="tool-card-cta">→ perplexity.ai</a>
+  </div>
+
+  <h3>Cas d'usage concret</h3>
+  <p>
+    Un client te demande <em>"Est-ce que la loi Climat de 2025 m'oblige à faire un audit énergétique avant de vendre ma maison G ?"</em>. En 10 secondes, Perplexity te donne la réponse complète avec les articles de loi sources. Tu réponds au client, tu rassures, tu signes le mandat.
+  </p>
+
+  <h2>Combien de temps tu peux vraiment gagner ?</h2>
+  <p>
+    Voici une estimation basée sur les retours de <strong>17 conseillers immobiliers</strong> qu'on accompagne :
+  </p>
+  <ul>
+    <li>📝 <strong>Rédaction de descriptifs</strong> : -2h/semaine (Claude/ChatGPT)</li>
+    <li>📱 <strong>Posts réseaux sociaux</strong> : -3h/semaine (Claude + Canva)</li>
+    <li>📧 <strong>Emails et relances</strong> : -2h/semaine (Claude)</li>
+    <li>🎨 <strong>Visuels et flyers</strong> : -1h/semaine (Canva)</li>
+    <li>🔎 <strong>Recherches juridiques/techniques</strong> : -1h/semaine (Perplexity)</li>
+    <li>📋 <strong>Organisation et CRM</strong> : -1h/semaine (Notion)</li>
+  </ul>
+  <p>
+    <strong>Total : ~10 heures par semaine.</strong> Soit 40 heures par mois. Soit 1 mandat supplémentaire que tu peux travailler chaque mois.
+  </p>
+
+  <h2>La vraie limite des outils gratuits</h2>
+  <p>
+    Tous ces outils sont géniaux mais ils ont 3 défauts en commun :
+  </p>
+  <ol>
+    <li><strong>Tu dois apprendre à les utiliser</strong> — chaque outil = une logique différente, un prompt à maîtriser</li>
+    <li><strong>Ils sont génériques</strong> — ils ne connaissent pas TON secteur, TON style, TES clients</li>
+    <li><strong>Tu jongles entre 5 fenêtres</strong> — au lieu d'une seule routine fluide</li>
+  </ol>
+  <p>
+    C'est précisément pour ça qu'on a créé Agent IA Immo. Un seul assistant qui combine la puissance de Claude, est configuré <strong>à ta façon de travailler</strong>, et te donne des scripts prêts à l'emploi. Pas de prompt à apprendre. Pas de jonglage. Juste : tu remplis tes infos du jour, tu lances la session, ça travaille.
+  </p>
+
+</article>
+
+<div class="article-cta">
+  <h3>Tu veux gagner ces 10h/semaine sans galérer ?</h3>
+  <p>17 conseillers immobiliers utilisent déjà leur assistant IA personnalisé. RDV de présentation offert pour voir ce que ça donne dans ton cas précis.</p>
+  <a href="../index.html#packs" class="btn-primary">Découvrir les packs →</a>
+</div>
+
+<div class="article-author">
+  <img src="../thomas.jpg" alt="Thomas Favard" />
+  <div class="article-author-info">
+    <p class="name">Thomas Favard</p>
+    <p class="role">Co-fondateur d'Agent IA Immo · Brive-la-Gaillarde · Conseil en stratégie digitale & formation IA pour conseillers immobiliers</p>
+  </div>
+</div>
+
+<footer>
+  <p class="footer-copy">© 2026 Thomas Favard · <a href="../blog.html">Retour au blog</a> · <a href="../index.html">Retour au site</a></p>
+</footer>
+
+</body>
+</html>
