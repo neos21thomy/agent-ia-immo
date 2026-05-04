@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5 erreurs à éviter quand tu utilises l'IA en immobilier — Agent IA Immo</title>
+  <meta name="description" content="Les 5 erreurs les plus fréquentes des conseillers immobiliers qui débutent avec l'IA — et comment les éviter pour gagner vraiment du temps sans perdre en crédibilité." />
+  <meta name="keywords" content="erreurs IA immobilier, ChatGPT conseiller immobilier, IA hallucinations, prompts immobilier, IA et RGPD" />
+
+  <meta property="og:title" content="5 erreurs à éviter quand tu utilises l'IA en immobilier" />
+  <meta property="og:description" content="Les pièges classiques que font 80% des conseillers immo qui se mettent à l'IA — et comment les contourner." />
+  <meta property="og:url" content="https://leadengineai.fr/blog/5-erreurs-eviter-ia-immobilier.html" />
+  <meta property="og:image" content="https://leadengineai.fr/og-image.jpg" />
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2026-05-05" />
+  <meta property="article:author" content="Thomas Favard" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="canonical" href="https://leadengineai.fr/blog/5-erreurs-eviter-ia-immobilier.html" />
+  <link rel="icon" type="image/png" href="../favicon.png?v=2" />
+  <link rel="shortcut icon" href="../favicon.ico?v=2" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Schema.org Article -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "5 erreurs à éviter quand tu utilises l'IA en immobilier",
+    "description": "Les 5 erreurs classiques des conseillers immobiliers qui débutent avec l'IA — et comment les éviter.",
+    "image": "https://leadengineai.fr/og-image.jpg",
+    "datePublished": "2026-05-05",
+    "dateModified": "2026-05-05",
+    "author": {
+      "@type": "Person",
+      "name": "Thomas Favard",
+      "url": "https://leadengineai.fr/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Agent IA Immo",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://leadengineai.fr/favicon.png"
+      }
+    }
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:  #07070f;
+      --dark:   #0d0d1a;
+      --card:   #11111f;
+      --v700:   #6d28d9;
+      --v600:   #7c3aed;
+      --v500:   #8b5cf6;
+      --v400:   #a78bfa;
+      --v300:   #c4b5fd;
+      --white:  #f0f0ff;
+      --muted:  #9090b8;
+      --border: rgba(139,92,246,.25);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--black);
+      color: var(--white);
+      line-height: 1.8;
+      letter-spacing: -0.005em;
+      font-size: 1.05rem;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+      letter-spacing: -0.02em;
+      color: var(--white);
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--dark); }
+    ::-webkit-scrollbar-thumb { background: var(--v600); border-radius: 3px; }
+
+    /* Fond animé subtil */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background:
+        radial-gradient(circle 700px at 80% 10%, rgba(124,58,237,.15), transparent 70%),
+        radial-gradient(circle 600px at 10% 80%, rgba(232,121,249,.08), transparent 70%);
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(7,7,15,.65);
+      backdrop-filter: blur(24px) saturate(1.3);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--v300);
+      text-decoration: none;
+      transition: transform .25s;
+    }
+    .nav-logo span { color: var(--white); }
+    .nav-logo:hover { transform: scale(1.03); }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .9rem;
+      transition: color .25s;
+    }
+    .nav-links a:hover { color: var(--v300); }
+
+    /* HERO ARTICLE */
+    .article-hero {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 7rem 1.5rem 2.5rem;
+      text-align: center;
+    }
+    .breadcrumb {
+      font-size: .85rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .breadcrumb a {
+      color: var(--v400);
+      text-decoration: none;
+    }
+    .breadcrumb a:hover { color: var(--v300); }
+
+    .article-title {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+    .article-title .gradient {
+      background: linear-gradient(135deg, var(--v300) 0%, #e879f9 60%, var(--v400) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .article-meta-info {
+      display: inline-flex;
+      gap: 1rem;
+      align-items: center;
+      font-size: .9rem;
+      color: var(--muted);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .article-meta-info .author {
+      color: var(--v300);
+      font-weight: 600;
+    }
+
+    /* COVER */
+    .article-cover {
+      max-width: 900px;
+      margin: 0 auto 3rem;
+      height: 280px;
+      background: linear-gradient(135deg, var(--v700) 0%, var(--v500) 50%, #e879f9 100%);
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(109,40,217,.35);
+    }
+    .article-cover::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 30% 40%, rgba(255,255,255,.18), transparent 40%),
+        radial-gradient(circle at 70% 60%, rgba(255,255,255,.12), transparent 40%);
+    }
+    .cover-emoji {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 7rem;
+      filter: drop-shadow(0 8px 30px rgba(0,0,0,.4));
+    }
+
+    /* CONTENU ARTICLE */
+    .article-content {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    .article-content > .intro {
+      font-size: 1.2rem;
+      color: var(--v300);
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      padding: 1.5rem 1.75rem;
+      background: rgba(139,92,246,.05);
+      border-left: 3px solid var(--v500);
+      border-radius: 0 12px 12px 0;
+    }
+
+    .article-content h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 3rem 0 1rem;
+      padding-bottom: .5rem;
+      border-bottom: 2px solid rgba(139,92,246,.2);
+    }
+    .article-content h2 .num {
+      color: var(--v400);
+      font-weight: 800;
+      margin-right: .5rem;
+    }
+    .article-content h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 2rem 0 .75rem;
+      color: var(--v300);
+    }
+    .article-content p {
+      margin-bottom: 1.25rem;
+      color: var(--white);
+    }
+    .article-content ul, .article-content ol {
+      margin: 1rem 0 1.5rem 1.5rem;
+      color: var(--white);
+    }
+    .article-content li {
+      margin-bottom: .6rem;
+    }
+    .article-content strong {
+      color: var(--v300);
+      font-weight: 700;
+    }
+    .article-content a {
+      color: var(--v400);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .article-content a:hover { color: var(--v300); }
+
+    /* Carte erreur (rouge) */
+    .error-card {
+      background: rgba(239,68,68,.05);
+      border-left: 3px solid #ef4444;
+      border-radius: 0 12px 12px 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .error-card-title {
+      color: #f87171;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: .5rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .error-card p { margin-bottom: 0; color: var(--white); }
+
+    /* Carte solution (verte) */
+    .solution-card {
+      background: rgba(34,197,94,.05);
+      border-left: 3px solid #22c55e;
+      border-radius: 0 12px 12px 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .solution-card-title {
+      color: #4ade80;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: .5rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .solution-card p { margin-bottom: 0; color: var(--white); }
+
+    /* Encadré jaune (astuce) */
+    .tip-box {
+      background: rgba(251,191,36,.05);
+      border-left: 3px solid #fbbf24;
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 12px 12px 0;
+      margin: 1.5rem 0;
+    }
+    .tip-box strong { color: #fbbf24; }
+
+    /* CTA en bas d'article */
+    .article-cta {
+      max-width: 720px;
+      margin: 3rem auto;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(139,92,246,.1), rgba(232,121,249,.05));
+      border: 1px solid var(--v500);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+    }
+    .article-cta h3 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: .75rem;
+    }
+    .article-cta p {
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--v700), var(--v500));
+      color: #fff;
+      text-decoration: none;
+      padding: .95rem 2rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 0 4px 20px rgba(109,40,217,.4);
+      transition: transform .3s, box-shadow .3s;
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 30px rgba(139,92,246,.6);
+    }
+
+    /* AUTHOR FOOTER */
+    .article-author {
+      max-width: 720px;
+      margin: 4rem auto 2rem;
+      padding: 1.5rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+    }
+    .article-author img {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid rgba(139,92,246,.4);
+    }
+    .article-author-info .name {
+      font-weight: 700;
+      color: var(--v300);
+      margin-bottom: .25rem;
+    }
+    .article-author-info .role {
+      font-size: .85rem;
+      color: var(--muted);
+    }
+
+    footer {
+      background: var(--dark);
+      border-top: 1px solid var(--border);
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .footer-copy {
+      font-size: .8rem;
+      color: var(--muted);
+    }
+    .footer-copy a { color: var(--v400); text-decoration: none; }
+
+    @media (max-width: 600px) {
+      nav { padding: 1rem 1.25rem; }
+      .nav-links { display: none; }
+      .article-cover { height: 200px; }
+      .cover-emoji { font-size: 5rem; }
+      .article-content { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="../index.html">Agent IA <span>Immo</span></a>
+  <ul class="nav-links">
+    <li><a href="../blog.html">Blog</a></li>
+    <li><a href="../index.html#packs">Les packs</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="article-hero">
+  <p class="breadcrumb"><a href="../index.html">Accueil</a> · <a href="../blog.html">Blog</a> · Article</p>
+  <h1 class="article-title">5 erreurs à éviter quand tu utilises <span class="gradient">l'IA en immobilier</span></h1>
+  <div class="article-meta-info">
+    <span class="author">Par Thomas Favard</span>
+    <span>•</span>
+    <span>5 mai 2026</span>
+    <span>•</span>
+    <span>7 min de lecture</span>
+  </div>
+</section>
+
+<div class="article-cover">
+  <div class="cover-emoji">⚠️</div>
+</div>
+
+<article class="article-content">
+
+  <p class="intro">
+    L'IA fait gagner du temps. Sauf quand on l'utilise mal — et là, elle peut te faire perdre un mandat, ta crédibilité, ou pire : un client. Sur les 21 conseillers que j'accompagne, je vois revenir <strong>les mêmes 5 erreurs</strong>. Voici comment les éviter, avec des solutions concrètes que tu peux appliquer dès demain.
+  </p>
+
+  <h2><span class="num">1.</span> Faire confiance aveuglément aux infos données par l'IA</h2>
+
+  <div class="error-card">
+    <div class="error-card-title">❌ Le problème</div>
+    <p>Tu demandes à ChatGPT le montant des frais de notaire pour un bien à 250k€, il te répond avec assurance « environ 7 500 € ». Tu transmets l'info au client. Sauf que l'IA a halluciné — le calcul est faux de 30 %. Le client le découvre chez le notaire. Ta crédibilité prend un coup.</p>
+  </div>
+
+  <p>
+    Les IA génératives (ChatGPT, Claude, Gemini) sont entraînées sur des données qui peuvent être périmées ou approximatives. Elles « inventent » avec confiance des chiffres, des articles de loi, des prix de marché. C'est ce qu'on appelle <strong>les hallucinations</strong> — et c'est le piège n°1 du conseiller pressé.
+  </p>
+
+  <div class="solution-card">
+    <div class="solution-card-title">✅ La solution</div>
+    <p>Ne JAMAIS communiquer un chiffre, un montant juridique ou une date précise à un client sans vérifier la source. Utilise <strong>Perplexity</strong> (ou Google + service-public.fr) pour valider. Et si l'info n'est pas critique, demande à l'IA de citer ses sources.</p>
+  </div>
+
+  <h3>Cas concret</h3>
+  <p>
+    Un de mes accompagnés a évité une grosse boulette : ChatGPT lui annonçait que la loi Climat obligeait l'audit énergétique pour les biens classés F dès 2025. Faux : c'est seulement les G, et les F seulement à partir de 2028. Heureusement il a vérifié sur Perplexity avant d'envoyer le mail au vendeur.
+  </p>
+
+  <div class="tip-box">
+    💡 <strong>Astuce</strong> : ajoute systématiquement à tes prompts <em>« Si tu n'es pas sûr à 100 %, dis-le clairement plutôt que d'inventer. »</em> — ça réduit les hallucinations de 60 %.
+  </div>
+
+  <h2><span class="num">2.</span> Copier-coller les textes IA sans les retoucher</h2>
+
+  <div class="error-card">
+    <div class="error-card-title">❌ Le problème</div>
+    <p>Tu génères un descriptif de bien avec ChatGPT, tu le colles direct sur SeLoger. Trois jours plus tard, un acheteur te dit : <em>« J'ai vu votre annonce, mais en fait elle ressemble à toutes les autres. »</em>. Normal : ChatGPT en mode brut produit du texte fade et bourré de clichés (« charme indéniable », « emplacement idéal », « véritable cocon de douceur »…).</p>
+  </div>
+
+  <p>
+    L'IA générative produit par défaut un texte <strong>moyenné</strong>, neutre, sans aspérités. Or ce qui vend en immobilier, c'est l'inverse : ton ton, ta personnalité, des détails concrets que TU as vus pendant la visite, pas une IA.
+  </p>
+
+  <div class="solution-card">
+    <div class="solution-card-title">✅ La solution</div>
+    <p>Utilise l'IA comme un <strong>premier jet</strong>, jamais comme un produit fini. Règle : passe au moins 2 minutes à retoucher chaque texte généré. Vire les expressions toutes faites, ajoute 1 ou 2 détails personnels (« la cuisine donne sur le jardin où le propriétaire prenait son café le matin »), corrige le ton.</p>
+  </div>
+
+  <div class="tip-box">
+    💡 <strong>Astuce prompt</strong> : commence par <em>« Tu es conseiller immobilier à [ta ville]. Tu écris dans un ton naturel, sans jamais utiliser les mots "charme", "cocon", "véritable", "écrin", "havre de paix". »</em> — la qualité bondit immédiatement.
+  </div>
+
+  <h2><span class="num">3.</span> Utiliser des prompts trop vagues</h2>
+
+  <div class="error-card">
+    <div class="error-card-title">❌ Le problème</div>
+    <p>Tu tapes : <em>« Écris-moi un post LinkedIn sur l'immobilier »</em>. Tu reçois un truc générique sur « l'évolution du marché ». Inutilisable. Tu te dis : « l'IA c'est nul ». En vrai, le problème, c'est ton prompt.</p>
+  </div>
+
+  <p>
+    L'IA fait exactement ce que tu lui demandes — et rien de plus. Plus ton prompt est vague, plus la réponse est vague. C'est mathématique. La qualité de la sortie dépend à 80 % de la qualité de l'entrée.
+  </p>
+
+  <div class="solution-card">
+    <div class="solution-card-title">✅ La solution</div>
+    <p>Donne-lui : <strong>(1) le contexte</strong> (qui tu es), <strong>(2) la cible</strong> (à qui tu parles), <strong>(3) l'objectif</strong> (ce que tu veux obtenir), <strong>(4) le format</strong> (longueur, ton, structure), <strong>(5) un exemple</strong> si possible.</p>
+  </div>
+
+  <h3>Cas concret — comparaison</h3>
+  <p>
+    <strong>Mauvais prompt :</strong> <em>« Fais-moi un post LinkedIn. »</em>
+  </p>
+  <p>
+    <strong>Bon prompt :</strong> <em>« Tu es conseiller immobilier à Brive depuis 5 ans. Écris un post LinkedIn de 150 mots maximum, ton authentique, pour des propriétaires de 45-65 ans qui hésitent à vendre leur maison. Objectif : leur donner envie de me contacter pour une estimation gratuite. Pas de hashtags génériques. Termine par une question ouverte. »</em>
+  </p>
+  <p>
+    Le résultat est 10x meilleur. Et utilisable directement (après les 2 minutes de retouches du point 2 😉).
+  </p>
+
+  <h2><span class="num">4.</span> Mettre des données clients sensibles dans l'IA sans précaution</h2>
+
+  <div class="error-card">
+    <div class="error-card-title">❌ Le problème</div>
+    <p>Tu colles dans ChatGPT le mail complet de ton vendeur — avec son nom, son téléphone, son adresse, le prix demandé, sa situation familiale — pour générer une réponse. Ces données partent sur des serveurs OpenAI aux États-Unis. Si ton client le découvre, c'est <strong>infraction RGPD</strong>. Risque : amende, plainte, perte du mandat.</p>
+  </div>
+
+  <p>
+    Le RGPD européen interdit de transmettre des données personnelles identifiables à des services hors UE sans consentement explicite. Or ChatGPT, Claude, Gemini stockent (au moins temporairement) ce que tu leur envoies — et certains s'en servent pour entraîner leurs modèles.
+  </p>
+
+  <div class="solution-card">
+    <div class="solution-card-title">✅ La solution</div>
+    <p>Avant de coller un texte dans une IA : <strong>anonymise tout ce qui identifie une personne</strong>. Remplace les noms par « [VENDEUR] », les adresses par « [ADRESSE] », les téléphones par « [TEL] ». Tu peux le faire en 10 secondes avec un Find & Replace.</p>
+  </div>
+
+  <div class="tip-box">
+    💡 <strong>Astuce</strong> : crée un mini-process. Avant chaque prompt impliquant un client, copie le texte dans un Notepad, fais Cmd+F sur les noms/adresses, remplace par des balises, puis colle dans l'IA. 30 secondes de rituel = 100 % de protection RGPD.
+  </div>
+
+  <h2><span class="num">5.</span> Penser que l'IA va remplacer le métier de conseiller</h2>
+
+  <div class="error-card">
+    <div class="error-card-title">❌ Le problème</div>
+    <p>Tu te dis : « Avec l'IA je vais pouvoir gérer 50 mandats au lieu de 20, sans bouger de mon canapé. » Six mois plus tard, ton taux de signature s'effondre. Pourquoi ? Parce que tes clients ne veulent pas un robot. Ils veulent <strong>une relation humaine</strong>, une visite physique, une poignée de main, un café.</p>
+  </div>
+
+  <p>
+    L'immobilier est l'un des secteurs où la confiance humaine reste IRRÉCUPÉRABLE par une machine. C'est pour ça que les conseillers <strong>vont rester</strong>. Mais ceux qui réussissent en 2026, ce sont ceux qui ont compris une chose : l'IA libère du temps pour l'humain. Pas pour gérer 2x plus de dossiers.
+  </p>
+
+  <div class="solution-card">
+    <div class="solution-card-title">✅ La solution</div>
+    <p>Utilise les heures gagnées pour ce qui te fait gagner les mandats : <strong>plus de visites, plus de café-vendeurs, plus de présence physique sur ton secteur</strong>. L'IA fait les tâches répétitives, toi tu fais le métier.</p>
+  </div>
+
+  <h3>Cas concret</h3>
+  <p>
+    Un de mes accompagnés est passé de 8 à 14 mandats actifs en 4 mois. Pas parce qu'il a automatisé sa prospection. <strong>Parce qu'il a libéré 10h/semaine de descriptifs, posts et emails</strong> — et qu'il a remis ces 10h en visite-vendeur le samedi matin. Résultat : taux de transformation x2.
+  </p>
+
+  <h2>Ce qu'il faut retenir</h2>
+  <p>
+    Les 5 erreurs viennent toutes du même biais : <strong>croire que l'IA est magique</strong>. Elle ne l'est pas. C'est un outil, comme ton CRM ou ton appareil photo. Bien utilisé, il te transforme. Mal utilisé, il te dessert.
+  </p>
+  <ol>
+    <li><strong>Vérifie</strong> systématiquement les infos critiques</li>
+    <li><strong>Retouche</strong> tous les textes générés (2 min minimum)</li>
+    <li><strong>Sois précis</strong> dans tes prompts (contexte + cible + objectif + format)</li>
+    <li><strong>Anonymise</strong> avant chaque envoi de données clients</li>
+    <li><strong>Garde l'humain au centre</strong> — l'IA est ton bras droit, pas ton remplaçant</li>
+  </ol>
+
+  <h2>Le piège du « DIY total »</h2>
+  <p>
+    La 6ème erreur, qu'on ne traite pas dans cet article mais qui mérite d'être nommée : <strong>vouloir tout configurer soi-même</strong>. Les conseillers qui galèrent le plus avec l'IA sont ceux qui ont essayé pendant 6 mois de devenir experts en prompts, et qui ont fini par abandonner. Pas parce que l'IA ne marche pas — mais parce qu'apprendre à la dompter prend 100 heures qu'ils n'ont pas.
+  </p>
+  <p>
+    C'est précisément pour ça qu'on a créé Agent IA Immo : on configure ton assistant à TA façon de travailler, et tu n'as plus qu'à l'utiliser. Pas de prompts à apprendre. Pas d'erreurs RGPD. Pas d'hallucinations non vérifiées.
+  </p>
+
+</article>
+
+<div class="article-cta">
+  <h3>Tu veux passer à l'IA sans tomber dans ces pièges ?</h3>
+  <p>21 conseillers immobiliers utilisent déjà leur assistant IA personnalisé, configuré pour éviter ces 5 erreurs. RDV de présentation offert.</p>
+  <a href="../index.html#packs" class="btn-primary">Découvrir les packs →</a>
+</div>
+
+<div class="article-author">
+  <img src="../thomas.jpg" alt="Thomas Favard" />
+  <div class="article-author-info">
+    <p class="name">Thomas Favard</p>
+    <p class="role">Co-fondateur d'Agent IA Immo · Brive-la-Gaillarde · Conseil en stratégie digitale & formation IA pour conseillers immobiliers</p>
+  </div>
+</div>
+
+<footer>
+  <p class="footer-copy">© 2026 Thomas Favard · <a href="../blog.html">Retour au blog</a> · <a href="../index.html">Retour au site</a></p>
+</footer>
+
+</body>
+</html>
