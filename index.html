@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Agent IA Immo — Scripts IA pour Conseillers Immobiliers</title>
-  <meta name="description" content="Scripts IA personnalisés pour conseillers immobiliers. Facebook, LinkedIn, GMB automatisés. 3 packs à partir de 500€. RDV offert avec Thomas Favard — Brive-la-Gaillarde." />
+  <meta name="description" content="Outils IA personnalisés pour conseillers immobiliers : Facebook, LinkedIn, GMB, rapports brandés, veille mandats. 3 packs dès 239 € (offre lancement −30%). RDV offert avec Thomas Favard — Brive-la-Gaillarde." />
   <meta property="og:title" content="Agent IA Immo — Ton assistant IA pour l'immobilier" />
   <meta property="og:description" content="Scripts IA personnalisés pour conseillers immo. RDV offert." />
   <meta property="og:url" content="https://leadengineai.fr/" />
@@ -485,6 +485,168 @@
       font-size: 2.4rem;
       font-weight: 900;
       color: var(--v300);
+    }
+
+    /* Nouveau bloc prix avec promo */
+    .pack-price-box {
+      margin-top: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: .25rem;
+    }
+    .pack-price-box .price-original {
+      font-size: .95rem;
+      color: var(--muted);
+      text-decoration: line-through;
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .pack-price-box .price-promo {
+      display: inline-block;
+      background: linear-gradient(135deg, #f59e0b, #ef4444);
+      color: #fff;
+      font-size: .68rem;
+      font-weight: 800;
+      padding: .15rem .45rem;
+      border-radius: 4px;
+      letter-spacing: .5px;
+      text-decoration: none;
+    }
+    .pack-price-box .price-now {
+      display: flex;
+      align-items: baseline;
+      gap: .25rem;
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+    }
+    .pack-price-box .price-now-amount {
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--v300);
+      line-height: 1;
+      background: linear-gradient(135deg, var(--v300), #e879f9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .pack-price-box .price-now-currency {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--v300);
+    }
+    .pack-price-box .price-saving {
+      font-size: .8rem;
+      color: var(--muted);
+    }
+    .pack-price-box .price-saving strong {
+      color: #4ade80;
+      font-weight: 700;
+    }
+    .pack-price-box .price-includes {
+      margin-top: .35rem;
+      font-size: .78rem;
+      color: var(--v300);
+      background: rgba(139,92,246,.08);
+      border-left: 2px solid var(--v500);
+      padding: .4rem .65rem;
+      border-radius: 0 6px 6px 0;
+    }
+
+    /* Bandeau "Services inclus dans chaque pack" */
+    .services-included-banner {
+      background: linear-gradient(135deg, rgba(139,92,246,.08), rgba(232,121,249,.05));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 1.75rem 2rem;
+      margin: 0 0 2.5rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .services-included-banner .gift-icon {
+      font-size: 2.5rem;
+      filter: drop-shadow(0 4px 12px rgba(139,92,246,.4));
+    }
+    .services-included-banner .banner-title {
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--v400);
+      margin-bottom: .35rem;
+    }
+    .services-included-banner .banner-text {
+      font-size: 1.05rem;
+      color: var(--white);
+      font-weight: 600;
+    }
+    .services-included-banner .banner-text em {
+      color: var(--v300);
+      font-style: normal;
+      background: rgba(139,92,246,.15);
+      padding: .1rem .4rem;
+      border-radius: 4px;
+    }
+    .services-included-banner .services-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-top: .65rem;
+    }
+    .services-included-banner .service-pill {
+      font-size: .8rem;
+      background: rgba(139,92,246,.1);
+      border: 1px solid rgba(139,92,246,.25);
+      color: var(--v300);
+      padding: .35rem .75rem;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+    }
+    @media (max-width: 700px) {
+      .services-included-banner {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .services-included-banner .services-list { justify-content: center; }
+    }
+
+    /* Mini "services inclus" dans chaque pack card */
+    .pack-services-mini {
+      background: rgba(139,92,246,.06);
+      border: 1px solid rgba(139,92,246,.2);
+      border-radius: 10px;
+      padding: .75rem .9rem;
+      margin: 1rem 0 1.25rem;
+      font-size: .78rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .pack-services-mini strong {
+      color: var(--v300);
+      font-weight: 700;
+      display: block;
+      margin-bottom: .2rem;
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    /* Badge "Top deal" doré */
+    .pack-badge-top.gold {
+      background: linear-gradient(135deg, #d4af37, #f4d77e);
+      color: #0F0F1E;
+    }
+
+    /* Item "fire" dans Premium */
+    .scripts-list li .fire {
+      flex-shrink: 0;
+      width: 18px; height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .85rem;
     }
 
     /* Bouton "Nous contacter" en mini pill cliquable */
@@ -2145,24 +2307,24 @@
       {
         "@type": "Offer",
         "name": "Pack Starter",
-        "description": "Création et personnalisation de supports IA Facebook, LinkedIn, Rapport de Bien. Installation, formation visio. 3 mois de suivi offerts.",
-        "price": "500",
+        "description": "3 outils IA pour usage personnel : autopublication Facebook + Instagram, rapport d'estimation Word, rapport de bien PDF 8 pages. Installation, formation et 3 mois de suivi inclus.",
+        "price": "239",
         "priceCurrency": "EUR",
         "availability": "https://schema.org/InStock"
       },
       {
         "@type": "Offer",
         "name": "Pack Essentiel",
-        "description": "Supports IA Facebook, LinkedIn, Google My Business, Auto-publication. Installation, formation 1h30. 3 mois de suivi.",
-        "price": "790",
+        "description": "7 outils IA brandés pour conseiller pro : autopublication FB + Insta + LinkedIn pro, rapports brandés, Google Business Profile, matching acheteur-bien, présence sociale ciblée. Installation, formation et 3 mois de suivi inclus.",
+        "price": "360",
         "priceCurrency": "EUR",
         "availability": "https://schema.org/InStock"
       },
       {
         "@type": "Offer",
         "name": "Pack Premium",
-        "description": "Supports IA Facebook, LinkedIn, Instagram, GMB, Événements, Contenu hebdo. Formation + suivi mensuel visio 30 min. 3 mois de suivi.",
-        "price": "1190",
+        "description": "11 outils IA tout inclus : tout l'Essentiel + publication hebdo magazine luxe, auto publi événements, prépa visite acheteur, veille mandats quotidienne PAP/SeLoger/LBC. Installation, formation et 3 mois de suivi inclus.",
+        "price": "620",
         "priceCurrency": "EUR",
         "availability": "https://schema.org/InStock"
       }
@@ -2458,197 +2620,219 @@
       </div>
     </div>
 
+    <!-- SERVICES INCLUS DANS CHAQUE PACK -->
+    <div class="services-included-banner fade-up">
+      <div class="gift-icon">🎁</div>
+      <div>
+        <div class="banner-title">Inclus dans <em>chaque</em> pack</div>
+        <div class="banner-text">Quel que soit le pack que tu choisis, tu reçois également :</div>
+        <div class="services-list">
+          <span class="service-pill">🔍 DÉCOUVERTE personnalisée</span>
+          <span class="service-pill">🛠 Installation chez toi</span>
+          <span class="service-pill">🎓 Formation à l'utilisation</span>
+          <span class="service-pill">📅 3 mois de suivi + mises à jour</span>
+        </div>
+      </div>
+    </div>
+
     <div class="packs-grid">
 
       <!-- STARTER -->
       <div class="pack fade-up">
         <div class="pack-header">
-          <div class="pack-tier">Pack</div>
+          <div class="pack-tier">Pack 01</div>
           <div class="pack-name">Starter</div>
-          <div class="pack-tagline">Pour démarrer ta présence locale sur les réseaux</div>
-          <div class="pack-price">
-            <a href="tel:+33647438492" class="price-contact">
-              <span class="price-dot"></span>
-              Nous contacter
-            </a>
+          <div class="pack-tagline">Pour mon usage personnel — démarrer en douceur</div>
+          <div class="pack-price-box">
+            <div class="price-original">341 €<span class="price-promo">−30%</span></div>
+            <div class="price-now">
+              <span class="price-now-amount">239</span>
+              <span class="price-now-currency">€</span>
+            </div>
+            <div class="price-saving">paiement unique · <strong>économie 102 €</strong></div>
+            <div class="price-includes">✨ Installation + Formation + 3 mois inclus</div>
           </div>
         </div>
         <div class="pack-body">
-          <div class="pack-duration">⏱ Session type : 20 min</div>
           <div class="pack-objectives">
             <div class="obj">
               <div class="obj-num">3</div>
-              <div class="obj-label">Scripts inclus</div>
+              <div class="obj-label">Outils inclus</div>
             </div>
             <div class="obj">
-              <div class="obj-num">1h</div>
-              <div class="obj-label">Formation incluse</div>
+              <div class="obj-num">✓</div>
+              <div class="obj-label">Installation incluse</div>
             </div>
             <div class="obj">
               <div class="obj-num">3</div>
               <div class="obj-label">Mois de suivi offerts</div>
             </div>
           </div>
-          <div class="scripts-title">3 scripts inclus</div>
+          <div class="scripts-title">3 outils inclus</div>
           <ul class="scripts-list">
             <li>
               <span class="check">✓</span>
-              Facebook — Profil personnel
+              Autopublication d'annonces Facebook + Instagram
               <span class="tag">Réseaux</span>
             </li>
             <li>
               <span class="check">✓</span>
-              LinkedIn — Réseau professionnel
-              <span class="tag">Réseaux</span>
+              Rapport d'estimation Word (usage interne)
+              <span class="tag">Rapports</span>
             </li>
             <li>
               <span class="check">✓</span>
-              Rapport de Bien
-              <span class="tag">Contenu</span>
+              Rapport de bien complet PDF 8 pages
+              <span class="tag">Rapports</span>
             </li>
           </ul>
-          <a href="#contact" class="pack-cta cta-outline">Demander ce pack</a>
+          <a href="#contact" class="pack-cta cta-outline">Je choisis le Starter</a>
         </div>
       </div>
 
       <!-- ESSENTIEL -->
       <div class="pack featured fade-up">
-        <div class="pack-badge-top">Populaire</div>
+        <div class="pack-badge-top">⭐ Populaire</div>
         <div class="pack-header">
-          <div class="pack-tier">Pack</div>
+          <div class="pack-tier">Pack 02</div>
           <div class="pack-name">Essentiel</div>
-          <div class="pack-tagline">Le pack complet pour développer ta notoriété locale</div>
-          <div class="pack-price">
-            <a href="tel:+33647438492" class="price-contact">
-              <span class="price-dot"></span>
-              Nous contacter
-            </a>
+          <div class="pack-tagline">Pro complet, brandé pour mes clients</div>
+          <div class="pack-price-box">
+            <div class="price-original">514 €<span class="price-promo">−30%</span></div>
+            <div class="price-now">
+              <span class="price-now-amount">360</span>
+              <span class="price-now-currency">€</span>
+            </div>
+            <div class="price-saving">paiement unique · <strong>économie 154 €</strong></div>
+            <div class="price-includes">✨ Installation + Formation + 3 mois inclus</div>
           </div>
         </div>
         <div class="pack-body">
-          <div class="pack-duration">⏱ Session type : 30 min</div>
           <div class="pack-objectives">
             <div class="obj">
-              <div class="obj-num">5</div>
-              <div class="obj-label">Scripts inclus</div>
+              <div class="obj-num">7</div>
+              <div class="obj-label">Outils inclus</div>
             </div>
             <div class="obj">
-              <div class="obj-num">1h30</div>
-              <div class="obj-label">Formation incluse</div>
+              <div class="obj-num">✓</div>
+              <div class="obj-label">Brandé client</div>
             </div>
             <div class="obj">
               <div class="obj-num">3</div>
               <div class="obj-label">Mois de suivi offerts</div>
             </div>
           </div>
-          <div class="scripts-title">5 scripts inclus</div>
+          <div class="scripts-title">7 outils inclus</div>
           <ul class="scripts-list">
             <li>
               <span class="check">✓</span>
-              Facebook — Profil personnel
+              Autopublication FB + Insta + LinkedIn pro
               <span class="tag">Réseaux</span>
             </li>
             <li>
               <span class="check">✓</span>
-              LinkedIn — Réseau professionnel
-              <span class="tag">Réseaux</span>
+              Rapport d'estimation BRANDÉ (Vendeur + Interne)
+              <span class="tag">Rapports</span>
             </li>
             <li>
               <span class="check">✓</span>
-              Rapport de Bien
-              <span class="tag">Contenu</span>
+              Rapport bien PDF 12 pages BRANDÉ
+              <span class="tag">Rapports</span>
             </li>
             <li>
               <span class="check">✓</span>
-              Google My Business
+              Google Business Profile (avis, posts)
               <span class="tag">Visibilité</span>
             </li>
             <li>
               <span class="check">✓</span>
-              Auto-publication d'annonces
-              <span class="tag">Auto</span>
+              Matching acheteur-bien automatique
+              <span class="tag">Business</span>
+            </li>
+            <li>
+              <span class="check">✓</span>
+              Présence sociale ciblée LinkedIn + Insta
+              <span class="tag">Réseaux</span>
+            </li>
+            <li>
+              <span class="check">✓</span>
+              Mentions légales pro (RSAC · CPI · GALIAN)
+              <span class="tag">Conformité</span>
             </li>
           </ul>
-          <a href="#contact" class="pack-cta cta-solid">Demander ce pack</a>
+          <a href="#contact" class="pack-cta cta-solid">Je choisis l'Essentiel</a>
         </div>
       </div>
 
       <!-- PREMIUM -->
       <div class="pack fade-up">
+        <div class="pack-badge-top gold">👑 Top deal</div>
         <div class="pack-header">
-          <div class="pack-tier">Pack</div>
+          <div class="pack-tier">Pack 03</div>
           <div class="pack-name">Premium</div>
-          <div class="pack-tagline">L'arsenal complet pour dominer ton marché local</div>
-          <div class="pack-price">
-            <a href="tel:+33647438492" class="price-contact">
-              <span class="price-dot"></span>
-              Nous contacter
-            </a>
+          <div class="pack-tagline">Tout inclus, sans compromis</div>
+          <div class="pack-price-box">
+            <div class="price-original">886 €<span class="price-promo">−30%</span></div>
+            <div class="price-now">
+              <span class="price-now-amount">620</span>
+              <span class="price-now-currency">€</span>
+            </div>
+            <div class="price-saving">paiement unique · <strong>économie 266 €</strong></div>
+            <div class="price-includes">✨ Installation + Formation + 3 mois inclus</div>
           </div>
         </div>
         <div class="pack-body">
-          <div class="pack-duration">⏱ Session type : 45 min</div>
           <div class="pack-objectives">
             <div class="obj">
-              <div class="obj-num">8</div>
-              <div class="obj-label">Scripts inclus</div>
+              <div class="obj-num">11</div>
+              <div class="obj-label">Outils inclus</div>
             </div>
             <div class="obj">
-              <div class="obj-num">Visio</div>
-              <div class="obj-label">Suivi mensuel 30 min</div>
+              <div class="obj-num">🔥</div>
+              <div class="obj-label">Veille mandats exclusive</div>
             </div>
             <div class="obj">
               <div class="obj-num">3</div>
               <div class="obj-label">Mois de suivi offerts</div>
             </div>
           </div>
-          <div class="scripts-title">8 scripts inclus</div>
+          <div class="scripts-title">11 outils inclus</div>
           <ul class="scripts-list">
             <li>
               <span class="check">✓</span>
-              Facebook — Profil personnel
-              <span class="tag">Réseaux</span>
+              Tout le Pack Essentiel (7 outils brandés)
+              <span class="tag">Tout inclus</span>
             </li>
             <li>
               <span class="check">✓</span>
-              LinkedIn — Réseau professionnel
-              <span class="tag">Réseaux</span>
-            </li>
-            <li>
-              <span class="check">✓</span>
-              Rapport de Bien
-              <span class="tag">Contenu</span>
-            </li>
-            <li>
-              <span class="check">✓</span>
-              Google My Business
-              <span class="tag">Visibilité</span>
-            </li>
-            <li>
-              <span class="check">✓</span>
-              Auto-publication d'annonces
-              <span class="tag">Auto</span>
-            </li>
-            <li>
-              <span class="check">✓</span>
-              Auto-publication événements
-              <span class="tag">Auto</span>
-            </li>
-            <li>
-              <span class="check">✓</span>
-              Instagram
-              <span class="tag">Réseaux</span>
-            </li>
-            <li>
-              <span class="check">✓</span>
-              Contenu Hebdomadaire
+              Publication hebdo programmée (visuels luxe)
               <span class="tag">Stratégie</span>
             </li>
+            <li>
+              <span class="check">✓</span>
+              Auto publi événements (portes ouvertes…)
+              <span class="tag">Auto</span>
+            </li>
+            <li>
+              <span class="check">✓</span>
+              Prépa visite (brief sur-mesure acheteur)
+              <span class="tag">Conversion</span>
+            </li>
+            <li>
+              <span class="fire">🔥</span>
+              Veille mandats (PAP · SeLoger · LBC quotidien)
+              <span class="tag">Exclusif</span>
+            </li>
           </ul>
-          <a href="#contact" class="pack-cta cta-outline">Demander ce pack</a>
+          <a href="#contact" class="pack-cta cta-outline">Je choisis le Premium</a>
         </div>
       </div>
 
+    </div>
+
+    <!-- PROMO BANNER -->
+    <div class="fade-up" style="margin-top: 2rem; text-align: center; font-size: .9rem; color: var(--muted);">
+      🔥 Offre de lancement <strong style="color: #f59e0b;">−30%</strong> sur les 3 packs · économie jusqu'à 266 €
     </div>
   </div>
 </section>
@@ -2665,95 +2849,153 @@
         <thead>
           <tr>
             <th>Fonctionnalité</th>
-            <th>Starter</th>
-            <th class="col-featured">Essentiel</th>
-            <th>Premium</th>
+            <th>Starter<br><span style="font-size:.7rem; color: var(--muted); font-weight: 400;"><s>341 €</s> · <strong style="color:#f59e0b;">239 €</strong></span></th>
+            <th class="col-featured">Essentiel<br><span style="font-size:.7rem; color: var(--muted); font-weight: 400;"><s>514 €</s> · <strong style="color:#f59e0b;">360 €</strong></span></th>
+            <th>Premium<br><span style="font-size:.7rem; color: var(--muted); font-weight: 400;"><s>886 €</s> · <strong style="color:#f59e0b;">620 €</strong></span></th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Script Facebook</td>
+            <td colspan="4" style="background: rgba(139,92,246,.1); color: var(--v300); font-weight: 700; font-size: .8rem; text-transform: uppercase; letter-spacing: 1px; padding: .75rem 1rem;">🎁 Services inclus dans chaque pack</td>
+          </tr>
+          <tr>
+            <td>DÉCOUVERTE (configuration profil)</td>
             <td><span class="check-yes">✓</span></td>
             <td class="col-featured"><span class="check-yes">✓</span></td>
             <td><span class="check-yes">✓</span></td>
           </tr>
           <tr>
-            <td>Script LinkedIn</td>
+            <td>Installation chez le client</td>
             <td><span class="check-yes">✓</span></td>
             <td class="col-featured"><span class="check-yes">✓</span></td>
             <td><span class="check-yes">✓</span></td>
           </tr>
           <tr>
-            <td>Script Rapport de Bien</td>
+            <td>Formation à l'utilisation</td>
             <td><span class="check-yes">✓</span></td>
             <td class="col-featured"><span class="check-yes">✓</span></td>
             <td><span class="check-yes">✓</span></td>
           </tr>
           <tr>
-            <td>Script Google My Business</td>
+            <td>3 mois de suivi + mises à jour offerts</td>
+            <td><span class="check-yes">✓</span></td>
+            <td class="col-featured"><span class="check-yes">✓</span></td>
+            <td><span class="check-yes">✓</span></td>
+          </tr>
+
+          <tr>
+            <td colspan="4" style="background: rgba(139,92,246,.1); color: var(--v300); font-weight: 700; font-size: .8rem; text-transform: uppercase; letter-spacing: 1px; padding: .75rem 1rem;">📢 Autopublication d'annonces</td>
+          </tr>
+          <tr>
+            <td>Publication Facebook + Instagram</td>
+            <td><span class="check-yes">✓</span></td>
+            <td class="col-featured"><span class="check-yes">✓</span></td>
+            <td><span class="check-yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>Publication LinkedIn (texte pro adapté)</td>
+            <td><span class="check-no">–</span></td>
+            <td class="col-featured"><span class="check-yes">✓</span></td>
+            <td><span class="check-yes">✓</span></td>
+          </tr>
+
+          <tr>
+            <td colspan="4" style="background: rgba(139,92,246,.1); color: var(--v300); font-weight: 700; font-size: .8rem; text-transform: uppercase; letter-spacing: 1px; padding: .75rem 1rem;">📑 Rapports professionnels</td>
+          </tr>
+          <tr>
+            <td>Rapport d'estimation Word</td>
+            <td>Interne</td>
+            <td class="col-featured" style="color: #4ade80; font-weight: 700;">+ Vendeur brandé</td>
+            <td style="color: #4ade80; font-weight: 700;">+ Vendeur brandé</td>
+          </tr>
+          <tr>
+            <td>Rapport bien complet PDF</td>
+            <td>8 pages interne</td>
+            <td class="col-featured" style="color: #4ade80; font-weight: 700;">12 pages brandé</td>
+            <td style="color: #4ade80; font-weight: 700;">12 pages brandé</td>
+          </tr>
+          <tr>
+            <td>Mentions légales (RSAC · CPI · GALIAN)</td>
+            <td><span class="check-no">–</span></td>
+            <td class="col-featured"><span class="check-yes">✓</span></td>
+            <td><span class="check-yes">✓</span></td>
+          </tr>
+
+          <tr>
+            <td colspan="4" style="background: rgba(139,92,246,.1); color: var(--v300); font-weight: 700; font-size: .8rem; text-transform: uppercase; letter-spacing: 1px; padding: .75rem 1rem;">🌐 Présence en ligne</td>
+          </tr>
+          <tr>
+            <td>Présence sociale ciblée (LinkedIn + Insta)</td>
             <td><span class="check-no">–</span></td>
             <td class="col-featured"><span class="check-yes">✓</span></td>
             <td><span class="check-yes">✓</span></td>
           </tr>
           <tr>
-            <td>Auto-publication annonces</td>
+            <td>Gestion fiche Google Business Profile</td>
+            <td><span class="check-no">–</span></td>
+            <td class="col-featured"><span class="check-yes">✓</span></td>
+            <td><span class="check-yes">✓</span></td>
+          </tr>
+
+          <tr>
+            <td colspan="4" style="background: rgba(139,92,246,.1); color: var(--v300); font-weight: 700; font-size: .8rem; text-transform: uppercase; letter-spacing: 1px; padding: .75rem 1rem;">🚀 Génération de business</td>
+          </tr>
+          <tr>
+            <td>Matching acheteur-bien (base + nouveau mandat)</td>
             <td><span class="check-no">–</span></td>
             <td class="col-featured"><span class="check-yes">✓</span></td>
             <td><span class="check-yes">✓</span></td>
           </tr>
           <tr>
-            <td>Auto-publication événements</td>
+            <td>🔥 Veille mandats (PAP · SeLoger · LBC quotidien)</td>
+            <td><span class="check-no">–</span></td>
+            <td class="col-featured"><span class="check-no">–</span></td>
+            <td><span class="check-yes">✓</span></td>
+          </tr>
+
+          <tr>
+            <td colspan="4" style="background: rgba(139,92,246,.1); color: var(--v300); font-weight: 700; font-size: .8rem; text-transform: uppercase; letter-spacing: 1px; padding: .75rem 1rem;">📝 Création de contenu avancée</td>
+          </tr>
+          <tr>
+            <td>Publi hebdo programmée (visuels luxe)</td>
             <td><span class="check-no">–</span></td>
             <td class="col-featured"><span class="check-no">–</span></td>
             <td><span class="check-yes">✓</span></td>
           </tr>
           <tr>
-            <td>Script Instagram</td>
+            <td>Auto publi événements (portes ouvertes…)</td>
             <td><span class="check-no">–</span></td>
             <td class="col-featured"><span class="check-no">–</span></td>
             <td><span class="check-yes">✓</span></td>
           </tr>
+
           <tr>
-            <td>Contenu hebdomadaire (3 posts/sem.)</td>
+            <td colspan="4" style="background: rgba(139,92,246,.1); color: var(--v300); font-weight: 700; font-size: .8rem; text-transform: uppercase; letter-spacing: 1px; padding: .75rem 1rem;">🎯 Conversion</td>
+          </tr>
+          <tr>
+            <td>Prépa visite (brief sur-mesure acheteur)</td>
             <td><span class="check-no">–</span></td>
             <td class="col-featured"><span class="check-no">–</span></td>
             <td><span class="check-yes">✓</span></td>
           </tr>
-          <tr>
-            <td>Session type</td>
-            <td>20 min</td>
-            <td class="col-featured">30 min</td>
-            <td>45 min</td>
+
+          <tr style="border-top: 2px solid var(--v500);">
+            <td><strong>Nombre d'outils inclus</strong></td>
+            <td><strong style="color:var(--v300); font-size: 1.2rem;">3</strong></td>
+            <td class="col-featured"><strong style="color:var(--v300); font-size: 1.2rem;">7</strong></td>
+            <td><strong style="color:var(--v300); font-size: 1.2rem;">11</strong></td>
           </tr>
           <tr>
-            <td>Nombre de scripts</td>
-            <td>3</td>
-            <td class="col-featured"><strong style="color:var(--v300)">5</strong></td>
-            <td><strong style="color:var(--v300)">8</strong></td>
+            <td>Prix initial</td>
+            <td><s style="color: var(--muted);">341 €</s></td>
+            <td class="col-featured"><s style="color: var(--muted);">514 €</s></td>
+            <td><s style="color: var(--muted);">886 €</s></td>
           </tr>
           <tr>
-            <td>Formation installation</td>
-            <td>1h</td>
-            <td class="col-featured">1h30</td>
-            <td>1h30</td>
-          </tr>
-          <tr>
-            <td>Suivi mensuel visio</td>
-            <td><span class="check-no">–</span></td>
-            <td class="col-featured"><span class="check-no">–</span></td>
-            <td>30 min/mois</td>
-          </tr>
-          <tr>
-            <td>Rapport de session</td>
-            <td><span class="check-yes">✓</span></td>
-            <td class="col-featured"><span class="check-yes">✓</span></td>
-            <td><span class="check-yes">✓</span></td>
-          </tr>
-          <tr>
-            <td>Mois de suivi offerts</td>
-            <td>3 mois</td>
-            <td class="col-featured">3 mois</td>
-            <td>3 mois</td>
+            <td><strong>🔥 Prix offre de lancement (−30%)</strong></td>
+            <td><strong style="color: #f59e0b; font-size: 1.1rem;">239 €</strong></td>
+            <td class="col-featured"><strong style="color: #f59e0b; font-size: 1.1rem;">360 €</strong></td>
+            <td><strong style="color: #f59e0b; font-size: 1.1rem;">620 €</strong></td>
           </tr>
         </tbody>
       </table>
