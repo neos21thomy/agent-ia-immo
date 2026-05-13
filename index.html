@@ -2229,6 +2229,216 @@
       .bg-mesh .b4 { display: none; }
       .pack.featured::before { animation-duration: 12s; }
     }
+
+    /* ╔══════════════════════════════════════════════════════════════╗ */
+    /* ║  MOBILE OPTIMISATIONS (≤ 768 px)                              ║ */
+    /* ╚══════════════════════════════════════════════════════════════╝ */
+
+    /* Burger toggle button (caché par défaut sur desktop) */
+    .nav-burger {
+      display: none;
+      width: 44px;
+      height: 44px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      padding: 0;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      position: relative;
+      z-index: 1001;
+      transition: border-color .2s;
+    }
+    .nav-burger:hover { border-color: var(--v500); }
+    .nav-burger span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--v300);
+      border-radius: 2px;
+      transition: transform .25s ease, opacity .2s ease;
+    }
+    .nav-burger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .nav-burger.open span:nth-child(2) {
+      opacity: 0;
+    }
+    .nav-burger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    @media (max-width: 768px) {
+      /* ─── NAV : burger menu ─── */
+      nav {
+        padding: 0.85rem 1rem;
+        align-items: center;
+      }
+      .nav-burger { display: flex; }
+      .nav-links {
+        display: flex !important;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: min(80vw, 320px);
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0 !important;
+        padding: 5rem 1.5rem 2rem;
+        background: rgba(7, 7, 15, 0.97);
+        backdrop-filter: blur(20px);
+        border-left: 1px solid var(--border);
+        transform: translateX(100%);
+        transition: transform .3s cubic-bezier(.4,0,.2,1);
+        z-index: 1000;
+        list-style: none;
+      }
+      .nav-links.open { transform: translateX(0); }
+      .nav-links li {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .nav-links a {
+        display: block;
+        padding: 1rem 0.5rem;
+        font-size: 1.05rem;
+        color: var(--v300);
+        text-decoration: none;
+        border-bottom: 1px solid var(--border);
+        transition: color .2s, padding-left .2s;
+      }
+      .nav-links a:hover,
+      .nav-links a:focus-visible {
+        color: var(--v200);
+        padding-left: 1rem;
+      }
+      .nav-links a.nav-cta {
+        margin-top: 1rem;
+        background: linear-gradient(135deg, var(--v700), var(--v500));
+        color: #fff !important;
+        border: none;
+        border-radius: 10px;
+        text-align: center;
+        padding: 0.9rem 1rem !important;
+        font-weight: 700;
+      }
+      .nav-links a.nav-cta:hover { padding-left: 1rem !important; }
+
+      /* Backdrop quand menu ouvert */
+      body.nav-open::after {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.6);
+        z-index: 999;
+        animation: fadeIn .25s;
+      }
+      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+      body.nav-open { overflow: hidden; }
+
+      /* ─── HERO ─── */
+      .hero { padding-top: 6rem !important; padding-bottom: 3rem !important; }
+      .hero h1 { font-size: clamp(2rem, 9vw, 2.6rem) !important; line-height: 1.15 !important; }
+      .hero-sub { font-size: 1rem; line-height: 1.55; margin-bottom: 1.75rem; }
+      .hero-actions {
+        flex-direction: column;
+        gap: 0.7rem;
+        width: 100%;
+        max-width: 320px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .btn-primary, .btn-ghost, .btn-call {
+        width: 100%;
+        text-align: center;
+        padding: 0.95rem 1.25rem !important;
+        font-size: 0.95rem !important;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .hero-stats { gap: 1.25rem !important; margin-top: 2.5rem !important; }
+      .stat { flex: 1; min-width: 90px; }
+      .stat-num { font-size: 1.6rem !important; }
+
+      /* ─── SECTIONS : padding & titres ─── */
+      section { padding-left: 1rem !important; padding-right: 1rem !important; }
+      #how, #packs, #compare, #temoignages, #faq, #video-demo, #contact {
+        padding-top: 3rem !important;
+        padding-bottom: 2rem !important;
+      }
+      .section-title { font-size: clamp(1.6rem, 6vw, 2rem) !important; }
+      .section-sub { font-size: 0.95rem !important; padding: 0 0.5rem; }
+      .section-label { font-size: 0.7rem !important; }
+
+      /* ─── PACKS : 1 colonne ─── */
+      .packs-grid { gap: 1.25rem !important; }
+      .pack { padding-bottom: 0.5rem; }
+      .pack-name { font-size: 1.45rem !important; }
+      .pack-price-box .price-now-amount { font-size: 2.4rem !important; }
+      .pack-objectives { grid-template-columns: 1fr 1fr !important; }
+      .obj-num { font-size: 1.1rem !important; }
+
+      /* ─── COMPARATIF : scroll horizontal propre ─── */
+      .compare-table {
+        font-size: 0.78rem !important;
+        min-width: 600px;
+      }
+      .compare-table th, .compare-table td {
+        padding: 0.55rem 0.4rem !important;
+      }
+      #compare > .section-inner > div[style*="overflow-x"] {
+        margin-left: -1rem;
+        margin-right: -1rem;
+        padding: 0 1rem;
+      }
+
+      /* ─── TÉMOIGNAGES : carousel scroll snap ─── */
+      .testimonials-track { gap: 1rem !important; }
+
+      /* ─── VIDÉO : marge réduite ─── */
+      #video-demo { padding-top: 2.5rem !important; padding-bottom: 1.5rem !important; }
+      .video-wrapper { padding: 0.25rem !important; margin-top: 1.5rem !important; }
+      .video-glow { filter: blur(20px) !important; }
+
+      /* ─── FOOTER ─── */
+      .footer-inner { flex-direction: column !important; gap: 1.5rem; text-align: center; }
+      .footer-links { justify-content: center; flex-wrap: wrap; }
+
+      /* ─── PERSO-BANNER : padding réduit ─── */
+      .perso-banner { padding: 1.25rem !important; flex-direction: column !important; gap: 1rem !important; text-align: center; }
+      .perso-icon-wrap { margin: 0 auto !important; }
+
+      /* ─── SERVICES BANNER : empilement vertical ─── */
+      .services-included-banner {
+        padding: 1.25rem !important;
+        grid-template-columns: 1fr !important;
+        text-align: center;
+      }
+      .services-included-banner .gift-icon { margin: 0 auto; }
+      .services-included-banner .services-list { justify-content: center; }
+
+      /* ─── TOUCH TARGETS minimum 44px ─── */
+      .btn-primary, .btn-ghost, .btn-call, .pack-cta,
+      .contact-item, .nav-links a, .price-contact { min-height: 44px; }
+    }
+
+    /* Très petits écrans (<400 px) — affinage supplémentaire */
+    @media (max-width: 400px) {
+      .hero h1 { font-size: 1.95rem !important; }
+      .hero-stats { gap: 1rem !important; }
+      .stat-num { font-size: 1.4rem !important; }
+      .stat-label { font-size: 0.65rem !important; }
+      .pack-header { padding: 1.5rem 1.25rem 1rem !important; }
+      .pack-body { padding: 1.25rem 1.25rem 1.5rem !important; }
+      .pack-price-box .price-now-amount { font-size: 2.2rem !important; }
+    }
   </style>
 
   <!-- Canonical URL -->
@@ -2250,7 +2460,7 @@
     "image": "https://leadengineai.fr/og-image.jpg",
     "telephone": "+33647438492",
     "email": "thomas@leadengineai.fr",
-    "priceRange": "500€ - 1190€",
+    "priceRange": "239€ - 620€",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Brive-la-Gaillarde",
@@ -2438,7 +2648,7 @@
 <!-- ══ NAV ══════════════════════════════════════════════════════════ -->
 <nav>
   <a class="nav-logo" href="#hero">Agent IA <span>Immo</span></a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="navLinks">
     <li><a href="#how">Comment ça marche</a></li>
     <li><a href="#packs">Les packs</a></li>
     <li><a href="#compare">Comparatif</a></li>
@@ -2446,6 +2656,11 @@
     <li><a href="blog.html">Blog</a></li>
     <li><a href="#contact" class="nav-cta">Contact</a></li>
   </ul>
+  <button class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 </nav>
 
 <!-- ══ HERO ══════════════════════════════════════════════════════════ -->
@@ -3388,6 +3603,46 @@
 
 <!-- ══ JS ══════════════════════════════════════════════════════════════ -->
 <script>
+  /* ── BURGER MENU MOBILE ── */
+  (function() {
+    const burger = document.getElementById('navBurger');
+    const links = document.getElementById('navLinks');
+    if (!burger || !links) return;
+
+    const close = () => {
+      burger.classList.remove('open');
+      links.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('nav-open');
+    };
+    const open = () => {
+      burger.classList.add('open');
+      links.classList.add('open');
+      burger.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('nav-open');
+    };
+
+    burger.addEventListener('click', () => {
+      if (links.classList.contains('open')) close();
+      else open();
+    });
+    // Ferme au clic sur un lien
+    links.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', close);
+    });
+    // Ferme au clic backdrop
+    document.addEventListener('click', (e) => {
+      if (!links.classList.contains('open')) return;
+      if (e.target === burger || burger.contains(e.target)) return;
+      if (links.contains(e.target)) return;
+      close();
+    });
+    // Ferme avec ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && links.classList.contains('open')) close();
+    });
+  })();
+
   /* ── FAQ TOGGLE ── */
   function toggleFaq(btn) {
     const item = btn.closest('.faq-item');
