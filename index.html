@@ -2439,6 +2439,97 @@
       .pack-body { padding: 1.25rem 1.25rem 1.5rem !important; }
       .pack-price-box .price-now-amount { font-size: 2.2rem !important; }
     }
+
+    /* ╔══════════════════════════════════════════════════════════════╗ */
+    /* ║  THÈME CLAIR  ([data-theme="light"])                          ║ */
+    /* ╚══════════════════════════════════════════════════════════════╝ */
+    html[data-theme="light"] {
+      --black:   #f6f5fc;   /* fond principal */
+      --dark:    #ebe9f6;
+      --card:    #ffffff;
+      --card2:   #f3f1fc;
+      --v900:    #4c1d95;
+      --v700:    #6d28d9;
+      --v600:    #7c3aed;
+      --v500:    #7c3aed;
+      --v400:    #6d28d9;   /* accent texte → foncé pour lisibilité */
+      --v300:    #6d28d9;   /* labels/accents → foncé sur blanc */
+      --v200:    #5b21b6;
+      --white:   #181826;   /* « texte principal » devient foncé */
+      --muted:   #5c5c7a;
+      --border:  rgba(124,58,237,.20);
+      --glow:    rgba(139,92,246,.16);
+    }
+
+    /* Fonds vitrés en dur → version claire */
+    html[data-theme="light"] nav { background: rgba(255,255,255,.82) !important; }
+    html[data-theme="light"] nav.scrolled { background: rgba(255,255,255,.92) !important; }
+    html[data-theme="light"] .review-modal { background: rgba(20,18,40,.45); }
+
+    /* Décor : on adoucit fortement pour fond clair */
+    html[data-theme="light"] body::before { opacity: .25; }       /* grain */
+    html[data-theme="light"] .bg-mesh .blob { opacity: .10 !important; }
+    html[data-theme="light"] body::after { opacity: .35; }         /* spotlight curseur */
+    html[data-theme="light"] #neuralCanvas { opacity: .14 !important; }
+    html[data-theme="light"] .particles { opacity: .25 !important; }
+    html[data-theme="light"] .bg-grid {
+      background-image:
+        linear-gradient(rgba(124,58,237,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124,58,237,.05) 1px, transparent 1px);
+    }
+    html[data-theme="light"] .floating-shapes { opacity: .5; }
+
+    /* Ombres : plus douces sur fond clair */
+    html[data-theme="light"] .pack,
+    html[data-theme="light"] .testi-card,
+    html[data-theme="light"] .faq-item,
+    html[data-theme="light"] .article-card {
+      box-shadow: 0 8px 30px rgba(109,40,217,.08);
+    }
+    html[data-theme="light"] .pack:hover {
+      box-shadow: 0 16px 50px rgba(109,40,217,.15);
+    }
+    html[data-theme="light"] .demo-video {
+      box-shadow: 0 0 0 1px rgba(124,58,237,.12),
+                  0 20px 60px rgba(109,40,217,.18);
+    }
+    html[data-theme="light"] .video-glow { opacity: .5; }
+
+    /* Bouton ghost : meilleur contraste sur blanc */
+    html[data-theme="light"] .btn-ghost {
+      background: rgba(124,58,237,.07);
+      border-color: rgba(124,58,237,.30);
+    }
+
+    /* ── BOUTON TOGGLE THÈME ── */
+    .theme-toggle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: rgba(139,92,246,.08);
+      color: var(--v300);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background .2s, border-color .2s, transform .2s, color .2s;
+      padding: 0;
+    }
+    .theme-toggle:hover {
+      background: rgba(139,92,246,.18);
+      border-color: var(--v500);
+      transform: scale(1.08) rotate(12deg);
+    }
+    .theme-toggle svg { width: 18px; height: 18px; display: block; }
+    .theme-toggle .icon-sun  { display: none; }
+    .theme-toggle .icon-moon { display: block; }
+    html[data-theme="light"] .theme-toggle .icon-sun  { display: block; }
+    html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
+    @media (max-width: 768px) {
+      .theme-toggle { margin-left: auto; margin-right: .6rem; }
+    }
   </style>
 
   <!-- Canonical URL -->
@@ -2619,6 +2710,19 @@
   }
   </script>
 
+  <!-- Anti-flash : applique le thème avant le rendu -->
+  <script>
+    (function() {
+      try {
+        var t = localStorage.getItem('theme');
+        if (!t) {
+          t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        if (t === 'light') document.documentElement.setAttribute('data-theme', 'light');
+      } catch (e) {}
+    })();
+  </script>
+
 </head>
 <body>
 
@@ -2656,6 +2760,15 @@
     <li><a href="blog.html">Blog</a></li>
     <li><a href="#contact" class="nav-cta">Contact</a></li>
   </ul>
+  <button class="theme-toggle" id="themeToggle" aria-label="Changer de thème" title="Thème clair / sombre">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="4"></circle>
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+    </svg>
+  </button>
   <button class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false">
     <span></span>
     <span></span>
@@ -3509,6 +3622,24 @@ Le Chasseur de Mandats
 
 <!-- ══ JS ══════════════════════════════════════════════════════════════ -->
 <script>
+  /* ── TOGGLE THÈME CLAIR / SOMBRE ── */
+  (function() {
+    const btn = document.getElementById('themeToggle');
+    if (!btn) return;
+    const root = document.documentElement;
+    const apply = (theme) => {
+      if (theme === 'light') root.setAttribute('data-theme', 'light');
+      else root.removeAttribute('data-theme');
+      try { localStorage.setItem('theme', theme); } catch (e) {}
+      btn.setAttribute('aria-label',
+        theme === 'light' ? 'Passer en thème sombre' : 'Passer en thème clair');
+    };
+    btn.addEventListener('click', () => {
+      const isLight = root.getAttribute('data-theme') === 'light';
+      apply(isLight ? 'dark' : 'light');
+    });
+  })();
+
   /* ── BURGER MENU MOBILE ── */
   (function() {
     const burger = document.getElementById('navBurger');
