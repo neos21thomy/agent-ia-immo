@@ -412,7 +412,24 @@
       .cover-emoji { font-size: 5rem; }
       .article-content { font-size: 1rem; }
     }
+    /* THEME CLAIR */
+    html[data-theme="light"]{
+      --black:#f6f5fc; --dark:#ebe9f6; --card:#ffffff;
+      --v700:#6d28d9; --v600:#7c3aed; --v500:#7c3aed;
+      --v400:#6d28d9; --v300:#6d28d9;
+      --white:#181826; --muted:#5c5c7a; --border:rgba(124,58,237,.20);
+    }
+    html[data-theme="light"] nav{ background:rgba(255,255,255,.85)!important; }
+    html[data-theme="light"] body::before{ opacity:.4; }
+    .theme-toggle{ width:38px; height:38px; border-radius:50%; border:1px solid var(--border); background:rgba(139,92,246,.08); color:var(--v300); cursor:pointer; display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; transition:background .2s,border-color .2s,transform .2s,color .2s; padding:0; margin-left:1rem; }
+    .theme-toggle:hover{ background:rgba(139,92,246,.18); border-color:var(--v500); transform:scale(1.08) rotate(12deg); }
+    .theme-toggle svg{ width:17px; height:17px; display:block; }
+    .theme-toggle .icon-sun{ display:none; }
+    .theme-toggle .icon-moon{ display:block; }
+    html[data-theme="light"] .theme-toggle .icon-sun{ display:block; }
+    html[data-theme="light"] .theme-toggle .icon-moon{ display:none; }
   </style>
+<script>(function(){try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}if(t==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}})();</script>
 </head>
 <body>
 
@@ -423,6 +440,10 @@
     <li><a href="../index.html#packs">Les packs</a></li>
     <li><a href="../index.html#contact">Contact</a></li>
   </ul>
+  <button class="theme-toggle" id="themeToggle" aria-label="Changer de theme" title="Theme clair / sombre">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+  </button>
 </nav>
 
 <section class="article-hero">
@@ -639,5 +660,6 @@
   <p class="footer-copy">© 2026 Thomas Favard · <a href="../blog.html">Retour au blog</a> · <a href="../index.html">Retour au site</a></p>
 </footer>
 
+<script>(function(){var b=document.getElementById('themeToggle');if(!b)return;var r=document.documentElement;function a(t){if(t==='light')r.setAttribute('data-theme','light');else r.removeAttribute('data-theme');try{localStorage.setItem('theme',t);}catch(e){}}b.addEventListener('click',function(){a(r.getAttribute('data-theme')==='light'?'dark':'light');});})();</script>
 </body>
 </html>
