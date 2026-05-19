@@ -4,17 +4,10 @@
 User-agent: *
 Allow: /
 
-# Pages légales — accessibles mais pas prioritaires
-# (déjà taguées noindex en HTML)
-
-# Bloquer les fichiers techniques et sauvegardes
+# Espace admin (déjà noindex en HTML)
+Disallow: /admin.html
 Disallow: /_backups/
 Disallow: /.claude/
-Disallow: /*.txt$
-Disallow: /index-*.html
 
-# Sitemap pour aider Google
+# Sitemap
 Sitemap: https://leadengineai.fr/sitemap.xml
-
-# Délai entre requêtes (poli)
-Crawl-delay: 1
