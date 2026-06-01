@@ -2650,6 +2650,38 @@
       line-height: 1.6;
     }
 
+    /* ── VIDÉO DE PRÉSENTATION ── */
+    #video {
+      background: linear-gradient(180deg, var(--black) 0%, var(--dark) 100%);
+    }
+    .video-wrapper {
+      max-width: 960px;
+      margin: 2.5rem auto 0;
+      position: relative;
+      aspect-ratio: 16 / 9;
+      border-radius: 20px;
+      overflow: hidden;
+      background: var(--card);
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 60px rgba(109,40,217,.25), 0 8px 20px rgba(0,0,0,.4);
+      transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s;
+    }
+    .video-wrapper:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 28px 80px rgba(109,40,217,.35), 0 12px 30px rgba(0,0,0,.5);
+    }
+    .video-wrapper iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+    @media (max-width: 768px) {
+      .video-wrapper { border-radius: 14px; margin-top: 1.5rem; }
+    }
+
     /* ── VS CHATGPT TABLE ── */
     .vs-table-wrap {
       max-width: 880px;
@@ -3036,6 +3068,22 @@
   }
   </script>
 
+  <!-- 4bis. VideoObject — Vidéo de bienvenue (boost SEO onglet Vidéos Google) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": "Agent IA Immo — Vidéo de bienvenue : devenir autonome avec l'IA en immobilier",
+    "description": "Vidéo de bienvenue de Thomas Favard : découvre la méthode Agent IA Immo, comment 114 conseillers immobiliers maîtrisent l'IA dans leur quotidien — formation, agents personnalisés, accompagnement 2 à 5 mois.",
+    "thumbnailUrl": "https://img.youtube.com/vi/4FxSNYh40Fg/maxresdefault.jpg",
+    "uploadDate": "2026-05-14",
+    "contentUrl": "https://youtu.be/4FxSNYh40Fg",
+    "embedUrl": "https://www.youtube.com/embed/4FxSNYh40Fg",
+    "publisher": { "@id": "https://leadengineai.fr/#organization" },
+    "inLanguage": "fr-FR"
+  }
+  </script>
+
   <!-- 5. HowTo — La méthode Agent IA Immo (boost SEO featured snippet) -->
   <script type="application/ld+json">
   {
@@ -3312,6 +3360,24 @@
     </div>
   </div>
 </div>
+
+<!-- ══ VIDÉO DE BIENVENUE ════════════════════════════════════════════ -->
+<section id="video">
+  <div class="section-inner">
+    <p class="section-label fade-up">Bienvenue chez Agent IA Immo</p>
+    <h2 class="section-title fade-up">Découvre la méthode <span class="gradient">en 2 minutes</span></h2>
+    <p class="section-sub fade-up">Une vidéo courte où je te présente l'approche, ce qu'on fait ensemble et ce que les 114 conseillers immobiliers que j'accompagne obtiennent au quotidien.</p>
+    <div class="video-wrapper fade-up">
+      <iframe
+        src="https://www.youtube.com/embed/4FxSNYh40Fg?rel=0&modestbranding=1"
+        title="Agent IA Immo — Vidéo de bienvenue : devenir autonome avec l'IA en immobilier"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
 
 <!-- ══ HOW IT WORKS ══════════════════════════════════════════════════ -->
 <section id="how">
