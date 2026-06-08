@@ -460,7 +460,7 @@
     /* POURQUOI 3 piliers */
     .pillars {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 1.5rem;
     }
     .pillar {
@@ -1046,7 +1046,7 @@
   <p class="breadcrumb"><a href="index.html">Accueil</a> · Création de site internet</p>
   <span class="hero-badge">Création de site internet · IA + Humain</span>
   <h1 class="hero-title">Le site internet qui vous <span class="gradient">ressemble vraiment</span><br>livré en 7 jours</h1>
-  <p class="hero-sub">Pendant que <strong>les grandes plateformes vous vendent un abonnement à vie</strong>, nous vous concevons un site <strong>sur-mesure que vous possédez à 100%</strong>, optimisé Google dès le jour 1, avec une vraie formation pour rester autonome. <strong>Vous payez une fois. C'est à vous. Pour toujours.</strong></p>
+  <p class="hero-sub">Pendant que <strong>les grandes plateformes vous vendent un abonnement à vie</strong>, nous vous concevons un site <strong>sur-mesure</strong> au <strong>design UX soigné</strong>, <strong>parfait sur mobile</strong>, optimisé Google dès le jour 1. Vous payez une fois, vous êtes propriétaire, avec une vraie formation pour rester autonome. <strong>C'est à vous. Pour toujours.</strong></p>
   <div class="hero-cta">
     <a href="#packs" class="btn-primary">Voir les formules →</a>
     <a href="#contact" class="btn-ghost">Devis gratuit en 48h</a>
@@ -1054,24 +1054,24 @@
 
   <div class="trust">
     <div class="trust-item">
-      <div class="trust-icon">⚡</div>
-      <div class="trust-value">7-15 jours</div>
-      <div class="trust-label">Livraison rapide</div>
+      <div class="trust-icon">📱</div>
+      <div class="trust-value">Mobile-first</div>
+      <div class="trust-label">100% responsive</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">🎨</div>
+      <div class="trust-value">UX soigné</div>
+      <div class="trust-label">Design pensé pour convertir</div>
     </div>
     <div class="trust-item">
       <div class="trust-icon">🎯</div>
       <div class="trust-value">SEO inclus</div>
-      <div class="trust-label">Optimisé Google</div>
+      <div class="trust-label">Optimisé Google dès J1</div>
     </div>
     <div class="trust-item">
       <div class="trust-icon">🔓</div>
       <div class="trust-value">100% à vous</div>
-      <div class="trust-label">Pas d'abonnement</div>
-    </div>
-    <div class="trust-item">
-      <div class="trust-icon">📍</div>
-      <div class="trust-value">Brive · France</div>
-      <div class="trust-label">Présentiel ou visio</div>
+      <div class="trust-label">Pas d'abonnement à vie</div>
     </div>
   </div>
 </section>
@@ -1102,19 +1102,24 @@
 <section id="why">
   <div class="section-inner">
     <p class="section-label">Pourquoi LeadEngine AI</p>
-    <h2 class="section-title">3 choses qui changent <span style="color:var(--v300);">tout</span></h2>
+    <h2 class="section-title">4 choses qui changent <span style="color:var(--v300);">tout</span></h2>
     <p class="section-sub">Vous méritez mieux qu'un template générique personnalisé en 2h. Voici ce qu'on fait différemment.</p>
 
     <div class="pillars">
       <div class="pillar">
         <div class="pillar-icon">🧠</div>
-        <h3>Conçu avec l'IA, pensé par un humain</h3>
-        <p>L'IA accélère la conception (architecture, SEO, premières maquettes) mais c'est nous qui pilote chaque détail. Vous avez <strong>la vitesse de l'IA et la finesse d'un humain qui vous connaît</strong>.</p>
+        <h3>Conçu avec l'IA, piloté par un humain</h3>
+        <p>L'IA accélère la conception (architecture, SEO, premières maquettes) mais c'est nous qui pilotons chaque détail. Vous avez <strong>la vitesse de l'IA et la finesse d'un humain qui vous connaît</strong>.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">📱</div>
+        <h3>Mobile-first &amp; UX soignée</h3>
+        <p>Aujourd'hui, <strong>plus de 65% du trafic web vient du téléphone</strong>. Chaque site est <strong>pensé d'abord pour le mobile</strong>, puis adapté tablette et desktop. Une expérience utilisateur (UX) fluide à chaque format, des boutons faciles à toucher, un texte lisible sans zoomer.</p>
       </div>
       <div class="pillar">
         <div class="pillar-icon">🎯</div>
         <h3>Optimisé pour Google dès le jour 1</h3>
-        <p>SEO technique inclus : vitesse &lt; 2s, balises propres, schema.org, mobile-first, sitemap. <strong>Votre site est prêt à être trouvé sur Google sans payer un consultant SEO en plus</strong>.</p>
+        <p>SEO technique inclus : vitesse &lt; 2s, balises propres, schema.org, sitemap. <strong>Votre site est prêt à être trouvé sur Google sans payer un consultant SEO en plus</strong>. Google priorise les sites mobile-friendly — vous êtes prêt.</p>
       </div>
       <div class="pillar">
         <div class="pillar-icon">🔓</div>
@@ -1155,6 +1160,18 @@
         <div class="vs-cell label">🔍 SEO Google</div>
         <div class="vs-cell them"><span class="vs-icon-x">✕</span> Code lourd, vitesse moyenne, mal-aimé de Google</div>
         <div class="vs-cell us"><span class="vs-icon-check">✓</span> Code propre, <strong>vitesse &lt; 2s</strong>, schema.org, optimisé dès J1</div>
+      </div>
+
+      <div class="vs-row">
+        <div class="vs-cell label">📱 Mobile / responsive</div>
+        <div class="vs-cell them"><span class="vs-icon-x">✕</span> Adaptation auto souvent imparfaite : éléments coupés, boutons trop petits</div>
+        <div class="vs-cell us"><span class="vs-icon-check">✓</span> <strong>Mobile-first</strong> : chaque écran testé manuellement (mobile, tablette, desktop)</div>
+      </div>
+
+      <div class="vs-row">
+        <div class="vs-cell label">🎨 UX design</div>
+        <div class="vs-cell them"><span class="vs-icon-x">✕</span> Template choisi sur catalogue, parcours utilisateur générique</div>
+        <div class="vs-cell us"><span class="vs-icon-check">✓</span> <strong>Parcours pensé pour convertir</strong> votre cible précise (clients, leads, RDV)</div>
       </div>
 
       <div class="vs-row">
@@ -1242,7 +1259,7 @@
         <p class="pack-price">À partir de 299 €<small>Livré en 7 jours</small></p>
         <ul class="pack-features">
           <li>1 page complète et longue</li>
-          <li>Design responsive sur-mesure</li>
+          <li>Design responsive mobile-first &amp; UX soignée</li>
           <li>SEO de base inclus</li>
           <li>Formulaire de contact</li>
           <li>Domaine + hébergement 1 an</li>
@@ -1261,7 +1278,7 @@
         <p class="pack-price">Sur devis<small>Livré en 10-15 jours</small></p>
         <ul class="pack-features">
           <li>Jusqu'à 7 pages</li>
-          <li>Design responsive sur-mesure</li>
+          <li>Design responsive mobile-first &amp; UX soignée</li>
           <li>SEO complet inclus + schema.org</li>
           <li>Blog intégré (autonome)</li>
           <li>Formulaire contact + RDV</li>
@@ -1280,7 +1297,7 @@
         <p class="pack-price">Sur devis<small>Livré en 3-4 semaines</small></p>
         <ul class="pack-features">
           <li>Pages illimitées</li>
-          <li>Design responsive sur-mesure</li>
+          <li>Design responsive mobile-first &amp; UX soignée</li>
           <li>SEO complet + schema.org</li>
           <li>Blog intégré</li>
           <li>Espace membre / e-commerce / CRM</li>
@@ -1426,6 +1443,16 @@
         <button class="faq-q" onclick="toggleFaq(this)">L'hébergement et le nom de domaine sont-ils inclus ?</button>
         <div class="faq-a"><div class="faq-a-inner">Oui, la <strong>1<sup>ère</sup> année</strong> est incluse dans tous les packs. Vous restez propriétaire du domaine et vous pouvez le transférer où vous voulez à tout moment. À partir de la 2<sup>e</sup> année, vous payez directement l'hébergeur (15-50€/an selon le pack).</div></div>
       </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Le site sera-t-il bien sur mobile ?</button>
+        <div class="faq-a"><div class="faq-a-inner">Oui, et c'est <strong>un point critique pour nous</strong>. Plus de 65% du trafic web vient aujourd'hui du téléphone. Chaque site est conçu en <strong>mobile-first</strong> : on commence par dessiner et coder le site pour mobile, puis on adapte tablette et desktop. Chaque écran est <strong>testé manuellement</strong> (iPhone, Android, iPad, ordinateur) avant livraison. Boutons assez grands pour le pouce, textes lisibles sans zoomer, menus pliables, images compressées pour charger vite en 4G. C'est ce qui fait la différence entre un site qui convertit sur mobile et un site qu'on quitte au bout de 3 secondes.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">C'est quoi exactement l'UX design dont vous parlez ?</button>
+        <div class="faq-a"><div class="faq-a-inner"><strong>UX = Expérience Utilisateur</strong>. C'est l'art de penser à la personne qui visite votre site : <em>« où va-t-elle cliquer en premier ? quelle question se pose-t-elle ? quel chemin la conduit naturellement à vous contacter ? »</em>. Concrètement, ça veut dire : hiérarchie visuelle claire, parcours fluide, formulaires courts, CTA visibles, temps de chargement &lt; 2s. Un site avec une bonne UX <strong>convertit 2 à 5 fois mieux</strong> qu'un site mal pensé. C'est inclus dans chaque pack, pas une option à part.</div></div>
+      </div>
+
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">Le site sera-t-il visible sur Google ?</button>
         <div class="faq-a"><div class="faq-a-inner">Oui. Tous les sites livrés intègrent les <strong>fondamentaux SEO</strong> : balises titres optimisées, structure HTML sémantique, vitesse de chargement &lt; 2s, schema.org, sitemap, mobile-first. Une formation au maintien du SEO est incluse. Attention : être visible en 1<sup>ère</sup> page Google sur vos mots-clés clés demande quelques semaines à quelques mois de patience.</div></div>

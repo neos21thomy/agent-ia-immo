@@ -2493,9 +2493,27 @@
       .video-wrapper { padding: 0.25rem !important; margin-top: 1.5rem !important; }
       .video-glow { filter: blur(20px) !important; }
 
-      /* ─── FOOTER ─── */
+      /* ─── FOOTER (touch targets mobile-friendly 44px+) ─── */
       .footer-inner { flex-direction: column !important; gap: 1.5rem; text-align: center; }
-      .footer-links { justify-content: center; flex-wrap: wrap; }
+      .footer-links { justify-content: center; flex-wrap: wrap; gap: .5rem !important; }
+      .footer-links a {
+        min-height: 44px;
+        min-width: 44px;
+        padding: .65rem .9rem !important;
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        font-size: .9rem !important;
+      }
+      .footer-links a:active { background: rgba(139,92,246,.12); }
+      .footer-brand a, .footer-copy a {
+        min-height: 32px;
+        padding: .3rem .5rem;
+        display: inline-block;
+      }
+      /* Liens dans <p> du footer plus touch-friendly */
+      footer p a { padding: .35rem .6rem; display: inline-block; min-height: 36px; }
 
       /* ─── PERSO-BANNER : padding réduit ─── */
       .perso-banner { padding: 1.25rem !important; flex-direction: column !important; gap: 1rem !important; text-align: center; }
@@ -3548,7 +3566,7 @@ Le Bâtisseur de Réseau
               <span class="tag">Réseaux</span>
             </li>
           </ul>
-          <a href="#contact" class="pack-cta cta-outline">Nous choisis le Starter</a>
+          <a href="#contact" class="pack-cta cta-outline">Choisir le Starter</a>
         </div>
       </div>
 
@@ -3614,7 +3632,7 @@ Le Matching de Biens
               <span class="tag">Business</span>
             </li>
           </ul>
-          <a href="#contact" class="pack-cta cta-solid">Nous choisis l'Essentiel</a>
+          <a href="#contact" class="pack-cta cta-solid">Choisir l'Essentiel</a>
         </div>
       </div>
 
@@ -3675,7 +3693,7 @@ Le Chasseur de Mandats
               <span class="tag">Exclusif</span>
             </li>
           </ul>
-          <a href="#contact" class="pack-cta cta-outline">Nous choisis le Premium</a>
+          <a href="#contact" class="pack-cta cta-outline">Choisir le Premium</a>
         </div>
       </div>
 
