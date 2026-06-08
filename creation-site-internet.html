@@ -29,33 +29,159 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Schema Service -->
+  <!-- Schema Service avec offres détaillées -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Service",
     "serviceType": "Création de site internet",
     "name": "Création de site internet sur-mesure avec IA",
-    "description": "Conception et développement de sites internet professionnels assistés par IA. Design moderne, SEO inclus, livraison rapide en 7 à 15 jours.",
+    "description": "Conception et développement de sites internet professionnels assistés par IA. Design moderne, SEO inclus, livraison rapide en 7 à 15 jours, hébergement la 1ère année offert.",
     "provider": {
       "@type": "ProfessionalService",
+      "@id": "https://leadengineai.fr/#organization",
       "name": "LeadEngine AI",
       "url": "https://leadengineai.fr/",
+      "logo": "https://leadengineai.fr/favicon.png",
       "telephone": "+33647438492",
       "areaServed": [
         { "@type": "City", "name": "Brive-la-Gaillarde" },
         { "@type": "AdministrativeArea", "name": "Corrèze" },
+        { "@type": "AdministrativeArea", "name": "Nouvelle-Aquitaine" },
         { "@type": "Country", "name": "France" }
       ],
-      "founder": { "@type": "Person", "name": "Thomas Favard" }
+      "founder": { "@type": "Person", "name": "Thomas Favard" },
+      "sameAs": [
+        "https://www.linkedin.com/in/thomas-favard-immo/",
+        "https://www.facebook.com/profile.php?id=61590336616169"
+      ]
     },
     "areaServed": "FR",
-    "offers": {
-      "@type": "AggregateOffer",
-      "priceCurrency": "EUR",
-      "lowPrice": "299",
-      "offerCount": "3",
-      "availability": "https://schema.org/InStock"
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Packs Création de Site Internet",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "name": "Pack Vitrine",
+          "description": "Site one-page complet, design sur-mesure, SEO de base, domaine et hébergement 1 an, formation 1h. Livré en 7 jours.",
+          "price": "299",
+          "priceCurrency": "EUR",
+          "availability": "https://schema.org/InStock",
+          "validFrom": "2026-06-01"
+        },
+        {
+          "@type": "Offer",
+          "name": "Pack Pro",
+          "description": "Site multi-pages (jusqu'à 7 pages), blog intégré, SEO complet, schema.org, domaine et hébergement 1 an, formation 1h30. Livré en 10-15 jours.",
+          "priceCurrency": "EUR",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Pack Sur-mesure",
+          "description": "Site avec fonctionnalités avancées (espace membre, e-commerce, intégrations API), pages illimitées, SEO complet, formation 2h. Livré en 3-4 semaines.",
+          "priceCurrency": "EUR",
+          "availability": "https://schema.org/InStock"
+        }
+      ]
+    },
+    "termsOfService": "Devis gratuit et sans engagement. 1 mois de support inclus après livraison. 3 retouches/mois incluses pendant le mois suivant la livraison."
+  }
+  </script>
+
+  <!-- Schema HowTo : le process en 4 étapes -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Comment créer un site internet professionnel avec LeadEngine AI",
+    "description": "Le process en 4 étapes pour obtenir un site internet sur-mesure, conçu avec l'IA, livré en 7 à 15 jours.",
+    "totalTime": "P15D",
+    "estimatedCost": {
+      "@type": "MonetaryAmount",
+      "currency": "EUR",
+      "value": "299"
+    },
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "Échange découverte",
+        "text": "30 minutes en visio ou en présentiel pour comprendre votre activité, votre cible et vos objectifs. Devis détaillé sous 48h, gratuit et sans engagement."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "Conception assistée par IA",
+        "text": "Architecture du site et premières maquettes générées avec l'IA, raffinées par nos soins. Vous validez chaque détail avant le développement."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 3,
+        "name": "Développement et SEO",
+        "text": "Code propre et performant, optimisé pour Google dès le départ. Hébergement configuré, domaine activé, mesures techniques en place (vitesse, schema.org, mobile-first)."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 4,
+        "name": "Formation et livraison",
+        "text": "Formation vidéo personnalisée (1 à 2 heures). Vous savez modifier votre site seul. 1 mois de support inclus pour ajustements et questions."
+      }
+    ]
+  }
+  </script>
+
+  <!-- Schema WebPage avec Speakable (voice search) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://leadengineai.fr/creation-site-internet.html",
+    "url": "https://leadengineai.fr/creation-site-internet.html",
+    "name": "Création de site internet à Brive · IA, sur-mesure, livré en 7 jours",
+    "inLanguage": "fr-FR",
+    "isPartOf": { "@type": "WebSite", "name": "LeadEngine AI", "url": "https://leadengineai.fr/" },
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": ["h1.hero-title", ".hero-sub", ".guarantee-card h3"]
+    },
+    "datePublished": "2026-06-08",
+    "dateModified": "2026-06-08"
+  }
+  </script>
+
+  <!-- Schema LocalBusiness (boost SEO local) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://leadengineai.fr/#localbusiness-web",
+    "name": "LeadEngine AI — Création de sites internet",
+    "url": "https://leadengineai.fr/creation-site-internet.html",
+    "image": "https://leadengineai.fr/og-image.jpg",
+    "telephone": "+33647438492",
+    "priceRange": "€€",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Brive-la-Gaillarde",
+      "postalCode": "19100",
+      "addressRegion": "Corrèze",
+      "addressCountry": "FR"
+    },
+    "areaServed": [
+      { "@type": "City", "name": "Brive-la-Gaillarde" },
+      { "@type": "City", "name": "Tulle" },
+      { "@type": "City", "name": "Limoges" },
+      { "@type": "AdministrativeArea", "name": "Corrèze" },
+      { "@type": "AdministrativeArea", "name": "Nouvelle-Aquitaine" },
+      { "@type": "Country", "name": "France" }
+    ],
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "09:00",
+      "closes": "19:00"
     }
   }
   </script>
