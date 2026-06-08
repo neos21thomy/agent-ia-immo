@@ -4322,20 +4322,7 @@ Le Chasseur de Mandats
     requestAnimationFrame(step);
   };
 
-  /* Seul le premier compteur (16 Conseillers actifs) s'anime — les autres restent figés */
-  const firstStat = document.querySelector('.stat-num');
-  if (firstStat) {
-    const statObs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          const original = e.target.textContent;
-          animateCount(e.target, original);
-          statObs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.5 });
-    statObs.observe(firstStat);
-  }
+  /* Stats hero — affichage immédiat, pas d'animation (le "1" et le "3" sont trop petits pour qu'un compteur ait du sens) */
 
   /* Barre de temps gagné — remplissage progressif au scroll */
   const timeBar = document.querySelector('.time-saved-fill');
