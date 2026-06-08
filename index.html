@@ -2366,24 +2366,49 @@
       .nav-burger { display: flex; }
       .nav-links {
         display: flex !important;
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        width: min(80vw, 320px);
-        flex-direction: column;
-        align-items: stretch;
+        position: fixed !important;
+        top: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: min(82vw, 340px) !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
         gap: 0 !important;
-        padding: 5rem 1.5rem 2rem;
-        background: rgba(7, 7, 15, 0.97);
+        padding: 5rem 1.5rem 2rem !important;
+        background-color: #07070f !important;      /* fond solide opaque (fallback Instagram in-app) */
+        background: linear-gradient(180deg, #0d0d1a 0%, #07070f 100%) !important;
+        -webkit-backdrop-filter: blur(20px);
         backdrop-filter: blur(20px);
         border-left: 1px solid var(--border);
+        box-shadow: -8px 0 32px rgba(0,0,0,.5);
         transform: translateX(100%);
         transition: transform .3s cubic-bezier(.4,0,.2,1);
-        z-index: 1000;
+        z-index: 9999 !important;                   /* au-dessus de tout */
         list-style: none;
+        overflow-y: auto;
       }
       .nav-links.open { transform: translateX(0); }
+
+      /* Backdrop semi-opaque quand menu ouvert */
+      body.nav-open::after {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.55);
+        z-index: 998;
+        pointer-events: none;
+      }
+      body.nav-open { overflow: hidden; }
+      /* Theme clair : fond blanc opaque pour menu drawer mobile */
+      html[data-theme="light"] .nav-links {
+        background-color: #ffffff !important;
+        background: linear-gradient(180deg, #ffffff 0%, #f6f5fc 100%) !important;
+        box-shadow: -8px 0 32px rgba(0,0,0,.18);
+      }
+      html[data-theme="light"] body.nav-open::after {
+        background: rgba(0,0,0,.35);
+      }
+
       .nav-links li {
         list-style: none;
         margin: 0;
@@ -2426,6 +2451,16 @@
       }
       @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
       body.nav-open { overflow: hidden; }
+      /* Theme clair : fond blanc opaque pour menu drawer mobile */
+      html[data-theme="light"] .nav-links {
+        background-color: #ffffff !important;
+        background: linear-gradient(180deg, #ffffff 0%, #f6f5fc 100%) !important;
+        box-shadow: -8px 0 32px rgba(0,0,0,.18);
+      }
+      html[data-theme="light"] body.nav-open::after {
+        background: rgba(0,0,0,.35);
+      }
+
 
       /* ─── HERO ─── */
       .hero { padding-top: 6rem !important; padding-bottom: 3rem !important; }
@@ -2594,6 +2629,57 @@
                   0 20px 60px rgba(109,40,217,.18);
     }
     html[data-theme="light"] .video-glow { opacity: .5; }
+
+    /* ─── FIX THÈME CLAIR : éléments avec gradients dark hardcoded ─── */
+    html[data-theme="light"] .step {
+      background: linear-gradient(180deg, #ffffff 0%, #f6f5fc 100%) !important;
+    }
+    html[data-theme="light"] .pack {
+      background: linear-gradient(180deg, #ffffff 0%, #f6f5fc 100%) !important;
+    }
+    html[data-theme="light"] .testi-card,
+    html[data-theme="light"] .faq-item,
+    html[data-theme="light"] .article-card {
+      background: #ffffff !important;
+    }
+    /* Step paragraphs : muted plus contrasté en clair */
+    html[data-theme="light"] .step p,
+    html[data-theme="light"] .pack-desc,
+    html[data-theme="light"] .testi-text {
+      color: #2d2d3f !important;
+    }
+    /* Btn-ghost : couleur plus contrastée en clair */
+    html[data-theme="light"] .btn-ghost {
+      color: #4c1d95 !important;
+      border-color: rgba(124,58,237,.4);
+      background: rgba(124,58,237,.06);
+    }
+    html[data-theme="light"] .btn-ghost:hover {
+      color: #2e1065 !important;
+      background: rgba(124,58,237,.12);
+    }
+    /* Pill backgrounds : on renforce le fond pour meilleur contraste */
+    html[data-theme="light"] .perso-pill,
+    html[data-theme="light"] .service-pill,
+    html[data-theme="light"] .audience-tag,
+    html[data-theme="light"] .tag {
+      background: rgba(124,58,237,.15) !important;
+    }
+    /* Footer : fond clair adapté */
+    html[data-theme="light"] footer {
+      background: #ebe9f6 !important;
+      border-top: 1px solid rgba(124,58,237,.2);
+    }
+    html[data-theme="light"] .footer-copy { color: #2d2d3f; }
+    html[data-theme="light"] .footer-copy a { color: #6d28d9; }
+    /* Marquee items texte */
+    html[data-theme="light"] .marquee-item { color: #4c1d95; }
+    /* Cards interactives : box-shadow renforcé pour relief sur fond clair */
+    html[data-theme="light"] .step,
+    html[data-theme="light"] .pack {
+      border: 1px solid rgba(124,58,237,.18);
+      box-shadow: 0 4px 16px rgba(76, 29, 149, .06);
+    }
 
     /* Bouton ghost : meilleur contraste sur blanc */
     html[data-theme="light"] .btn-ghost {
@@ -3278,7 +3364,7 @@
 <!-- ══ HERO ══════════════════════════════════════════════════════════ -->
 <section id="hero">
   <div class="hero-bg"></div>
-  <div class="hero-badge">IA · Immobilier · Automatisation</div>
+  <div class="hero-badge">IA · Immobilier · Automatisation · 🇫🇷 Made in France</div>
   <div class="hero" style="position:relative;z-index:1;">
     <h1>
       Devenez autonome avec l'IA<br />

@@ -17,7 +17,7 @@
   <link rel="shortcut icon" href="favicon.ico?v=2" />
 
   <meta property="og:title" content="Création de site internet à Brive · IA et sur-mesure · LeadEngine AI" />
-  <meta property="og:description" content="Sites internet sur-mesure conçus avec l'IA. Brive-la-Gaillarde, Corrèze, France. Livraison 7-15 jours. Devis gratuit." />
+  <meta property="og:description" content="Sites internet sur-mesure conçus avec l'IA. Brive-la-Gaillarde, Corrèze, France. Livraison 7 jours en moyenne. Devis gratuit." />
   <meta property="og:url" content="https://leadengineai.fr/creation-site-internet.html" />
   <meta property="og:image" content="https://leadengineai.fr/og-image.jpg" />
   <meta property="og:type" content="website" />
@@ -97,7 +97,7 @@
     "@type": "HowTo",
     "name": "Comment créer un site internet professionnel avec LeadEngine AI",
     "description": "Le process en 4 étapes pour obtenir un site internet sur-mesure, conçu avec l'IA, livré en 7 à 15 jours.",
-    "totalTime": "P15D",
+    "totalTime": "P7D",
     "estimatedCost": {
       "@type": "MonetaryAmount",
       "currency": "EUR",
@@ -502,6 +502,200 @@
     @media (max-width: 900px) {
       .pillars { grid-template-columns: 1fr; }
     }
+
+    /* BADGE FRANÇAIS */
+    .fr-badge-hero {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      margin-top: 1.5rem;
+      padding: .55rem 1.2rem;
+      background: linear-gradient(135deg, rgba(0,85,164,.12), rgba(239,65,53,.08));
+      border: 1px solid rgba(139,92,246,.3);
+      border-radius: 999px;
+      font-size: .88rem;
+      color: var(--v300);
+    }
+    .fr-badge-hero strong { color: var(--white); font-weight: 700; }
+    .fr-flag { font-size: 1.15rem; line-height: 1; }
+    .fr-badge-small {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      font-size: .82rem;
+      color: var(--v300);
+      padding: .25rem .65rem;
+      background: rgba(139,92,246,.08);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+    }
+
+    /* BANDEAU TOUT-EN-UN */
+    #allin {
+      background: var(--dark);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .allin-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 1rem;
+      padding: 3rem 1.5rem;
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+    .allin-item {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: 1rem .85rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: border-color .25s, transform .25s;
+    }
+    .allin-item:hover { border-color: var(--v500); transform: translateY(-2px); }
+    .allin-icon { font-size: 1.4rem; flex-shrink: 0; }
+    .allin-text { font-size: .9rem; font-weight: 600; color: var(--white); line-height: 1.3; }
+    .allin-text small { display: block; font-weight: 400; font-size: .76rem; color: var(--muted); margin-top: .15rem; }
+    .allin-title {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      text-align: center;
+    }
+    .allin-title h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); margin-top: 3rem; margin-bottom: .5rem; }
+    .allin-title p { color: var(--muted); margin-bottom: 0; }
+
+    /* USE CASES PAR MÉTIER */
+    .usecases-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+    .usecase-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      position: relative;
+      transition: transform .3s, border-color .3s;
+    }
+    .usecase-card:hover { transform: translateY(-4px); border-color: var(--v500); }
+    .usecase-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, rgba(139,92,246,.15), rgba(232,121,249,.08));
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .usecase-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: .5rem; }
+    .usecase-card p { font-size: .9rem; color: var(--muted); line-height: 1.6; margin-bottom: .75rem; }
+    .usecase-card ul { list-style: none; padding: 0; margin: 0 0 .5rem; }
+    .usecase-card ul li {
+      padding-left: 1.3rem;
+      position: relative;
+      font-size: .85rem;
+      color: var(--white);
+      margin-bottom: .35rem;
+    }
+    .usecase-card ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--v400);
+      font-weight: 700;
+    }
+
+    /* AUDIT FORM */
+    #audit {
+      background: linear-gradient(180deg, var(--dark) 0%, var(--black) 100%);
+    }
+    .audit-card {
+      max-width: 720px;
+      margin: 0 auto;
+      background: var(--card);
+      border: 1px solid var(--v500);
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 20px 60px rgba(109,40,217,.2);
+    }
+    .audit-card h2 {
+      text-align: center;
+      font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+      margin-bottom: .75rem;
+    }
+    .audit-sub {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+    .audit-form { display: grid; gap: 1rem; }
+    .audit-form .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 540px) {
+      .audit-form .row { grid-template-columns: 1fr; }
+    }
+    .audit-form label {
+      display: block;
+      font-size: .82rem;
+      color: var(--v300);
+      margin-bottom: .35rem;
+      font-weight: 600;
+    }
+    .audit-form input,
+    .audit-form select,
+    .audit-form textarea {
+      width: 100%;
+      padding: .85rem 1rem;
+      background: var(--dark);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--white);
+      font-family: inherit;
+      font-size: 1rem;
+      transition: border-color .2s, background .2s;
+    }
+    .audit-form input:focus,
+    .audit-form select:focus,
+    .audit-form textarea:focus {
+      outline: none;
+      border-color: var(--v500);
+      background: rgba(139,92,246,.06);
+    }
+    .audit-form textarea { resize: vertical; min-height: 90px; }
+    .audit-submit {
+      background: linear-gradient(135deg, var(--v700), var(--v500));
+      color: #fff;
+      border: none;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform .25s, box-shadow .25s;
+      box-shadow: 0 4px 20px rgba(109,40,217,.4);
+    }
+    .audit-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(139,92,246,.6);
+    }
+    .audit-note {
+      font-size: .82rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: .5rem;
+    }
+    .audit-note strong { color: var(--v300); }
 
     /* STATS BANDEAU */
     #stats {
@@ -1028,6 +1222,80 @@
     .theme-toggle .icon-moon{ display:block; }
     html[data-theme="light"] .theme-toggle .icon-sun{ display:block; }
     html[data-theme="light"] .theme-toggle .icon-moon{ display:none; }
+
+    /* ─── FIX THÈME CLAIR (gradients dark hardcoded) ─── */
+    html[data-theme="light"] .pillar,
+    html[data-theme="light"] .pack,
+    html[data-theme="light"] .step {
+      background: linear-gradient(180deg, #ffffff 0%, #f6f5fc 100%) !important;
+      border: 1px solid rgba(124,58,237,.18);
+      box-shadow: 0 4px 16px rgba(76, 29, 149, .06);
+    }
+    html[data-theme="light"] .pillar p,
+    html[data-theme="light"] .step p,
+    html[data-theme="light"] .pack-desc,
+    html[data-theme="light"] .guarantee-card p,
+    html[data-theme="light"] .usecase-card p,
+    html[data-theme="light"] .pack-features li,
+    html[data-theme="light"] .vs-cell.them,
+    html[data-theme="light"] .vs-cell {
+      color: #2d2d3f !important;
+    }
+    html[data-theme="light"] .guarantee-card,
+    html[data-theme="light"] .usecase-card,
+    html[data-theme="light"] .portfolio-card {
+      background: #ffffff !important;
+      border: 1px solid rgba(124,58,237,.18);
+      box-shadow: 0 4px 16px rgba(76, 29, 149, .06);
+    }
+    html[data-theme="light"] .audit-card {
+      background: #ffffff !important;
+      box-shadow: 0 20px 60px rgba(109,40,217,.12);
+    }
+    html[data-theme="light"] .audit-form input,
+    html[data-theme="light"] .audit-form select,
+    html[data-theme="light"] .audit-form textarea {
+      background: #f6f5fc;
+      color: #181826;
+    }
+    html[data-theme="light"] .allin-item {
+      background: #ffffff !important;
+    }
+    html[data-theme="light"] #stats,
+    html[data-theme="light"] #allin {
+      background: linear-gradient(180deg, #ebe9f6 0%, #f6f5fc 100%) !important;
+    }
+    html[data-theme="light"] #packs {
+      background: #ebe9f6 !important;
+    }
+    html[data-theme="light"] #vs {
+      background: #ebe9f6 !important;
+    }
+    html[data-theme="light"] .vs-table {
+      background: #ffffff !important;
+    }
+    html[data-theme="light"] .vs-row.head {
+      background: linear-gradient(135deg, rgba(124,58,237,.08), rgba(232,121,249,.05)) !important;
+    }
+    html[data-theme="light"] .vs-cell.us {
+      background: rgba(124,58,237,.04) !important;
+    }
+    html[data-theme="light"] footer {
+      background: #ebe9f6 !important;
+    }
+    html[data-theme="light"] .footer-copy { color: #2d2d3f; }
+    html[data-theme="light"] .footer-copy a { color: #6d28d9; }
+    html[data-theme="light"] .audience-tag,
+    html[data-theme="light"] .fr-badge-small {
+      background: rgba(124,58,237,.12) !important;
+    }
+    html[data-theme="light"] .fr-badge-hero {
+      background: linear-gradient(135deg, rgba(124,58,237,.1), rgba(232,121,249,.06)) !important;
+      border-color: rgba(124,58,237,.25);
+    }
+    html[data-theme="light"] .pack-cta {
+      color: #ffffff !important;
+    }
   </style>
 <script>(function(){try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}if(t==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}})();</script>
 </head>
@@ -1046,7 +1314,11 @@
   <p class="breadcrumb"><a href="index.html">Accueil</a> · Création de site internet</p>
   <span class="hero-badge">Création de site internet · IA + Humain</span>
   <h1 class="hero-title">Le site internet qui vous <span class="gradient">ressemble vraiment</span><br>livré en 7 jours</h1>
-  <p class="hero-sub">Pendant que <strong>les grandes plateformes vous vendent un abonnement à vie</strong>, nous vous concevons un site <strong>sur-mesure</strong> au <strong>design UX soigné</strong>, <strong>parfait sur mobile</strong>, optimisé Google dès le jour 1. Vous payez une fois, vous êtes propriétaire, avec une vraie formation pour rester autonome. <strong>C'est à vous. Pour toujours.</strong></p>
+  <p class="hero-sub">Nous concevons votre site internet <strong>avec vous</strong>, pour qu'il vous ressemble vraiment : design UX soigné, <strong>parfait sur mobile</strong>, optimisé Google dès le jour 1. Vous payez <strong>une seule fois</strong>, vous êtes propriétaire, avec une vraie formation pour rester autonome. <strong>C'est à vous. Pour toujours.</strong></p>
+
+  <div class="fr-badge-hero">
+    <span class="fr-flag">🇫🇷</span> <strong>Made in France</strong> · Service 100% français · Hébergement européen RGPD
+  </div>
   <div class="hero-cta">
     <a href="#packs" class="btn-primary">Voir les formules →</a>
     <a href="#contact" class="btn-ghost">Devis gratuit en 48h</a>
@@ -1054,19 +1326,19 @@
 
   <div class="trust">
     <div class="trust-item">
-      <div class="trust-icon">📱</div>
-      <div class="trust-value">Mobile-first</div>
-      <div class="trust-label">100% responsive</div>
+      <div class="trust-icon">⚡</div>
+      <div class="trust-value">7 jours</div>
+      <div class="trust-label">Délai moyen de livraison</div>
     </div>
     <div class="trust-item">
-      <div class="trust-icon">🎨</div>
-      <div class="trust-value">UX soigné</div>
-      <div class="trust-label">Design pensé pour convertir</div>
+      <div class="trust-icon">🤝</div>
+      <div class="trust-value">Conçu avec vous</div>
+      <div class="trust-label">Validation à chaque étape</div>
     </div>
     <div class="trust-item">
-      <div class="trust-icon">🎯</div>
-      <div class="trust-value">SEO inclus</div>
-      <div class="trust-label">Optimisé Google dès J1</div>
+      <div class="trust-icon">😊</div>
+      <div class="trust-value">100% satisfaits</div>
+      <div class="trust-label">Tant que c'est pas parfait, on ajuste</div>
     </div>
     <div class="trust-item">
       <div class="trust-icon">🔓</div>
@@ -1076,24 +1348,44 @@
   </div>
 </section>
 
-<!-- STATS BANDEAU -->
-<section id="stats">
-  <div class="stats-grid">
-    <div class="stat-block">
-      <div class="stat-big">94-97</div>
-      <div class="stat-label-big">Score Google Lighthouse</div>
+<!-- BANDEAU TOUT-EN-UN -->
+<section id="allin">
+  <div class="allin-title">
+    <h2>Tout est <span style="color:var(--v300);">inclus</span></h2>
+    <p>Pas d'options cachées. Pas de frais surprises. Voici ce que vous obtenez avec chaque pack.</p>
+  </div>
+  <div class="allin-grid">
+    <div class="allin-item">
+      <span class="allin-icon">🎨</span>
+      <div class="allin-text">Design sur-mesure<small>Pas de template recyclé</small></div>
     </div>
-    <div class="stat-block">
-      <div class="stat-big">&lt; 2s</div>
-      <div class="stat-label-big">Vitesse de chargement</div>
+    <div class="allin-item">
+      <span class="allin-icon">📱</span>
+      <div class="allin-text">Mobile-first<small>Testé tous formats</small></div>
     </div>
-    <div class="stat-block">
-      <div class="stat-big">7-15j</div>
-      <div class="stat-label-big">Délai de livraison</div>
+    <div class="allin-item">
+      <span class="allin-icon">🔍</span>
+      <div class="allin-text">SEO inclus<small>Optimisé Google dès J1</small></div>
     </div>
-    <div class="stat-block">
-      <div class="stat-big">1 an</div>
-      <div class="stat-label-big">Hébergement offert</div>
+    <div class="allin-item">
+      <span class="allin-icon">🌐</span>
+      <div class="allin-text">Hébergement 1 an<small>Domaine + serveur offerts</small></div>
+    </div>
+    <div class="allin-item">
+      <span class="allin-icon">🎓</span>
+      <div class="allin-text">Formation incluse<small>Pour devenir autonome</small></div>
+    </div>
+    <div class="allin-item">
+      <span class="allin-icon">🛠️</span>
+      <div class="allin-text">3 retouches/mois<small>Gratuites le 1<sup>er</sup> mois</small></div>
+    </div>
+    <div class="allin-item">
+      <span class="allin-icon">📊</span>
+      <div class="allin-text">Analytics inclus<small>Google Analytics paramétré</small></div>
+    </div>
+    <div class="allin-item">
+      <span class="allin-icon">🔒</span>
+      <div class="allin-text">RGPD &amp; SSL<small>Conforme et sécurisé</small></div>
     </div>
   </div>
 </section>
@@ -1403,23 +1695,129 @@
   </div>
 </section>
 
-<!-- POUR QUI -->
+<!-- USE CASES PAR MÉTIER -->
 <section id="for-who">
   <div class="section-inner">
-    <p class="section-label">Pour qui ?</p>
-    <h2 class="section-title">Un site fait pour <span style="color:var(--v300);">votre métier</span></h2>
-    <p class="section-sub">Nous accompagnons tous les indépendants et petites entreprises qui veulent un site qui ressemble à leur métier — pas un template générique.</p>
+    <p class="section-label">Si vous êtes…</p>
+    <h2 class="section-title">Un site pensé pour <span style="color:var(--v300);">votre métier</span></h2>
+    <p class="section-sub">Chaque métier a ses propres codes, ses propres objectifs, ses propres clients. Voilà comment on adapte le site à <strong>votre</strong> activité.</p>
 
-    <div class="audiences">
-      <span class="audience-tag">Conseillers immobiliers</span>
-      <span class="audience-tag">Artisans (plombiers, électriciens, menuisiers…)</span>
-      <span class="audience-tag">Coachs & consultants</span>
-      <span class="audience-tag">Restaurants & traiteurs</span>
-      <span class="audience-tag">Professions libérales (avocats, kinés, ostéopathes…)</span>
-      <span class="audience-tag">E-commerçants</span>
-      <span class="audience-tag">Associations</span>
-      <span class="audience-tag">Indépendants & freelances</span>
-      <span class="audience-tag">Petites entreprises B2B</span>
+    <div class="usecases-grid">
+      <div class="usecase-card">
+        <div class="usecase-icon">🏠</div>
+        <h3>Conseiller immobilier</h3>
+        <p>Site vitrine pour valoriser votre expertise locale et générer des mandats vendeurs.</p>
+        <ul>
+          <li>Page "biens en vente" auto-alimentable</li>
+          <li>Formulaire estimation en ligne</li>
+          <li>Témoignages clients en avant</li>
+          <li>SEO local Brive, Tulle, Limoges…</li>
+        </ul>
+      </div>
+
+      <div class="usecase-card">
+        <div class="usecase-icon">🔨</div>
+        <h3>Artisan</h3>
+        <p>Plombier, électricien, menuisier, peintre… Un site qui rassure et fait sonner le téléphone.</p>
+        <ul>
+          <li>Galerie de réalisations</li>
+          <li>Devis en ligne en 1 clic</li>
+          <li>Témoignages clients locaux</li>
+          <li>Numéro de téléphone partout visible</li>
+        </ul>
+      </div>
+
+      <div class="usecase-card">
+        <div class="usecase-icon">🎯</div>
+        <h3>Coach / Consultant</h3>
+        <p>Site qui positionne votre expertise et capte les prospects qualifiés en mode autopilote.</p>
+        <ul>
+          <li>Page services + tarifs clairs</li>
+          <li>Réservation RDV intégrée (Calendly)</li>
+          <li>Blog pour démontrer l'expertise</li>
+          <li>Page "À propos" qui inspire confiance</li>
+        </ul>
+      </div>
+
+      <div class="usecase-card">
+        <div class="usecase-icon">🍽️</div>
+        <h3>Restaurant / Traiteur</h3>
+        <p>Présentation menu, événements, prise de réservation et commandes traiteur.</p>
+        <ul>
+          <li>Menu en ligne (mise à jour facile)</li>
+          <li>Galerie photos appétissantes</li>
+          <li>Réservation table ou événement</li>
+          <li>Avis Google intégrés</li>
+        </ul>
+      </div>
+
+      <div class="usecase-card">
+        <div class="usecase-icon">⚖️</div>
+        <h3>Profession libérale</h3>
+        <p>Avocats, kinés, ostéopathes, psychologues… Un site sobre, professionnel, rassurant.</p>
+        <ul>
+          <li>Présentation expertise &amp; parcours</li>
+          <li>Prise de RDV Doctolib / Calendly</li>
+          <li>Horaires &amp; accès clairs</li>
+          <li>Conformité RGPD stricte</li>
+        </ul>
+      </div>
+
+      <div class="usecase-card">
+        <div class="usecase-icon">🚀</div>
+        <h3>Autre activité ?</h3>
+        <p>Indépendant, e-commerce, association, petite entreprise B2B… Pas de problème.</p>
+        <ul>
+          <li>Discutons de votre cas précis</li>
+          <li>Devis adapté à votre métier</li>
+          <li>Approche 100% sur-mesure</li>
+          <li>30 min d'échange offert</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIT GRATUIT (formulaire) -->
+<section id="audit">
+  <div class="section-inner">
+    <p class="section-label" style="text-align:center;">Pas envie d'appeler tout de suite ?</p>
+    <div class="audit-card">
+      <h2>Audit <span style="color:var(--v300);">gratuit</span> en 60 secondes</h2>
+      <p class="audit-sub">Décrivez votre activité en 3 lignes, on vous répond sous 24h avec une <strong>reco personnalisée</strong> : quel pack, quel délai, quel budget. Sans engagement, sans appel forcé.</p>
+
+      <form class="audit-form" action="mailto:thomas@leadengineai.fr" method="post" enctype="text/plain" id="auditForm">
+        <div class="row">
+          <div>
+            <label for="audit-name">Votre prénom</label>
+            <input type="text" id="audit-name" name="prenom" required placeholder="Marie" />
+          </div>
+          <div>
+            <label for="audit-email">Votre email</label>
+            <input type="email" id="audit-email" name="email" required placeholder="marie@exemple.fr" />
+          </div>
+        </div>
+        <div>
+          <label for="audit-activite">Votre activité</label>
+          <select id="audit-activite" name="activite" required>
+            <option value="">Choisir…</option>
+            <option>Conseiller immobilier</option>
+            <option>Artisan</option>
+            <option>Coach / Consultant</option>
+            <option>Restaurant / Traiteur</option>
+            <option>Profession libérale</option>
+            <option>E-commerce</option>
+            <option>Association</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div>
+          <label for="audit-besoin">En 3 lignes, votre projet (cible, objectifs, délais souhaités)</label>
+          <textarea id="audit-besoin" name="projet" required placeholder="Ex. : Je veux un site vitrine pour mon cabinet de kinésithérapie à Brive, avec prise de RDV en ligne. Objectif : être visible sur Google d'ici 2 mois."></textarea>
+        </div>
+        <button type="submit" class="audit-submit">Recevoir notre reco sous 24h →</button>
+        <p class="audit-note">📩 <strong>Réponse personnalisée sous 24h.</strong> Aucun appel forcé, aucune carte bancaire demandée. <span class="fr-badge-small"><span class="fr-flag">🇫🇷</span> 100% français</span></p>
+      </form>
     </div>
   </div>
 </section>
