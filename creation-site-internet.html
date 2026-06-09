@@ -508,13 +508,24 @@
       display: inline-flex;
       align-items: center;
       gap: .55rem;
-      margin-top: 1.5rem;
-      padding: .55rem 1.2rem;
+      margin: 2rem auto 2.5rem;
+      padding: .6rem 1.3rem;
       background: linear-gradient(135deg, rgba(0,85,164,.12), rgba(239,65,53,.08));
       border: 1px solid rgba(139,92,246,.3);
       border-radius: 999px;
       font-size: .88rem;
       color: var(--v300);
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 100%;
+      line-height: 1.5;
+    }
+    @media (max-width: 600px) {
+      .fr-badge-hero {
+        font-size: .8rem;
+        padding: .55rem 1rem;
+        margin: 1.5rem auto 2rem;
+      }
     }
     .fr-badge-hero strong { color: var(--white); font-weight: 700; }
     .fr-flag { font-size: 1.15rem; line-height: 1; }
