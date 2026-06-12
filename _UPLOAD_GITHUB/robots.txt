@@ -1,0 +1,13 @@
+# Robots.txt — Agent IA Immo
+# https://leadengineai.fr
+
+User-agent: *
+Allow: /
+
+# Espace admin (déjà noindex en HTML)
+Disallow: /admin.html
+Disallow: /_backups/
+Disallow: /.claude/
+
+# Sitemap
+Sitemap: https://leadengineai.fr/sitemap.xml
