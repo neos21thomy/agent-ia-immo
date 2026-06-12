@@ -124,7 +124,10 @@
     .intro-bar::after { content: ''; position: absolute; inset: 0; transform-origin: left; background: linear-gradient(90deg, var(--v400), var(--pink)); animation: ifill 1.25s cubic-bezier(.65,0,.35,1) both; }
     @keyframes ifill { from { transform: scaleX(0); } }
     .intro-status { font-size: .68rem; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; animation: iin .8s ease .15s both; }
-    @media (prefers-reduced-motion: reduce) { #intro { display: none; } }
+    @media (prefers-reduced-motion: reduce) {
+      .intro-logo, .intro-brand, .intro-status { animation: none; }
+      .intro-bar::after { animation: none; transform: scaleX(1); }
+    }
 
     /* ── Nav ── */
     nav {
@@ -487,6 +490,14 @@
 
 <script>
 (() => {
+  const h = location.hash;
+  if (['#packs','#contact','#how','#learn','#compare','#faq','#temoignages','#vs-chatgpt','#video','#about'].includes(h)) {
+    location.replace('agents-ia-immo.html' + h);
+  }
+})();
+</script>
+<script>
+(() => {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ── Nav ── */
@@ -638,6 +649,8 @@
     filter: blur(3px); animation: flame .1s linear infinite alternate;
   }
   @keyframes flame { to { height: 80px; opacity: .75; } }
+  #launch.soft .launch-stars, #launch.soft .launch-stars2,
+  #launch.soft .launch-rocket, #launch.soft .launch-rocket::after { animation: none !important; }
   .launch-txt { font-family: 'Space Grotesk', 'Inter', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 2.5px; color: #c4b5fd; text-transform: uppercase; }
   .launch-sub { font-size: .75rem; color: #9090b8; letter-spacing: 1px; margin-top: -1rem; }
 </style>
@@ -652,12 +665,13 @@
   (function() {
     const overlay = document.getElementById('launch');
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) overlay.classList.add('soft');
+    window.addEventListener('pageshow', e => { if (e.persisted) overlay.classList.remove('on'); });
     document.querySelectorAll('a[href^="https://app.leadengineai.fr"]').forEach(a => {
       a.addEventListener('click', e => {
-        if (reduced) return;
         e.preventDefault();
         overlay.classList.add('on');
-        setTimeout(() => { window.location.href = a.href; }, 1900);
+        setTimeout(() => { window.location.href = a.href; }, reduced ? 1100 : 1900);
       });
     });
   })();
