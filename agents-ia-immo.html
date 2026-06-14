@@ -2918,6 +2918,9 @@
       .sticky-cta-mobile { display: flex; }
       /* Évitez que le bouton sticky cache du contenu en bas de page */
       body { padding-bottom: 80px; }
+      /* Quand le menu mobile est ouvert, on masque le bouton RDV flottant
+         (sinon il recouvre le bas du menu — dont « Mon cockpit »). */
+      body.nav-open .sticky-cta-mobile { display: none !important; }
     }
 
     /* ═══ V3 — Refonte "20k" : démo hero + offre 2 temps ═══ */
@@ -3460,8 +3463,9 @@
 
 <!-- ══ NAV ══════════════════════════════════════════════════════════ -->
 <nav>
-  <a class="nav-logo" href="#hero">⚡ LeadEngine <span>Immo</span></a>
+  <a class="nav-logo" href="index.html" title="Accueil LeadEngine AI">⚡ LeadEngine <span>Immo</span></a>
   <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">← Accueil</a></li>
     <li><a href="#how">Comment ça marche</a></li>
     <li><a href="#learn">Ce que vous apprenez</a></li>
     <li><a href="agents.html">Les agents</a></li>
@@ -4775,63 +4779,189 @@ Le Chasseur de Mandats
 <style>
   #launch {
     position: fixed; inset: 0; z-index: 10000; background: #07070f;
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.6rem;
-    opacity: 0; pointer-events: none; transition: opacity .35s ease;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity .4s ease;
   }
   #launch.on { opacity: 1; pointer-events: auto; }
-  .launch-stars, .launch-stars2 {
-    position: absolute; inset: -100vh 0 0 0; pointer-events: none;
-    background-image:
-      radial-gradient(1.5px 1.5px at 12% 20%, rgba(255,255,255,.9), transparent),
-      radial-gradient(1px 1px at 28% 64%, rgba(196,181,253,.8), transparent),
-      radial-gradient(2px 2px at 45% 35%, rgba(255,255,255,.7), transparent),
-      radial-gradient(1px 1px at 62% 80%, rgba(232,121,249,.8), transparent),
-      radial-gradient(1.5px 1.5px at 75% 15%, rgba(255,255,255,.8), transparent),
-      radial-gradient(1px 1px at 88% 50%, rgba(196,181,253,.9), transparent),
-      radial-gradient(1.5px 1.5px at 35% 90%, rgba(255,255,255,.6), transparent),
-      radial-gradient(1px 1px at 55% 8%, rgba(255,255,255,.85), transparent);
-    background-size: 480px 480px;
+  #warpCanvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .launch-core { position: relative; z-index: 2; height: 300px; display: flex; align-items: center; }
+  .ship { filter: drop-shadow(0 0 26px rgba(167,139,250,.65)); transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+  #launch.ignite .ship { animation: ship-shake .1s linear infinite; }
+  @keyframes ship-shake { 25% { transform: translate(-1.2px, .5px); } 75% { transform: translate(1.2px, -.5px); } }
+  #launch.liftoff .ship {
+    animation: ship-liftoff .65s cubic-bezier(.6,-0.1,.9,.4) forwards;
   }
-  #launch.on .launch-stars { animation: warp .9s linear infinite; }
-  #launch.on .launch-stars2 { background-size: 320px 320px; opacity: .6; animation: warp .55s linear infinite; }
-  @keyframes warp { to { transform: translateY(100vh); } }
-  .launch-rocket { font-size: 4.2rem; line-height: 1; position: relative; filter: drop-shadow(0 0 26px rgba(167,139,250,.8)); }
-  #launch.on .launch-rocket { animation: shake .12s linear infinite, liftoff 1.7s cubic-bezier(.55,0,.85,.4) .15s forwards; }
-  @keyframes shake { 25% { transform: translateX(-1.5px); } 75% { transform: translateX(1.5px); } }
-  @keyframes liftoff { 0% { translate: 0 0; } 25% { translate: 0 -2vh; } 100% { translate: 0 -125vh; } }
-  .launch-rocket::after {
-    content: ''; position: absolute; left: 50%; top: 92%; transform: translateX(-50%);
-    width: 14px; height: 60px; border-radius: 50% 50% 50% 50% / 30% 30% 70% 70%;
-    background: linear-gradient(180deg, #fff, #fbbf24 30%, #f97316 60%, transparent);
-    filter: blur(3px); animation: flame .1s linear infinite alternate;
+  @keyframes ship-liftoff {
+    0% { transform: translateY(0) scale(1); }
+    100% { transform: translateY(-120vh) scale(.78); }
   }
-  @keyframes flame { to { height: 80px; opacity: .75; } }
-  #launch.soft .launch-stars, #launch.soft .launch-stars2,
-  #launch.soft .launch-rocket, #launch.soft .launch-rocket::after { animation: none !important; }
-  .launch-txt { font-family: 'Space Grotesk', 'Inter', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 2.5px; color: #c4b5fd; text-transform: uppercase; }
-  .launch-sub { font-size: .75rem; color: #9090b8; letter-spacing: 1px; margin-top: -1rem; }
+  .ship-flame { opacity: 0; transform-origin: 60px 192px; }
+  #launch.ignite .ship-flame { opacity: 1; animation: flame-flicker .09s linear infinite alternate; }
+  @keyframes flame-flicker {
+    from { transform: scaleY(.85) scaleX(.92); opacity: .9; }
+    to   { transform: scaleY(1.18) scaleX(1.05); opacity: 1; }
+  }
+  .launch-flash {
+    position: absolute; inset: -50%; z-index: 3; pointer-events: none; opacity: 0;
+    background: radial-gradient(circle, rgba(255,255,255,.95), rgba(196,181,253,.55) 35%, transparent 70%);
+  }
+  #launch.flash .launch-flash { animation: big-flash .5s ease-out forwards; }
+  @keyframes big-flash { 12% { opacity: 1; } 100% { opacity: 0; } }
+  .launch-bottom { position: absolute; bottom: 11vh; left: 50%; transform: translateX(-50%); z-index: 2; text-align: center; width: min(320px, 78vw); }
+  .launch-title {
+    font-family: 'Space Grotesk', 'Inter', sans-serif; font-weight: 700;
+    font-size: .82rem; letter-spacing: 4px; color: #c4b5fd; margin-bottom: 14px; white-space: nowrap;
+  }
+  .launch-title .dots::after { content: ''; animation: launch-dots 1.2s steps(4) infinite; }
+  @keyframes launch-dots { 0% { content: ''; } 25% { content: '.'; } 50% { content: '..'; } 75% { content: '...'; } }
+  .launch-bar { height: 2px; border-radius: 2px; background: rgba(167,139,250,.16); overflow: hidden; }
+  .launch-bar span { display: block; height: 100%; width: 0%; border-radius: 2px;
+    background: linear-gradient(90deg, #a78bfa, #e879f9); box-shadow: 0 0 12px rgba(232,121,249,.8); }
+  .launch-pct { margin-top: 10px; font-size: .68rem; letter-spacing: 2px; color: #9090b8; font-variant-numeric: tabular-nums; }
+  .launch-nebula {
+    position: absolute; inset: -30%; pointer-events: none; opacity: 0; transition: opacity 1s;
+    background:
+      radial-gradient(ellipse 60% 40% at 30% 60%, rgba(124,58,237,.22), transparent 70%),
+      radial-gradient(ellipse 50% 35% at 72% 30%, rgba(232,121,249,.14), transparent 70%);
+    filter: blur(30px);
+  }
+  #launch.on .launch-nebula { opacity: 1; animation: neb-drift 8s ease-in-out infinite alternate; }
+  @keyframes neb-drift { to { transform: rotate(4deg) scale(1.12); } }
+  .launch-glow {
+    position: absolute; left: 50%; top: 58%; transform: translateX(-50%);
+    width: 220px; height: 110px; border-radius: 50%; pointer-events: none; opacity: 0;
+    background: radial-gradient(ellipse, rgba(251,146,60,.55), rgba(124,58,237,.25) 55%, transparent 75%);
+    filter: blur(18px);
+  }
+  #launch.ignite .launch-glow { opacity: 1; animation: glow-pulse .14s linear infinite alternate; }
+  @keyframes glow-pulse { to { opacity: .55; transform: translateX(-50%) scale(1.18); } }
+  #launch.warpzoom .launch-core { animation: core-zoom 1.1s ease-in forwards; }
+  @keyframes core-zoom { to { transform: scale(1.12); } }
+  #launch.ignite { animation: cam-shake .09s linear infinite; }
+  @keyframes cam-shake { 25% { transform: translate(1px, -1px); } 75% { transform: translate(-1px, 1px); } }
+  #launch.liftoff { animation: none; }
 </style>
 <div id="launch" aria-hidden="true">
-  <div class="launch-stars"></div>
-  <div class="launch-stars2"></div>
-  <span class="launch-rocket">🚀</span>
-  <div class="launch-txt">Décollage vers votre cockpit</div>
-  <div class="launch-sub">Mise sur orbite des agents IA…</div>
+  <canvas id="warpCanvas"></canvas>
+  <div class="launch-nebula"></div>
+  <div class="launch-glow"></div>
+  <div class="launch-core">
+    <svg class="ship" viewBox="0 0 120 240" width="88" aria-hidden="true">
+      <defs>
+        <linearGradient id="shipBody" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#6d28d9"/><stop offset=".45" stop-color="#c4b5fd"/>
+          <stop offset=".55" stop-color="#ece8ff"/><stop offset="1" stop-color="#7c3aed"/>
+        </linearGradient>
+        <linearGradient id="finG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#a78bfa"/><stop offset="1" stop-color="#4c1d95"/>
+        </linearGradient>
+        <radialGradient id="winG" cx=".35" cy=".35" r="1">
+          <stop offset="0" stop-color="#fdf4ff"/><stop offset=".5" stop-color="#e879f9"/><stop offset="1" stop-color="#581c87"/>
+        </radialGradient>
+        <linearGradient id="flameG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#fff"/><stop offset=".3" stop-color="#fbbf24"/>
+          <stop offset=".7" stop-color="#f97316"/><stop offset="1" stop-color="rgba(249,115,22,0)"/>
+        </linearGradient>
+      </defs>
+      <g class="ship-flame">
+        <path d="M60 192 C74 211 71 225 60 239 C49 225 46 211 60 192 Z" fill="url(#flameG)"/>
+        <path d="M60 192 C67 204 66 215 60 225 C54 215 53 204 60 192 Z" fill="#fff" opacity=".85"/>
+      </g>
+      <g class="ship-body">
+        <path d="M38 148 L15 196 L38 184 Z" fill="url(#finG)"/>
+        <path d="M82 148 L105 196 L82 184 Z" fill="url(#finG)"/>
+        <path d="M60 6 C84 40 86 90 84 148 C84 168 76 178 60 178 C44 178 36 168 36 148 C34 90 36 40 60 6 Z" fill="url(#shipBody)"/>
+        <path d="M60 6 C70 21 76 39 78 58 L42 58 C44 39 50 21 60 6 Z" fill="rgba(255,255,255,.28)"/>
+        <circle cx="60" cy="92" r="16" fill="url(#winG)" stroke="rgba(255,255,255,.65)" stroke-width="2.5"/>
+        <circle cx="54" cy="86" r="5" fill="rgba(255,255,255,.85)"/>
+        <path d="M47 178 L73 178 L79 192 L41 192 Z" fill="#312e81"/>
+      </g>
+    </svg>
+    <div class="launch-flash"></div>
+  </div>
+  <div class="launch-bottom">
+    <div class="launch-title">INITIALISATION DU COCKPIT<span class="dots"></span></div>
+    <div class="launch-bar"><span id="launchBarFill"></span></div>
+    <div class="launch-pct" id="launchPct">0%</div>
+  </div>
 </div>
 <script>
-  (function() {
-    const overlay = document.getElementById('launch');
-    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced) overlay.classList.add('soft');
-    window.addEventListener('pageshow', e => { if (e.persisted) overlay.classList.remove('on'); });
-    document.querySelectorAll('a[href^="https://app.leadengineai.fr"]').forEach(a => {
-      a.addEventListener('click', e => {
-        e.preventDefault();
-        overlay.classList.add('on');
-        setTimeout(() => { window.location.href = a.href; }, reduced ? 1100 : 1900);
-      });
-    });
-  })();
+(() => {
+  const overlay = document.getElementById('launch');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canvas = document.getElementById('warpCanvas');
+  const ctx = canvas.getContext('2d');
+  let stars = [], raf = null, speed = .35, running = false;
+
+  function setup() {
+    canvas.width = innerWidth * devicePixelRatio;
+    canvas.height = innerHeight * devicePixelRatio;
+    ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+    stars = Array.from({ length: 330 }, () => ({
+      x: (Math.random() - .5) * innerWidth * 2,
+      y: (Math.random() - .5) * innerHeight * 2,
+      z: Math.random() * innerWidth,
+    }));
+  }
+  function frame() {
+    if (!running) return;
+    const cx = innerWidth / 2, cy = innerHeight / 2;
+    ctx.fillStyle = 'rgba(7,7,15,.45)';
+    ctx.fillRect(0, 0, innerWidth, innerHeight);
+    for (const s of stars) {
+      const pz = s.z;
+      s.z -= speed * 8;
+      if (s.z < 1) { s.z = innerWidth; s.x = (Math.random() - .5) * innerWidth * 2; s.y = (Math.random() - .5) * innerHeight * 2; continue; }
+      const sx = (s.x / s.z) * 400 + cx, sy = (s.y / s.z) * 400 + cy;
+      const px = (s.x / pz) * 400 + cx, py = (s.y / pz) * 400 + cy;
+      const t = 1 - s.z / innerWidth;
+      ctx.strokeStyle = `rgba(${167 + t * 60},${139 + t * 90},250,${.25 + t * .75})`;
+      ctx.lineWidth = t * 2.4 + .4;
+      ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(sx, sy); ctx.stroke();
+    }
+    raf = requestAnimationFrame(frame);
+  }
+
+  function launch(href) {
+    if (running) return;
+    running = true;
+    setup();
+    overlay.classList.add('on');
+    speed = .35;
+    frame();
+    const total = 2150;
+    const t0 = performance.now();
+    const bar = document.getElementById('launchBarFill');
+    const pct = document.getElementById('launchPct');
+    (function tick(now) {
+      const p = Math.min((now - t0) / (total - 250), 1);
+      bar.style.width = (p * 100) + '%';
+      pct.textContent = Math.round(p * 100) + '%';
+      if (p < 1 && running) requestAnimationFrame(tick);
+    })(t0);
+    setTimeout(() => overlay.classList.add('ignite'), 320);
+    setTimeout(() => { let s = setInterval(() => { speed = Math.min(speed * 1.32, 30); if (speed >= 30) clearInterval(s); }, 55); }, 800);
+    setTimeout(() => overlay.classList.add('warpzoom'), 900);
+    setTimeout(() => overlay.classList.add('liftoff'), 1450);
+    setTimeout(() => overlay.classList.add('flash'), 1780);
+    if (href) setTimeout(() => { window.location.href = href; }, total);
+  }
+
+  function reset() {
+    running = false;
+    if (raf) cancelAnimationFrame(raf);
+    overlay.classList.remove('on', 'ignite', 'liftoff', 'flash', 'warpzoom');
+    document.getElementById('launchBarFill').style.width = '0%';
+    document.getElementById('launchPct').textContent = '0%';
+  }
+  window.addEventListener('pageshow', e => { if (e.persisted) reset(); });
+  window.lancerDemo = () => { reset(); setTimeout(() => launch(null), 50); };
+
+  document.querySelectorAll('a[href^="https://app.leadengineai.fr"]').forEach(a => {
+    a.addEventListener('click', e => { e.preventDefault(); launch(a.href); });
+  });
+})();
 </script>
+
 \n</body>
 </html>
