@@ -370,208 +370,59 @@
 <script src="assets/leadengine.js" defer></script>
 
 
-<!-- ══ PROPULSION VERS LE COCKPIT — vue cockpit 1ʳᵉ personne ══ -->
+<!-- ══ TRANSITION VERS LE COCKPIT (simple, centrée, desktop + mobile) ══ -->
 <style>
-  #launch {
-    position: fixed; inset: 0; z-index: 10000; background: #04040a; overflow: hidden;
-    opacity: 0; pointer-events: none; transition: opacity .45s ease;
-    font-family: 'Space Grotesk', 'Inter', sans-serif;
-  }
+  #launch { position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center;
+    background: radial-gradient(circle at 50% 45%, #241a45 0%, #0c0a18 72%);
+    opacity: 0; pointer-events: none; transition: opacity .35s ease; overflow: hidden;
+    font-family: 'Space Grotesk', 'Inter', sans-serif; }
   #launch.on { opacity: 1; pointer-events: auto; }
-  #warpCanvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-
-  /* sol en perspective qui fonce vers le pilote */
-  .cx-floor {
-    position: absolute; left: 50%; bottom: -4vh; width: 320vw; height: 62vh; z-index: 1; pointer-events: none;
-    transform: translateX(-50%) perspective(300px) rotateX(76deg); transform-origin: bottom center;
-    opacity: 0; transition: opacity .9s ease;
-    background-image:
-      repeating-linear-gradient(90deg, rgba(167,139,250,.40) 0 1px, transparent 1px 6.25%),
-      repeating-linear-gradient(0deg, rgba(167,139,250,.40) 0 1px, transparent 1px 7%);
-    -webkit-mask-image: linear-gradient(to top, #000 0, transparent 78%);
-    mask-image: linear-gradient(to top, #000 0, transparent 78%);
-  }
-  #launch.ignite .cx-floor { opacity: .85; animation: cx-floorrush .6s linear infinite; }
-  @keyframes cx-floorrush { to { background-position: 0 0, 0 56px; } }
-
-  /* immersion : bords assombris (verrière) */
-  .cx-vignette { position: absolute; inset: 0; z-index: 2; pointer-events: none;
-    background: radial-gradient(ellipse 78% 82% at 50% 45%, transparent 34%, rgba(4,4,10,.45) 68%, #04040a 100%); }
-
-  /* réticule de visée central */
-  .cx-reticle { position: absolute; left: 50%; top: 45%; transform: translate(-50%, -50%); z-index: 3;
-    width: clamp(120px, 22vw, 230px); opacity: 0; pointer-events: none;
-    transition: opacity .6s ease; color: rgba(196,181,253,.5); }
-  #launch.on .cx-reticle { opacity: .55; }
-  #launch.ignite .cx-reticle { animation: cx-ret-spin 9s linear infinite; }
-  @keyframes cx-ret-spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
-
-  /* coins HUD */
-  .cx-corner { position: absolute; width: clamp(34px, 5vw, 58px); height: clamp(34px, 5vw, 58px); z-index: 4;
-    border: 2px solid rgba(196,181,253,.55); pointer-events: none; filter: drop-shadow(0 0 6px rgba(167,139,250,.4)); }
-  .cx-corner.tl { top: 20px; left: 20px; border-right: 0; border-bottom: 0; border-top-left-radius: 10px; }
-  .cx-corner.tr { top: 20px; right: 20px; border-left: 0; border-bottom: 0; border-top-right-radius: 10px; }
-  .cx-corner.bl { bottom: 20px; left: 20px; border-right: 0; border-top: 0; border-bottom-left-radius: 10px; }
-  .cx-corner.br { bottom: 20px; right: 20px; border-left: 0; border-top: 0; border-bottom-right-radius: 10px; }
-
-  /* bandeau statut haut */
-  .cx-top { position: absolute; top: 30px; left: 50%; transform: translateX(-50%); z-index: 5;
-    display: flex; align-items: center; gap: 12px; white-space: nowrap;
-    font-size: .62rem; letter-spacing: 2.5px; text-transform: uppercase; color: #9fa0c8; }
-  .cx-top b { color: #c4b5fd; font-weight: 700; }
-  .cx-top .sep { opacity: .35; }
-  .cx-led { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 8px #4ade80; display: inline-block; }
-  .cx-led.warn { background: #fbbf24; box-shadow: 0 0 8px #fbbf24; animation: cx-blink .7s steps(2) infinite; }
-  @keyframes cx-blink { 50% { opacity: .25; } }
-
-  /* rails télémétrie latéraux */
-  .cx-rail { position: absolute; top: 50%; transform: translateY(-50%); z-index: 4;
-    display: flex; flex-direction: column; gap: 9px; pointer-events: none; }
-  .cx-rail.left { left: 30px; } .cx-rail.right { right: 30px; }
-  .cx-rail i { width: 22px; height: 4px; border-radius: 2px; background: rgba(167,139,250,.22); }
-  .cx-rail i.hot { background: #a78bfa; box-shadow: 0 0 8px rgba(167,139,250,.8); }
-  #launch.ignite .cx-rail i { animation: cx-tele 1s steps(1) infinite; }
-  @keyframes cx-tele { 50% { background: #c4b5fd; box-shadow: 0 0 8px rgba(196,181,253,.8); } }
-
-  /* tableau de bord bas */
-  .cx-dash { position: absolute; left: 50%; bottom: 7vh; transform: translateX(-50%); z-index: 5;
-    width: min(440px, 84vw); text-align: center; }
-  .cx-brand { font-weight: 700; letter-spacing: 3px; font-size: .8rem; color: #c4b5fd; margin-bottom: 16px; }
-  .cx-brand .bolt { filter: drop-shadow(0 0 8px rgba(167,139,250,.9)); }
-  .cx-brand b { color: #fff; }
-  .cx-thr-head { display: flex; justify-content: space-between; align-items: baseline;
-    font-size: .64rem; letter-spacing: 2px; text-transform: uppercase; color: #9090b8; margin-bottom: 8px; }
-  .cx-thr-head .pct { color: #e879f9; font-weight: 700; font-variant-numeric: tabular-nums; font-size: .72rem; }
-  .cx-dots::after { content: ''; animation: cx-dots 1.2s steps(4) infinite; }
-  @keyframes cx-dots { 0% { content: ''; } 25% { content: '.'; } 50% { content: '..'; } 75% { content: '...'; } }
-  .cx-track { height: 3px; border-radius: 3px; background: rgba(167,139,250,.16); overflow: hidden; }
-  .cx-track span { display: block; height: 100%; width: 0%; border-radius: 3px;
-    background: linear-gradient(90deg, #7c3aed, #a78bfa, #e879f9); box-shadow: 0 0 14px rgba(232,121,249,.8); }
-
-  /* flash de saut hyperspatial */
-  .cx-flash { position: absolute; inset: 0; z-index: 6; pointer-events: none; opacity: 0;
-    background: radial-gradient(circle at 50% 45%, #fff, rgba(196,181,253,.55) 32%, transparent 70%); }
-  #launch.flash .cx-flash { animation: cx-flash .55s ease-out forwards; }
-  @keyframes cx-flash { 0% { opacity: 0; } 22% { opacity: 1; } 100% { opacity: 0; } }
-
-  /* secousse moteur */
-  #launch.ignite { animation: cx-shake .1s linear infinite; }
-  @keyframes cx-shake { 25% { transform: translate(1px, -1px); } 75% { transform: translate(-1px, 1px); } }
-  #launch.surge { animation: none; }
-
-  @media (max-width: 600px) {
-    .cx-rail { display: none; }
-    .cx-top { font-size: .52rem; gap: 7px; letter-spacing: 1.5px; top: 22px; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .cx-floor, .cx-reticle, .cx-rail i, .cx-led.warn, #launch.ignite { animation: none !important; }
-  }
+  .lz-ring { position: absolute; top: 50%; left: 50%; width: 60px; height: 60px; margin: -30px 0 0 -30px;
+    border: 2px solid rgba(167,139,250,.45); border-radius: 50%; opacity: 0; }
+  #launch.on .lz-ring { animation: lz-ring 1.3s ease-out infinite; }
+  #launch.on .lz-ring.d2 { animation-delay: .43s; }
+  #launch.on .lz-ring.d3 { animation-delay: .86s; }
+  @keyframes lz-ring { 0% { transform: scale(.3); opacity: .7; } 100% { transform: scale(16); opacity: 0; } }
+  .lz-core { position: relative; z-index: 2; text-align: center; transform: scale(.92); }
+  #launch.on .lz-core { transition: transform 1s cubic-bezier(.4,0,.2,1); transform: scale(1); }
+  #launch.go .lz-core { transform: scale(1.6); opacity: 0; transition: transform .55s ease-in, opacity .45s ease-in; }
+  .lz-logo { font-size: clamp(1.4rem, 4.5vw, 2.3rem); font-weight: 700; letter-spacing: 3px; color: #fff; }
+  .lz-logo .bolt { filter: drop-shadow(0 0 12px rgba(167,139,250,.9)); }
+  .lz-logo b { background: linear-gradient(100deg, #a78bfa, #e879f9); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .lz-status { margin-top: 1.05rem; font-size: .72rem; letter-spacing: 2.5px; text-transform: uppercase; color: #b9b2d6; }
+  .lz-status .lz-dots::after { content: ''; animation: lz-dots 1.2s steps(4) infinite; }
+  @keyframes lz-dots { 0% { content: ''; } 25% { content: '.'; } 50% { content: '..'; } 75% { content: '...'; } }
+  .lz-bar { width: 220px; max-width: 62vw; height: 3px; margin: 1.5rem auto 0; border-radius: 3px; background: rgba(167,139,250,.18); overflow: hidden; }
+  .lz-bar span { display: block; height: 100%; width: 0; border-radius: 3px; background: linear-gradient(90deg, #7c3aed, #e879f9); }
+  #launch.on .lz-bar span { width: 100%; transition: width 1.15s cubic-bezier(.45,0,.3,1); }
+  @media (prefers-reduced-motion: reduce) { .lz-ring { display: none; } #launch.on .lz-core, #launch.on .lz-bar span { transition: none; } }
 </style>
 <div id="launch" aria-hidden="true">
-  <canvas id="warpCanvas"></canvas>
-  <div class="cx-floor"></div>
-  <svg class="cx-reticle" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-    <circle cx="60" cy="60" r="40" opacity=".5"/>
-    <circle cx="60" cy="60" r="54" opacity=".25" stroke-dasharray="3 7"/>
-    <path d="M60 6v16M60 98v16M6 60h16M98 60h16"/>
-    <path d="M60 44v32M44 60h32" opacity=".4"/>
-  </svg>
-  <div class="cx-vignette"></div>
-  <div class="cx-corner tl"></div><div class="cx-corner tr"></div>
-  <div class="cx-corner bl"></div><div class="cx-corner br"></div>
-  <div class="cx-top">
-    <span class="cx-led"></span> Systèmes <span class="sep">•</span>
-    Cap&nbsp;: <b>votre&nbsp;espace</b> <span class="sep">•</span>
-    <span class="cx-led warn"></span> Propulsion
+  <div class="lz-ring d1"></div><div class="lz-ring d2"></div><div class="lz-ring d3"></div>
+  <div class="lz-core">
+    <div class="lz-logo"><span class="bolt">⚡</span> LEADENGINE <b>AI</b></div>
+    <div class="lz-status">Accès à votre cockpit<span class="lz-dots"></span></div>
+    <div class="lz-bar"><span></span></div>
   </div>
-  <div class="cx-rail left"><i></i><i class="hot"></i><i></i><i></i><i class="hot"></i><i></i></div>
-  <div class="cx-rail right"><i class="hot"></i><i></i><i></i><i class="hot"></i><i></i><i></i></div>
-  <div class="cx-dash">
-    <div class="cx-brand"><span class="bolt">⚡</span> LEADENGINE <b>AI</b></div>
-    <div class="cx-thr-head">
-      <span>Propulsion vers votre espace<span class="cx-dots"></span></span>
-      <span class="pct" id="launchPct">0%</span>
-    </div>
-    <div class="cx-track"><span id="thrustFill"></span></div>
-  </div>
-  <div class="cx-flash"></div>
 </div>
 <script>
 (() => {
   const overlay = document.getElementById('launch');
   if (!overlay) return;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const canvas = document.getElementById('warpCanvas');
-  const ctx = canvas.getContext('2d');
-  let stars = [], raf = null, speed = .5, running = false;
-
-  function setup() {
-    canvas.width = innerWidth * devicePixelRatio;
-    canvas.height = innerHeight * devicePixelRatio;
-    ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
-    stars = Array.from({ length: 360 }, () => ({
-      x: (Math.random() - .5) * innerWidth * 2,
-      y: (Math.random() - .5) * innerHeight * 2,
-      z: Math.random() * innerWidth,
-    }));
-  }
-  function frame() {
-    if (!running) return;
-    const cx = innerWidth / 2, cy = innerHeight * .45;
-    ctx.fillStyle = 'rgba(4,4,10,.40)';
-    ctx.fillRect(0, 0, innerWidth, innerHeight);
-    for (const s of stars) {
-      const pz = s.z;
-      s.z -= speed * 8;
-      if (s.z < 1) { s.z = innerWidth; s.x = (Math.random() - .5) * innerWidth * 2; s.y = (Math.random() - .5) * innerHeight * 2; continue; }
-      const sx = (s.x / s.z) * 420 + cx, sy = (s.y / s.z) * 420 + cy;
-      const px = (s.x / pz) * 420 + cx, py = (s.y / pz) * 420 + cy;
-      const t = 1 - s.z / innerWidth;
-      ctx.strokeStyle = `rgba(${170 + t * 60},${140 + t * 90},255,${.2 + t * .8})`;
-      ctx.lineWidth = t * 2.6 + .4;
-      ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(sx, sy); ctx.stroke();
-    }
-    raf = requestAnimationFrame(frame);
-  }
-
+  let running = false;
   function launch(href) {
-    if (running) return;
-    running = true;
-    setup();
+    if (running) return; running = true;
     overlay.classList.add('on');
-    speed = .5;
-    frame();
-    const total = 2150;
-    const t0 = performance.now();
-    const bar = document.getElementById('thrustFill');
-    const pct = document.getElementById('launchPct');
-    (function tick(now) {
-      const p = Math.min((now - t0) / (total - 250), 1);
-      const v = p * p; // la poussée accélère
-      bar.style.width = (v * 100) + '%';
-      pct.textContent = Math.round(v * 100) + '%';
-      if (p < 1 && running) requestAnimationFrame(tick);
-    })(t0);
-    setTimeout(() => overlay.classList.add('ignite'), 300);
-    setTimeout(() => { const s = setInterval(() => { speed = Math.min(speed * 1.34, 34); if (speed >= 34) clearInterval(s); }, 55); }, 700);
-    setTimeout(() => overlay.classList.add('surge'), 1480);
-    setTimeout(() => overlay.classList.add('flash'), 1780);
-    if (href) setTimeout(() => { window.location.href = href; }, total);
+    setTimeout(() => overlay.classList.add('go'), 950);
+    if (href) setTimeout(() => { window.location.href = href; }, 1350);
   }
-
-  function reset() {
-    running = false;
-    if (raf) cancelAnimationFrame(raf);
-    overlay.classList.remove('on', 'ignite', 'surge', 'flash');
-    const f = document.getElementById('thrustFill'); if (f) f.style.width = '0%';
-    const p = document.getElementById('launchPct'); if (p) p.textContent = '0%';
-  }
+  function reset() { running = false; overlay.classList.remove('on', 'go'); }
   window.addEventListener('pageshow', e => { if (e.persisted) reset(); });
   window.lancerDemo = () => { reset(); setTimeout(() => launch(null), 50); };
-
   document.querySelectorAll('a[href^="https://app.leadengineai.fr"]').forEach(a => {
     a.addEventListener('click', e => {
-      if (reduced) return;          // mouvement réduit → navigation directe
+      if (reduced) return;
       e.preventDefault();
       launch(a.href);
     });
