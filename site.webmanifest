@@ -1,0 +1,14 @@
+{
+  "name": "LeadEngine AI",
+  "short_name": "LeadEngine AI",
+  "description": "Agents IA, formation & création de sites internet pour les professionnels de l'immobilier. 100 % français, basé à Brive-la-Gaillarde.",
+  "lang": "fr",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F8F5F0",
+  "theme_color": "#6D28D9",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

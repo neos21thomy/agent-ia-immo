@@ -389,6 +389,15 @@
   <script defer src="/_vercel/insights/script.js"></script>
   <link rel="canonical" href="https://leadengineai.fr/contact" />
   <link rel="stylesheet" href="assets/leadengine.css" />
+  <meta name="theme-color" content="#6D28D9" />
+  <meta property="og:site_name" content="LeadEngine AI" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="LeadEngine AI — L’IA au service des pros, à la française" />
+  <meta name="twitter:image" content="https://leadengineai.fr/og-image.jpg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 <body>
 
@@ -465,7 +474,7 @@
         </a>
       </div>
 
-      <a href="tel:+33647438492" class="btn-rdv">
+      <a href="#reserver" class="btn-rdv">
         <span class="rdv-dot"></span>
         Prendre un RDV offert
       </a>
@@ -473,6 +482,20 @@
 
   </div>
 </div>
+
+<!-- ══ RÉSERVATION RDV — Calendly intégré ══ -->
+<section class="band" id="reserver">
+  <div class="inner" style="text-align:center;">
+    <p class="s-label">RDV découverte · sans engagement</p>
+    <h2 class="s-title">Réservez votre <span class="gradient">créneau offert</span></h2>
+    <p class="s-sub">30 minutes pour parler de votre activité et voir, concrètement, comment l'IA peut vous faire gagner du temps. Choisissez l'horaire qui vous arrange ci-dessous.</p>
+    <div class="calendly-inline-widget"
+         data-url="https://calendly.com/thomas-leadengineai/30min?hide_gdpr_banner=1&background_color=ffffff&text_color=1f1a33&primary_color=6d28d9"
+         style="min-width:320px;height:660px;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow-sm);"></div>
+    <noscript><p style="color:var(--muted);font-size:.9rem;margin-top:1rem;">Activez JavaScript pour réserver, ou écrivez à <a href="mailto:thomas@leadengineai.fr" style="color:var(--accent);">thomas@leadengineai.fr</a>.</p></noscript>
+  </div>
+</section>
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
 <footer class="le-footer">
   <div class="f-inner">
