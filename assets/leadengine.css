@@ -1,0 +1,242 @@
+/* ============================================================
+   LeadEngine AI — Design system « clair éditorial » (V3)
+   Source unique partagée par toutes les pages de la vitrine.
+   Base blanc cassé + violet profond + accents magenta, beaucoup d'air.
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* Surfaces */
+  --bg: #F8F5F0; --bg-2: #FFFFFF; --bg-3: #F2EDE6;
+  /* Texte */
+  --ink: #1F1A33; --ink-soft: #3A3450; --muted: #6E6A82;
+  /* Lignes */
+  --line: rgba(76,29,149,.12); --line-2: rgba(76,29,149,.22);
+  /* Violets (profond → clair) */
+  --v700: #4C1D95; --v600: #6D28D9; --v500: #7C3AED; --v400: #8B5CF6; --v300: #A78BFA;
+  /* Accents */
+  --accent: #6D28D9; --accent-deep: #4C1D95; --magenta: #C026D3;
+  --grad: linear-gradient(100deg, #6D28D9, #C026D3);
+  /* Ombres douces (teintées violet) */
+  --shadow-sm: 0 2px 12px -6px rgba(76,29,149,.22);
+  --shadow: 0 20px 54px -26px rgba(76,29,149,.34);
+  /* Rayons & layout */
+  --radius: 16px; --radius-lg: 22px; --maxw: 1080px;
+}
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg); color: var(--ink);
+  line-height: 1.7; overflow-x: hidden;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+}
+h1, h2, h3, h4 { font-family: 'Space Grotesk', 'Inter', sans-serif; letter-spacing: -0.02em; color: var(--ink); line-height: 1.12; }
+p { color: var(--ink-soft); }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+::selection { background: rgba(109,40,217,.18); }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--bg-3); }
+::-webkit-scrollbar-thumb { background: #cbb8ef; border-radius: 6px; border: 2px solid var(--bg-3); }
+
+/* ── Transitions entre pages ── */
+@view-transition { navigation: auto; }
+@keyframes le-pagein { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+body { animation: le-pagein .5s ease both; }
+
+/* ── Décor d'ambiance léger (halo violet diffus) ── */
+.le-aura {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(1100px 520px at 80% -10%, rgba(109,40,217,.10), transparent 60%),
+    radial-gradient(820px 420px at 6% 4%, rgba(192,38,211,.06), transparent 60%);
+}
+
+/* ── Navigation ── */
+nav.le-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 2.2rem;
+  background: rgba(248,245,240,.72);
+  backdrop-filter: blur(18px) saturate(1.4); -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  border-bottom: 1px solid transparent; transition: border-color .3s, box-shadow .3s;
+}
+nav.le-nav.scrolled { border-bottom-color: var(--line); box-shadow: var(--shadow-sm); }
+.nav-logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: .95rem; letter-spacing: 2.5px; color: var(--accent-deep); display: flex; align-items: center; gap: .5rem; }
+.nav-logo .bolt { color: var(--v600); }
+.nav-logo span.ai { color: var(--ink); }
+.nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+.nav-links a { font-size: .85rem; color: var(--muted); font-weight: 500; transition: color .25s; }
+.nav-links a:hover { color: var(--accent); }
+.btn-cockpit {
+  display: inline-flex; align-items: center; gap: .45rem;
+  background: var(--grad); color: #fff !important; font-weight: 600; font-size: .82rem;
+  padding: .62rem 1.2rem; border-radius: 11px;
+  box-shadow: 0 10px 24px -10px rgba(109,40,217,.6); transition: transform .2s, box-shadow .2s;
+}
+.btn-cockpit:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -10px rgba(109,40,217,.8); }
+.nav-burger { display: none; background: none; border: 1px solid var(--line-2); border-radius: 10px; padding: .5rem .65rem; cursor: pointer; }
+.nav-burger span { display: block; width: 18px; height: 2px; background: var(--accent); margin: 3.5px 0; border-radius: 2px; transition: all .3s; }
+@media (max-width: 880px) {
+  .nav-links {
+    position: fixed; inset: 0; flex-direction: column; justify-content: center; gap: 1.3rem;
+    background: rgba(248,245,240,.98); backdrop-filter: blur(20px);
+    transform: translateY(-100%); transition: transform .35s ease; height: 100dvh;
+  }
+  .nav-links.open { transform: translateY(0); }
+  .nav-links a { font-size: 1.1rem; color: var(--ink); }
+  .nav-burger { display: block; z-index: 110; }
+  .nav-burger.open span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+  .nav-burger.open span:nth-child(2) { opacity: 0; }
+  .nav-burger.open span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+}
+
+/* ── Sections & primitives éditoriales ── */
+section { padding: 4.8rem 1.5rem; position: relative; }
+.inner { max-width: var(--maxw); margin: 0 auto; }
+.s-label { text-align: center; font-size: .74rem; letter-spacing: 2.5px; text-transform: uppercase; color: var(--v600); font-weight: 600; margin-bottom: .85rem; }
+.s-title { text-align: center; font-size: clamp(1.7rem, 4vw, 2.5rem); font-weight: 700; margin-bottom: .9rem; }
+.s-sub { text-align: center; font-size: 1rem; color: var(--muted); max-width: 580px; margin: 0 auto 3rem; }
+.gradient { background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.reveal { opacity: 0; transform: translateY(30px); filter: blur(4px); transition: opacity .8s cubic-bezier(.2,.8,.2,1), transform .8s cubic-bezier(.2,.8,.2,1), filter .8s cubic-bezier(.2,.8,.2,1); }
+.reveal.visible { opacity: 1; transform: none; filter: blur(0); }
+
+/* Bandeaux de respiration (alternance de fonds) */
+.band { position: relative; background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); box-shadow: 0 -24px 50px -34px rgba(76,29,149,.30); }
+.band::before { content: ''; position: absolute; top: -2px; left: 50%; transform: translateX(-50%); width: 132px; height: 4px; border-radius: 0 0 5px 5px; background: var(--grad); opacity: .8; box-shadow: 0 4px 14px -4px rgba(124,58,237,.6); }
+.band-ink { background: linear-gradient(160deg, #241a3d, #160f29); }
+.band-ink, .band-ink p { color: #b9b2d6; }
+.band-ink .s-title, .band-ink h2, .band-ink h3, .band-ink h1 { color: #fff; }
+.band-ink .s-label { color: #C4B5FD; }
+
+/* ── Boutons ── */
+.btn-xl { display: inline-flex; align-items: center; gap: .5rem; font-weight: 600; font-size: .95rem; padding: .95rem 1.7rem; border-radius: 13px; transition: transform .2s, box-shadow .2s; cursor: pointer; }
+.btn-solid { background: var(--grad); color: #fff; box-shadow: 0 14px 34px -14px rgba(109,40,217,.7); }
+.btn-solid:hover { transform: translateY(-2px); box-shadow: 0 18px 42px -14px rgba(109,40,217,.85); }
+.btn-line { border: 1.5px solid var(--line-2); color: var(--accent-deep); background: var(--bg-2); }
+.btn-line:hover { border-color: var(--v500); transform: translateY(-2px); }
+
+/* ── Carte générique ── */
+.card { background: var(--bg-2); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow-sm); }
+
+/* ── Footer ── */
+footer.le-footer { background: var(--bg-2); border-top: 1px solid var(--line); padding: 3rem 1.5rem 6rem; }
+.f-inner { max-width: var(--maxw); margin: 0 auto; display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; align-items: flex-start; }
+.f-brand { font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: 2.5px; color: var(--accent-deep); font-size: .92rem; }
+.f-brand .bolt { color: var(--v600); }
+.f-col { display: grid; gap: .5rem; font-size: .85rem; }
+.f-col b { font-size: .72rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink); margin-bottom: .35rem; font-weight: 600; }
+.f-col a { color: var(--muted); transition: color .2s; }
+.f-col a:hover { color: var(--accent); }
+.f-copy { width: 100%; text-align: center; font-size: .76rem; color: var(--muted); margin-top: 2rem; border-top: 1px solid var(--line); padding-top: 1.6rem; }
+
+/* ── Responsive de base ── */
+@media (max-width: 768px) { nav.le-nav { padding: .9rem 1.2rem; } section { padding: 3.6rem 1.2rem; } }
+@media (max-width: 600px) { nav.le-nav { padding: .85rem 1rem; } section { padding: 3rem 1.1rem; } .s-sub { font-size: .95rem; } }
+
+/* ============================================================
+   Effets premium (subtils) — appliqués partout via cette feuille
+   ============================================================ */
+
+/* Grain éditorial très léger (injecté par leadengine.js) */
+.le-grain {
+  position: fixed; inset: -50%; z-index: -1; pointer-events: none; opacity: .03;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: le-grain 8s steps(6) infinite;
+}
+@keyframes le-grain { 0%,100% { transform: translate(0,0); } 25% { transform: translate(-2%,1%); } 50% { transform: translate(1%,-2%); } 75% { transform: translate(-1%,-1%); } }
+
+/* L'aura respire très lentement */
+.le-aura { animation: le-aura-drift 18s ease-in-out infinite alternate; }
+@keyframes le-aura-drift { to { transform: translate3d(0, -1.5%, 0) scale(1.04); } }
+
+/* Barre de progression de lecture (haut de page) */
+.le-progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 200; pointer-events: none; }
+.le-progress > i { display: block; height: 100%; width: 100%; transform: scaleX(0); transform-origin: left; background: var(--grad); box-shadow: 0 0 10px rgba(192,38,211,.45); }
+
+/* Soulignement animé des liens de nav (desktop) */
+@media (min-width: 881px) {
+  .nav-links a:not(.btn-cockpit) { position: relative; }
+  .nav-links a:not(.btn-cockpit)::after { content: ''; position: absolute; left: 0; right: 0; bottom: -5px; height: 2px; border-radius: 2px; background: var(--grad); transform: scaleX(0); transform-origin: right; transition: transform .3s ease; }
+  .nav-links a:not(.btn-cockpit):hover::after { transform: scaleX(1); transform-origin: left; }
+}
+
+/* Reflet (sheen) discret sur les boutons pleins au survol */
+.btn-solid, .btn-cockpit, .door .go { position: relative; overflow: hidden; }
+.btn-solid::after, .btn-cockpit::after, .door .go::after {
+  content: ''; position: absolute; top: 0; left: -120%; width: 55%; height: 100%; pointer-events: none;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.35), transparent); transform: skewX(-18deg);
+}
+.btn-solid:hover::after, .btn-cockpit:hover::after, .door .go:hover::after { animation: le-sheen .7s ease; }
+@keyframes le-sheen { to { left: 145%; } }
+
+/* Focus accessible premium */
+:where(a, button, input, textarea, select):focus-visible { outline: 2px solid var(--v500); outline-offset: 3px; border-radius: 6px; }
+
+/* ============================================================
+   Ambiance & profondeur — orbes, textures, diagonale
+   ============================================================ */
+
+/* Orbes d'ambiance flottants + parallax + dérive lente (injectés par leadengine.js) */
+.le-orbs { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.le-orb { position: absolute; border-radius: 50%; filter: blur(64px); will-change: transform, translate; }
+.le-orb.a { width: 600px; height: 600px; top: -160px; right: -100px; background: radial-gradient(circle, rgba(124,58,237,.42), transparent 70%); animation: le-drift-a 20s ease-in-out infinite alternate; }
+.le-orb.b { width: 520px; height: 520px; top: 38%; left: -190px; background: radial-gradient(circle, rgba(192,38,211,.30), transparent 70%); animation: le-drift-b 24s ease-in-out infinite alternate; }
+.le-orb.c { width: 680px; height: 680px; bottom: -280px; right: 3%; background: radial-gradient(circle, rgba(139,92,246,.28), transparent 70%); animation: le-drift-a 28s ease-in-out infinite alternate; }
+.le-orb.d { width: 520px; height: 520px; top: 4%; left: 24%; background: radial-gradient(circle, rgba(167,139,250,.24), transparent 70%); animation: le-drift-b 22s ease-in-out infinite alternate; }
+@keyframes le-drift-a { to { translate: -26px 30px; } }
+@keyframes le-drift-b { to { translate: 30px -22px; } }
+
+/* Voile de points très léger sur tout le fond (texture partout) */
+.le-bg-dots {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: .07;
+  background-image: radial-gradient(rgba(76,29,149,.6) 1px, transparent 1.6px);
+  background-size: 26px 26px;
+}
+
+/* Texture pointillés (à poser sur une section : class="tex-dots") */
+.tex-dots { position: relative; }
+.tex-dots > * { position: relative; z-index: 1; }
+.tex-dots::before {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: .55;
+  background-image: radial-gradient(rgba(76,29,149,.14) 1.1px, transparent 1.3px);
+  background-size: 24px 24px;
+  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 45%, #000, transparent 78%);
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 45%, #000, transparent 78%);
+}
+
+/* Texture grille fine (class="tex-grid") */
+.tex-grid { position: relative; }
+.tex-grid > * { position: relative; z-index: 1; }
+.tex-grid::before {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image: linear-gradient(rgba(76,29,149,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(76,29,149,.06) 1px, transparent 1px);
+  background-size: 46px 46px;
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 28%, #000 72%, transparent);
+  mask-image: linear-gradient(180deg, transparent, #000 28%, #000 72%, transparent);
+}
+
+/* Ruban diagonal décoratif (class="diag-band") */
+.diag-band { position: relative; overflow: hidden; }
+.diag-band > * { position: relative; z-index: 1; }
+.diag-band::after {
+  content: ''; position: absolute; top: -30%; left: -8%; width: 55%; height: 160%; z-index: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(124,58,237,.07), rgba(192,38,211,.05));
+  transform: rotate(11deg); border-radius: 48px;
+}
+
+/* Inclinaison 3D douce au survol (class="tilt", piloté par leadengine.js) */
+@media (min-width: 881px) and (prefers-reduced-motion: no-preference) {
+  .tilt { transform: perspective(900px) rotateX(var(--ry, 0deg)) rotateY(var(--rx, 0deg)); transition: transform .18s ease, border-color .3s, box-shadow .3s; }
+}
+
+/* ── Accessibilité : mouvement réduit ── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  body { animation: none; }
+  .reveal { opacity: 1; transform: none; filter: none; transition: none; }
+  .le-grain { display: none; }
+  * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; }
+}

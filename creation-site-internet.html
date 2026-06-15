@@ -29,6 +29,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
+  <link rel="stylesheet" href="assets/leadengine.css" />
+
   <!-- Schema Service avec offres détaillées -->
   <script type="application/ld+json">
   {
@@ -252,17 +254,17 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --black: #07070f;
-      --dark: #0d0d1a;
-      --card: #11111f;
-      --v700: #6d28d9;
-      --v600: #7c3aed;
-      --v500: #8b5cf6;
-      --v400: #a78bfa;
-      --v300: #c4b5fd;
-      --white: #f0f0ff;
-      --muted: #9090b8;
-      --border: rgba(139,92,246,.25);
+      --black: #F8F5F0;
+      --dark: #FFFFFF;
+      --card: #FFFFFF;
+      --v700: #4C1D95;
+      --v600: #6D28D9;
+      --v500: #7C3AED;
+      --v400: #6D28D9;
+      --v300: #6D28D9;
+      --white: #1F1A33;
+      --muted: #6E6A82;
+      --border: rgba(76,29,149,.12);
     }
 
     html { scroll-behavior: smooth; }
@@ -283,7 +285,7 @@
     }
 
     ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--dark); }
+    ::-webkit-scrollbar-track { background: #ECE7E0; }
     ::-webkit-scrollbar-thumb { background: var(--v600); border-radius: 3px; }
 
     body::before {
@@ -293,31 +295,11 @@
       pointer-events: none;
       z-index: -1;
       background:
-        radial-gradient(circle 700px at 80% 10%, rgba(124,58,237,.15), transparent 70%),
-        radial-gradient(circle 600px at 10% 80%, rgba(232,121,249,.08), transparent 70%);
+        radial-gradient(circle 700px at 80% 10%, rgba(109,40,217,.08), transparent 70%),
+        radial-gradient(circle 600px at 10% 80%, rgba(192,38,211,.05), transparent 70%);
     }
 
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 2.5rem;
-      background: rgba(7,7,15,.7);
-      backdrop-filter: blur(24px) saturate(1.3);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-logo { font-size: 1.1rem; font-weight: 700; color: var(--v300); text-decoration: none; }
-    .nav-logo span { color: var(--white); }
-    .nav-back {
-      display: flex; align-items: center; gap: .5rem;
-      color: var(--muted); text-decoration: none; font-size: .9rem;
-      transition: color .25s, transform .25s;
-    }
-    .nav-back:hover { color: var(--v300); transform: translateX(-3px); }
+    /* NAV — gérée par leadengine.css (.le-nav). Styles spécifiques retirés. */
 
     /* HERO */
     .hero {
@@ -334,7 +316,7 @@
       display: inline-flex;
       align-items: center;
       gap: .5rem;
-      background: rgba(139,92,246,.12);
+      background: rgba(109,40,217,.08);
       border: 1px solid var(--border);
       border-radius: 50px;
       padding: .35rem 1rem;
@@ -409,10 +391,10 @@
       border-radius: 12px;
       font-weight: 600;
       text-decoration: none;
-      background: rgba(139,92,246,.05);
+      background: rgba(109,40,217,.05);
       transition: border-color .25s, background .25s;
     }
-    .btn-ghost:hover { border-color: var(--v400); background: rgba(139,92,246,.12); }
+    .btn-ghost:hover { border-color: var(--v400); background: rgba(109,40,217,.12); }
 
     /* TRUST POINTS */
     .trust {
@@ -469,21 +451,22 @@
       gap: 1.5rem;
     }
     .pillar {
-      background: linear-gradient(180deg, var(--card) 0%, rgba(17,17,31,.7) 100%);
+      background: linear-gradient(180deg, #FFFFFF 0%, #FBFAF7 100%);
       border: 1px solid var(--border);
       border-radius: 18px;
       padding: 2rem 1.5rem;
       position: relative;
+      box-shadow: 0 4px 16px rgba(76,29,149,.06);
       transition: transform .3s cubic-bezier(.2,.8,.2,1), border-color .3s, box-shadow .3s;
     }
     .pillar:hover {
       transform: translateY(-4px);
       border-color: var(--v500);
-      box-shadow: 0 16px 50px rgba(109,40,217,.25);
+      box-shadow: 0 16px 50px rgba(109,40,217,.18);
     }
     .pillar-icon {
       width: 52px; height: 52px;
-      background: rgba(139,92,246,.1);
+      background: rgba(109,40,217,.08);
       border: 1px solid var(--border);
       border-radius: 14px;
       display: inline-flex;
@@ -515,8 +498,8 @@
       gap: .55rem;
       margin: 2rem auto 2.5rem;
       padding: .6rem 1.3rem;
-      background: linear-gradient(135deg, rgba(0,85,164,.12), rgba(239,65,53,.08));
-      border: 1px solid rgba(139,92,246,.3);
+      background: linear-gradient(135deg, rgba(109,40,217,.10), rgba(192,38,211,.06));
+      border: 1px solid rgba(76,29,149,.18);
       border-radius: 999px;
       font-size: .88rem;
       color: var(--v300);
@@ -541,7 +524,7 @@
       font-size: .82rem;
       color: var(--v300);
       padding: .25rem .65rem;
-      background: rgba(139,92,246,.08);
+      background: rgba(109,40,217,.08);
       border: 1px solid var(--border);
       border-radius: 999px;
     }
@@ -787,7 +770,7 @@
       height: 200px;
       position: relative;
       overflow: hidden;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16162a 100%);
+      background: linear-gradient(135deg, #EDE7F7 0%, #F3EEFA 100%);
     }
     .portfolio-preview img {
       width: 100%;
@@ -868,29 +851,30 @@
       gap: 1.25rem;
     }
     .guarantee-card {
-      background: linear-gradient(180deg, var(--card) 0%, rgba(17,17,31,.6) 100%);
+      background: linear-gradient(180deg, #FFFFFF 0%, #FBFAF7 100%);
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 1.5rem 1.5rem;
       position: relative;
+      box-shadow: 0 4px 16px rgba(76,29,149,.06);
       transition: transform .3s, border-color .3s;
     }
     .guarantee-card:hover {
       transform: translateY(-3px);
-      border-color: #22c55e;
+      border-color: var(--v500);
     }
     .guarantee-icon {
       width: 44px;
       height: 44px;
-      background: rgba(34,197,94,.1);
-      border: 1px solid rgba(34,197,94,.3);
+      background: rgba(109,40,217,.08);
+      border: 1px solid rgba(76,29,149,.18);
       border-radius: 12px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       font-size: 1.4rem;
       margin-bottom: 1rem;
-      color: #4ade80;
+      color: var(--v600);
     }
     .guarantee-card h3 {
       font-size: 1.05rem;
@@ -902,7 +886,7 @@
       color: var(--muted);
       line-height: 1.65;
     }
-    .guarantee-card strong { color: #4ade80; }
+    .guarantee-card strong { color: var(--v600); }
 
     /* COMPARATIF Plateformes vs Nous */
     #vs {
@@ -962,14 +946,20 @@
     .vs-cell.us strong {
       color: var(--v300);
     }
-    .vs-icon-x { color: #ef4444; font-weight: 700; }
-    .vs-icon-check { color: #22c55e; font-weight: 700; }
+    .vs-icon-x { color: #9A4F9E; font-weight: 700; }
+    .vs-icon-check { color: #16a34a; font-weight: 700; }
     @media (max-width: 720px) {
-      .vs-row { grid-template-columns: 1fr; }
-      .vs-cell { border-right: none; border-bottom: 1px solid rgba(139,92,246,.1); padding: .75rem 1rem; }
-      .vs-cell:last-child { border-bottom: none; }
-      .vs-row.head .vs-cell { font-size: .85rem; }
-      .vs-row.head .vs-cell.label { display: none; }
+      /* Mobile : chaque ligne devient une mini-carte lisible (fini les colonnes écrasées). */
+      .vs-row { grid-template-columns: 1fr; padding: .5rem 0 .65rem; border-bottom: 2px solid var(--border); }
+      .vs-row.head { display: none; }                 /* en-tête inutile : chaque cellule est étiquetée */
+      .vs-cell { border-right: none; padding: .35rem 1rem; font-size: .92rem; }
+      .vs-cell.label { font-weight: 800; font-size: 1rem; color: var(--white); padding-bottom: .1rem; }
+      .vs-cell.them::before { content: "Plateformes : "; color: var(--muted); font-weight: 700; }
+      .vs-cell.us {
+        background: rgba(139,92,246,.10); border-radius: 12px;
+        margin: .25rem 1rem 0; padding: .55rem .85rem;
+      }
+      .vs-cell.us::before { content: "Sur-mesure : "; color: var(--v300); font-weight: 700; }
     }
 
     /* PACKS */
@@ -982,9 +972,10 @@
       gap: 1.5rem;
     }
     .pack {
-      background: linear-gradient(180deg, var(--card) 0%, rgba(17,17,31,.6) 100%);
+      background: linear-gradient(180deg, #FFFFFF 0%, #FBFAF7 100%);
       border: 1px solid var(--border);
       border-radius: 22px;
+      box-shadow: 0 4px 16px rgba(76,29,149,.06);
       padding: 2rem 1.75rem;
       position: relative;
       transition: transform .3s cubic-bezier(.2,.8,.2,1), border-color .3s, box-shadow .3s;
@@ -1173,7 +1164,7 @@
       overflow: hidden;
       transition: max-height .35s ease;
     }
-    .faq-item.open .faq-a { max-height: 500px; }
+    .faq-item.open .faq-a { max-height: 1200px; }
     .faq-a-inner {
       padding: 0 1.5rem 1.5rem;
       color: var(--muted);
@@ -1204,32 +1195,41 @@
       margin: 0 auto 2rem;
     }
 
-    /* FOOTER */
-    footer {
-      background: var(--dark);
-      border-top: 1px solid var(--border);
-      padding: 2rem 1.5rem;
-      text-align: center;
-    }
-    .footer-copy {
-      font-size: .85rem;
-      color: var(--muted);
-    }
-    .footer-copy a { color: var(--v400); text-decoration: none; }
-    .footer-copy a:hover { color: var(--v300); }
+    /* FOOTER — géré par leadengine.css (.le-footer). */
 
     @media (max-width: 600px) {
-      nav { padding: 1rem 1.25rem; }
+      /* Espacements : moins de vide perdu, pas de chevauchement */
+      .hero { padding: 6rem 1.25rem 3rem; }
+      .section-inner { padding: 3.5rem 1.25rem; }
+      .allin-grid { padding: 2.25rem 1.25rem; }
+      .stats-grid { padding: 2.25rem 1.25rem; }
+
+      /* Lisibilité : aucune ligne de texte sous ~13px sur mobile */
+      .allin-text small { font-size: .8rem; }
+      .usecase-card ul li { font-size: .9rem; }
+      .audit-note { font-size: .85rem; }
+      .nav-back { font-size: .85rem; }
+      .breadcrumb { margin-bottom: 1.25rem; }
+
+      /* Cibles tactiles : CTA pleine largeur, faciles à toucher au pouce */
+      .hero-cta { gap: .75rem; }
+      .hero-cta .btn-primary,
+      .hero-cta .btn-ghost { width: 100%; text-align: center; }
+      .btn-primary, .btn-ghost { padding: .95rem 1.5rem; }
+      .theme-toggle { width: 40px; height: 40px; margin-left: .65rem; }
+
+      /* Cartes : un peu plus respirantes sur petit écran */
+      .pack { padding: 1.75rem 1.35rem; }
+      .audit-card { padding: 2rem 1.25rem; }
     }
 
-    /* THEME LIGHT */
+    /* THEME LIGHT — aligné sur la DA « clair éditorial » (identique au :root) */
     html[data-theme="light"]{
-      --black:#f6f5fc; --dark:#ebe9f6; --card:#ffffff;
-      --v700:#6d28d9; --v600:#7c3aed; --v500:#7c3aed;
-      --v400:#6d28d9; --v300:#6d28d9;
-      --white:#181826; --muted:#5c5c7a; --border:rgba(124,58,237,.20);
+      --black:#F8F5F0; --dark:#FFFFFF; --card:#FFFFFF;
+      --v700:#4C1D95; --v600:#6D28D9; --v500:#7C3AED;
+      --v400:#6D28D9; --v300:#6D28D9;
+      --white:#1F1A33; --muted:#6E6A82; --border:rgba(76,29,149,.12);
     }
-    html[data-theme="light"] nav{ background:rgba(255,255,255,.85)!important; }
     html[data-theme="light"] body::before{ opacity:.4; }
     .theme-toggle{ width:38px; height:38px; border-radius:50%; border:1px solid var(--border); background:rgba(139,92,246,.08); color:var(--v300); cursor:pointer; display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; transition:background .2s,border-color .2s,transform .2s,color .2s; padding:0; margin-left:1rem; }
     .theme-toggle:hover{ background:rgba(139,92,246,.18); border-color:var(--v500); transform:scale(1.08) rotate(12deg); }
@@ -1279,28 +1279,23 @@
     }
     html[data-theme="light"] #stats,
     html[data-theme="light"] #allin {
-      background: linear-gradient(180deg, #ebe9f6 0%, #f6f5fc 100%) !important;
+      background: linear-gradient(180deg, #F2EDE6 0%, #F8F5F0 100%) !important;
     }
     html[data-theme="light"] #packs {
-      background: #ebe9f6 !important;
+      background: #F2EDE6 !important;
     }
     html[data-theme="light"] #vs {
-      background: #ebe9f6 !important;
+      background: #F2EDE6 !important;
     }
     html[data-theme="light"] .vs-table {
       background: #ffffff !important;
     }
     html[data-theme="light"] .vs-row.head {
-      background: linear-gradient(135deg, rgba(124,58,237,.08), rgba(232,121,249,.05)) !important;
+      background: linear-gradient(135deg, rgba(124,58,237,.08), rgba(192,38,211,.05)) !important;
     }
     html[data-theme="light"] .vs-cell.us {
       background: rgba(124,58,237,.04) !important;
     }
-    html[data-theme="light"] footer {
-      background: #ebe9f6 !important;
-    }
-    html[data-theme="light"] .footer-copy { color: #2d2d3f; }
-    html[data-theme="light"] .footer-copy a { color: #6d28d9; }
     html[data-theme="light"] .audience-tag,
     html[data-theme="light"] .fr-badge-small {
       background: rgba(124,58,237,.12) !important;
@@ -1318,13 +1313,19 @@
 </head>
 <body>
 
-<nav>
-  <a class="nav-logo" href="index.html">⚡ LeadEngine <span>Sites</span></a>
-  <a class="nav-back" href="agents-ia-immo.html">← Retour au site</a>
-  <button class="theme-toggle" id="themeToggle" aria-label="Changer de theme" title="Theme clair / sombre">
-    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
-  </button>
+<!-- ══ Décor d'ambiance (halo violet diffus) ══ -->
+<div class="le-aura" aria-hidden="true"></div>
+
+<nav id="nav" class="le-nav">
+  <a class="nav-logo" href="index.html"><span class="bolt">⚡</span> LEADENGINE <span class="ai">AI</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="agents-ia-immo.html">Agents IA Immo</a></li>
+    <li><a href="creation-site-internet.html">Sites internet</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a class="btn-cockpit" href="https://app.leadengineai.fr">🚀 Mon cockpit</a></li>
+  </ul>
+  <button class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
 </nav>
 
 <section class="hero">
@@ -1971,9 +1972,17 @@
   </div>
 </section>
 
-<footer>
-  <p style="margin-bottom:.6rem;"><a href="index.html" style="color:#a78bfa;text-decoration:none;font-size:.85rem;font-weight:600;">⚡ Portail LeadEngine AI</a></p>
-      <p class="footer-copy">© 2026 <a href="https://leadengineai.fr">leadengineai.fr</a> · Création de sites internet · <a href="agents-ia-immo.html">Agent IA Immo</a> · <a href="mentions-legales.html">Mentions légales</a></p>
+<footer class="le-footer">
+  <div class="f-inner">
+    <div>
+      <div class="f-brand"><span class="bolt">⚡</span> LEADENGINE AI</div>
+      <p style="font-size:.78rem;color:var(--muted);max-width:240px;margin-top:.6rem;">L'IA au service des pros, à la française. Brive-la-Gaillarde (19).</p>
+    </div>
+    <div class="f-col"><b>Services</b><a href="agents-ia-immo.html">Agents IA Immo</a><a href="creation-site-internet.html">Création de sites</a><a href="https://app.leadengineai.fr">Le Cockpit</a></div>
+    <div class="f-col"><b>Ressources</b><a href="blog.html">Blog</a><a href="agents.html">Les 8 agents</a><a href="conseiller-ia-immobilier-brive.html">Brive &amp; Corrèze</a></div>
+    <div class="f-col"><b>Légal</b><a href="mentions-legales.html">Mentions légales</a><a href="cgv.html">CGV</a><a href="contact.html">Contact</a></div>
+    <div class="f-copy">© 2026 leadengineai.fr · Tous droits réservés</div>
+  </div>
 </footer>
 
 <script>
@@ -1996,6 +2005,8 @@ function toggleFaq(btn) {
   });
 })();
 </script>
+
+<script src="assets/leadengine.js" defer></script>
 
 </body>
 </html>

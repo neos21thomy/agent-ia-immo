@@ -7,35 +7,36 @@
   <meta name="robots" content="noindex, nofollow" />
   <link rel="icon" type="image/png" href="favicon.png?v=2" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/leadengine.css" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --black:  #07070f;
-      --dark:   #0d0d1a;
-      --card:   #11111f;
-      --v700:   #6d28d9;
-      --v600:   #7c3aed;
-      --v500:   #8b5cf6;
-      --v400:   #a78bfa;
-      --v300:   #c4b5fd;
-      --white:  #f0f0ff;
-      --muted:  #9090b8;
-      --border: rgba(139,92,246,.25);
+      --black:  #F8F5F0;   /* fond de page */
+      --dark:   #FFFFFF;   /* surfaces / champs */
+      --card:   #FFFFFF;   /* cartes / panneaux */
+      --v700:   #4C1D95;
+      --v600:   #6D28D9;
+      --v500:   #7C3AED;
+      --v400:   #6D28D9;   /* lisible sur clair */
+      --v300:   #4C1D95;   /* accent texte sur clair */
+      --white:  #1F1A33;   /* texte principal */
+      --muted:  #6E6A82;   /* texte secondaire */
+      --border: rgba(76,29,149,.12);
     }
 
     body {
       font-family: 'Inter', system-ui, sans-serif;
-      background: var(--black);
-      color: var(--white);
+      background: #F8F5F0;
+      color: #1F1A33;
       min-height: 100vh;
       letter-spacing: -0.005em;
     }
     body::before {
       content:''; position:fixed; inset:0; z-index:-1; pointer-events:none;
       background:
-        radial-gradient(circle 700px at 80% 10%, rgba(124,58,237,.18), transparent 70%),
-        radial-gradient(circle 600px at 10% 80%, rgba(232,121,249,.1), transparent 70%);
+        radial-gradient(circle 700px at 80% 10%, rgba(124,58,237,.08), transparent 70%),
+        radial-gradient(circle 600px at 10% 80%, rgba(192,38,211,.05), transparent 70%);
     }
 
     h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.02em; }
@@ -56,8 +57,7 @@
       text-align: center;
       max-width: 420px;
       width: 100%;
-      backdrop-filter: blur(20px);
-      box-shadow: 0 20px 80px rgba(109,40,217,.3);
+      box-shadow: 0 20px 54px -26px rgba(76,29,149,.34);
     }
     .pin-logo {
       font-size: 3rem;
@@ -353,7 +353,8 @@
     }
     .info-box strong { color: var(--v300); }
     .info-box code {
-      background: rgba(0,0,0,.3);
+      background: rgba(76,29,149,.08);
+      color: #4C1D95;
       padding: .15rem .4rem;
       border-radius: 4px;
       font-size: .85rem;
@@ -378,9 +379,9 @@
     .preview strong { color: var(--v300); }
 
     .success-msg {
-      background: rgba(74,222,128,.1);
-      border: 1px solid rgba(74,222,128,.3);
-      color: #4ade80;
+      background: rgba(22,163,74,.08);
+      border: 1px solid rgba(22,163,74,.3);
+      color: #15803d;
       padding: 1rem;
       border-radius: 10px;
       margin-top: 1rem;
@@ -812,6 +813,7 @@ function generateArticle() {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/leadengine.css" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -827,12 +829,12 @@ function generateArticle() {
   </${''}script>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{--black:#07070f;--dark:#0d0d1a;--card:#11111f;--v700:#6d28d9;--v600:#7c3aed;--v500:#8b5cf6;--v400:#a78bfa;--v300:#c4b5fd;--white:#f0f0ff;--muted:#9090b8;--border:rgba(139,92,246,.25)}
+    :root{--black:#F8F5F0;--dark:#FFFFFF;--card:#FFFFFF;--v700:#4C1D95;--v600:#6D28D9;--v500:#7C3AED;--v400:#8B5CF6;--v300:#6D28D9;--white:#1F1A33;--muted:#6E6A82;--border:rgba(76,29,149,.12)}
     html{scroll-behavior:smooth}
     body{font-family:'Inter',system-ui,sans-serif;background:var(--black);color:var(--white);line-height:1.8;letter-spacing:-0.005em;font-size:1.05rem}
     h1,h2,h3{font-family:'Space Grotesk','Inter',sans-serif;letter-spacing:-0.02em}
     body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(circle 700px at 80% 10%,rgba(124,58,237,.15),transparent 70%),radial-gradient(circle 600px at 10% 80%,rgba(232,121,249,.08),transparent 70%)}
-    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 2.5rem;background:rgba(7,7,15,.65);backdrop-filter:blur(24px) saturate(1.3);border-bottom:1px solid var(--border)}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 2.5rem;background:rgba(248,245,240,.82);backdrop-filter:blur(24px) saturate(1.3);border-bottom:1px solid var(--border)}
     .nav-logo{font-size:1.1rem;font-weight:700;color:var(--v300);text-decoration:none}
     .nav-logo span{color:var(--white)}
     .nav-links{display:flex;gap:1.5rem;list-style:none}
@@ -842,7 +844,7 @@ function generateArticle() {
     .breadcrumb{font-size:.85rem;color:var(--muted);margin-bottom:1.5rem}
     .breadcrumb a{color:var(--v400);text-decoration:none}
     .article-title{font-size:clamp(2rem,5vw,3.4rem);font-weight:800;line-height:1.1;margin-bottom:1.5rem}
-    .article-title .gradient{background:linear-gradient(135deg,var(--v300) 0%,#e879f9 60%,var(--v400) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .article-title .gradient{background:linear-gradient(100deg,#6D28D9 0%,#C026D3 60%,#7C3AED 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
     .article-meta-info{display:inline-flex;gap:1rem;align-items:center;font-size:.9rem;color:var(--muted);flex-wrap:wrap;justify-content:center}
     .article-meta-info .author{color:var(--v300);font-weight:600}
     .article-cover{max-width:900px;margin:0 auto 3rem;height:280px;background:linear-gradient(135deg,var(--v700) 0%,var(--v500) 50%,#e879f9 100%);border-radius:24px;position:relative;overflow:hidden;box-shadow:0 20px 60px rgba(109,40,217,.35)}
@@ -874,7 +876,7 @@ function generateArticle() {
 </head>
 <body>
 <nav>
-  <a class="nav-logo" href="agents-ia-immo.html">⚡ LeadEngine <span>Immo</span></a>
+  <a class="nav-logo" href="index.html">⚡ LEADENGINE <span>AI</span></a>
   <ul class="nav-links">
     <li><a href="blog.html">Blog</a></li>
     <li><a href="agents-ia-immo.html#packs">Les packs</a></li>
@@ -913,6 +915,7 @@ ${contentHtml}
   <p style="margin-bottom:.6rem;"><a href="index.html" style="color:#a78bfa;text-decoration:none;font-size:.85rem;font-weight:600;">⚡ Portail LeadEngine AI</a></p>
       <p class="footer-copy">© 2026 <a href="https://leadengineai.fr" style="color:inherit;text-decoration:none;">leadengineai.fr</a> <span style="display:inline-flex;align-items:center;gap:.3rem;margin-left:.5rem;padding:.15rem .5rem;background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.25);border-radius:99px;font-size:.78rem;color:var(--v300);">🇫🇷 Made in France</span> · <a href="blog.html">Retour au blog</a> · <a href="agents-ia-immo.html">Retour au site</a></p>
 </footer>
+<script src="../assets/leadengine.js" defer></script>
 </body>
 </html>
 `;

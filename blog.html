@@ -15,29 +15,30 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/leadengine.css" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --black:  #07070f;
-      --dark:   #0d0d1a;
-      --card:   #11111f;
-      --v700:   #6d28d9;
-      --v600:   #7c3aed;
-      --v500:   #8b5cf6;
-      --v400:   #a78bfa;
-      --v300:   #c4b5fd;
-      --white:  #f0f0ff;
-      --muted:  #9090b8;
-      --border: rgba(139,92,246,.25);
+      --black:  #F8F5F0;
+      --dark:   #F8F5F0;
+      --card:   #FFFFFF;
+      --v700:   #4C1D95;
+      --v600:   #6d28d9;
+      --v500:   #6d28d9;
+      --v400:   #6d28d9;
+      --v300:   #6d28d9;
+      --white:  #1F1A33;
+      --muted:  #6E6A82;
+      --border: rgba(76,29,149,.12);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background: var(--black);
-      color: var(--white);
+      background: #F8F5F0;
+      color: #1F1A33;
       line-height: 1.7;
       letter-spacing: -0.005em;
     }
@@ -50,51 +51,6 @@
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--dark); }
     ::-webkit-scrollbar-thumb { background: var(--v600); border-radius: 3px; }
-
-    /* FOND ANIMÉ */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: -1;
-      background:
-        radial-gradient(circle 600px at 20% 20%, rgba(124,58,237,.18), transparent 70%),
-        radial-gradient(circle 500px at 80% 60%, rgba(232,121,249,.12), transparent 70%);
-    }
-
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 2.5rem;
-      background: rgba(7,7,15,.6);
-      backdrop-filter: blur(24px) saturate(1.3);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-logo {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--v300);
-      text-decoration: none;
-      transition: transform .25s;
-    }
-    .nav-logo span { color: var(--white); }
-    .nav-logo:hover { transform: scale(1.03); }
-    .nav-back {
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-      color: var(--muted);
-      text-decoration: none;
-      font-size: .9rem;
-      transition: color .25s, transform .25s;
-    }
-    .nav-back:hover { color: var(--v300); transform: translateX(-3px); }
 
     /* HERO BLOG */
     .blog-hero {
@@ -109,7 +65,7 @@
       letter-spacing: 3px;
       text-transform: uppercase;
       color: var(--v300);
-      background: rgba(139,92,246,.1);
+      background: rgba(109,40,217,.08);
       border: 1px solid var(--border);
       padding: .4rem 1rem;
       border-radius: 999px;
@@ -122,7 +78,7 @@
       margin-bottom: 1rem;
     }
     .blog-title .gradient {
-      background: linear-gradient(135deg, var(--v300) 0%, #e879f9 60%, var(--v400) 100%);
+      background: linear-gradient(135deg, var(--v300) 0%, #C026D3 60%, var(--v400) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -150,11 +106,10 @@
       border-radius: 18px;
       overflow: hidden;
       text-decoration: none;
-      color: var(--white);
+      color: #1F1A33;
       display: flex;
       flex-direction: column;
       transition: transform .4s cubic-bezier(.2,.8,.2,1), border-color .3s, box-shadow .3s;
-      backdrop-filter: blur(10px);
     }
     .article-card:hover {
       transform: translateY(-8px);
@@ -164,7 +119,7 @@
 
     .article-cover {
       height: 200px;
-      background: linear-gradient(135deg, var(--v700) 0%, var(--v500) 50%, #e879f9 100%);
+      background: linear-gradient(135deg, #6D28D9 0%, #8b5cf6 50%, #C026D3 100%);
       position: relative;
       overflow: hidden;
     }
@@ -230,10 +185,9 @@
       margin: 0 auto 4rem;
       padding: 3rem 2rem;
       text-align: center;
-      background: linear-gradient(135deg, rgba(139,92,246,.08), rgba(232,121,249,.04));
+      background: linear-gradient(135deg, rgba(109,40,217,.06), rgba(192,38,211,.04));
       border: 1px solid var(--border);
       border-radius: 20px;
-      backdrop-filter: blur(10px);
     }
     .blog-cta h3 {
       font-size: 1.6rem;
@@ -246,7 +200,7 @@
     }
     .btn-primary {
       display: inline-block;
-      background: linear-gradient(135deg, var(--v700), var(--v500));
+      background: linear-gradient(135deg, #6D28D9, #C026D3);
       color: #fff;
       text-decoration: none;
       padding: .9rem 2rem;
@@ -258,54 +212,41 @@
     }
     .btn-primary:hover {
       transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 8px 30px rgba(139,92,246,.6);
+      box-shadow: 0 8px 30px rgba(192,38,211,.45);
     }
 
-    /* FOOTER */
-    footer {
-      background: var(--dark);
-      border-top: 1px solid var(--border);
-      padding: 1.5rem;
-      text-align: center;
-    }
-    .footer-copy {
-      font-size: .8rem;
-      color: var(--muted);
+    @media (max-width: 768px) {
+      .articles { grid-template-columns: 1fr; }
+      .blog-hero { padding: 7rem 1.25rem 3rem; }
     }
 
     @media (max-width: 600px) {
-      nav { padding: 1rem 1.25rem; }
       .blog-title { font-size: 2rem; }
+      .blog-subtitle { font-size: 1.02rem; }
+      .articles { padding: 1.5rem 1.25rem 4rem; gap: 1.5rem; }
+      .blog-cta { margin: 0 1.25rem 3rem; padding: 2.25rem 1.5rem; }
+      .blog-cta h3 { font-size: 1.4rem; }
+      .btn-primary { display: block; width: 100%; padding: 1rem 1.5rem; }
     }
-    /* THEME CLAIR */
-    html[data-theme="light"]{
-      --black:#f6f5fc; --dark:#ebe9f6; --card:#ffffff;
-      --v700:#6d28d9; --v600:#7c3aed; --v500:#7c3aed;
-      --v400:#6d28d9; --v300:#6d28d9;
-      --white:#181826; --muted:#5c5c7a; --border:rgba(124,58,237,.20);
-    }
-    html[data-theme="light"] nav{ background:rgba(255,255,255,.85)!important; }
-    html[data-theme="light"] body::before{ opacity:.4; }
-    .theme-toggle{ width:38px; height:38px; border-radius:50%; border:1px solid var(--border); background:rgba(139,92,246,.08); color:var(--v300); cursor:pointer; display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; transition:background .2s,border-color .2s,transform .2s,color .2s; padding:0; margin-left:1rem; }
-    .theme-toggle:hover{ background:rgba(139,92,246,.18); border-color:var(--v500); transform:scale(1.08) rotate(12deg); }
-    .theme-toggle svg{ width:17px; height:17px; display:block; }
-    .theme-toggle .icon-sun{ display:none; }
-    .theme-toggle .icon-moon{ display:block; }
-    html[data-theme="light"] .theme-toggle .icon-sun{ display:block; }
-    html[data-theme="light"] .theme-toggle .icon-moon{ display:none; }
   </style>
-<script>(function(){try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}if(t==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}})();</script>
   <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 
-<nav>
-  <a class="nav-logo" href="agents-ia-immo.html">⚡ LeadEngine <span>Immo</span></a>
-  <a class="nav-back" href="agents-ia-immo.html">← Retour au site</a>
-  <button class="theme-toggle" id="themeToggle" aria-label="Changer de theme" title="Theme clair / sombre">
-    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
-  </button>
+<!-- ══ Décor d'ambiance (halo violet diffus) ══ -->
+<div class="le-aura" aria-hidden="true"></div>
+
+<!-- ══ NAV ══ -->
+<nav id="nav" class="le-nav">
+  <a class="nav-logo" href="index.html"><span class="bolt">⚡</span> LEADENGINE <span class="ai">AI</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="agents-ia-immo.html">Agents IA Immo</a></li>
+    <li><a href="creation-site-internet.html">Sites internet</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a class="btn-cockpit" href="https://app.leadengineai.fr">🚀 Mon cockpit</a></li>
+  </ul>
+  <button class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
 </nav>
 
 <section class="blog-hero">
@@ -380,11 +321,19 @@
   <a href="agents-ia-immo.html#packs" class="btn-primary">Découvrir les packs →</a>
 </div>
 
-<footer>
-  <p style="margin-bottom:.6rem;"><a href="index.html" style="color:#a78bfa;text-decoration:none;font-size:.85rem;font-weight:600;">⚡ Portail LeadEngine AI</a></p>
-      <p class="footer-copy">© 2026 <a href="https://leadengineai.fr" style="color:inherit;text-decoration:none;">leadengineai.fr</a> <span style="display:inline-flex;align-items:center;gap:.3rem;margin-left:.5rem;padding:.15rem .5rem;background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.25);border-radius:99px;font-size:.78rem;color:var(--v300);">🇫🇷 Made in France</span> · Agent IA Immo · <a href="agents-ia-immo.html" style="color:var(--v400);text-decoration:none;">Retour au site</a></p>
+<footer class="le-footer">
+  <div class="f-inner">
+    <div>
+      <div class="f-brand"><span class="bolt">⚡</span> LEADENGINE AI</div>
+      <p style="font-size:.78rem;color:var(--muted);max-width:240px;margin-top:.6rem;">L'IA au service des pros, à la française. Brive-la-Gaillarde (19).</p>
+    </div>
+    <div class="f-col"><b>Services</b><a href="agents-ia-immo.html">Agents IA Immo</a><a href="creation-site-internet.html">Création de sites</a><a href="https://app.leadengineai.fr">Le Cockpit</a></div>
+    <div class="f-col"><b>Ressources</b><a href="blog.html">Blog</a><a href="agents.html">Les 8 agents</a><a href="conseiller-ia-immobilier-brive.html">Brive &amp; Corrèze</a></div>
+    <div class="f-col"><b>Légal</b><a href="mentions-legales.html">Mentions légales</a><a href="cgv.html">CGV</a><a href="contact.html">Contact</a></div>
+    <div class="f-copy">© 2026 leadengineai.fr · Tous droits réservés</div>
+  </div>
 </footer>
 
-<script>(function(){var b=document.getElementById('themeToggle');if(!b)return;var r=document.documentElement;function a(t){if(t==='light')r.setAttribute('data-theme','light');else r.removeAttribute('data-theme');try{localStorage.setItem('theme',t);}catch(e){}}b.addEventListener('click',function(){a(r.getAttribute('data-theme')==='light'?'dark':'light');});})();</script>
+<script src="assets/leadengine.js" defer></script>
 </body>
 </html>

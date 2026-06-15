@@ -10,37 +10,68 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
   <script defer src="/_vercel/insights/script.js"></script>
+  <link rel="stylesheet" href="assets/leadengine.css" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Inter', system-ui, sans-serif; background: #07070f; color: #f0f0ff;
-      min-height: 100vh; display: flex; align-items: center; justify-content: center;
-      text-align: center; padding: 1.5rem; line-height: 1.7;
+      font-family: 'Inter', system-ui, sans-serif; background: #F8F5F0; color: #1F1A33;
+      min-height: 100vh; display: flex; flex-direction: column;
+      text-align: center; line-height: 1.7;
     }
     body::before {
       content: ''; position: fixed; inset: 0; z-index: -1;
-      background: radial-gradient(circle 600px at 50% 30%, rgba(124,58,237,.2), transparent 70%);
+      background: radial-gradient(circle 600px at 50% 30%, rgba(124,58,237,.10), transparent 70%);
     }
-    .box { max-width: 480px; }
-    .ic { font-size: 3.4rem; display: block; margin-bottom: 1rem; filter: drop-shadow(0 0 20px rgba(167,139,250,.7)); animation: pop .6s cubic-bezier(.2,.8,.2,1) both; }
+    .box { max-width: 480px; margin: auto; padding: 7rem 1.5rem 3rem; }
+    .ic { font-size: 3.4rem; display: block; margin-bottom: 1rem; filter: drop-shadow(0 8px 18px rgba(109,40,217,.28)); animation: pop .6s cubic-bezier(.2,.8,.2,1) both; }
     @keyframes pop { from { transform: scale(.4); opacity: 0; } }
-    h1 { font-family: 'Space Grotesk', sans-serif; font-size: 1.9rem; margin-bottom: .8rem; }
-    .gr { background: linear-gradient(120deg, #c4b5fd, #e879f9); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-    p { color: #9090b8; font-size: .95rem; margin-bottom: 1.6rem; }
+    h1 { font-family: 'Space Grotesk', sans-serif; font-size: 1.9rem; margin-bottom: .8rem; color: #1F1A33; }
+    .gr { background: linear-gradient(120deg, #6D28D9, #C026D3); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    p { color: #6E6A82; font-size: .95rem; margin-bottom: 1.6rem; }
     a {
-      display: inline-block; background: linear-gradient(135deg, #a78bfa, #7c3aed); color: #fff;
+      display: inline-block; background: linear-gradient(135deg, #6D28D9, #C026D3); color: #fff;
       font-weight: 700; font-size: .9rem; padding: .85rem 1.7rem; border-radius: 12px; text-decoration: none;
-      box-shadow: 0 10px 28px -10px rgba(124,58,237,.8);
+      box-shadow: 0 12px 28px -12px rgba(109,40,217,.7);
     }
   </style>
 </head>
 <body>
+
+<!-- ══ NAV ══ -->
+<nav id="nav" class="le-nav">
+  <a class="nav-logo" href="index.html"><span class="bolt">⚡</span> LEADENGINE <span class="ai">AI</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="agents-ia-immo.html">Agents IA Immo</a></li>
+    <li><a href="creation-site-internet.html">Sites internet</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a class="btn-cockpit" href="https://app.leadengineai.fr">🚀 Mon cockpit</a></li>
+  </ul>
+  <button class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</nav>
+
   <div class="box">
     <span class="ic">🚀</span>
     <h1>Message bien reçu, <span class="gr">merci !</span></h1>
-    <p>Thomas vous rappelle sous <strong style="color:#c4b5fd;">48h</strong> (souvent bien plus vite).
+    <p>Thomas vous rappelle sous <strong style="color:#6D28D9;">48h</strong> (souvent bien plus vite).
     En attendant, jetez un œil au blog ou découvrez les agents IA.</p>
     <a href="index.html">← Retour à l'accueil</a>
   </div>
+
+<!-- ══ FOOTER ══ -->
+<footer class="le-footer">
+  <div class="f-inner">
+    <div>
+      <div class="f-brand"><span class="bolt">⚡</span> LEADENGINE AI</div>
+      <p style="font-size:.78rem;color:var(--muted);max-width:240px;margin-top:.6rem;">L'IA au service des pros, à la française. Brive-la-Gaillarde (19).</p>
+    </div>
+    <div class="f-col"><b>Services</b><a href="agents-ia-immo.html">Agents IA Immo</a><a href="creation-site-internet.html">Création de sites</a><a href="https://app.leadengineai.fr">Le Cockpit</a></div>
+    <div class="f-col"><b>Ressources</b><a href="blog.html">Blog</a><a href="agents.html">Les 8 agents</a><a href="conseiller-ia-immobilier-brive.html">Brive &amp; Corrèze</a></div>
+    <div class="f-col"><b>Légal</b><a href="mentions-legales.html">Mentions légales</a><a href="cgv.html">CGV</a><a href="contact.html">Contact</a></div>
+    <div class="f-copy">© 2026 leadengineai.fr · Tous droits réservés</div>
+  </div>
+</footer>
+
+<script src="assets/leadengine.js" defer></script>
 </body>
 </html>

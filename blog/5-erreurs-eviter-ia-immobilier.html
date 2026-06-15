@@ -23,6 +23,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
+  <link rel="stylesheet" href="../assets/leadengine.css" />
+
   <!-- Schema.org Article -->
   <script type="application/ld+json">
   {
@@ -53,26 +55,26 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --black:  #07070f;
-      --dark:   #0d0d1a;
-      --card:   #11111f;
-      --v700:   #6d28d9;
-      --v600:   #7c3aed;
-      --v500:   #8b5cf6;
-      --v400:   #a78bfa;
-      --v300:   #c4b5fd;
-      --white:  #f0f0ff;
-      --muted:  #9090b8;
-      --border: rgba(139,92,246,.25);
+      --black:  #F8F5F0;
+      --dark:   #FFFFFF;
+      --card:   #FFFFFF;
+      --v700:   #4C1D95;
+      --v600:   #6D28D9;
+      --v500:   #6D28D9;
+      --v400:   #6D28D9;
+      --v300:   #4C1D95;
+      --white:  #1F1A33;
+      --muted:  #6E6A82;
+      --border: rgba(76,29,149,.12);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background: var(--black);
-      color: var(--white);
-      line-height: 1.8;
+      background: #F8F5F0;
+      color: #1F1A33;
+      line-height: 1.7;
       letter-spacing: -0.005em;
       font-size: 1.05rem;
     }
@@ -80,59 +82,12 @@
     h1, h2, h3, h4 {
       font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
       letter-spacing: -0.02em;
-      color: var(--white);
+      color: #1F1A33;
     }
 
     ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--dark); }
+    ::-webkit-scrollbar-track { background: #ebe9f6; }
     ::-webkit-scrollbar-thumb { background: var(--v600); border-radius: 3px; }
-
-    /* Fond animé subtil */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: -1;
-      background:
-        radial-gradient(circle 700px at 80% 10%, rgba(124,58,237,.15), transparent 70%),
-        radial-gradient(circle 600px at 10% 80%, rgba(232,121,249,.08), transparent 70%);
-    }
-
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 2.5rem;
-      background: rgba(7,7,15,.65);
-      backdrop-filter: blur(24px) saturate(1.3);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-logo {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--v300);
-      text-decoration: none;
-      transition: transform .25s;
-    }
-    .nav-logo span { color: var(--white); }
-    .nav-logo:hover { transform: scale(1.03); }
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-      list-style: none;
-    }
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: .9rem;
-      transition: color .25s;
-    }
-    .nav-links a:hover { color: var(--v300); }
 
     /* HERO ARTICLE */
     .article-hero {
@@ -147,10 +102,10 @@
       margin-bottom: 1.5rem;
     }
     .breadcrumb a {
-      color: var(--v400);
+      color: var(--v600);
       text-decoration: none;
     }
-    .breadcrumb a:hover { color: var(--v300); }
+    .breadcrumb a:hover { color: var(--v700); }
 
     .article-title {
       font-size: clamp(2rem, 5vw, 3.4rem);
@@ -159,7 +114,7 @@
       margin-bottom: 1.5rem;
     }
     .article-title .gradient {
-      background: linear-gradient(135deg, var(--v300) 0%, #e879f9 60%, var(--v400) 100%);
+      background: linear-gradient(135deg, #6D28D9 0%, #C026D3 60%, #6D28D9 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -184,11 +139,11 @@
       max-width: 900px;
       margin: 0 auto 3rem;
       height: 280px;
-      background: linear-gradient(135deg, var(--v700) 0%, var(--v500) 50%, #e879f9 100%);
+      background: linear-gradient(135deg, #4C1D95 0%, #6D28D9 50%, #C026D3 100%);
       border-radius: 24px;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 20px 60px rgba(109,40,217,.35);
+      box-shadow: 0 20px 60px rgba(109,40,217,.25);
     }
     .article-cover::after {
       content: '';
@@ -217,12 +172,12 @@
 
     .article-content > .intro {
       font-size: 1.2rem;
-      color: var(--v300);
+      color: #4C1D95;
       line-height: 1.7;
       margin-bottom: 2.5rem;
       padding: 1.5rem 1.75rem;
-      background: rgba(139,92,246,.05);
-      border-left: 3px solid var(--v500);
+      background: rgba(109,40,217,.05);
+      border-left: 3px solid var(--v600);
       border-radius: 0 12px 12px 0;
     }
 
@@ -231,10 +186,10 @@
       font-weight: 700;
       margin: 3rem 0 1rem;
       padding-bottom: .5rem;
-      border-bottom: 2px solid rgba(139,92,246,.2);
+      border-bottom: 2px solid rgba(76,29,149,.15);
     }
     .article-content h2 .num {
-      color: var(--v400);
+      color: var(--v600);
       font-weight: 800;
       margin-right: .5rem;
     }
@@ -242,40 +197,40 @@
       font-size: 1.25rem;
       font-weight: 700;
       margin: 2rem 0 .75rem;
-      color: var(--v300);
+      color: var(--v700);
     }
     .article-content p {
       margin-bottom: 1.25rem;
-      color: var(--white);
+      color: #1F1A33;
     }
     .article-content ul, .article-content ol {
       margin: 1rem 0 1.5rem 1.5rem;
-      color: var(--white);
+      color: #1F1A33;
     }
     .article-content li {
       margin-bottom: .6rem;
     }
     .article-content strong {
-      color: var(--v300);
+      color: var(--v700);
       font-weight: 700;
     }
     .article-content a {
-      color: var(--v400);
+      color: var(--v600);
       text-decoration: underline;
       text-underline-offset: 3px;
     }
-    .article-content a:hover { color: var(--v300); }
+    .article-content a:hover { color: var(--v700); }
 
     /* Carte erreur (rouge) */
     .error-card {
-      background: rgba(239,68,68,.05);
-      border-left: 3px solid #ef4444;
+      background: rgba(220,38,38,.06);
+      border-left: 3px solid #dc2626;
       border-radius: 0 12px 12px 0;
       padding: 1.25rem 1.5rem;
       margin: 1.5rem 0;
     }
     .error-card-title {
-      color: #f87171;
+      color: #b91c1c;
       font-weight: 700;
       font-size: 1rem;
       margin-bottom: .5rem;
@@ -283,18 +238,18 @@
       align-items: center;
       gap: .5rem;
     }
-    .error-card p { margin-bottom: 0; color: var(--white); }
+    .error-card p { margin-bottom: 0; color: #1F1A33; }
 
     /* Carte solution (verte) */
     .solution-card {
-      background: rgba(34,197,94,.05);
-      border-left: 3px solid #22c55e;
+      background: rgba(22,163,74,.06);
+      border-left: 3px solid #16a34a;
       border-radius: 0 12px 12px 0;
       padding: 1.25rem 1.5rem;
       margin: 1.5rem 0;
     }
     .solution-card-title {
-      color: #4ade80;
+      color: #15803d;
       font-weight: 700;
       font-size: 1rem;
       margin-bottom: .5rem;
@@ -302,17 +257,18 @@
       align-items: center;
       gap: .5rem;
     }
-    .solution-card p { margin-bottom: 0; color: var(--white); }
+    .solution-card p { margin-bottom: 0; color: #1F1A33; }
 
-    /* Encadré jaune (astuce) */
+    /* Encadré astuce (violet) */
     .tip-box {
-      background: rgba(251,191,36,.05);
-      border-left: 3px solid #fbbf24;
+      background: rgba(192,38,211,.06);
+      border-left: 3px solid #C026D3;
       padding: 1.25rem 1.5rem;
       border-radius: 0 12px 12px 0;
       margin: 1.5rem 0;
+      color: #1F1A33;
     }
-    .tip-box strong { color: #fbbf24; }
+    .tip-box strong { color: #A21CAF; }
 
     /* CTA en bas d'article */
     .article-cta {
@@ -320,15 +276,15 @@
       margin: 3rem auto;
       padding: 2.5rem 2rem;
       text-align: center;
-      background: linear-gradient(135deg, rgba(139,92,246,.1), rgba(232,121,249,.05));
-      border: 1px solid var(--v500);
+      background: linear-gradient(135deg, rgba(109,40,217,.07), rgba(192,38,211,.05));
+      border: 1px solid rgba(109,40,217,.25);
       border-radius: 20px;
-      backdrop-filter: blur(10px);
     }
     .article-cta h3 {
       font-size: 1.6rem;
       font-weight: 700;
       margin-bottom: .75rem;
+      color: #1F1A33;
     }
     .article-cta p {
       color: var(--muted);
@@ -336,19 +292,19 @@
     }
     .btn-primary {
       display: inline-block;
-      background: linear-gradient(135deg, var(--v700), var(--v500));
+      background: linear-gradient(135deg, var(--v700), var(--v600));
       color: #fff;
       text-decoration: none;
       padding: .95rem 2rem;
       border-radius: 12px;
       font-weight: 700;
       font-size: 1rem;
-      box-shadow: 0 4px 20px rgba(109,40,217,.4);
+      box-shadow: 0 4px 20px rgba(109,40,217,.3);
       transition: transform .3s, box-shadow .3s;
     }
     .btn-primary:hover {
       transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 8px 30px rgba(139,92,246,.6);
+      box-shadow: 0 8px 30px rgba(109,40,217,.45);
     }
 
     /* AUTHOR FOOTER */
@@ -356,23 +312,24 @@
       max-width: 720px;
       margin: 4rem auto 2rem;
       padding: 1.5rem;
-      background: var(--card);
+      background: #FFFFFF;
       border: 1px solid var(--border);
       border-radius: 16px;
       display: flex;
       gap: 1.25rem;
       align-items: center;
+      box-shadow: 0 8px 24px -16px rgba(76,29,149,.25);
     }
     .article-author img {
       width: 64px;
       height: 64px;
       border-radius: 50%;
       object-fit: cover;
-      border: 1px solid rgba(139,92,246,.4);
+      border: 1px solid rgba(109,40,217,.3);
     }
     .article-author-info .name {
       font-weight: 700;
-      color: var(--v300);
+      color: var(--v700);
       margin-bottom: .25rem;
     }
     .article-author-info .role {
@@ -380,58 +337,26 @@
       color: var(--muted);
     }
 
-    footer {
-      background: var(--dark);
-      border-top: 1px solid var(--border);
-      padding: 1.5rem;
-      text-align: center;
-    }
-    .footer-copy {
-      font-size: .8rem;
-      color: var(--muted);
-    }
-    .footer-copy a { color: var(--v400); text-decoration: none; }
-
     @media (max-width: 600px) {
-      nav { padding: 1rem 1.25rem; }
-      .nav-links { display: none; }
       .article-cover { height: 200px; }
       .cover-emoji { font-size: 5rem; }
       .article-content { font-size: 1rem; }
     }
-    /* THEME CLAIR */
-    html[data-theme="light"]{
-      --black:#f6f5fc; --dark:#ebe9f6; --card:#ffffff;
-      --v700:#6d28d9; --v600:#7c3aed; --v500:#7c3aed;
-      --v400:#6d28d9; --v300:#6d28d9;
-      --white:#181826; --muted:#5c5c7a; --border:rgba(124,58,237,.20);
-    }
-    html[data-theme="light"] nav{ background:rgba(255,255,255,.85)!important; }
-    html[data-theme="light"] body::before{ opacity:.4; }
-    .theme-toggle{ width:38px; height:38px; border-radius:50%; border:1px solid var(--border); background:rgba(139,92,246,.08); color:var(--v300); cursor:pointer; display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; transition:background .2s,border-color .2s,transform .2s,color .2s; padding:0; margin-left:1rem; }
-    .theme-toggle:hover{ background:rgba(139,92,246,.18); border-color:var(--v500); transform:scale(1.08) rotate(12deg); }
-    .theme-toggle svg{ width:17px; height:17px; display:block; }
-    .theme-toggle .icon-sun{ display:none; }
-    .theme-toggle .icon-moon{ display:block; }
-    html[data-theme="light"] .theme-toggle .icon-sun{ display:block; }
-    html[data-theme="light"] .theme-toggle .icon-moon{ display:none; }
   </style>
-<script>(function(){try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}if(t==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}})();</script>
   <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 
-<nav>
-  <a class="nav-logo" href="../agents-ia-immo.html">⚡ LeadEngine <span>Immo</span></a>
-  <ul class="nav-links">
+<nav id="nav" class="le-nav">
+  <a class="nav-logo" href="../index.html"><span class="bolt">⚡</span> LEADENGINE <span class="ai">AI</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="../agents-ia-immo.html">Agents IA Immo</a></li>
+    <li><a href="../creation-site-internet.html">Sites internet</a></li>
     <li><a href="../blog.html">Blog</a></li>
-    <li><a href="../agents-ia-immo.html#packs">Les packs</a></li>
-    <li><a href="../agents-ia-immo.html#contact">Contact</a></li>
+    <li><a href="../contact.html">Contact</a></li>
+    <li><a class="btn-cockpit" href="https://app.leadengineai.fr">🚀 Mon cockpit</a></li>
   </ul>
-  <button class="theme-toggle" id="themeToggle" aria-label="Changer de theme" title="Theme clair / sombre">
-    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
-  </button>
+  <button class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
 </nav>
 
 <section class="article-hero">
@@ -614,11 +539,19 @@
   </div>
 </div>
 
-<footer>
-  <p style="margin-bottom:.6rem;"><a href="../index.html" style="color:#a78bfa;text-decoration:none;font-size:.85rem;font-weight:600;">⚡ Portail LeadEngine AI</a></p>
-      <p class="footer-copy">© 2026 <a href="https://leadengineai.fr" style="color:inherit;text-decoration:none;">leadengineai.fr</a> <span style="display:inline-flex;align-items:center;gap:.3rem;margin-left:.5rem;padding:.15rem .5rem;background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.25);border-radius:99px;font-size:.78rem;color:var(--v300);">🇫🇷 Made in France</span> · <a href="../blog.html">Retour au blog</a> · <a href="../agents-ia-immo.html">Retour au site</a></p>
+<footer class="le-footer">
+  <div class="f-inner">
+    <div>
+      <div class="f-brand"><span class="bolt">⚡</span> LEADENGINE AI</div>
+      <p style="font-size:.78rem;color:var(--muted);max-width:240px;margin-top:.6rem;">L'IA au service des pros, à la française. Brive-la-Gaillarde (19).</p>
+    </div>
+    <div class="f-col"><b>Services</b><a href="../agents-ia-immo.html">Agents IA Immo</a><a href="../creation-site-internet.html">Création de sites</a><a href="https://app.leadengineai.fr">Le Cockpit</a></div>
+    <div class="f-col"><b>Ressources</b><a href="../blog.html">Blog</a><a href="../agents.html">Les 8 agents</a><a href="../conseiller-ia-immobilier-brive.html">Brive &amp; Corrèze</a></div>
+    <div class="f-col"><b>Légal</b><a href="../mentions-legales.html">Mentions légales</a><a href="../cgv.html">CGV</a><a href="../contact.html">Contact</a></div>
+    <div class="f-copy">© 2026 leadengineai.fr · Tous droits réservés</div>
+  </div>
 </footer>
 
-<script>(function(){var b=document.getElementById('themeToggle');if(!b)return;var r=document.documentElement;function a(t){if(t==='light')r.setAttribute('data-theme','light');else r.removeAttribute('data-theme');try{localStorage.setItem('theme',t);}catch(e){}}b.addEventListener('click',function(){a(r.getAttribute('data-theme')==='light'?'dark':'light');});})();</script>
+<script src="../assets/leadengine.js" defer></script>
 </body>
 </html>
