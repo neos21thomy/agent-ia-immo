@@ -43,6 +43,16 @@ PRESETS = {
     "film-08-manifeste": ("epic", 100, 3.5, 8.2),
     "film-09-prix-cafe": ("pop", 124, 1.4),
     "film-10-visite-au-mandat": ("house", 122, 1.5),
+    "nat-01-rappelez-moi-en-mars": ("lofi", 88, 0.8),
+    "nat-02-dimanche-soir": ("lofi", 88, 0.8),
+    "nat-03-842-contacts": ("pop", 124, 0.8),
+    "nat-04-compromis-12-pages": ("pop", 124, 0.8),
+    "nat-05-note-vocale": ("lofi", 88, 0.8),
+    "nat-06-avis-sans-reponse": ("house", 122, 0.8),
+    "nat-07-annonce-22h": ("lofi", 88, 0.8),
+    "nat-08-quiz-dpe": ("pop", 124, 0.8),
+    "nat-09-anniversaire": ("lofi", 88, 0.8),
+    "nat-10-ton-collegue": ("house", 122, 0.8),
 }
 
 # progressions (MIDI) : accords (3-4 notes) et fondamentale de basse

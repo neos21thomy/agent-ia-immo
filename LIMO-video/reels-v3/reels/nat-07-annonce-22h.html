@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — 22 h 13, l’annonce</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/naturel.css" />
+    <style>
+      @font-face { font-family: "Anton"; src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Source Serif 4"; src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; }
+      .cur { display: inline-block; width: 4px; height: 44px; background: #f5b700; vertical-align: -8px; margin-left: 2px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="15.8" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="15.8" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/nat-07-annonce-22h.wav" data-start="0" data-duration="15.8" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/naturel.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 15.8;
+        N.init(tl, root, D);
+        const cap1 = N.cap("22 h 13. Toujours pas<br>d’accroche pour l’annonce.", { top: "140px" }, 0.15);
+        const ip = N.iphone({ left: "110px", top: "400px", width: "860px", height: "1480px" }, "22:13");
+        N.hide(ip.el);
+        tl.fromTo(ip.el, { opacity: 0, y: 300 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0.05);
+        const nt = K.h("div", "n-notes", `<h3>Annonce maison Brive</h3><div class="dt">22:13</div><div style="font-size:40px;line-height:1.4"><span class="t"></span><span class="cur"></span></div>`, ip.screen);
+        const tt = K.$(".t", nt);
+        const cur = K.$(".cur", nt);
+        tl.fromTo(cur, { opacity: 1 }, { opacity: 0, duration: 0.3, repeat: 13, yoyo: true, ease: "steps(1)" }, 0.8);
+        const drafts = ["Charmante maison idéalement située…", "Belle maison de 120 m² avec jar…", "Maison… "];
+        let tt0 = 0.9;
+        const P = { i: 0 };
+        drafts.forEach((d, k) => {
+          const P1 = { n: 0 };
+          tl.to(P1, { n: d.length, duration: 0.7, ease: "none", onUpdate: () => { tt.textContent = d.slice(0, Math.round(P1.n)); } }, tt0);
+          for (let x = 0; x < 6; x++) K.sfx(tt0 + x * 0.11, "type", 0.05, 0, { f: 2800 + x * 60 });
+          const P2 = { n: d.length };
+          tl.to(P2, { n: 0, duration: 0.4, ease: "none", onUpdate: () => { tt.textContent = d.slice(0, Math.round(P2.n)); } }, tt0 + 0.95);
+          tt0 += 1.5;
+        });
+        N.out(cap1, 3.0, { y: -10, d: 0.2 });
+        const cap2 = N.cap("Et les mentions légales,<br>t’es sûr de les avoir ?", { top: "140px" }, 3.2, { dark: true });
+        N.out([cap2, ip.el], 5.3, { y: 60, d: 0.4 });
+        const h = N.head(["L’ANNONCE", "EST PRÊTE<span class='v'>.</span>"], { top: "180px", fontSize: "96px" }, 5.6);
+        const an = N.ab("n-card", `<div style="padding:40px 44px"><div style="font-family:'Source Serif 4',serif;font-size:46px;font-weight:600;line-height:1.2;color:#1b1f4b" class="ti"></div><div class="bo" style="margin-top:18px;font-size:32px;line-height:1.4;color:#3a3a3c;min-height:140px"></div><div class="lg" style="margin-top:20px;padding-top:18px;border-top:1px solid #efeff4;font-size:24px;line-height:1.4;color:#6e6e73">312 000 € honoraires inclus · 4 % TTC à la charge de l’acquéreur · DPE C · GES A</div><div class="cs" style="display:flex;gap:14px;margin-top:22px"><span class="n-chip">${K.icon("check")}Mentions légales</span><span class="n-chip">${K.icon("check")}Prête à publier</span></div></div>`, { left: "90px", top: "620px", width: "900px" });
+        N.hide(an);
+        tl.fromTo(an, { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 6.1);
+        K.type(K.$(".ti", an), "Maison familiale lumineuse avec jardin", 6.5, 0.7, 0.05);
+        K.type(K.$(".bo", an), "À 5 min du centre de Brive, 120 m², 4 chambres, séjour traversant et jardin de 700 m² sans vis-à-vis.", 7.2, 1.3, 0.04);
+        N.hide(K.$(".lg", an));
+        K.fin(K.$(".lg", an), 8.6, { y: 8 });
+        N.hide(K.$(".cs", an));
+        tl.set(K.$(".cs", an), { opacity: 1 }, 9.0);
+        K.pop(K.$$(".cs .n-chip", an), 9.0, { st: 0.12 });
+        K.sfx(9.0, "success", 0.22);
+        N.out([h, an], 11.8);
+        window.__TE = 12.2;
+        N.outro(12.2, "essai");
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

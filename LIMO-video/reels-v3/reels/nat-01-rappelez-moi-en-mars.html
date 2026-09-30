@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — Rappelez-moi en mars</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/naturel.css" />
+    <style>
+      @font-face { font-family: "Anton"; src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Source Serif 4"; src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; }
+
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="16.6" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="16.6" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/nat-01-rappelez-moi-en-mars.wav" data-start="0" data-duration="16.6" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/naturel.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 16.6;
+        N.init(tl, root, D);
+        const cap1 = N.cap("Ce SMS, tout agent immo<br>l’a déjà reçu.", { top: "150px" }, 0.15);
+        const ip = N.iphone({ left: "110px", top: "400px", width: "860px", height: "1500px" }, "9:12");
+        N.hide(ip.el);
+        tl.fromTo(ip.el, { opacity: 0, y: 300 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0.05);
+        const sc = ip.screen;
+        const head = K.h("div", "n-mhead", `<div class="av">MM</div><b>M. et Mme Martin · vendeurs</b>`, sc);
+        const th = K.h("div", "n-thread", null, sc);
+        const d1 = K.h("div", "n-day", "Lun. 12 janvier · 18:40", th);
+        const b1 = K.h("div", "n-bub in", "Bonjour, on réfléchit encore. Rappelez-moi en mars, on sera prêts à vendre.", th);
+        const b2 = K.h("div", "n-bub out", "Parfait, je vous rappelle en mars !", th);
+        const d2 = K.h("div", "n-day", "Ven. 18 avril · 9:12", th);
+        const dots = K.h("div", "n-dots", "<i></i><i></i><i></i>", th);
+        const b3 = K.h("div", "n-bub in", "Bonjour, finalement nous avons signé avec une autre agence. Bonne continuation.", th);
+        [b1, b2, d2, dots, b3].forEach(N.hide);
+        K.fin(b1, 0.7, { y: 20, d: 0.35 });
+        K.sfx(0.7, "receive", 0.26);
+        K.fin(b2, 1.5, { y: 20, d: 0.35 });
+        K.sfx(1.5, "send", 0.22);
+        N.out(cap1, 2.4, { y: -10, d: 0.2 });
+        const cap2 = N.cap("On est en avril.<br>Tu l’as rappelé ?", { top: "150px" }, 2.6);
+        K.fin(d2, 2.7, { y: 10, d: 0.3 });
+        [2.7, 3.0, 3.3].forEach((x, i) => K.sfx(x, i % 2 ? "tock" : "tick", 0.16));
+        tl.fromTo(dots, { opacity: 0 }, { opacity: 1, duration: 0.15 }, 3.6);
+        K.$$("i", dots).forEach((d, i) => tl.fromTo(d, { y: 0 }, { y: -8, duration: 0.14, yoyo: true, repeat: 3, ease: "sine.inOut" }, 3.65 + i * 0.07));
+        tl.set(dots, { display: "none" }, 4.4);
+        K.fin(b3, 4.4, { y: 20, d: 0.35 });
+        K.sfx(4.4, "receive", 0.3);
+        tl.fromTo(ip.el, { x: 0 }, { x: 8, duration: 0.05, ease: "none", yoyo: true, repeat: 5, immediateRender: false }, 4.6);
+        N.out(cap2, 5.2, { y: -10, d: 0.2 });
+        const cap3 = N.cap("Mandat perdu.<br>Pas à cause du prix.", { top: "150px" }, 5.4, { dark: true });
+        K.sfx(5.4, "thump", 0.3);
+        N.out([cap3, ip.el], 7.4, { y: 60, d: 0.4 });
+        // LIMO
+        const h = N.head(["LIMO, LUI<span class='v'>,</span>", "N’OUBLIE PAS<span class='v'>.</span>"], { top: "170px", fontSize: "92px" }, 7.8);
+        const ph = N.phoneLimo({ left: "213px", top: "560px" }, 8.2);
+        const n1 = N.notif({ title: "RAPPEL", time: "1er mars", text: "M. et Mme Martin : ils vendent en mars. C’est le moment d’appeler." }, { left: "90px", top: "640px" }, 9.1);
+        const n2 = N.notif({ title: "AGENDA", time: "3 mars", text: "Estimation chez les Martin : jeudi, 10 h.", snd: "notif", g: 0.2 }, { left: "90px", top: "860px" }, 10.3);
+        const n3 = N.notif({ title: "MANDAT", time: "10 mars", text: "Mandat exclusif signé : famille Martin.", snd: "success", g: 0.3 }, { left: "90px", top: "1060px" }, 11.3);
+        N.out([h, ph, n1, n2, n3], 12.7, { y: -30 });
+        window.__TE = 13.0;
+        N.outro(13.0, "dm");
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

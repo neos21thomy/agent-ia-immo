@@ -14,6 +14,30 @@ Tout le matériel des Reels de l'application **LIMO** (app.leadengineai.fr), ré
 | `sources/` | Fichiers fournis : `images/` (affiche robot, logo, pubs, landing mobile) et `videos/` (pub « Analyseur de dossier », vidéo UGC IA) |
 | `archives/` | Sources de la V1 (zip) |
 
+## 🌿 Série finale « LIMO naturel » : 10 Reels (`rendus/naturel/`), à publier en priorité
+
+Même charte que les pubs LIMO : fond lavande, titres marine en capitales, point violet, trait turquoise, logo maison.
+Les films utilisent des formats natifs (SMS, Notes, Contacts, notifications iPhone) et partent d'un moment vécu par tous les agents.
+Chacun existe en version bruitages seuls et en version `-musique`.
+
+| # | Fichier `LIMO-nat-…` | Accroche (première seconde) | Fin |
+|---|---|---|---|
+| 1 | `01-rappelez-moi-en-mars` | « Ce SMS, tout agent immo l'a déjà reçu. » « Rappelez-moi en mars. » Avril : signé ailleurs | Message privé « LIMO » |
+| 2 | `02-dimanche-soir` | « Dimanche, 21 h 47. Ta tête est déjà à lundi. » Liste de notes cochée « fait par LIMO » | Essai 14 jours |
+| 3 | `03-842-contacts` | « Ton CRM a 842 contacts. Combien t'en as rappelé ce mois-ci ? » 12 / 842 | Démo 15 min |
+| 4 | `04-compromis-12-pages` | « 12 pages. Tu recopies encore tout ça à la main ? » | Démo 15 min |
+| 5 | `05-note-vocale` | « Tu sors de visite. "Je noterai ça ce soir." » Spoiler : non | Essai 14 jours |
+| 6 | `06-avis-sans-reponse` | « Ce client t'a laissé 5 étoiles… il y a 12 jours. » | Commentaire « LIMO » |
+| 7 | `07-annonce-22h` | « 22 h 13. Toujours pas d'accroche pour l'annonce. » | Essai 14 jours |
+| 8 | `08-quiz-dpe` | « Le DPE de 2020 est encore bon ? Tu réponds quoi ? » A/B/C, compte à rebours | Message privé « LIMO » |
+| 9 | `09-anniversaire` | « Ta cliente de 2022 fête son anniversaire. » Un SMS, un nouveau mandat | Essai 14 jours |
+| 10 | `10-ton-collegue` | « POV : ton collègue part à 18 h… et il signe plus de mandats que toi. » | Message privé « LIMO » |
+
+**Ordre de publication conseillé** (un tous les 2 jours) : 1, 8, 10, 3, 5, 9, 4, 6, 2, 7.
+Le quiz DPE (8) et « Ton collègue » (10) sont les plus partageables. Le 1 est le plus fort en pub.
+
+Sources : `reels-v3/reels/nat-*.html`, générés par `reels-v3/outils/naturel.py` avec le kit `assets/kit/naturel.css` / `naturel.js`.
+
 ## 🎯 Campagne « 10 films » pour faire contacter les agents immo (`rendus/films/`)
 
 Chaque film vise un levier différent et finit sur un **appel au contact**. Chacun existe en version bruitages seuls et en version `-musique`.

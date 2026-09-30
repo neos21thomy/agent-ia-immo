@@ -1,0 +1,456 @@
+/* LIMO — charte « naturelle » reprise des pubs LIMO : lavande, marine, violet, turquoise. */
+:root {
+  --lav: #f1eefc;
+  --lav2: #e7e1fa;
+  --navy: #1b1f4b;
+  --navy2: #3a3f6b;
+  --vio: #6b4fe0;
+  --teal: #2cc4b5;
+  --mut: #5d6285;
+  --ios-blue: #0a84ff;
+  --ios-gray: #e9e9eb;
+}
+body {
+  background: var(--lav);
+}
+.n-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #f5f3fe 0%, #ece7fb 100%);
+}
+.n-arc {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid rgba(107, 79, 224, 0.1);
+}
+.ab {
+  position: absolute;
+}
+.ctr {
+  left: 70px;
+  right: 70px;
+  text-align: center;
+}
+/* titres façon pub LIMO */
+.n-head {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--navy);
+  line-height: 1.08;
+  letter-spacing: 0.01em;
+}
+.n-head .v,
+.n-head em {
+  font-style: normal;
+  color: var(--vio);
+}
+.n-bar {
+  width: 110px;
+  height: 7px;
+  border-radius: 4px;
+  background: var(--teal);
+}
+.n-body {
+  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+  color: var(--mut);
+  line-height: 1.35;
+}
+.n-body b {
+  color: var(--navy);
+  font-weight: 700;
+}
+.n-body .v {
+  color: var(--vio);
+  font-weight: 700;
+}
+.nmask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+.nmask > span {
+  display: inline-block;
+}
+/* légende façon texte TikTok / Reels natif */
+.n-cap {
+  display: flex;
+  justify-content: center;
+}
+.n-cap span {
+  display: inline-block;
+  max-width: 900px;
+  padding: 16px 26px;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 8px 26px rgba(27, 31, 75, 0.14);
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 1.22;
+  color: #111;
+  text-align: center;
+}
+.n-cap.dark span {
+  background: var(--navy);
+  color: #fff;
+}
+/* iPhone clair */
+.n-iphone {
+  border-radius: 96px;
+  background: #0e0f14;
+  padding: 18px;
+  box-shadow: 0 40px 80px rgba(27, 31, 75, 0.28);
+}
+.n-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 80px;
+  overflow: hidden;
+  background: #ffffff;
+}
+.n-status {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 64px;
+  font-family: Inter, sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  color: #000;
+}
+.n-status svg {
+  width: 100px;
+  height: 22px;
+}
+.n-island {
+  position: absolute;
+  left: 50%;
+  top: 24px;
+  width: 210px;
+  height: 60px;
+  margin-left: -105px;
+  border-radius: 30px;
+  background: #0e0f14;
+}
+/* Messages iOS */
+.n-mhead {
+  z-index: 2;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 96px;
+  height: 170px;
+  border-bottom: 1px solid #e5e5ea;
+  background: #f9f9fb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: Inter, sans-serif;
+}
+.n-mhead .av {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #7b8093, #5f6477);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 34px;
+}
+.n-mhead b {
+  font-weight: 600;
+  font-size: 32px;
+  color: #000;
+}
+.n-thread {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 266px;
+  bottom: 0;
+  padding: 24px 30px;
+  font-family: Inter, sans-serif;
+}
+.n-day {
+  text-align: center;
+  font-size: 27px;
+  font-weight: 600;
+  color: #6e6e73;
+  margin: 14px 0 12px;
+}
+.n-bub {
+  max-width: 78%;
+  padding: 18px 26px;
+  border-radius: 36px;
+  font-size: 44px;
+  line-height: 1.28;
+  margin-bottom: 16px;
+}
+.n-bub.in {
+  background: var(--ios-gray);
+  color: #000;
+  border-bottom-left-radius: 10px;
+}
+.n-bub.out {
+  margin-left: auto;
+  background: var(--ios-blue);
+  color: #fff;
+  border-bottom-right-radius: 10px;
+}
+.n-dots {
+  display: inline-flex;
+  gap: 8px;
+  padding: 22px 26px;
+  border-radius: 36px;
+  background: var(--ios-gray);
+}
+.n-dots i {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #8e8e93;
+}
+/* notification iOS claire */
+.n-notif {
+  width: 900px;
+  border-radius: 34px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 18px 50px rgba(27, 31, 75, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 30px;
+  font-family: Inter, sans-serif;
+}
+.n-notif img {
+  flex: none;
+  width: 84px;
+  height: 84px;
+  border-radius: 20px;
+  background: #fff;
+  object-fit: contain;
+  border: 1px solid #ecebf5;
+  padding: 8px;
+}
+.n-notif .tx {
+  flex: 1;
+}
+.n-notif .tp {
+  display: flex;
+  justify-content: space-between;
+  font-size: 23px;
+  font-weight: 600;
+  color: #6e6e73;
+}
+.n-notif b {
+  display: block;
+  margin-top: 4px;
+  font-weight: 600;
+  font-size: 31px;
+  line-height: 1.28;
+  color: #000;
+}
+/* Notes iOS */
+.n-notes {
+  position: absolute;
+  inset: 96px 0 0 0;
+  background: #fffdf6;
+  color: #1c1c1e;
+  padding: 40px 52px;
+  font-family: Inter, sans-serif;
+}
+.n-notes h3 {
+  margin: 0 0 8px;
+  font-size: 60px;
+  font-weight: 800;
+  color: #000;
+}
+.n-notes .dt {
+  font-size: 24px;
+  color: #6e6e73;
+  margin-bottom: 30px;
+}
+.n-li {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  height: 108px;
+  font-size: 40px;
+  color: #1c1c1e;
+}
+.n-li .c {
+  flex: none;
+  position: relative;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 3px solid #c7c7cc;
+}
+.n-li .c i {
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: #f5b700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.n-li .c svg.i {
+  width: 28px;
+  height: 28px;
+  stroke-width: 3.4;
+}
+.n-li .tag {
+  margin-left: auto;
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 22px;
+  background: rgba(107, 79, 224, 0.12);
+  color: var(--vio);
+  font-size: 24px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+/* vrai écran LIMO */
+.n-phone {
+  width: 654px;
+  height: 1312px;
+}
+.n-phone img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 654px;
+  height: 1312px;
+  filter: drop-shadow(0 40px 60px rgba(27, 31, 75, 0.3));
+}
+/* carte de fin */
+.n-cta {
+  display: flex;
+  justify-content: center;
+}
+.n-cta span {
+  height: 116px;
+  padding: 0 56px;
+  border-radius: 58px;
+  background: var(--vio);
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  color: #fff;
+  white-space: nowrap;
+  box-shadow: 0 16px 36px rgba(107, 79, 224, 0.3);
+}
+.n-cta svg.i {
+  width: 40px;
+  height: 40px;
+}
+.n-kw {
+  display: inline-block;
+  padding: 0 18px;
+  border-radius: 14px;
+  background: var(--vio);
+  color: #fff;
+}
+/* cartes claires */
+.n-card {
+  border-radius: 36px;
+  background: #ffffff;
+  box-shadow: 0 20px 50px rgba(27, 31, 75, 0.16);
+  font-family: Inter, sans-serif;
+  color: #1c1c1e;
+}
+.n-row {
+  display: flex;
+  align-items: center;
+  height: 96px;
+  padding: 0 34px;
+  border-bottom: 1px solid #efeff4;
+  font-size: 32px;
+}
+.n-row span {
+  color: #6e6e73;
+}
+.n-row b {
+  margin-left: auto;
+  font-weight: 700;
+  color: var(--navy);
+}
+.n-row .ok {
+  margin-left: 18px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--teal);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.n-row .ok svg.i {
+  width: 26px;
+  height: 26px;
+  stroke-width: 3.4;
+}
+.n-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 56px;
+  padding: 0 22px;
+  border-radius: 28px;
+  background: rgba(44, 196, 181, 0.14);
+  color: #15877d;
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+  font-size: 26px;
+  white-space: nowrap;
+}
+.n-chip svg.i {
+  width: 28px;
+  height: 28px;
+  stroke-width: 3;
+}
+.n-stars {
+  display: flex;
+  gap: 6px;
+  color: #f5b700;
+}
+.n-stars svg.i {
+  width: 38px;
+  height: 38px;
+  fill: #f5b700;
+  stroke: #f5b700;
+}
+.n-wave {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 50px;
+}
+.n-wave i {
+  display: block;
+  width: 7px;
+  border-radius: 4px;
+  background: #fff;
+}

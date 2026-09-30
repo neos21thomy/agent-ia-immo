@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — Ton CRM stocke, LIMO travaille</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/naturel.css" />
+    <style>
+      @font-face { font-family: "Anton"; src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Source Serif 4"; src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; }
+      .n-ct { display: flex; align-items: center; gap: 22px; height: 118px; padding: 0 44px; border-bottom: 1px solid #efeff4; font-family: Inter, sans-serif; font-size: 38px; color: #000; }
+      .n-ct .av { flex: none; width: 64px; height: 64px; border-radius: 50%; background: #6f7488; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700; }
+      .n-ct span { margin-left: auto; font-size: 25px; color: #6e6e73; }
+      #big { top: 620px; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 230px; color: var(--navy); line-height: 1; }
+      #big small { font-size: 80px; color: var(--mut); font-weight: 600; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="16.0" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="16.0" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/nat-03-842-contacts.wav" data-start="0" data-duration="16.0" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/naturel.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 16.0;
+        N.init(tl, root, D);
+        const cap1 = N.cap("Ton CRM a <b>842</b> contacts.", { top: "140px" }, 0.15);
+        const ip = N.iphone({ left: "110px", top: "380px", width: "860px", height: "1500px" }, "8:30");
+        N.hide(ip.el);
+        tl.fromTo(ip.el, { opacity: 0, y: 300 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0.05);
+        const hd = K.h("div", "n-mhead", `<b style="font-size:40px;font-weight:800">Contacts</b><b style="color:#6e6e73">842 contacts</b>`, ip.screen);
+        const vp = K.h("div", "", null, ip.screen);
+        Object.assign(vp.style, { position: "absolute", left: "0", right: "0", top: "266px", bottom: "0", overflow: "hidden" });
+        const list = K.h("div", "", null, vp);
+        Object.assign(list.style, { position: "absolute", left: "0", right: "0", top: "0" });
+        list.setAttribute("data-layout-allow-occlusion", "");
+        list.setAttribute("data-layout-allow-overflow", "");
+        const FN = ["Albert", "Bernard", "Blanc", "Boyer", "Chevalier", "Clément", "Da Silva", "Delmas", "Durand", "Fabre", "Faure", "Fournier", "Garnier", "Girard", "Lambert", "Laurent", "Lefebvre", "Leroy", "Martin", "Mercier", "Moreau", "Morel", "Perrin", "Petit", "Renaud", "Robin", "Roche", "Roussel", "Roy", "Vidal"];
+        const PR = ["M.", "Mme", "M. et Mme"];
+        const last = ["Vendeur · 2023", "Acquéreur · 2024", "Estimation · 2022", "Vendeur · 2021", "Visite · 2024"];
+        FN.forEach((n, i) => K.h("div", "n-ct", `<div class="av">${n[0]}</div>${PR[i % 3]} ${n}<span>${last[i % 5]}</span>`, list).setAttribute("data-layout-allow-occlusion", ""));
+        list.querySelectorAll("*").forEach((e) => e.setAttribute("data-layout-allow-occlusion", ""));
+        tl.fromTo(list, { y: 0 }, { y: -2300, duration: 2.6, ease: "power2.inOut" }, 0.7);
+        K.sfx(0.7, "whoosh", 0.14, 0, { d: 2.4, f0: 300, f1: 1400, pk: 0.5 });
+        N.out(cap1, 2.8, { y: -10, d: 0.2 });
+        const cap2 = N.cap("Combien t’en as rappelé<br>ce mois-ci ?", { top: "140px" }, 3.0, { dark: true });
+        N.out([ip.el], 4.6, { y: 60, d: 0.4 });
+        const big = N.ab("ctr", `<span>0</span><small> / 842</small>`, {});
+        big.id = "big";
+        N.hide(big);
+        tl.set(big, { opacity: 1 }, 4.9);
+        K.count(K.$("span", big), 12, 4.9, 0.8, (v) => String(Math.round(v)));
+        K.sfx(5.75, "thump", 0.35);
+        const s1 = N.text("ctr n-body", "Les autres attendent. Et signent ailleurs.", { top: "900px", fontSize: "40px" }, 5.8);
+        N.out([cap2, big, s1], 7.4);
+        const h = N.head(["TON CRM STOCKE<span class='v'>.</span>", "<em>LIMO TRAVAILLE.</em>"], { top: "190px", fontSize: "86px" }, 7.6);
+        const ph = N.phoneLimo({ left: "213px", top: "560px" }, 8.2);
+        const n1 = N.notif({ title: "BRIEF DU MATIN", time: "8:00", text: "5 actions prioritaires aujourd’hui. On commence par M. Albert." }, { left: "90px", top: "680px" }, 9.3);
+        N.out([h, ph, n1], 12.0, { y: -30 });
+        window.__TE = 12.4;
+        N.outro(12.4, "demo");
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>
