@@ -11,6 +11,8 @@ chacun dans un format viral différent. Les MP4 finaux sont dans `../rendus/v3/`
 | 4 | `reels/reel-4-conversation.html` | Conversation / chat | 35,3 s | « J'ai laissé mon IA gérer ma journée d'agent immo… » |
 | 5 | `reels/reel-5-top11.html` | Top / liste en décompte (thème clair) | 37 s | « 11 tâches que tu ne feras plus jamais à la main. » |
 
+Versions 15 s ciblées agents immo : `reels/short-1-pov.html` à `reels/short-5-top3.html` (3 à 4 outils métier, carte de fin « L'IA des agents immo. »).
+
 Chaque Reel finit sur la même carte : robot LIMO, « Ton chef de cabinet IA. », **« 14 jours gratuits · sans CB »**, app.leadengineai.fr.
 
 ## Les 11 outils montrés (données fictives)

@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — Short 3 · Agent immo sans vs avec LIMO</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <style>
+      @font-face {
+        font-family: "Anton";
+        src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("assets/fonts/source-serif-4-latin-600-normal.woff2") format("woff2");
+        font-weight: 600;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Caveat";
+        src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2");
+        font-weight: 700;
+        font-style: normal;
+      }
+      #score {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 136px;
+        height: 110px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 22px;
+        transform-origin: 50% 50%;
+      }
+      .team {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .team .lb {
+        height: 50px;
+        padding: 0 16px;
+        border-radius: 25px;
+        display: flex;
+        align-items: center;
+        font-family: Montserrat, sans-serif;
+        font-weight: 700;
+        font-size: 21px;
+        letter-spacing: 0.12em;
+      }
+      .sans .lb {
+        background: rgba(255, 90, 103, 0.16);
+        border: 2px solid rgba(255, 90, 103, 0.5);
+        color: #ff9aa2;
+      }
+      .avec .lb {
+        background: rgba(0, 198, 252, 0.14);
+        border: 2px solid rgba(0, 198, 252, 0.55);
+        color: var(--cyan);
+      }
+      .digit {
+        position: relative;
+        width: 96px;
+        height: 110px;
+        overflow: hidden;
+        font-family: "Anton", sans-serif;
+        font-size: 88px;
+        line-height: 110px;
+        text-align: center;
+      }
+      .digit span {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+      }
+      .sans .digit {
+        color: #ff9aa2;
+      }
+      .avec .digit {
+        color: var(--cyan);
+      }
+      .dash {
+        font-family: "Anton", sans-serif;
+        font-size: 64px;
+        color: var(--muted);
+      }
+      .tlabel {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 282px;
+        text-align: center;
+        font-family: Montserrat, sans-serif;
+        font-weight: 700;
+        font-size: 24px;
+        letter-spacing: 0.2em;
+        color: var(--muted);
+      }
+      .tname {
+        position: absolute;
+        left: 30px;
+        right: 30px;
+        top: 318px;
+        text-align: center;
+        font-family: "Anton", sans-serif;
+        font-size: 72px;
+        line-height: 1.3;
+        color: var(--fg);
+      }
+      .panel {
+        position: absolute;
+        left: 60px;
+        width: 960px;
+        border-radius: 34px;
+      }
+      #pL {
+        top: 450px;
+        height: 260px;
+        background: rgba(255, 90, 103, 0.07);
+        border: 2px solid rgba(255, 90, 103, 0.35);
+      }
+      #pR {
+        top: 760px;
+        height: 860px;
+        background: rgba(0, 198, 252, 0.06);
+        border: 2px solid rgba(0, 198, 252, 0.35);
+      }
+      .ptag {
+        position: absolute;
+        left: 24px;
+        top: -22px;
+        height: 44px;
+        padding: 0 16px;
+        border-radius: 22px;
+        display: flex;
+        align-items: center;
+        font-family: Montserrat, sans-serif;
+        font-weight: 700;
+        font-size: 18px;
+        letter-spacing: 0.14em;
+      }
+      #pL .ptag {
+        background: #3a1419;
+        color: #ff9aa2;
+      }
+      #pR .ptag {
+        background: #0b2a36;
+        color: var(--cyan);
+      }
+      #vs {
+        position: absolute;
+        left: 492px;
+        top: 687px;
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        background: var(--bg);
+        border: 3px solid rgba(255, 255, 255, 0.22);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Anton", sans-serif;
+        font-size: 40px;
+        color: var(--fg);
+      }
+      .pain {
+        position: absolute;
+        left: 60px;
+        top: 450px;
+        width: 960px;
+        height: 260px;
+      }
+      .pain .pi {
+        position: absolute;
+        left: 48px;
+        top: 55px;
+        width: 150px;
+        height: 150px;
+        color: #ff6b77;
+        transform-origin: 50% 50%;
+      }
+      .pain .pi svg.i {
+        stroke-width: 1.6;
+      }
+      .pain .pn {
+        position: absolute;
+        left: 236px;
+        right: 36px;
+        top: 44px;
+        height: 128px;
+        font-family: "Caveat", cursive;
+        font-weight: 700;
+        font-size: 60px;
+        line-height: 1.05;
+        color: #ffd2d6;
+      }
+      .chipbar {
+        position: absolute;
+        display: flex;
+      }
+      .chipbar.bad {
+        left: 296px;
+        top: 628px;
+      }
+      .chipbar.good {
+        left: 60px;
+        top: 1592px;
+        width: 960px;
+        justify-content: center;
+      }
+      .chipbar span {
+        height: 56px;
+        padding: 0 20px;
+        border-radius: 28px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+        font-size: 24px;
+        white-space: nowrap;
+        transform-origin: 50% 50%;
+      }
+      .chipbar span svg.i {
+        width: 24px;
+        height: 24px;
+        stroke-width: 2.6;
+      }
+      .chipbar.bad span {
+        background: #e5484d;
+        color: #fff;
+      }
+      .chipbar.good span {
+        background: var(--cyan);
+        color: var(--on-cyan);
+      }
+      #hook {
+        position: absolute;
+        left: 40px;
+        right: 40px;
+        top: 470px;
+        text-align: center;
+        font-family: "Anton", sans-serif;
+        color: var(--fg);
+      }
+      #hook .mask {
+        line-height: 1.3;
+        margin-bottom: -0.2em;
+      }
+      #final {
+        position: absolute;
+        left: 40px;
+        right: 40px;
+        top: 760px;
+        text-align: center;
+        font-family: "Anton", sans-serif;
+        font-size: 120px;
+        line-height: 1.15;
+        color: var(--fg);
+      }
+      #final em {
+        font-style: normal;
+        color: var(--cyan);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="15" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="15" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/short-3-sans-vs-avec.wav" data-start="0" data-duration="15" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 15;
+        K.bg(root, { dur: D });
+
+        /* ---------- accroche ---------- */
+        const hook = K.h("div", "", `<span class="mask" data-layout-allow-overflow style="font-size:100px"><span data-layout-allow-occlusion data-layout-allow-overlap>AGENT IMMO</span></span><span class="mask" data-layout-allow-overflow style="font-size:170px"><span data-layout-allow-occlusion data-layout-allow-overlap style="color:#ff6b77">SANS LIMO</span></span><span class="mask" data-layout-allow-overflow style="font-size:90px"><span data-layout-allow-occlusion data-layout-allow-overlap>VS</span></span><span class="mask" data-layout-allow-overflow style="font-size:170px"><span class="cy" data-layout-allow-occlusion data-layout-allow-overlap>AVEC LIMO</span></span>`, root);
+        hook.id = "hook";
+        const hs = K.$$(".mask > span", hook);
+        tl.fromTo(hs, { yPercent: 115 }, { yPercent: 0, duration: 0.55, ease: "expo.out", stagger: 0.14 }, 0.06);
+        K.sfx(0.08, "slam", 0.4);
+        K.sfx(0.22, "buzz", 0.14, -0.4, { d: 0.22 });
+        K.sfx(0.36, "whoosh", 0.12, 0, { d: 0.3, f0: 700, f1: 5000, pk: 0.7 });
+        K.sfx(0.5, "success", 0.2, 0.4);
+        tl.to(hook, { y: -120, opacity: 0, duration: 0.32, ease: "power2.in" }, 1.75);
+        K.sfx(1.75, "whoosh", 0.18, 0, { d: 0.4, f0: 2500, f1: 500, pk: 0.35 });
+
+        /* ---------- tableau des scores ---------- */
+        const score = K.h("div", "", `<div class="team sans"><span class="lb">SANS LIMO</span><div class="digit"><span>0</span></div></div><span class="dash">–</span><div class="team avec"><div class="digit" id="dA"></div><span class="lb">AVEC LIMO</span></div>`, root);
+        score.id = "score";
+        const dA = K.$("#dA", score);
+        const nums = [];
+        for (let i = 0; i <= 11; i++) nums.push(K.h("span", "", String(i), dA));
+        nums.slice(1).forEach((n) => tl.set(n, { opacity: 0 }, 0));
+        tl.fromTo(score, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 1.9);
+
+        /* ---------- les deux colonnes ---------- */
+        const pL = K.h("div", "panel", `<span class="ptag">SANS LIMO</span>`, root);
+        pL.id = "pL";
+        const pR = K.h("div", "panel", `<span class="ptag">AVEC LIMO</span>`, root);
+        pR.id = "pR";
+        const vs = K.h("div", "", "VS", root);
+        vs.id = "vs";
+        tl.fromTo(pL, { opacity: 0, y: -60 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 1.95);
+        tl.fromTo(pR, { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 1.95);
+        K.pop(vs, 2.2, { s: 0.3 });
+        K.sfx(2.2, "pop", 0.2, 0, { f: 420 });
+        const stage = K.stage(root, { x: 160, y: 800, scale: 1.25, h: 620 });
+
+        const ROUNDS = [
+          ["RELANCER TES VENDEURS", "note", "Post-it perdu…", "Mandat signé ailleurs", "brief", "Relances prêtes"],
+          ["SAISIR UN COMPROMIS", "file", "12 pages à recopier…", "30 min de saisie", "doc", "Fiche remplie"],
+          ["VÉRIFIER UN DPE", "search", "25 onglets Google", "Réponse incertaine", "droit", "Réponse sourcée"],
+        ];
+        const MAKERS = { brief: K.brief, dictee: K.dictee, doc: K.doc, estim: K.estim, annonce: K.annonce, posts: K.posts, photo: K.photo, sms: K.sms, avis: K.avis, detect: K.detect, droit: K.droit };
+        let r = 2.45;
+        let prev = null;
+        ROUNDS.forEach((R, k) => {
+          const lab = K.h("div", "tlabel", `TÂCHE ${String(k + 1).padStart(2, "0")} / ${ROUNDS.length}`, root);
+          const name = K.h("div", "tname", R[0], root);
+          const pain = K.h("div", "pain", `<div class="pi">${K.icon(R[1])}</div><div class="pn"></div>`, root);
+          const bad = K.h("div", "chipbar bad", `<span>${K.icon("x")}${R[3]}</span>`, root);
+          const good = K.h("div", "chipbar good", `<span>${K.icon("check")}${R[5]}</span>`, root);
+          const comp = MAKERS[R[4]](stage);
+          if (prev) {
+            K.fout(prev, r - 0.2, { y: -24, d: 0.2 });
+            K.sfx(r - 0.2, "swipe", 0.1);
+          }
+          K.fin([lab, name], r, { y: 16, d: 0.35, st: 0.05 });
+          K.pop(K.$(".pi", pain), r + 0.1, { s: 0.4 });
+          tl.fromTo(K.$(".pi", pain), { rotation: 0 }, { rotation: 7, duration: 0.07, ease: "none", yoyo: true, repeat: 5 }, r + 0.5);
+          K.type(K.$(".pn", pain), R[2], r + 0.25, 0.5, 0.04);
+          K.pop(K.$("span", bad), r + 0.85, { s: 0.6 });
+          tl.fromTo([pL, pain], { x: 0 }, { x: 8, duration: 0.04, ease: "none", yoyo: true, repeat: 5, immediateRender: false }, r + 0.85);
+          K.sfx(r + 0.85, "buzz", 0.16, -0.5, { d: 0.26 });
+          const e = comp.play(r + 0.2);
+          K.pop(K.$("span", good), e - 0.1, { s: 0.6 });
+          tl.to(nums[k], { yPercent: -100, opacity: 0, duration: 0.25, ease: "power3.in" }, e);
+          tl.fromTo(nums[k + 1], { yPercent: 100, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.32, ease: "back.out(1.8)" }, e + 0.05);
+          K.sfx(e + 0.05, "split", 0.22, 0.5);
+          prev = [lab, name, pain, bad, good, comp.el];
+          r = e + 0.42;
+        });
+
+        /* ---------- score final ---------- */
+        const F = r;
+        K.fout(prev, F - 0.2, { y: -24, d: 0.2 });
+        K.fout([pL, pR, vs], F - 0.05, { y: 30, d: 0.3 });
+        tl.to(score, { y: 360, scale: 1.45, duration: 0.55, ease: "power3.inOut" }, F);
+        const fin = K.h("div", "", "LE MATCH<br>EST <em>PLIÉ.</em>", root);
+        fin.id = "final";
+        K.fin(fin, F + 0.35, { y: 40 });
+        K.sfx(F + 0.35, "fanfare", 0.26);
+        K.burst(K.sparkles(root, 540, 640, 16, 420, 140, 7), F + 0.3);
+        const TE = F + 1.8;
+        K.fout([score, fin], TE - 0.25, { y: -30, d: 0.28 });
+        window.__TE = TE;
+        K.endCard(root, TE, { tag: "L’IA des agents immo." });
+
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

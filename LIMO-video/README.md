@@ -28,6 +28,20 @@ question juridique) et finit sur « 14 jours gratuits · sans CB ».
 | `LIMO-v3-4-conversation.mp4` | Conversation / chat | 35,3 s | « J'ai laissé mon IA gérer ma journée d'agent immo… » : chaque demande reçoit sa réponse, chute « T'es qui en fait ? » |
 | `LIMO-v3-5-top-11.mp4` | Top / décompte (thème clair) | 37 s | « 11 tâches que tu ne feras plus jamais à la main », décompte 11 → 1, « Lequel tu testes en premier ? » |
 
+### Versions 15 s ciblées agents immo (`rendus/v3-15s/`)
+
+Mêmes 5 formats, recentrés sur les tâches du métier. Chaque accroche interpelle directement l'agent, et la carte de fin dit « L'IA des agents immo. ».
+
+| Fichier | Durée | Accroche | Outils montrés |
+|---|---|---|---|
+| `LIMO-15s-1-POV-agent-immo.mp4` | 15,1 s | « POV : t'es agent immo. Zéro paperasse. » | Relances, compte rendu de visite dicté, compromis, annonce + mentions légales |
+| `LIMO-15s-2-speedrun.mp4` | 14,9 s | « Speedrun : toute la paperasse d'un agent immo. » | Compte rendu de visite, compromis → fiche, avis de valeur |
+| `LIMO-15s-3-sans-vs-avec.mp4` | 15 s | « Agent immo sans LIMO vs avec LIMO » | Relances vendeurs, saisie du compromis, vérification DPE |
+| `LIMO-15s-4-conversation.mp4` | 14,5 s | « Agents immo : j'ai testé l'IA faite pour notre métier… » | Relances du jour, compromis PDF, question DPE |
+| `LIMO-15s-5-top-3.mp4` | 15,2 s | « Agent immo ? 3 tâches que tu ne feras plus à la main. » | Compromis, annonces, relances |
+
+Sources : `reels-v3/reels/short-*.html` (même chaîne `outils/run.sh short-1-pov`).
+
 **Conseils de publication**
 
 - Un Reel tous les 2-3 jours plutôt que les 5 d'un coup ; commencer par le 3 (avant/après), le plus parlant.
