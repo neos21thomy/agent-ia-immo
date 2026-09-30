@@ -33,6 +33,16 @@ PRESETS = {
     "serie-n1-declic": ("epic", 100, 2.45, 13.05),
     "premium-hero": ("epic", 100, 2.9, 6.4),
     "premium-15s": ("epic", 100, 2.4, 2.4),
+    "film-01-mandat-perdu": ("epic", 100, 2.0, 6.7),
+    "film-02-dimanche-18h": ("lofi", 88, 1.4),
+    "film-03-le-calcul": ("speed", 140, 2.8),
+    "film-04-fais-le-test": ("pop", 124, 1.4),
+    "film-05-ton-telephone-bosse": ("house", 122, 2.0),
+    "film-06-tout-en-un": ("epic", 100, 1.1, 5.3),
+    "film-07-mythes-realite": ("trap", 140, 2.5),
+    "film-08-manifeste": ("epic", 100, 3.5, 8.2),
+    "film-09-prix-cafe": ("pop", 124, 1.4),
+    "film-10-visite-au-mandat": ("house", 122, 1.5),
 }
 
 # progressions (MIDI) : accords (3-4 notes) et fondamentale de basse

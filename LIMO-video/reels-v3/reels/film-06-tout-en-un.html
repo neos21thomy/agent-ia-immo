@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — Film 6 · Tout-en-un</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/premium.css" />
+    <style>
+      @font-face {
+        font-family: "Anton";
+        src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("assets/fonts/source-serif-4-latin-600-normal.woff2") format("woff2");
+        font-weight: 600;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Caveat";
+        src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2");
+        font-weight: 700;
+        font-style: normal;
+      }
+      .tile { width: 290px; height: 190px; border-radius: 28px; background: #16132a; border: 2px solid #2a2445;
+        display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+        font-family: Montserrat, sans-serif; font-weight: 700; font-size: 25px; color: #fff; text-align: center; line-height: 1.15; }
+      .tile .ic { width: 74px; height: 74px; border-radius: 22px; background: rgba(123,92,255,.2); color: var(--vio-l); display: flex; align-items: center; justify-content: center; }
+      .tile .ic svg.i { width: 40px; height: 40px; }
+      #hs { left: 290px; top: 700px; width: 500px; height: 441px; }
+      #hs img { width: 500px; height: 441px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="12.0" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="12.0" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/film-06-tout-en-un.wav" data-start="0" data-duration="12.0" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/premium.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 12.0;
+        P.init(tl, root, D);
+        const t1 = P.title(["11 OUTILS.", "<em>1 SEUL ASSISTANT.</em>"], { top: "200px", fontSize: "96px" }, 0.1, { slam: 0.4 });
+        const TL = [["zap", "Brief du jour"], ["mic", "Dictée vocale"], ["file", "Lecture de compromis"], ["calc", "Estimation DVF"], ["pen", "Annonces"], ["image", "Posts réseaux"], ["camera", "Photos « VENDU »"], ["msg", "SMS clients"], ["star", "Avis Google"], ["radar", "Pistes DPE"], ["scale", "Questions juridiques"]];
+        const tiles = TL.map((x, i) => {
+          const col = i % 3, row = Math.floor(i / 3);
+          const left = row === 3 ? 245 + col * 310 : 85 + col * 310;
+          const e = P.ab("tile", `<span class="ic">${K.icon(x[0])}</span>${x[1]}`, { left: left + "px", top: 560 + row * 210 + "px" });
+          tl.set(e, { opacity: 0 }, 0);
+          const t = 1.1 + i * 0.13;
+          tl.fromTo(e, { opacity: 0, scale: 0.5, y: 40 }, { opacity: 1, scale: 1, y: 0, duration: 0.4, ease: "back.out(1.8)" }, t);
+          K.sfx(t, "pop", 0.1, (col - 1) * 0.4, { f: 480 + i * 40 });
+          return { e, cx: left + 145, cy: 560 + row * 210 + 95 };
+        });
+        const s1 = P.text("ctr p-serif", "Fini de jongler entre six applis.", { top: "1450px", fontSize: "48px" }, 3.0);
+        P.out([t1, s1], 4.6);
+        tiles.forEach((o, i) => {
+          tl.to(o.e, { x: 540 - o.cx, y: 920 - o.cy, scale: 0.15, opacity: 0, rotation: (i % 2 ? 1 : -1) * 40, duration: 0.55, ease: "power3.in" }, 4.7 + i * 0.04);
+        });
+        K.sfx(4.7, "whoosh", 0.24, 0, { d: 0.8, f0: 3000, f1: 300, pk: 0.8 });
+        const hs = P.ab("", `<img src="assets/img/limo-house.png" alt="Logo LIMO" />`, {});
+        hs.id = "hs";
+        tl.set(hs, { opacity: 0 }, 0);
+        tl.fromTo(hs, { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.6)" }, 5.3);
+        K.sfx(5.35, "thump", 0.5);
+        K.burst(K.sparkles(root, 540, 920, 18, 340, 300, 5), 5.35);
+        const t2 = P.title(["TOUT DANS", "<em>UN SEUL OUTIL.</em>"], { top: "1230px", fontSize: "96px" }, 5.8, { slam: 0.3 });
+        P.out([hs, t2], 8.2);
+        window.__TE = 8.9;
+        P.outro(8.4, "demo");
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

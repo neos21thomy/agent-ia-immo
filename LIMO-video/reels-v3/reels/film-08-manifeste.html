@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — Film 8 · Manifeste</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/premium.css" />
+    <style>
+      @font-face {
+        font-family: "Anton";
+        src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("assets/fonts/source-serif-4-latin-600-normal.woff2") format("woff2");
+        font-weight: 600;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Caveat";
+        src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2");
+        font-weight: 700;
+        font-style: normal;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="15.4" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="15.4" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/film-08-manifeste.wav" data-start="0" data-duration="15.4" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/premium.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 15.4;
+        P.init(tl, root, D);
+        const a = P.text("ctr p-serif", "Tu n’es pas devenu agent immo", { top: "800px", fontSize: "62px" }, 0.2, { d: 0.9 });
+        const b = P.title(["pour remplir des cases."], { top: "920px", fontSize: "70px" }, 1.3, { cls: "ctr p-mid", slam: 0.25 });
+        P.out([a, b], 3.4);
+        const c = P.text("ctr p-serif", "Tu l’es devenu pour les gens.", { top: "660px", fontSize: "62px" }, 3.7, { d: 0.8 });
+        const d = P.text("ctr p-serif", "Les visites. Les familles.", { top: "840px", fontSize: "62px" }, 4.7, { d: 0.8 });
+        const e = P.title(["<em>Les clés qu’on remet.</em>"], { top: "1040px", fontSize: "84px" }, 5.7, { cls: "ctr p-mid", slam: 0.3 });
+        K.sfx(5.7, "sparkle", 0.18);
+        P.out([c, d, e], 7.9);
+        const t = P.title(["LA PAPERASSE ?", "<em>LAISSE-LA À LIMO.</em>"], { top: "250px", fontSize: "90px" }, 8.2, { slam: 0.4 });
+        const ph = P.photo({ left: "60px", top: "560px", width: "960px", height: "578px" }, 8.4);
+        const s = P.text("ctr p-serif", "Toi, retourne sur le terrain.", { top: "1200px", fontSize: "54px" }, 9.6);
+        P.out([t, ph, s], 11.6);
+        window.__TE = 12.3;
+        P.outro(11.8, "essai");
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

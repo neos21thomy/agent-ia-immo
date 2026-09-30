@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — Film 3 · Le calcul</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/premium.css" />
+    <style>
+      @font-face {
+        font-family: "Anton";
+        src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("assets/fonts/source-serif-4-latin-600-normal.woff2") format("woff2");
+        font-weight: 600;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Caveat";
+        src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2");
+        font-weight: 700;
+        font-style: normal;
+      }
+      .row { left: 90px; width: 900px; height: 118px; display: flex; align-items: center; justify-content: space-between;
+        border-bottom: 2px solid rgba(255,255,255,.1); font-family: Montserrat, sans-serif; }
+      .row b { font-weight: 600; font-size: 38px; color: #fff; }
+      .row span { font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 36px; color: var(--vio-l); }
+      #tot { top: 1130px; font-family: Montserrat, sans-serif; font-weight: 800; font-size: 170px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="17.1" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="17.1" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/film-03-le-calcul.wav" data-start="0" data-duration="17.1" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/premium.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 17.1;
+        P.init(tl, root, D);
+        const k = P.text("ctr p-kick", "LE CALCUL QUI FAIT MAL", { top: "250px" }, 0.1);
+        const t1 = P.title(["COMBIEN D’HEURES", "TU PERDS", "<em>CHAQUE SEMAINE ?</em>"], { top: "560px", fontSize: "84px" }, 0.3, { slam: 0.35 });
+        P.out(t1, 2.5);
+        const R = [["Saisir 2 compromis", "2 × 30 min"], ["Rédiger 4 annonces", "4 × 45 min"], ["Trier tes relances", "5 × 15 min"], ["Posts réseaux", "3 × 20 min"], ["Répondre aux avis", "3 × 10 min"]];
+        const rows = R.map((r, i) => {
+          const e = P.ab("row", `<b>${r[0]}</b><span>${r[1]}</span>`, { top: 360 + i * 130 + "px" });
+          tl.set(e, { opacity: 0 }, 0);
+          K.fin(e, 2.8 + i * 0.45, { y: 24 });
+          K.sfx(2.8 + i * 0.45, "pop", 0.14, 0, { f: 500 + i * 70 });
+          return e;
+        });
+        const lab = P.text("ctr p-kick", "PAR SEMAINE", { top: "1070px" }, 5.2);
+        const tot = P.ab("ctr", `<em style="font-style:normal;background:linear-gradient(90deg,#a893ff,#7b5cff 55%,#00c6fc);-webkit-background-clip:text;background-clip:text;color:transparent">0 h 00</em>`, {});
+        tot.id = "tot";
+        tl.set(tot, { opacity: 0 }, 0);
+        tl.set(tot, { opacity: 1 }, 5.3);
+        const em = K.$("em", tot);
+        K.count(em, 405, 5.3, 1.3, (v) => `${Math.floor(v / 60)} h ${String(Math.round(v % 60)).padStart(2, "0")}`);
+        K.sfx(6.6, "slam", 0.35);
+        const note = P.text("ctr p-sm", "Exemple indicatif, à ajuster à ton activité", { top: "1680px", fontSize: "24px", color: "#8f8ba8" }, 5.3);
+        P.out([...rows, lab, tot], 7.9);
+        const y1 = P.title(["SUR UN AN :", "<em>≈ 310 HEURES.</em>"], { top: "520px", fontSize: "104px" }, 8.2, { slam: 0.35 });
+        const y2 = P.text("ctr p-serif", "Presque <b>8 semaines</b> de travail<br>passées à faire de l’administratif.", { top: "860px", fontSize: "50px", lineHeight: "1.35" }, 9.1);
+        P.out([y1, y2, k, note], 11.2);
+        const q = P.title(["ET SI LIMO", "<em>S’EN OCCUPAIT ?</em>"], { top: "700px", fontSize: "96px" }, 11.4, { slam: 0.4 });
+        P.out(q, 13.3);
+        window.__TE = 14.0;
+        P.outro(13.5, "demo");
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,274 @@
+/* LIMO — habillage « premium » commun aux films de conversion (s'ajoute à kit.css). */
+:root {
+  --vio: #7b5cff;
+  --vio-l: #a893ff;
+  --teal: #2fd6c8;
+  --red: #ff5a67;
+  --ok: #2bd99a;
+  --ink: #16193a;
+}
+body {
+  background: #06081a;
+}
+.ab {
+  position: absolute;
+}
+.ctr {
+  left: 60px;
+  right: 60px;
+  text-align: center;
+}
+.p-big {
+  font-family: Montserrat, sans-serif;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+.p-mid {
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+  font-size: 60px;
+  line-height: 1.18;
+  color: #fff;
+}
+.p-sm {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 34px;
+  line-height: 1.3;
+  color: #c9c6e6;
+}
+.p-big em,
+.p-mid em,
+.p-sm em {
+  font-style: normal;
+  background: linear-gradient(90deg, var(--vio-l), var(--vio) 55%, #00c6fc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.p-big .red,
+.p-mid .red {
+  color: var(--red);
+}
+.p-serif {
+  font-family: "Source Serif 4", serif;
+  color: #d9d6f0;
+}
+.p-kick {
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: 0.34em;
+  color: var(--teal);
+  padding-left: 0.34em;
+}
+.pmask {
+  display: block;
+  overflow: hidden;
+  line-height: 1.2;
+  margin-bottom: -0.1em;
+}
+.pmask > span {
+  display: inline-block;
+}
+/* carte blanche façon notification iOS */
+.p-notif {
+  width: 900px;
+  min-height: 150px;
+  border-radius: 34px;
+  background: #ffffff;
+  box-shadow: 0 30px 70px rgba(10, 8, 40, 0.55);
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  padding: 24px 32px;
+}
+.p-notif .bl {
+  flex: none;
+  width: 92px;
+  height: 92px;
+  border-radius: 24px;
+  background: linear-gradient(145deg, #8b6dff, #6a4de8);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.p-notif .bl.red {
+  background: linear-gradient(145deg, #ff7a85, #e5484d);
+}
+.p-notif .bl.ok {
+  background: linear-gradient(145deg, #3fe3a8, #16b37a);
+}
+.p-notif .bl.cy {
+  background: linear-gradient(145deg, #38d4ff, #0a9fd6);
+}
+.p-notif .bl svg.i {
+  width: 48px;
+  height: 48px;
+}
+.p-notif .tx {
+  flex: 1;
+  font-family: Montserrat, sans-serif;
+}
+.p-notif .tp {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: 21px;
+  letter-spacing: 0.12em;
+  color: var(--vio);
+}
+.p-notif .tp span {
+  letter-spacing: 0;
+  font-weight: 500;
+  color: #6e6c85;
+}
+.p-notif b {
+  display: block;
+  margin-top: 6px;
+  font-weight: 600;
+  font-size: 33px;
+  line-height: 1.25;
+  color: var(--ink);
+}
+.p-phone {
+  width: 654px;
+  height: 1312px;
+}
+.p-phone img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 654px;
+  height: 1312px;
+  filter: drop-shadow(0 50px 70px rgba(0, 0, 0, 0.6));
+}
+.p-halo {
+  background: radial-gradient(closest-side, rgba(123, 92, 255, 0.42), rgba(123, 92, 255, 0));
+}
+.p-photo {
+  border-radius: 44px;
+  overflow: hidden;
+  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.55);
+}
+.p-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.p-pill {
+  height: 64px;
+  padding: 0 28px;
+  border-radius: 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  white-space: nowrap;
+}
+.p-pill svg.i {
+  width: 30px;
+  height: 30px;
+  flex: none;
+}
+.p-pill.red {
+  background: rgba(255, 90, 103, 0.14);
+  border: 2px solid rgba(255, 90, 103, 0.6);
+  color: #ffb3b9;
+}
+.p-pill.ok {
+  background: rgba(43, 217, 154, 0.14);
+  border: 2px solid rgba(43, 217, 154, 0.6);
+  color: #b9f5dc;
+}
+.p-pill.vi {
+  background: rgba(123, 92, 255, 0.18);
+  border: 2px solid rgba(168, 147, 255, 0.6);
+  color: #dcd3ff;
+}
+/* carte de fin */
+.p-house {
+  width: 500px;
+  height: 441px;
+}
+.p-house img {
+  width: 100%;
+  height: 100%;
+}
+.p-wm {
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  padding-left: 0.14em;
+  color: #fff;
+}
+.p-cta {
+  left: 140px;
+  width: 800px;
+  height: 128px;
+  border-radius: 64px;
+  background: linear-gradient(90deg, #7b5cff, #5a3fe0);
+  box-shadow: 0 24px 60px rgba(123, 92, 255, 0.55);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+  font-size: 42px;
+  color: #fff;
+  white-space: nowrap;
+}
+.p-cta svg.i {
+  width: 44px;
+  height: 44px;
+  flex: none;
+}
+.p-cta i.sh {
+  position: absolute;
+  top: -20px;
+  left: 0;
+  width: 120px;
+  height: 170px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0));
+  transform: skewX(-20deg);
+}
+.p-chips {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+.p-chips span {
+  height: 58px;
+  padding: 0 24px;
+  border-radius: 29px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 2px solid rgba(47, 214, 200, 0.5);
+  background: rgba(47, 214, 200, 0.1);
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 25px;
+  color: #bff5ef;
+  white-space: nowrap;
+}
+.p-chips span svg.i {
+  width: 26px;
+  height: 26px;
+  flex: none;
+}
+.p-kw {
+  display: inline-block;
+  padding: 0 22px;
+  border-radius: 18px;
+  background: #fff;
+  color: var(--vio);
+  font-family: Montserrat, sans-serif;
+  font-weight: 800;
+}

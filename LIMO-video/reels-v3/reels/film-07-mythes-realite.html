@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — Film 7 · Mythes et réalité</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/premium.css" />
+    <style>
+      @font-face {
+        font-family: "Anton";
+        src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("assets/fonts/source-serif-4-latin-600-normal.woff2") format("woff2");
+        font-weight: 600;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Caveat";
+        src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2");
+        font-weight: 700;
+        font-style: normal;
+      }
+      .strike { left: 120px; width: 840px; height: 8px; border-radius: 4px; background: var(--red); transform-origin: 0 50%; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="15.5" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="15.5" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/film-07-mythes-realite.wav" data-start="0" data-duration="15.5" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/premium.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 15.5;
+        P.init(tl, root, D);
+        const k = P.text("ctr p-kick", "IDÉES REÇUES", { top: "250px" }, 0.1);
+        const t1 = P.title(["L’IA POUR LES", "<em>AGENTS IMMO ?</em>"], { top: "620px", fontSize: "104px" }, 0.3, { slam: 0.4 });
+        P.out(t1, 2.2);
+        const M = [
+          ["« C’est trop compliqué. »", "Tu parles.<br><em>LIMO écrit.</em>"],
+          ["« C’est hors de prix. »", "Dès<br><em>49 € par mois.</em>"],
+          ["« L’IA va remplacer les agents. »", "Elle remplace la paperasse.<br><em>Pas toi.</em>"],
+        ];
+        M.forEach((m, i) => {
+          const t = 2.5 + i * 3.1;
+          const mp = P.pill("red", "x", "MYTHE", { top: "620px" }, t, { snd: false });
+          const my = P.text("ctr p-serif", m[0], { top: "740px", fontSize: "60px", lineHeight: "1.25" }, t + 0.1);
+          const st = P.ab("strike", null, { top: "780px" });
+          tl.set(st, { scaleX: 0 }, 0);
+          tl.to(st, { scaleX: 1, duration: 0.3, ease: "power3.out" }, t + 0.9);
+          tl.to(my, { opacity: 0.45, duration: 0.3 }, t + 0.95);
+          K.sfx(t + 0.9, "buzz", 0.16);
+          const rp = P.pill("ok", "check", "RÉALITÉ", { top: "1000px" }, t + 1.4);
+          const re = P.text("ctr p-mid", m[1], { top: "1120px", fontSize: "74px" }, t + 1.5);
+          P.out([mp, my, st, rp, re], t + 2.8);
+        });
+        P.out(k, 11.6);
+        window.__TE = 12.4;
+        P.outro(11.9, "dm");
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

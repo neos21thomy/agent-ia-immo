@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — Film 4 · Fais le test</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/premium.css" />
+    <style>
+      @font-face {
+        font-family: "Anton";
+        src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("assets/fonts/source-serif-4-latin-600-normal.woff2") format("woff2");
+        font-weight: 600;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Caveat";
+        src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2");
+        font-weight: 700;
+        font-style: normal;
+      }
+      .it { left: 90px; width: 900px; height: 150px; border-radius: 28px; background: #16132a; border: 2px solid #2a2445;
+        display: flex; align-items: center; gap: 26px; padding: 0 30px; font-family: Montserrat, sans-serif; font-weight: 600; font-size: 34px; line-height: 1.25; color: #fff; }
+      .it .bx { flex: none; width: 64px; height: 64px; border-radius: 18px; border: 4px solid #4a4370; position: relative; }
+      .it .bx i { position: absolute; inset: -4px; border-radius: 18px; background: var(--vio); display: flex; align-items: center; justify-content: center; color: #fff; }
+      .it .bx svg.i { width: 40px; height: 40px; stroke-width: 3.2; }
+      #score { right: 90px; top: 150px; height: 80px; padding: 0 28px; border-radius: 40px; background: #fff; display: flex; align-items: center;
+        font-family: Montserrat, sans-serif; font-weight: 800; font-size: 40px; color: var(--vio); }
+      #robo { left: 390px; top: 1020px; width: 300px; height: 375px; object-fit: contain; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="14.4" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="14.4" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/film-04-fais-le-test.wav" data-start="0" data-duration="14.4" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/premium.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 14.4;
+        P.init(tl, root, D);
+        const t1 = P.title(["AGENT IMMO :", "<em>FAIS LE TEST.</em>"], { top: "250px", fontSize: "100px" }, 0.1, { slam: 0.4 });
+        const sc = P.ab("", [0, 1, 2, 3, 4, 5].map((n) => `<span class="sn" style="position:absolute;left:0;right:0;text-align:center">${n}/5</span>`).join("") + `<span style="visibility:hidden">5/5</span>`, {});
+        sc.id = "score";
+        tl.set(sc, { opacity: 0 }, 0);
+        K.pop(sc, 1.0);
+        const sn = K.$$(".sn", sc);
+        sn.slice(1).forEach((x) => tl.set(x, { opacity: 0 }, 0));
+        const S = ["T’as déjà oublié de rappeler un vendeur.", "Tu écris tes annonces le soir.", "Tu recopies tes compromis à la main.", "Tu ne sais plus qui relancer.", "Un avis Google attend ta réponse."];
+        const its = S.map((s, i) => {
+          const e = P.ab("it", `<span class="bx"><i>${K.icon("check")}</i></span>${s}`, { top: 560 + i * 176 + "px" });
+          tl.set(e, { opacity: 0 }, 0);
+          tl.set(K.$(".bx i", e), { scale: 0 }, 0);
+          const t = 1.4 + i * 1.0;
+          K.fin(e, t, { y: 30 });
+          K.sfx(t, "whoosh", 0.1, 0.2, { d: 0.3, f0: 600, f1: 3000, pk: 0.5 });
+          tl.to(K.$(".bx i", e), { scale: 1, duration: 0.28, ease: "back.out(2.6)" }, t + 0.55);
+          K.sfx(t + 0.55, "tick", 0.26, 0, { f: 1600 + i * 200 });
+          tl.set(sn[i], { opacity: 0 }, t + 0.6);
+          tl.set(sn[i + 1], { opacity: 1 }, t + 0.6);
+          tl.fromTo(sc, { scale: 1.25 }, { scale: 1, duration: 0.3, ease: "back.out(2)", immediateRender: false }, t + 0.6);
+          return e;
+        });
+        P.out([t1, ...its], 6.9);
+        const t2 = P.title(["5 SUR 5 ?", "<em>IL TE FAUT UN</em>", "<em>CHEF DE CABINET.</em>"], { top: "420px", fontSize: "96px" }, 7.2, { slam: 0.4 });
+        const robo = K.h("img", "ab", null, root);
+        robo.id = "robo";
+        robo.src = "assets/img/limo-robot.png";
+        robo.alt = "Robot LIMO";
+        tl.set(robo, { opacity: 0 }, 0);
+        tl.fromTo(robo, { opacity: 0, y: 80, scale: 0.6 }, { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: "back.out(1.7)" }, 8.1);
+        K.sfx(8.15, "thump", 0.4);
+        K.sfx(8.2, "bloop-up", 0.22, 0, { f0: 260, f1: 780, d: 0.16 });
+        const s2 = P.text("ctr p-sm", "Et commente ton score !", { top: "1450px" }, 8.9);
+        P.out([t2, robo, s2, sc], 10.6);
+        window.__TE = 11.3;
+        P.outro(10.8, "comment");
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

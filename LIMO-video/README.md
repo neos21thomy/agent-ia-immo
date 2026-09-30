@@ -14,6 +14,31 @@ Tout le matériel des Reels de l'application **LIMO** (app.leadengineai.fr), ré
 | `sources/` | Fichiers fournis : `images/` (affiche robot, logo, pubs, landing mobile) et `videos/` (pub « Analyseur de dossier », vidéo UGC IA) |
 | `archives/` | Sources de la V1 (zip) |
 
+## 🎯 Campagne « 10 films » pour faire contacter les agents immo (`rendus/films/`)
+
+Chaque film vise un levier différent et finit sur un **appel au contact**. Chacun existe en version bruitages seuls et en version `-musique`.
+
+| # | Fichier | Durée | Levier | Accroche | Appel à l'action |
+|---|---|---|---|---|---|
+| 1 | `LIMO-film-01-mandat-perdu` | 19 s | Peur de perdre | SMS « on a signé avec une autre agence », on rembobine, avec LIMO : mandat signé | Message privé « LIMO » |
+| 2 | `LIMO-film-02-dimanche-18h` | 16,2 s | Temps libre | 6 tâches tombent le dimanche, LIMO les coche toutes | Essai 14 jours |
+| 3 | `LIMO-film-03-le-calcul` | 17,1 s | Rationnel | 6 h 45 perdues par semaine, ≈ 310 h par an (exemple indicatif) | Démo 15 min |
+| 4 | `LIMO-film-04-fais-le-test` | 14,4 s | Identification | 5 situations cochées, score 5/5 | Commentaire « LIMO » |
+| 5 | `LIMO-film-05-ton-telephone-bosse` | 14,8 s | Preuve | Les notifications LIMO de la journée sur le vrai écran | Essai 14 jours |
+| 6 | `LIMO-film-06-tout-en-un` | 12 s | Simplicité | 11 outils qui s'assemblent dans la maison LIMO | Démo 15 min |
+| 7 | `LIMO-film-07-mythes-realite` | 15,5 s | Objections | Trop compliqué, trop cher (dès 49 €/mois), l'IA va me remplacer | Message privé « LIMO » |
+| 8 | `LIMO-film-08-manifeste` | 15,4 s | Émotion | « Tu n'es pas devenu agent immo pour remplir des cases. » | Essai 14 jours |
+| 9 | `LIMO-film-09-prix-cafe` | 16 s | Prix | 49 €/mois = 1,63 €/jour, face à 10 000 € d'honoraires (exemple) | Essai 14 jours |
+| 10 | `LIMO-film-10-visite-au-mandat` | 14,6 s | Démonstration | De la visite dictée au mandat signé, sans rien ressaisir | Démo 15 min |
+
+**Pour que les contacts arrivent :**
+- Messages privés et commentaires « LIMO » : réponds vite (automatise-le avec une réponse enregistrée ou ManyChat). Le film le promet : « je t'ouvre ton accès ».
+- « Lien en bio » (films 3, 6 et 10) : mets le lien de réservation de démo en bio.
+- En pub : commence par les films 1, 5 et 7 (peur, preuve, objections), puis garde celui qui a le coût par contact le plus bas.
+
+Sources : `reels-v3/reels/film-*.html`, générés par `reels-v3/outils/films.py` avec le kit `assets/kit/premium.css` / `premium.js`.
+Prix « dès 49 €/mois » : grille 49/79/119 €/mois du bilan LIMO. Les chiffres des films 3 et 9 sont affichés comme des exemples indicatifs.
+
 ## ⭐ Films premium (`rendus/premium/`) : à mettre en avant
 
 Construits avec **les visuels fournis** : le vrai écran LIMO détouré de la pub « Ton CRM stocke », la maison lumineuse du logo et la photo du robot au bureau vue mer.

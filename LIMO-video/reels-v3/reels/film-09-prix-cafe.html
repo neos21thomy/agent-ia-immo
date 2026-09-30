@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — Film 9 · Le prix d’un café</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/premium.css" />
+    <style>
+      @font-face {
+        font-family: "Anton";
+        src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("assets/fonts/source-serif-4-latin-600-normal.woff2") format("woff2");
+        font-weight: 600;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Caveat";
+        src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2");
+        font-weight: 700;
+        font-style: normal;
+      }
+      #cup { left: 120px; top: 760px; width: 360px; height: 360px; }
+      #cup svg { width: 360px; height: 360px; }
+      .eq { left: 520px; width: 480px; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 52px; color: #fff; }
+      .eq.big { font-weight: 800; font-size: 76px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="16.0" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="16.0" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/film-09-prix-cafe.wav" data-start="0" data-duration="16.0" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/premium.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 16.0;
+        P.init(tl, root, D);
+        const t1 = P.title(["LIMO COÛTE", "MOINS CHER QUE", "<em>TON CAFÉ.</em>"], { top: "240px", fontSize: "100px" }, 0.1, { slam: 0.4 });
+        const cup = P.ab("", `<svg viewBox="0 0 200 200"><path class="st" d="M70 60 C60 45 80 35 70 20" stroke="#c9c6e6" stroke-width="5" fill="none" stroke-linecap="round"/><path class="st" d="M100 60 C90 45 110 35 100 20" stroke="#c9c6e6" stroke-width="5" fill="none" stroke-linecap="round"/><path class="st" d="M130 60 C120 45 140 35 130 20" stroke="#c9c6e6" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M40 75 H160 L148 170 Q146 182 132 182 H68 Q54 182 52 170Z" fill="#f5f4fa"/><path d="M160 95 Q192 95 190 122 Q188 150 154 150" stroke="#f5f4fa" stroke-width="12" fill="none"/><rect x="40" y="75" width="120" height="16" fill="#6b4f3a"/></svg>`, {});
+        cup.id = "cup";
+        tl.set(cup, { opacity: 0 }, 0);
+        tl.fromTo(cup, { opacity: 0, scale: 0.6, rotation: -10 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.6, ease: "back.out(1.7)" }, 1.4);
+        tl.fromTo(K.$$(".st", cup), { y: 0, opacity: 0.2 }, { y: -8, opacity: 1, duration: 0.6, ease: "sine.inOut", yoyo: true, repeat: 5, stagger: 0.15 }, 1.6);
+        K.sfx(1.4, "pop", 0.2, -0.3, { f: 420 });
+        const e1 = P.text("eq", "49 € / mois", { top: "800px" }, 2.0);
+        const e2 = P.text("eq", "÷ 30 jours", { top: "890px", color: "#a893ff" }, 2.6);
+        const e3 = P.ab("eq big", `= <span>0,00</span> €<br><small style="font-size:34px;color:#c9c6e6">par jour</small>`, { top: "990px" });
+        tl.set(e3, { opacity: 0 }, 0);
+        K.fin(e3, 3.2, { y: 20 });
+        K.count(K.$("span", e3), 1.63, 3.3, 1.0, (v) => v.toFixed(2).replace(".", ","));
+        K.sfx(4.35, "slam", 0.3);
+        P.out([t1, cup, e1, e2, e3], 5.6);
+        const k2 = P.text("ctr p-kick", "ET EN FACE ?", { top: "520px" }, 5.9);
+        const f1 = P.text("ctr p-mid", "Une vente à 200 000 €", { top: "680px", fontSize: "64px" }, 6.2);
+        const f2 = P.text("ctr p-mid", "× 5 % d’honoraires", { top: "800px", fontSize: "64px", color: "#a893ff" }, 6.8);
+        const f3 = P.ab("ctr p-big", `= <em>0 €</em>`, { top: "930px", fontSize: "130px" });
+        tl.set(f3, { opacity: 0 }, 0);
+        K.fin(f3, 7.4, { y: 20 });
+        K.count(K.$("em", f3), 10000, 7.5, 1.0, (v) => String(Math.round(v / 100) * 100).replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " €");
+        K.sfx(8.55, "slam", 0.35);
+        const note = P.text("ctr p-sm", "Exemple indicatif", { top: "1170px", fontSize: "26px", color: "#8f8ba8" }, 7.5);
+        P.out([k2, f1, f2, f3, note], 9.6);
+        const t2 = P.title(["UN MANDAT DE PLUS", "<em>ET LIMO EST PAYÉ</em>", "<em>POUR DES ANNÉES.</em>"], { top: "620px", fontSize: "82px" }, 9.9, { slam: 0.4 });
+        P.out(t2, 12.2);
+        window.__TE = 12.9;
+        P.outro(12.4, "essai");
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

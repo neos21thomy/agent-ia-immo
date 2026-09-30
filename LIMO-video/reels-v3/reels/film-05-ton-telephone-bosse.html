@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — Film 5 · Ton téléphone bosse</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/premium.css" />
+    <style>
+      @font-face {
+        font-family: "Anton";
+        src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("assets/fonts/source-serif-4-latin-600-normal.woff2") format("woff2");
+        font-weight: 600;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Caveat";
+        src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2");
+        font-weight: 700;
+        font-style: normal;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="14.8" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="14.8" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/film-05-ton-telephone-bosse.wav" data-start="0" data-duration="14.8" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/premium.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 14.8;
+        P.init(tl, root, D);
+        const t1 = P.title(["PENDANT QUE", "TU FAIS TES VISITES…"], { top: "180px", fontSize: "76px" }, 0.1, { slam: 0.35 });
+        const { ph, halo } = P.phone({ left: "213px", top: "560px" }, 0.8);
+        const N = [
+          ["BRIEF", "8:00", "sparkles", "", "Brief prêt : 5 actions aujourd’hui."],
+          ["ANNIVERSAIRE", "9:30", "cake", "cy", "Mme Roy : SMS d’anniversaire prêt."],
+          ["NOUVELLE PISTE", "11:00", "pin", "ok", "DPE F à 300 m : vendeur potentiel."],
+          ["COMPROMIS", "14:00", "file", "cy", "Compromis Roche lu : fiche remplie."],
+          ["AVIS GOOGLE", "16:30", "star", "", "Marie L., 5 étoiles : réponse prête."],
+          ["RAPPEL", "18:00", "bell", "red", "M. Albert attend ton rappel."],
+        ];
+        const els = [];
+        N.forEach((n, i) => {
+          const t = 2.0 + i * 1.05;
+          els.forEach((e, j) => {
+            const depth = i - j;
+            tl.to(e, { y: 180 * depth, scale: 1 - 0.03 * depth, opacity: depth >= 4 ? 0 : 1, duration: 0.4, ease: "power3.out" }, t);
+          });
+          const e = P.notif({ title: n[0], time: n[1], icon: n[2], c: n[3], text: n[4], pan: i % 2 ? 0.3 : -0.3 }, { left: "90px", top: "470px", transformOrigin: "50% 0" }, t);
+          els.push(e);
+        });
+        P.out([t1, ph, halo, ...els], 8.7, { y: 60 });
+        const t2 = P.title(["…LIMO FAIT", "<em>TOUT LE RESTE.</em>"], { top: "700px", fontSize: "110px" }, 9.0, { slam: 0.4 });
+        P.out(t2, 11.0);
+        window.__TE = 11.7;
+        P.outro(11.2, "essai");
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

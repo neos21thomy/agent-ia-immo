@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — Film 1 · Le mandat perdu</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/premium.css" />
+    <style>
+      @font-face {
+        font-family: "Anton";
+        src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("assets/fonts/source-serif-4-latin-600-normal.woff2") format("woff2");
+        font-weight: 600;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Caveat";
+        src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2");
+        font-weight: 700;
+        font-style: normal;
+      }
+      #rw { top: 760px; font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 150px; color: #fff; }
+      #rwi { left: 390px; top: 560px; width: 300px; height: 150px; }
+      #rwi svg { width: 300px; height: 150px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="19.0" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="19.0" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/film-01-mandat-perdu.wav" data-start="0" data-duration="19.0" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/premium.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 19.0;
+        P.init(tl, root, D);
+        const k1 = P.text("ctr p-kick", "MARDI · 9 H 12", { top: "330px" }, 0.1);
+        const n1 = P.notif({ title: "SMS · M. ALBERT", time: "9:12", icon: "msg", c: "red", text: "Finalement, on a signé avec une autre agence. Vous ne nous avez jamais rappelés…" }, { left: "90px", top: "470px" }, 0.45);
+        tl.fromTo(n1, { x: 0 }, { x: 10, duration: 0.05, ease: "none", yoyo: true, repeat: 7, immediateRender: false }, 1.0);
+        P.flash(1.7);
+        K.sfx(1.7, "buzz", 0.22);
+        const t1 = P.title(["LE MANDAT", "<span class='red'>QUE T’AS OUBLIÉ</span>", "DE RAPPELER."], { top: "860px", fontSize: "94px" }, 1.9, { slam: 0.4 });
+        P.out([k1, n1, t1], 4.3);
+        // on rembobine
+        const rwi = P.ab("", `<svg viewBox="0 0 200 100"><path d="M100 10 L30 50 L100 90Z M180 10 L110 50 L180 90Z" fill="#00C6FC"/></svg>`, {});
+        rwi.id = "rwi";
+        const rt = P.title(["ON REMBOBINE."], { top: "380px", fontSize: "100px" }, 4.6, { slam: 0.3 });
+        const rw = P.ab("ctr", "MAR 09:12", {});
+        rw.id = "rw";
+        tl.set([rwi, rw], { opacity: 0 }, 0);
+        tl.fromTo([rwi, rw], { opacity: 0 }, { opacity: 1, duration: 0.2 }, 4.6);
+        tl.fromTo(rwi, { x: 0 }, { x: -24, duration: 0.12, ease: "sine.inOut", yoyo: true, repeat: 11 }, 4.7);
+        const P0 = { m: 24 * 60 + 9 * 60 + 12 };
+        tl.to(P0, { m: 8 * 60, duration: 1.4, ease: "power2.inOut", onUpdate: () => {
+          const m = Math.round(P0.m); const d = m >= 24 * 60 ? "MAR" : "LUN"; const r = m % (24 * 60);
+          rw.textContent = `${d} ${String(Math.floor(r / 60)).padStart(2, "0")}:${String(r % 60).padStart(2, "0")}`;
+        } }, 4.8);
+        for (let i = 0; i < 12; i++) K.sfx(4.8 + i * 0.11, "tick", 0.12, 0, { f: 3200 - i * 120 });
+        K.sfx(4.7, "whoosh", 0.24, 0, { d: 1.4, f0: 6000, f1: 300, pk: 0.8 });
+        P.out([rt, rwi, rw], 6.5);
+        // avec LIMO
+        const k2 = P.text("ctr p-kick", "LUNDI · 8 H 00 · AVEC LIMO", { top: "250px" }, 6.7);
+        const { ph, halo } = P.phone({ left: "213px", top: "520px" }, 6.8);
+        const n2 = P.notif({ title: "RAPPEL", text: "M. Albert attend ton rappel aujourd’hui." }, { left: "90px", top: "640px" }, 7.7);
+        K.tapAt(n2, 800, 80, 8.8);
+        const n3 = P.notif({ title: "APPEL PASSÉ", icon: "phone", c: "cy", time: "8:05", text: "RDV d’estimation calé : jeudi, 10 h." }, { left: "90px", top: "830px" }, 9.2);
+        const n4 = P.notif({ title: "MANDAT", icon: "file", c: "ok", time: "Jeudi", text: "Mandat exclusif signé : famille Albert.", snd: "success", g: 0.3 }, { left: "90px", top: "1020px" }, 10.4);
+        K.sfx(10.6, "fanfare", 0.22);
+        K.burst(K.sparkles(root, 540, 1100, 18, 480, 160, 3), 10.55);
+        P.out([k2, ph, halo, n2, n3, n4], 12.3, { y: 60 });
+        const t3 = P.title(["UN RAPPEL OUBLIÉ", "= <span class='red'>UN MANDAT PERDU.</span>"], { top: "620px", fontSize: "76px" }, 12.6, { slam: 0.35 });
+        const s3 = P.text("ctr p-serif", "LIMO ne t’en laisse passer aucun.", { top: "860px", fontSize: "54px" }, 13.6);
+        P.out([t3, s3], 15.2);
+        window.__TE = 15.9;
+        P.outro(15.4, "dm");
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>
