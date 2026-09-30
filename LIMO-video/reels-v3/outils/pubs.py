@@ -21,6 +21,9 @@ if __name__ == "__main__":
         h, n = re.subn(r'N\.outro\(([\d.]+), "\w+"\)', r'N.outro(\1, "pub")', h)
         assert n == 1, (src, n)
         h = h.replace(f"assets/audio/{src}.wav", f"assets/audio/{name}.wav")
+        # police de l'accroche (absente des films « naturel » générés avant la série hooks)
+        if "Montserrat Hook" not in h.split("</style>")[0]:
+            h = h.replace("    <style>\n", '    <style>\n      @font-face { font-family: "Montserrat Hook"; src: url("assets/fonts/montserrat-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-style: normal; }\n', 1)
         # mascotte : sous le bouton, au centre (visible aussi en 4:5)
         h = h.replace("x: 890 - (left + W / 2), y: 1610 - (top + H / 2), scale: s, rotation: -8", "x: 540 - (left + W / 2), y: 1370 - (top + H / 2), scale: s, rotation: 0").replace("const s = 260 / W;", "const s = 200 / W;")
         pathlib.Path(f"reels/{name}.html").write_text(h, encoding="utf-8")

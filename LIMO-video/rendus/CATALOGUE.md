@@ -1,6 +1,6 @@
 # 🎬 Catalogue des vidéos LIMO
 
-Toutes les vidéos Instagram (1080×1920, 30 i/s) de LIMO, au même endroit : **108 fichiers MP4**.
+Toutes les vidéos Instagram (1080×1920, 30 i/s) de LIMO, au même endroit : **120 fichiers MP4**.
 Chaque vidéo existe en version **bruitages seuls** (pour poser un son tendance dans Instagram) et, le plus souvent, en version **`-musique`**.
 Ouvre `CATALOGUE.html` dans ce dossier pour les regarder toutes directement dans ton navigateur.
 
@@ -8,6 +8,7 @@ Ouvre `CATALOGUE.html` dans ce dossier pour les regarder toutes directement dans
 
 | Série | Statut | Vidéos |
 |---|---|---|
+| 📣 Publicités Meta : 6 pubs (9:16 et 4:5) | ⭐ À publier en priorité | 6 |
 | 🤖 Série « Mascotte » : 10 Reels | ⭐ À publier en priorité | 10 |
 | 🪝 Série « Hooks » : 10 Reels | ⭐ À publier en priorité | 10 |
 | 🌿 Série « LIMO naturel » : 10 Reels | ⭐ À publier | 10 |
@@ -17,6 +18,19 @@ Ouvre `CATALOGUE.html` dans ce dossier pour les regarder toutes directement dans
 | ⚡ V3 en 15 s (style sombre) | Style ancien (sombre) | 5 |
 | 🚀 V3 : 5 Reels longs (style sombre) | Style ancien (sombre) | 5 |
 | 🗄️ Premières versions | Obsolète | 2 |
+
+## 📣 Publicités Meta : 6 pubs (9:16 et 4:5)
+
+**⭐ À publier en priorité** · Versions sponsorisées : musique intégrée, fin « Essaie LIMO, 14 jours offerts » dans la zone visible. Les versions 4:5 (fil d'actualité) sont dans pubs/4x5/. Textes, ciblage et budget : pubs/KIT-PUB-META.md.
+
+| Aperçu | Vidéo | Durée | Accroche / contenu | Fin | Musique |
+|---|---|---|---|---|---|
+| <img src="apercus/vignettes/LIMO-pub-01-trois-agences-9x16.jpg" width="90"> | [LIMO-pub-01-trois-agences-9x16](pubs/9x16/LIMO-pub-01-trois-agences-9x16.mp4) | 15.2 s | « Ton vendeur a appelé 3 agences. » | Essai 14 jours (bouton pub) | [▶ 4:5](pubs/4x5/LIMO-pub-01-trois-agences-4x5.mp4) |
+| <img src="apercus/vignettes/LIMO-pub-02-ton-concurrent-9x16.jpg" width="90"> | [LIMO-pub-02-ton-concurrent-9x16](pubs/9x16/LIMO-pub-02-ton-concurrent-9x16.mp4) | 14.6 s | « Ton concurrent utilise déjà ça. » | Essai 14 jours (bouton pub) | [▶ 4:5](pubs/4x5/LIMO-pub-02-ton-concurrent-4x5.mp4) |
+| <img src="apercus/vignettes/LIMO-pub-03-qui-va-vendre-9x16.jpg" width="90"> | [LIMO-pub-03-qui-va-vendre-9x16](pubs/9x16/LIMO-pub-03-qui-va-vendre-9x16.mp4) | 15.6 s | « Et si tu savais qui va vendre dans ta rue ? » | Essai 14 jours (bouton pub) | [▶ 4:5](pubs/4x5/LIMO-pub-03-qui-va-vendre-4x5.mp4) |
+| <img src="apercus/vignettes/LIMO-pub-04-entretien-embauche-9x16.jpg" width="90"> | [LIMO-pub-04-entretien-embauche-9x16](pubs/9x16/LIMO-pub-04-entretien-embauche-9x16.mp4) | 16.2 s | Mascotte : « Poste : assistant d'agent immo. » | Essai 14 jours (bouton pub) | [▶ 4:5](pubs/4x5/LIMO-pub-04-entretien-embauche-4x5.mp4) |
+| <img src="apercus/vignettes/LIMO-pub-05-mieux-que-ton-stagiaire-9x16.jpg" width="90"> | [LIMO-pub-05-mieux-que-ton-stagiaire-9x16](pubs/9x16/LIMO-pub-05-mieux-que-ton-stagiaire-9x16.mp4) | 15.4 s | Mascotte : « 3 trucs que je fais mieux que ton stagiaire. » | Essai 14 jours (bouton pub) | [▶ 4:5](pubs/4x5/LIMO-pub-05-mieux-que-ton-stagiaire-4x5.mp4) |
+| <img src="apercus/vignettes/LIMO-pub-06-rappelez-moi-en-mars-9x16.jpg" width="90"> | [LIMO-pub-06-rappelez-moi-en-mars-9x16](pubs/9x16/LIMO-pub-06-rappelez-moi-en-mars-9x16.mp4) | 16.6 s | « Rappelez-moi en mars. » → signé ailleurs | Essai 14 jours (bouton pub) | [▶ 4:5](pubs/4x5/LIMO-pub-06-rappelez-moi-en-mars-4x5.mp4) |
 
 ## 🤖 Série « Mascotte » : 10 Reels
 
