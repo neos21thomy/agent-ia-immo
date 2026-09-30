@@ -14,6 +14,31 @@ Tout le matériel des Reels de l'application **LIMO** (app.leadengineai.fr), ré
 | `sources/` | Fichiers fournis : `images/` (affiche robot, logo, pubs, landing mobile) et `videos/` (pub « Analyseur de dossier », vidéo UGC IA) |
 | `archives/` | Sources de la V1 (zip) |
 
+## 🪝 Série « Hooks » : 10 Reels (`rendus/hooks/`), accroche lisible dès la 1re image
+
+Même charte que la série naturelle. L'accroche est **déjà à l'écran sur la première image** (donc aussi sur la vignette),
+en grandes capitales marine avec un mot surligné en violet. Elle s'adresse directement à l'agent immo.
+Chaque film fait de 14 à 15,6 s et existe en version bruitages seuls et en version `-musique`.
+
+| # | Fichier `LIMO-hook-…` | Hook (image 1) | Mécanique | Fin |
+|---|---|---|---|---|
+| 1 | `01-ia-remplace` | « L'IA va remplacer ~~les agents immo~~ » | Contre-pied : « seulement ceux qui ne l'utilisent pas » | Commentaire « LIMO » |
+| 2 | `02-trois-agences` | « Ton vendeur a appelé 3 agences. » | Devinette : J+2 / +14 h / 4 min avec LIMO | Essai 14 jours |
+| 3 | `03-dix-secondes` | « Agent immo ? Donne-moi 10 secondes. » | Compte à rebours, 6 tâches cochées | Démo 15 min |
+| 4 | `04-red-flags` | « 3 red flags qui font fuir tes vendeurs. » | Tendance « red flags », chaque flag devient vert | Commentaire « LIMO » |
+| 5 | `05-ton-concurrent` | « Ton concurrent utilise déjà ça. » | Téléphone flouté, « Tu veux voir ? », révélation | Message privé « LIMO » |
+| 6 | `06-elle-vaut-combien` | « "Elle vaut combien, ma maison ?" » | Réponse en visite : fourchette en 30 s | Démo 15 min |
+| 7 | `07-qui-va-vendre` | « Et si tu savais qui va vendre dans ta rue ? » | Carte Brive / Allassac / Voutezac, détecteur | Message privé « LIMO » |
+| 8 | `08-avant-8h` | « Ce que font les agents qui signent le plus avant 8 h. » | Brief du jour prêt à 7 h 58 | Essai 14 jours |
+| 9 | `09-ne-like-pas` | « Ne like pas cette vidéo… si tu aimes écrire tes annonces à 23 h. » | Psychologie inversée, puis « là, tu peux liker » | Commentaire « LIMO » |
+| 10 | `10-le-test` | « Test : t'as besoin d'un assistant ? » | 5 situations cochées, score /5 | Message privé « LIMO » |
+
+**Ordre conseillé** : 1, 4, 5, 2, 9, 7, 3, 10, 6, 8. Les 1, 4, 9 et 10 déclenchent le plus de commentaires,
+et les 2, 5 et 7 sont les plus forts en publicité sponsorisée.
+Les chiffres et les noms sont fictifs ; les écrans d'estimation et de carte portent la mention « Exemple fictif ».
+
+Sources : `reels-v3/reels/hook-*.html`, générés par `reels-v3/outils/hooks.py` (fonctions `N.hook` et `N.chip` du kit naturel).
+
 ## 🌿 Série finale « LIMO naturel » : 10 Reels (`rendus/naturel/`), à publier en priorité
 
 Même charte que les pubs LIMO : fond lavande, titres marine en capitales, point violet, trait turquoise, logo maison.

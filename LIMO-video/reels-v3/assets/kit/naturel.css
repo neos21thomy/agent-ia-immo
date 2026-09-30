@@ -454,3 +454,67 @@ body {
   border-radius: 4px;
   background: #fff;
 }
+/* ---- série « hooks » : accroche lisible dès la 1re image ---- */
+.n-hook {
+  font-family: Montserrat, sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--navy);
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+  transform-origin: 50% 50%;
+}
+.n-hook .hk {
+  white-space: nowrap;
+  display: block;
+}
+.n-hook .hl {
+  display: inline-block;
+  padding: 0 16px;
+  border-radius: 12px;
+  background-image: linear-gradient(var(--vio), var(--vio));
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  color: #fff;
+}
+.n-hook .v {
+  color: var(--vio);
+}
+.n-hook .st {
+  position: relative;
+  display: inline-block;
+}
+.n-hook .st i {
+  position: absolute;
+  left: -3%;
+  width: 106%;
+  top: 50%;
+  height: 14px;
+  margin-top: -7px;
+  border-radius: 7px;
+  background: #e5484d;
+  transform-origin: 0 50%;
+}
+.n-hand {
+  font-family: Caveat, cursive;
+  font-weight: 700;
+  color: var(--vio);
+}
+.n-red {
+  color: #d93a3f;
+}
+.n-flag {
+  flex: none;
+  width: 76px;
+  height: 76px;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.n-flag svg.i {
+  width: 40px;
+  height: 40px;
+  stroke-width: 2.6;
+}

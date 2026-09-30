@@ -73,6 +73,35 @@
     K.sfx(t, o.snd || "notif", o.g ?? 0.24);
     return el;
   };
+  // Accroche « hook » : visible dès la première image (vignette), petit coup de poing, surlignage violet
+  N.hook = (lines, css, o = {}) => {
+    const el = N.ab("ctr n-hook", lines.map((l) => `<span class="hk">${l}</span>`).join(""), css);
+    el.setAttribute("data-layout-allow-overflow", "");
+    tl.fromTo(el, { scale: 1.12 }, { scale: 1, duration: 0.45, ease: "power3.out" }, 0);
+    K.sfx(0.0, "slam", o.g ?? 0.34);
+    const hl = o.hl ?? 0.35;
+    K.$$(".hl", el).forEach((h, i) => {
+      tl.fromTo(h, { backgroundSize: "0% 100%", color: "#1b1f4b" }, { backgroundSize: "100% 100%", color: "#ffffff", duration: 0.35, ease: "power2.out" }, hl + i * 0.12);
+      K.sfx(hl + i * 0.12, "whoosh", 0.1, 0, { d: 0.3, f0: 800, f1: 4200, pk: 0.6 });
+    });
+    const st = o.st ?? 1.2;
+    K.$$(".st", el).forEach((s, i) => {
+      tl.fromTo(K.$("i", s), { scaleX: 0 }, { scaleX: 1, duration: 0.28, ease: "power2.out" }, st + i * 0.14);
+      K.sfx(st + i * 0.14, "clack", 0.2);
+    });
+    return el;
+  };
+  // Pastille turquoise ; à t = 0 elle est déjà là (vignette)
+  N.chip = (html, css, t = 0) => {
+    const el = N.ab("ctr", `<span class="n-chip">${html}</span>`, css);
+    if (t > 0) {
+      N.hide(el);
+      tl.set(el, { opacity: 1 }, t);
+      K.pop(K.$("span", el), t);
+      K.sfx(t, "pop", 0.14);
+    }
+    return el;
+  };
   // Carte de fin sobre, au logo LIMO
   N.outro = (t, kind = "essai") => {
     const logo = N.ab("", `<img src="assets/img/limo-logo-ad.png" alt="LIMO" style="width:100%;height:100%" />`, { left: "290px", top: "360px", width: "500px", height: "189px" });

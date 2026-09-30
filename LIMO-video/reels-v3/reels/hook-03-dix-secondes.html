@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — Donne-moi 10 secondes</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/naturel.css" />
+    <style>
+      @font-face { font-family: "Anton"; src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Source Serif 4"; src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; }
+      #ring { left: 390px; top: 300px; width: 300px; height: 300px; }
+      #ring svg { width: 300px; height: 300px; transform: rotate(-90deg); }
+      #ring .n { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: Montserrat, sans-serif; font-weight: 800; font-size: 128px; color: var(--navy); }
+      #ring .n span { position: absolute; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="14.0" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="14.0" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/hook-03-dix-secondes.wav" data-start="0" data-duration="14.0" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/naturel.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 14.0;
+        N.init(tl, root, D);
+        const hk = N.hook(["AGENT IMMO ?", "DONNE-MOI", "<span class='hl'>10 SECONDES.</span>"], { top: "480px", fontSize: "98px" });
+        const s1 = N.text("ctr n-body", "Je te montre ta matinée <b>déjà faite</b>.", { top: "880px", fontSize: "46px" }, 0.9);
+        N.out([hk, s1], 2.0, { y: -40 });
+        const ring = N.ab("", `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="#fff" stroke="#e7e1fa" stroke-width="8"/><circle class="p" cx="50" cy="50" r="44" fill="none" stroke="#6b4fe0" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="0"/></svg><div class="n">${Array.from({ length: 11 }, (_, k) => `<span>${10 - k}</span>`).join("")}</div>`, {});
+        ring.id = "ring";
+        N.hide(ring);
+        K.pop(ring, 2.2, { s: 0.7 });
+        const T0 = 2.4, STEP = 0.6;
+        tl.fromTo(K.$(".p", ring), { strokeDashoffset: 0 }, { strokeDashoffset: 1, duration: STEP * 10, ease: "none" }, T0);
+        K.$$(".n span", ring).forEach((s, k) => {
+          tl.set(s, { opacity: 0 }, 0);
+          tl.set(s, { opacity: 1 }, k === 0 ? 2.2 : T0 + k * STEP);
+          if (k < 10) tl.set(s, { opacity: 0 }, T0 + (k + 1) * STEP);
+          if (k > 0) K.sfx(T0 + k * STEP, "tick", 0.16, 0, { f: 1500 + k * 90 });
+        });
+        const L = ["Brief du jour prêt", "3 relances préparées", "Annonce Brive rédigée", "Avis Google : réponse prête", "Avis de valeur Vignols", "Post LinkedIn publié"];
+        const card = N.ab("n-card", L.map((l) => `<div class="n-row"><span style="color:#1c1c1e">${l}</span><i class="ok" style="margin-left:auto">${K.icon("check")}</i></div>`).join(""), { left: "110px", top: "680px", width: "860px" });
+        N.hide(card);
+        K.fin(card, 2.4, { y: 40, d: 0.4 });
+        K.$$(".n-row", card).forEach((r, i) => {
+          const t = 2.9 + i * 0.85;
+          tl.set(r, { opacity: 0.25 }, 0);
+          tl.to(r, { opacity: 1, duration: 0.2 }, t);
+          tl.fromTo(K.$(".ok", r), { scale: 0 }, { scale: 1, duration: 0.25, ease: "back.out(2.4)" }, t);
+          K.sfx(t, "success", 0.12);
+        });
+        const c1 = N.cap("0 seconde de ton temps.", { top: "1420px" }, 8.6, { dark: true });
+        K.sfx(8.6, "thump", 0.3);
+        N.out([ring, card, c1], 10.0, { y: -30 });
+        window.__TE = 10.4;
+        N.outro(10.4, "demo");
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

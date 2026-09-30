@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — Ce que font les meilleurs avant 8 h</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/naturel.css" />
+    <style>
+      @font-face { font-family: "Anton"; src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Source Serif 4"; src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; }
+
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="14.8" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="14.8" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/hook-08-avant-8h.wav" data-start="0" data-duration="14.8" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/naturel.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 14.8;
+        N.init(tl, root, D);
+        const hk = N.hook(["CE QUE FONT", "LES AGENTS", "QUI SIGNENT", "LE PLUS", "<span class='hl'>AVANT 8 H.</span>"], { top: "420px", fontSize: "104px" });
+        N.out(hk, 2.6, { y: -40 });
+        const cap = N.cap("7 h 58. Le brief est déjà prêt.", { top: "150px" }, 2.8);
+        const ip = N.iphone({ left: "110px", top: "400px", width: "860px", height: "1480px" }, "7:58");
+        N.hide(ip.el);
+        tl.fromTo(ip.el, { opacity: 0, y: 300 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 2.8);
+        const notes = K.h("div", "n-notes", `<h3>Brief du jour</h3><div class="dt">Préparé par LIMO · 7:30</div>`, ip.screen);
+        const L = [["Appeler M. Albert", "9:00"], ["Visite à Vignols", "10:30"], ["Relancer famille Martin", "Priorité"], ["Publier l’annonce Allassac", "Prête"], ["Répondre à 2 avis Google", "Prêt"]];
+        L.forEach((l, i) => {
+          const r = K.h("div", "n-li", `<span class="c"></span><span class="t">${l[0]}</span><span class="tag">${l[1]}</span>`, notes);
+          N.hide(r);
+          K.fin(r, 3.4 + i * 0.35, { y: 16, d: 0.3 });
+          K.sfx(3.4 + i * 0.35, "tick", 0.16, 0, { f: 1600 + i * 150 });
+        });
+        N.out(cap, 5.8, { y: -10, d: 0.2 });
+        const c2 = N.cap("Pas plus d’heures.<br>Juste savoir quoi faire.", { top: "150px" }, 6.0, { dark: true });
+        K.sfx(6.0, "thump", 0.28);
+        N.out([c2, ip.el], 8.4, { y: 60, d: 0.4 });
+        const h = N.head(["TON BRIEF", "DU MATIN<span class='v'>.</span>"], { top: "560px", fontSize: "100px" }, 8.7);
+        const s = N.text("ctr n-body", "Chaque jour, LIMO te dit <b>qui appeler,<br>quoi relancer, quoi publier</b>.", { top: "900px", fontSize: "38px" }, 9.4);
+        N.out([h, s], 11.0);
+        window.__TE = 11.2;
+        N.outro(11.2, "essai");
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

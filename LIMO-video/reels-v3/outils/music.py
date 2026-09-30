@@ -53,6 +53,16 @@ PRESETS = {
     "nat-08-quiz-dpe": ("pop", 124, 0.8),
     "nat-09-anniversaire": ("lofi", 88, 0.8),
     "nat-10-ton-collegue": ("house", 122, 0.8),
+    "hook-01-ia-remplace": ("trap", 140, 0.3),
+    "hook-02-trois-agences": ("house", 122, 0.3),
+    "hook-03-dix-secondes": ("speed", 140, 0.3),
+    "hook-04-red-flags": ("trap", 140, 0.3),
+    "hook-05-ton-concurrent": ("epic", 100, 0.3, 3.3),
+    "hook-06-elle-vaut-combien": ("pop", 124, 0.3),
+    "hook-07-qui-va-vendre": ("house", 122, 0.3),
+    "hook-08-avant-8h": ("lofi", 88, 0.3),
+    "hook-09-ne-like-pas": ("pop", 124, 0.3),
+    "hook-10-le-test": ("house", 122, 0.3),
 }
 
 # progressions (MIDI) : accords (3-4 notes) et fondamentale de basse

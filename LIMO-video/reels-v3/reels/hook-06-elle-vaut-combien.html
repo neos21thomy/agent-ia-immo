@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — Elle vaut combien, ma maison ?</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/naturel.css" />
+    <style>
+      @font-face { font-family: "Anton"; src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Source Serif 4"; src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; }
+      .est { font-family: Montserrat, sans-serif; font-weight: 800; font-size: 50px; color: var(--navy); white-space: nowrap; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="15.2" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="15.2" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/hook-06-elle-vaut-combien.wav" data-start="0" data-duration="15.2" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/naturel.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 15.2;
+        N.init(tl, root, D);
+        const hk = N.hook(["« ELLE VAUT", "COMBIEN,", "<span class='hl'>MA MAISON ? »</span>"], { top: "440px", fontSize: "92px" });
+        const s1 = N.text("ctr n-body", "Ton vendeur. En pleine visite.<br><b>Il attend ta réponse. Là.</b>", { top: "820px", fontSize: "46px" }, 0.9);
+        N.out([hk, s1], 2.8, { y: -40 });
+        const cap = N.cap("Tu sors ton téléphone…", { top: "150px" }, 3.0);
+        const ip = N.iphone({ left: "110px", top: "400px", width: "860px", height: "1480px" }, "15:24");
+        N.hide(ip.el);
+        tl.fromTo(ip.el, { opacity: 0, y: 300 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 3.0);
+        K.h("div", "n-mhead", `<div class="av" style="background:#fff;padding:6px"><img src="assets/img/limo-house-ad.png" alt="" style="width:100%;height:100%;object-fit:contain" /></div><b>LIMO</b>`, ip.screen);
+        const th = K.h("div", "n-thread", null, ip.screen);
+        K.h("div", "n-day", "Aujourd’hui · 15:24", th);
+        const b1 = K.h("div", "n-bub out", "Maison 120 m², Vignols, terrain 1 500 m², 4 ch., DPE D. Estimation ?", th);
+        N.hide(b1);
+        K.fin(b1, 3.6, { y: 20, d: 0.35 });
+        K.sfx(3.6, "send", 0.22);
+        const dots = K.h("div", "n-dots", "<i></i><i></i><i></i>", th);
+        N.hide(dots);
+        tl.set(dots, { opacity: 1 }, 4.1);
+        K.$$("i", dots).forEach((d, i) => tl.fromTo(d, { y: 0 }, { y: -8, duration: 0.14, yoyo: true, repeat: 3, ease: "sine.inOut" }, 4.15 + i * 0.07));
+        tl.set(dots, { display: "none" }, 4.8);
+        const b2 = K.h("div", "n-bub in", `<div style="font-size:30px;font-weight:600;color:#6e6e73">Fourchette estimée</div><div class="est"><span class="a">0 €</span> – <span class="b">0 €</span></div><div style="margin-top:10px;font-size:32px">Appuyée sur 3 ventes comparables du secteur. Avis de valeur prêt à envoyer.</div>`, th);
+        b2.style.maxWidth = "92%";
+        N.hide(b2);
+        K.fin(b2, 4.8, { y: 20, d: 0.35 });
+        K.sfx(4.8, "receive", 0.28);
+        K.count(K.$(".a", b2), 212000, 5.0, 1.1, K.eur, { ticks: 10 });
+        K.count(K.$(".b", b2), 228000, 5.0, 1.1, K.eur, { ticks: 0 });
+        N.out(cap, 5.4, { y: -10, d: 0.2 });
+        const c2 = N.cap("…et tu réponds en 30 secondes.", { top: "150px" }, 5.6, { dark: true });
+        K.sfx(6.2, "success", 0.24);
+        const fx = N.text("ctr n-body", "Exemple fictif", { top: "1830px", fontSize: "22px" }, 5.0);
+        N.out([c2, ip.el, fx], 8.4, { y: 60, d: 0.4 });
+        const h = N.head(["TU ASSURES", "DEVANT TON VENDEUR<span class='v'>.</span>"], { top: "620px", fontSize: "82px" }, 8.8);
+        const s2 = N.text("ctr n-body", "Estimation argumentée, <b>avis de valeur prêt à envoyer</b>.", { top: "960px", fontSize: "38px" }, 9.5);
+        N.out([h, s2], 11.4);
+        window.__TE = 11.6;
+        N.outro(11.6, "demo");
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>
