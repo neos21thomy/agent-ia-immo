@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — Série Conseiller augmenté · Niveau 1 · Le déclic</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <style>
+      @font-face {
+        font-family: "Anton";
+        src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Caveat";
+        src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2");
+        font-weight: 700;
+        font-style: normal;
+      }
+      #level {
+        position: absolute;
+        right: 84px;
+        top: 138px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 10px;
+        font-family: Montserrat, sans-serif;
+        font-weight: 700;
+        font-size: 20px;
+        letter-spacing: 0.18em;
+        color: var(--cyan);
+      }
+      #level .segs {
+        display: flex;
+        gap: 8px;
+      }
+      #level .segs i {
+        display: block;
+        width: 44px;
+        height: 10px;
+        border-radius: 5px;
+        background: rgba(255, 255, 255, 0.12);
+        overflow: hidden;
+      }
+      #level .segs i b {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: var(--cyan);
+        transform-origin: 0 50%;
+      }
+      #series {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 470px;
+        text-align: center;
+        font-family: Montserrat, sans-serif;
+        font-weight: 700;
+        font-size: 30px;
+        letter-spacing: 0.3em;
+        color: var(--cyan);
+      }
+      #hook {
+        position: absolute;
+        left: 60px;
+        right: 60px;
+        top: 560px;
+        text-align: center;
+        font-family: "Anton", sans-serif;
+        font-size: 128px;
+        color: var(--fg);
+      }
+      #hook .mask {
+        line-height: 1.3;
+        margin-bottom: -0.2em;
+      }
+      .year {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 300px;
+        text-align: center;
+        font-family: "Anton", sans-serif;
+        font-size: 150px;
+        line-height: 1.2;
+        color: var(--fg);
+      }
+      .era {
+        position: absolute;
+        left: 110px;
+        top: 540px;
+        width: 860px;
+        height: 880px;
+        border-radius: 44px;
+        background: var(--card);
+        border: 2px solid var(--card-b);
+      }
+      .era .art {
+        position: absolute;
+        left: 180px;
+        top: 60px;
+        width: 500px;
+        height: 400px;
+      }
+      .era .art svg {
+        width: 500px;
+        height: 400px;
+      }
+      .era .art img {
+        position: absolute;
+        left: 90px;
+        top: 0;
+        width: 320px;
+        height: 400px;
+        object-fit: contain;
+      }
+      .era .nm {
+        position: absolute;
+        left: 40px;
+        right: 40px;
+        top: 490px;
+        text-align: center;
+        font-family: "Anton", sans-serif;
+        font-size: 84px;
+        line-height: 1.2;
+        color: var(--fg);
+      }
+      .era .qt {
+        position: absolute;
+        left: 50px;
+        right: 50px;
+        top: 630px;
+        text-align: center;
+        font-family: "Caveat", cursive;
+        font-weight: 700;
+        font-size: 58px;
+        line-height: 1.1;
+        color: #ffb3b9;
+      }
+      .stamp {
+        position: absolute;
+        left: 520px;
+        top: 90px;
+        height: 96px;
+        padding: 0 26px;
+        border-radius: 16px;
+        border: 6px solid #2bd99a;
+        display: flex;
+        align-items: center;
+        font-family: "Anton", sans-serif;
+        font-size: 60px;
+        letter-spacing: 0.06em;
+        color: #2bd99a;
+        background: rgba(8, 40, 30, 0.85);
+        transform: rotate(-10deg);
+      }
+      .stamp.ask {
+        border-color: var(--cyan);
+        color: var(--cyan);
+        background: rgba(6, 30, 44, 0.9);
+      }
+      #rail {
+        position: absolute;
+        left: 150px;
+        top: 1530px;
+        width: 780px;
+        height: 60px;
+      }
+      #rail .ln {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 14px;
+        height: 4px;
+        border-radius: 2px;
+        background: rgba(255, 255, 255, 0.14);
+      }
+      #rail .fl {
+        position: absolute;
+        left: 0;
+        width: 780px;
+        top: 14px;
+        height: 4px;
+        border-radius: 2px;
+        background: linear-gradient(90deg, var(--violet), var(--cyan));
+        transform-origin: 0 50%;
+      }
+      #rail .dt {
+        position: absolute;
+        top: 4px;
+        width: 24px;
+        height: 24px;
+        margin-left: -12px;
+        border-radius: 50%;
+        background: #1a1628;
+        border: 3px solid rgba(255, 255, 255, 0.25);
+      }
+      #rail .dt.on {
+        background: var(--cyan);
+        border-color: #fff;
+      }
+      #rail .lb {
+        position: absolute;
+        top: 40px;
+        width: 160px;
+        margin-left: -80px;
+        text-align: center;
+        font-family: Montserrat, sans-serif;
+        font-weight: 700;
+        font-size: 17px;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+      }
+      .say {
+        position: absolute;
+        left: 70px;
+        right: 70px;
+        text-align: center;
+        font-family: "Anton", sans-serif;
+        color: var(--fg);
+      }
+      .say em {
+        font-style: normal;
+        color: var(--cyan);
+      }
+      #robo {
+        position: absolute;
+        left: 390px;
+        top: 1080px;
+        width: 300px;
+        height: 375px;
+        object-fit: contain;
+      }
+      #next {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 1700px;
+        display: flex;
+        justify-content: center;
+      }
+      #next span {
+        height: 60px;
+        padding: 0 26px;
+        border-radius: 30px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        border: 2px solid rgba(0, 198, 252, 0.55);
+        background: rgba(0, 198, 252, 0.12);
+        font-family: Montserrat, sans-serif;
+        font-weight: 700;
+        font-size: 24px;
+        letter-spacing: 0.1em;
+        white-space: nowrap;
+        color: var(--cyan);
+      }
+      #next span svg.i {
+        flex: none;
+        width: 26px;
+        height: 26px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="19.5" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="19.5" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/serie-n1-declic.wav" data-start="0" data-duration="19.5" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 19.5;
+        K.bg(root, { dur: D });
+
+        /* ---------- générique de la série : niveau 1/5 ---------- */
+        const wm = K.wordmark(root, { x: 84, y: 146, size: 46 });
+        const level = K.h("div", "", `<span>NIVEAU 1/5</span><div class="segs">${"<i><b></b></i>".repeat(5)}</div>`, root);
+        level.id = "level";
+        tl.fromTo([wm, level], { opacity: 0, y: -16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out", stagger: 0.06 }, 0.1);
+        const seg1 = K.$(".segs b", level);
+        K.$$(".segs b", level).slice(1).forEach((b) => tl.set(b, { scaleX: 0 }, 0));
+        tl.fromTo(seg1, { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power2.out" }, 0.45);
+        K.sfx(0.45, "riser", 0.1, 0.4, { d: 0.45 });
+        K.sfx(0.95, "tick", 0.2, 0.4, { f: 2400 });
+
+        const series = K.h("div", "", "CONSEILLER AUGMENTÉ", root);
+        series.id = "series";
+        K.fin(series, 0.05, { y: 14, d: 0.4 });
+        K.sfx(0.05, "whoosh", 0.12, 0, { d: 0.35, f0: 600, f1: 4000, pk: 0.6 });
+
+        /* ---------- accroche ---------- */
+        const hook = K.h("div", "", ["EN 2007,", "T’AURAIS REFUSÉ", "<span class='cy'>LE SMARTPHONE ?</span>"].map((l) => `<span class="mask" data-layout-allow-overflow><span data-layout-allow-occlusion data-layout-allow-overlap>${l}</span></span>`).join(""), root);
+        hook.id = "hook";
+        const hs = K.$$(".mask > span", hook);
+        tl.fromTo(hs, { yPercent: 115 }, { yPercent: 0, duration: 0.55, ease: "expo.out", stagger: 0.12 }, 0.2);
+        K.sfx(0.22, "slam", 0.45);
+        hs.forEach((s, i) => i && K.sfx(0.2 + i * 0.12, "whoosh", 0.12, i % 2 ? 0.3 : -0.3, { d: 0.3, f0: 700, f1: 5000, pk: 0.7 }));
+        K.fout([hook, series], 2.2, { y: -60, d: 0.3 });
+        K.sfx(2.2, "whoosh", 0.2, 0, { d: 0.4, f0: 2500, f1: 500, pk: 0.35 });
+
+        /* ---------- la frise ---------- */
+        const C = "#00C6FC";
+        const V = "#9B7BFF";
+        const ART = {
+          fax: `<svg viewBox="0 0 200 160"><rect x="58" y="16" width="84" height="54" rx="4" fill="#F5F4FA"/><path d="M72 32h56M72 44h56M72 56h36" stroke="#9aa3b5" stroke-width="4"/><rect x="30" y="62" width="140" height="74" rx="14" fill="#2a2440" stroke="${V}" stroke-width="4"/><rect x="48" y="80" width="54" height="22" rx="5" fill="${C}" opacity=".85"/><circle cx="126" cy="84" r="5" fill="${V}"/><circle cx="142" cy="84" r="5" fill="${V}"/><circle cx="126" cy="102" r="5" fill="${V}"/><circle cx="142" cy="102" r="5" fill="${V}"/><rect x="48" y="112" width="104" height="10" rx="5" fill="#15121f"/></svg>`,
+          web: `<svg viewBox="0 0 200 160"><rect x="16" y="18" width="168" height="124" rx="12" fill="#2a2440" stroke="${V}" stroke-width="4"/><path d="M16 42h168" stroke="${V}" stroke-width="4"/><circle cx="32" cy="30" r="4" fill="#ff6b77"/><circle cx="46" cy="30" r="4" fill="#F4C20D"/><circle cx="60" cy="30" r="4" fill="#2bd99a"/>${[0, 1, 2]
+            .map((i) => `<rect x="${30 + i * 50}" y="56" width="40" height="34" rx="5" fill="#8fd3ff"/><path d="M${34 + i * 50} 82 l16 -14 l16 14z" fill="#c8553d"/><rect x="${38 + i * 50}" y="80" width="24" height="10" fill="#f6efe3"/><rect x="${30 + i * 50}" y="96" width="40" height="6" rx="3" fill="#6b6385"/><rect x="${30 + i * 50}" y="108" width="26" height="6" rx="3" fill="${C}"/>`)
+            .join("")}</svg>`,
+          phone: `<svg viewBox="0 0 200 160"><rect x="66" y="6" width="68" height="148" rx="14" fill="#15121f" stroke="${V}" stroke-width="4"/><rect x="74" y="20" width="52" height="118" rx="6" fill="#2a2440"/><rect x="88" y="11" width="24" height="5" rx="2.5" fill="#2a2440"/>${[0, 1, 2, 3, 4, 5]
+            .map((i) => `<rect x="${80 + (i % 3) * 15}" y="${30 + Math.floor(i / 3) * 16}" width="11" height="11" rx="3" fill="${[C, V, "#2bd99a", "#F4C20D", "#ff6b77", C][i]}"/>`)
+            .join("")}<rect x="80" y="66" width="40" height="30" rx="4" fill="#8fd3ff"/><path d="M84 92 l16 -14 l16 14z" fill="#c8553d"/><rect x="80" y="102" width="30" height="5" rx="2.5" fill="#6b6385"/><rect x="80" y="112" width="20" height="5" rx="2.5" fill="${C}"/></svg>`,
+          visit: `<svg viewBox="0 0 200 160"><ellipse cx="100" cy="80" rx="84" ry="64" fill="none" stroke="${C}" stroke-width="4" stroke-dasharray="10 9"/><path d="M178 70 l8 12 l-14 2" fill="none" stroke="${C}" stroke-width="4" stroke-linecap="round"/><path d="M22 92 l-8 -12 l14 -2" fill="none" stroke="${C}" stroke-width="4" stroke-linecap="round"/><rect x="62" y="70" width="76" height="52" fill="#f6efe3"/><polygon points="54,74 100,40 146,74" fill="#c8553d"/><rect x="92" y="96" width="16" height="26" rx="2" fill="#6b4f3a"/><rect x="70" y="80" width="16" height="13" rx="2" fill="#ffe29a"/><rect x="114" y="80" width="16" height="13" rx="2" fill="#ffe29a"/><text x="100" y="152" text-anchor="middle" font-family="Montserrat" font-weight="700" font-size="16" fill="${C}">360°</text></svg>`,
+        };
+        const ERAS = [
+          ["ANNÉES 90", "LE FAX", "« Du papier par le téléphone ? Pas pour moi. »", "fax", "FAX"],
+          ["ANNÉES 2000", "LES PORTAILS", "« Ma vitrine, ça suffit. »", "web", "PORTAILS"],
+          ["2007", "LE SMARTPHONE", "« Mon agenda papier marche très bien. »", "phone", "SMARTPHONE"],
+          ["2020", "LA VISITE VIRTUELLE", "« Rien ne remplace une vraie visite. »", "visit", "VISITE 360°"],
+          ["AUJOURD’HUI", "L’IA", "« Pas pour moi… »", "ai", "IA"],
+        ];
+        const rail = K.h("div", "", `<div class="ln"></div><div class="fl"></div>${ERAS.map((e, i) => `<div class="dt" style="left:${(i / (ERAS.length - 1)) * 780}px"></div><div class="lb" style="left:${(i / (ERAS.length - 1)) * 780}px">${e[4]}</div>`).join("")}`, root);
+        rail.id = "rail";
+        const fl = K.$(".fl", rail);
+        const dts = K.$$(".dt", rail);
+        tl.fromTo(rail, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 2.3);
+        tl.fromTo(fl, { scaleX: 0 }, { scaleX: 0, duration: 0.01 }, 2.3);
+
+        const T0 = 2.45;
+        const STEP = 2.05;
+        let prev = null;
+        ERAS.forEach((e, i) => {
+          const t = T0 + i * STEP;
+          const year = K.h("div", "year", e[0], root);
+          const card = K.h("div", "era", `<div class="art">${e[3] === "ai" ? `<img src="assets/img/limo-robot.png" alt="Robot LIMO" />` : ART[e[3]]}</div><div class="nm">${e[1]}</div><div class="qt"></div>`, root);
+          const stamp = K.h("div", "stamp" + (i === ERAS.length - 1 ? " ask" : ""), i === ERAS.length - 1 ? "ET TOI ?" : "ADOPTÉ", card);
+          stamp.setAttribute("data-layout-allow-overlap", "");
+          if (prev) {
+            tl.to(prev, { x: -900, opacity: 0, duration: 0.32, ease: "power2.in" }, t - 0.05);
+            K.sfx(t - 0.05, "swipe", 0.12);
+          }
+          tl.fromTo(year, { opacity: 0, x: 380 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, t + 0.05);
+          tl.fromTo(card, { opacity: 0, x: 900 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, t + 0.08);
+          K.sfx(t + 0.05, "whoosh", 0.16, 0.4, { d: 0.35, f0: 400, f1: 3000, pk: 0.5 });
+          K.type(K.$(".qt", card), e[2], t + 0.45, 0.55, 0.04);
+          tl.to(fl, { scaleX: i / (ERAS.length - 1), duration: 0.45, ease: "power2.out" }, t + 0.1);
+          tl.fromTo(dts[i], { scale: 0.6 }, { scale: 1.25, duration: 0.25, ease: "back.out(3)" }, t + 0.15);
+          tl.fromTo(dts[i], { backgroundColor: "#1a1628", borderColor: "rgba(255,255,255,0.25)" }, { backgroundColor: "#00C6FC", borderColor: "#ffffff", duration: 0.2 }, t + 0.15);
+          tl.fromTo(stamp, { opacity: 0, scale: 2.2, rotation: -10 }, { opacity: 1, scale: 1, rotation: -10, duration: 0.24, ease: "power4.in" }, t + 1.25);
+          K.sfx(t + 1.47, i === ERAS.length - 1 ? "buzz" : "stamp", i === ERAS.length - 1 ? 0.14 : 0.4);
+          prev = [year, card];
+        });
+        const TF = T0 + ERAS.length * STEP + 0.35;
+
+        /* ---------- le message ---------- */
+        tl.to(prev, { x: -900, opacity: 0, duration: 0.32, ease: "power2.in" }, TF - 0.35);
+        K.fout(rail, TF - 0.35, { y: 30, d: 0.3 });
+        K.sfx(TF - 0.35, "whoosh", 0.18, 0, { d: 0.4, f0: 2500, f1: 500, pk: 0.35 });
+        const s1 = K.h("div", "say", "L’IA FAIT DÉJÀ<br>PARTIE DE <em>TA VIE.</em>", root);
+        Object.assign(s1.style, { top: "380px", fontSize: "104px", lineHeight: "1.15" });
+        const s2 = K.h("div", "say", "Chaque époque a eu ses outils.<br>Ceux qui s’y sont mis tôt<br>ont pris de l’avance.", root);
+        Object.assign(s2.style, { top: "700px", fontFamily: "'Source Serif 4', serif", fontSize: "46px", lineHeight: "1.35", color: "var(--muted)" });
+        K.fin(s1, TF, { y: 40 });
+        K.sfx(TF, "slam", 0.32);
+        K.fin(s2, TF + 0.5, { y: 20 });
+        const robo = K.h("img", "", null, root);
+        robo.id = "robo";
+        robo.src = "assets/img/limo-robot.png";
+        robo.alt = "Robot LIMO";
+        const s3 = K.h("div", "say", "CONSEILLER IMMO ?<br><em>UTILISE LIMO.</em>", root);
+        Object.assign(s3.style, { top: "1470px", fontSize: "76px", lineHeight: "1.15" });
+        tl.fromTo(robo, { opacity: 0, y: 80, scale: 0.6 }, { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: "back.out(1.7)" }, TF + 1.3);
+        K.sfx(TF + 1.35, "thump", 0.4);
+        K.sfx(TF + 1.4, "bloop-up", 0.22, 0, { f0: 260, f1: 780, d: 0.16 });
+        K.fin(s3, TF + 1.7, { y: 30 });
+        K.sfx(TF + 1.7, "success", 0.24);
+        const TE = TF + 3.4;
+        const next = K.h("div", "", `<span>${K.icon("sparkles")}À SUIVRE · NIVEAU 2</span>`, root);
+        next.id = "next";
+        K.pop(K.$("span", next), TF + 2.4, { s: 0.6 });
+        K.sfx(TF + 2.4, "pop", 0.2, 0, { f: 620 });
+        K.fout([s1, s2, s3, robo, next, wm, level], TE - 0.3, { y: -30, d: 0.3 });
+        window.__TE = TE;
+        K.endCard(root, TE, { tag: "L’IA des agents immo." });
+
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

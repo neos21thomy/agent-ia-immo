@@ -42,6 +42,18 @@ Mêmes 5 formats, recentrés sur les tâches du métier. Chaque accroche interpe
 
 Sources : `reels-v3/reels/short-*.html` (même chaîne `outils/run.sh short-1-pov`).
 
+### Série « Conseiller augmenté » (`rendus/serie/`)
+
+Une série en 5 niveaux qui avance d'épisode en épisode. Chaque vidéo s'ouvre sur une barre « NIVEAU X/5 ».
+
+| Niveau | Fichier | Durée | Message |
+|---|---|---|---|
+| 1 · Le déclic | `LIMO-serie-niveau-1-le-declic.mp4` | 19,5 s | « En 2007, t'aurais refusé le smartphone ? » La frise fax → portails → smartphone → visite virtuelle → IA : à chaque époque, les outils ont été adoptés. « L'IA fait déjà partie de ta vie. Conseiller immo ? Utilise LIMO. » |
+| 2 · Le constat | à venir | | Les IA grand public ne connaissent ni tes clients, ni tes mandats (citer ChatGPT/Gemini/Claude seulement si c'est vérifié) |
+| 3 · La réponse | à venir | | LIMO : l'IA faite pour le métier |
+
+Source : `reels-v3/reels/serie-n1-declic.html`.
+
 **Conseils de publication**
 
 - Un Reel tous les 2-3 jours plutôt que les 5 d'un coup ; commencer par le 3 (avant/après), le plus parlant.
