@@ -1,0 +1,2025 @@
+<!doctype html>
+<html lang="fr" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — Reel V2 « Ta journée est déjà triée »</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "Anton";
+        src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("assets/fonts/source-serif-4-latin-600-normal.woff2") format("woff2");
+        font-weight: 600;
+        font-style: normal;
+      }
+
+      :root {
+        --bg: #05070c;
+        --fg: #f2f6fa;
+        --cyan: #00c6fc;
+        --label: #bfcad6;
+        --app-bg: #131219;
+        --card: #1e1830;
+        --card-b: #2a2340;
+        --violet: #785afc;
+        --violet-l: #a98dff;
+        --violet-bg: #2a2148;
+        --blue: #1278fc;
+        --txt: #f2eefa;
+        --muted: #9a93b5;
+        --muted2: #8e87aa;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: var(--bg);
+      }
+      body {
+        font-family: Inter, sans-serif;
+        color: var(--fg);
+        -webkit-font-smoothing: antialiased;
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: var(--bg);
+      }
+      .clip {
+        position: absolute;
+        inset: 0;
+      }
+      .cy {
+        color: var(--cyan);
+      }
+      .mask {
+        display: block;
+        overflow: hidden;
+      }
+      .mask > span {
+        display: block;
+      }
+      svg.i {
+        width: 100%;
+        height: 100%;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      /* ---------- Fond persistant ---------- */
+      #grid {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: -48px;
+        bottom: -48px;
+        background-image: radial-gradient(circle, rgba(160, 205, 255, 0.22) 1.6px, transparent 2.1px);
+        background-size: 48px 48px;
+        -webkit-mask-image: radial-gradient(ellipse 72% 55% at 50% 40%, #000 18%, transparent 78%);
+        mask-image: radial-gradient(ellipse 72% 55% at 50% 40%, #000 18%, transparent 78%);
+        opacity: 0.55;
+      }
+      #glowA {
+        position: absolute;
+        left: 260px;
+        top: -420px;
+        width: 1300px;
+        height: 1300px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(0, 198, 252, 0.2) 0%, rgba(0, 198, 252, 0) 62%);
+      }
+      #glowB {
+        position: absolute;
+        left: -640px;
+        top: 960px;
+        width: 1400px;
+        height: 1400px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(120, 90, 252, 0.17) 0%, rgba(120, 90, 252, 0) 62%);
+      }
+
+      /* ---------- Scène 1 : accroche ---------- */
+      #hook-ringwrap {
+        position: absolute;
+        left: 240px;
+        top: 430px;
+        width: 600px;
+        height: 600px;
+        transform-origin: 50% 50%;
+      }
+      #hook-ring {
+        position: absolute;
+        inset: 0;
+        overflow: visible;
+      }
+      #ticks line {
+        stroke: rgba(191, 202, 214, 0.35);
+        stroke-width: 3;
+        stroke-linecap: round;
+      }
+      #hook-time {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Anton", sans-serif;
+        font-size: 232px;
+        letter-spacing: 0.01em;
+        color: var(--fg);
+      }
+      #hook-time .mask {
+        line-height: 1.3;
+        padding: 0 0.03em;
+      }
+      #hook-lines {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 1080px;
+        text-align: center;
+        font-family: "Anton", sans-serif;
+        font-size: 118px;
+        color: var(--fg);
+      }
+      #hook-lines .mask {
+        line-height: 1.32;
+        margin-bottom: -0.2em;
+      }
+
+      /* ---------- Scène 2-5 : app ---------- */
+      #topbar {
+        position: absolute;
+        left: 84px;
+        right: 84px;
+        top: 146px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .wm {
+        display: flex;
+        align-items: center;
+        font-family: Montserrat, sans-serif;
+        font-weight: 700;
+        color: var(--fg);
+      }
+      .wm-sm .wm-t {
+        font-size: 46px;
+        letter-spacing: 0.06em;
+        line-height: 1;
+      }
+      .wm-sm .wm-o {
+        width: 36px;
+        height: 36px;
+        margin-left: 2px;
+        overflow: visible;
+      }
+      #prog {
+        display: flex;
+        gap: 8px;
+      }
+      .seg {
+        display: block;
+        width: 46px;
+        height: 6px;
+        border-radius: 3px;
+        background: rgba(200, 225, 255, 0.16);
+        overflow: hidden;
+      }
+      .seg i {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: var(--cyan);
+        transform-origin: 0% 50%;
+      }
+      #chapters {
+        position: absolute;
+        left: 84px;
+        top: 236px;
+        width: 912px;
+        height: 420px;
+      }
+      .chap {
+        position: absolute;
+        inset: 0;
+      }
+      .ch-label {
+        font-family: Montserrat, sans-serif;
+        font-weight: 400;
+        font-size: 26px;
+        letter-spacing: 0.28em;
+        color: var(--label);
+      }
+      .ch-h {
+        margin-top: 6px;
+        font-family: "Anton", sans-serif;
+        font-size: 112px;
+        color: var(--fg);
+      }
+      .ch-h .mask {
+        line-height: 1.32;
+        margin-bottom: -0.22em;
+      }
+      .ch-bar {
+        width: 150px;
+        height: 8px;
+        margin-top: 44px;
+        border-radius: 2px;
+        background: var(--cyan);
+        transform-origin: 0% 50%;
+      }
+
+      #phoneWrap {
+        position: absolute;
+        left: 190px;
+        top: 690px;
+        width: 700px;
+        height: 1500px;
+      }
+      #phone {
+        position: absolute;
+        inset: 0;
+        border-radius: 106px;
+        background: #0b0b10;
+        border: 4px solid #34343f;
+        box-shadow:
+          0 0 0 10px #0d0d13,
+          0 60px 140px rgba(0, 0, 0, 0.7),
+          0 0 160px rgba(0, 198, 252, 0.1);
+      }
+      #screen {
+        position: absolute;
+        inset: 16px;
+        border-radius: 90px;
+        overflow: hidden;
+        background: var(--app-bg);
+      }
+      #statusbar {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 88px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 58px 0 74px;
+        font-weight: 700;
+        font-size: 27px;
+        color: #f4f2fa;
+      }
+      .island {
+        position: absolute;
+        left: 50%;
+        top: 20px;
+        width: 200px;
+        height: 58px;
+        margin-left: -100px;
+        border-radius: 29px;
+        background: #000;
+      }
+      .sb-icons {
+        width: 112px;
+        height: 24px;
+      }
+      .scr {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 98px;
+        bottom: 0;
+        padding: 0 26px;
+      }
+      #scr-chat,
+      #scr-est,
+      #scr-det {
+        opacity: 0;
+      }
+
+      /* Brief */
+      .scr-head {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        padding-top: 6px;
+      }
+      .sh-title {
+        font-family: "Source Serif 4", serif;
+        font-weight: 600;
+        font-size: 54px;
+        line-height: 1.12;
+        color: #f4f0fb;
+      }
+      .sh-sub {
+        margin-top: 6px;
+        font-size: 22px;
+        color: var(--muted);
+      }
+      .pill-count {
+        position: relative;
+        width: 158px;
+        height: 48px;
+        margin-bottom: 6px;
+        border-radius: 24px;
+        background: var(--violet-bg);
+        overflow: hidden;
+        font-weight: 700;
+        font-size: 21px;
+        color: #cdbcff;
+      }
+      .pill-count span {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .sec-label {
+        margin-top: 34px;
+        font-weight: 700;
+        font-size: 19px;
+        letter-spacing: 0.14em;
+        color: var(--muted2);
+      }
+      .cards {
+        margin-top: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .card {
+        position: relative;
+        height: 104px;
+        border-radius: 24px;
+        background: var(--card);
+        border: 2px solid var(--card-b);
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        padding: 0 22px 0 20px;
+      }
+      .ic {
+        flex: none;
+        width: 62px;
+        height: 62px;
+        border-radius: 18px;
+        background: var(--violet-bg);
+        color: var(--violet-l);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .ic svg.i {
+        width: 30px;
+        height: 30px;
+      }
+      .ic.cyan {
+        background: rgba(0, 198, 252, 0.14);
+        color: var(--cyan);
+      }
+      .ct {
+        flex: 1;
+        min-width: 0;
+      }
+      .t {
+        position: relative;
+        display: inline-block;
+        font-weight: 700;
+        font-size: 25px;
+        color: var(--txt);
+        white-space: nowrap;
+      }
+      .strike {
+        position: absolute;
+        left: -3px;
+        right: -3px;
+        top: 52%;
+        height: 3px;
+        border-radius: 2px;
+        background: var(--txt);
+        transform-origin: 0% 50%;
+      }
+      .r {
+        margin-top: 4px;
+        font-size: 20px;
+        color: var(--muted);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .chk {
+        position: relative;
+        flex: none;
+        width: 44px;
+        height: 44px;
+      }
+      .chk-ring {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        border: 3px solid #4a3f6b;
+      }
+      .chk-bg {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background: var(--cyan);
+      }
+      .chk-svg {
+        position: absolute;
+        inset: 0;
+        width: 44px;
+        height: 44px;
+      }
+      .chk-svg path {
+        fill: none;
+        stroke: #04141b;
+        stroke-width: 3.4;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .tap {
+        position: absolute;
+        right: 22px;
+        top: 28px;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: rgba(0, 198, 252, 0.45);
+      }
+
+      /* Chat */
+      .chat-head {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        height: 100px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid #221c36;
+      }
+      .avatar {
+        flex: none;
+        width: 66px;
+        height: 66px;
+        border-radius: 18px;
+        background: linear-gradient(145deg, #8a6bff, #5b3fd6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .avatar svg {
+        width: 54px;
+        height: 54px;
+      }
+      .ch-meta {
+        flex: 1;
+        min-width: 0;
+      }
+      .nm {
+        font-weight: 700;
+        font-size: 28px;
+        color: #f4f0fb;
+      }
+      .ds {
+        margin-top: 2px;
+        font-size: 20px;
+        color: var(--muted);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .hbtn,
+      .nbtn {
+        flex: none;
+        height: 58px;
+        border-radius: 16px;
+        background: var(--card);
+        border: 2px solid var(--card-b);
+        color: #d6cdef;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .hbtn {
+        width: 58px;
+      }
+      .hbtn svg.i {
+        width: 26px;
+        height: 26px;
+      }
+      .nbtn {
+        padding: 0 16px;
+        gap: 6px;
+        font-weight: 700;
+        font-size: 20px;
+        color: #e8e0fa;
+      }
+      .nbtn svg.i {
+        width: 20px;
+        height: 20px;
+      }
+      .conv {
+        position: relative;
+        margin-top: 26px;
+        height: 560px;
+      }
+      #bubble {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 492px;
+        height: 150px;
+        padding: 24px 26px;
+        border-radius: 28px 28px 10px 28px;
+        background: var(--blue);
+        color: #fff;
+        font-size: 25px;
+        line-height: 34px;
+        transform-origin: 100% 50%;
+      }
+      .listen {
+        position: absolute;
+        right: 0;
+        top: 39px;
+        width: 232px;
+        height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        color: #fff;
+      }
+      .listen svg.i {
+        flex: none;
+        width: 28px;
+        height: 28px;
+      }
+      #wave {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        height: 44px;
+      }
+      #wave i {
+        display: block;
+        width: 5px;
+        height: 44px;
+        border-radius: 3px;
+        background: #fff;
+        transform-origin: 50% 50%;
+      }
+      #typing {
+        position: absolute;
+        left: 0;
+        top: 184px;
+        display: flex;
+        gap: 9px;
+        padding: 18px 22px;
+        border-radius: 22px;
+        background: var(--card);
+      }
+      #typing i {
+        display: block;
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+        background: var(--violet-l);
+      }
+      #answer {
+        position: absolute;
+        left: 0;
+        top: 180px;
+        width: 608px;
+        font-family: "Source Serif 4", serif;
+        font-size: 28px;
+        line-height: 1.4;
+        color: #ece6f7;
+      }
+      #answer b {
+        font-weight: 600;
+      }
+      #receipt {
+        position: absolute;
+        left: 0;
+        top: 246px;
+        width: 608px;
+        padding: 6px 24px;
+        border-radius: 24px;
+        background: var(--card);
+        border: 2px solid var(--card-b);
+      }
+      .row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        height: 78px;
+        border-bottom: 2px solid #262040;
+      }
+      .row:last-child {
+        border-bottom: 0;
+      }
+      .ric {
+        flex: none;
+        width: 46px;
+        height: 46px;
+        border-radius: 13px;
+        background: var(--violet-bg);
+        color: var(--violet-l);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .ric svg.i {
+        width: 24px;
+        height: 24px;
+      }
+      .rl {
+        flex: 1;
+        font-size: 22px;
+        color: var(--muted);
+      }
+      .rv {
+        font-weight: 700;
+        font-size: 24px;
+        color: var(--txt);
+      }
+      .rchk {
+        position: relative;
+        flex: none;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: var(--cyan);
+      }
+      .rchk svg {
+        position: absolute;
+        inset: 0;
+        width: 34px;
+        height: 34px;
+      }
+      .rchk path {
+        fill: none;
+        stroke: #04141b;
+        stroke-width: 3.4;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      /* Estimation */
+      .est-head .sh-title {
+        font-size: 50px;
+      }
+      .hero {
+        margin-top: 26px;
+        padding: 26px 30px 28px;
+        border-radius: 28px;
+        background: var(--card);
+        border: 2px solid var(--card-b);
+      }
+      .lbl {
+        font-weight: 700;
+        font-size: 19px;
+        letter-spacing: 0.14em;
+        color: var(--muted2);
+      }
+      .num-wrap {
+        height: 112px;
+        display: flex;
+        align-items: center;
+      }
+      #est-num {
+        display: inline-block;
+        font-weight: 900;
+        font-size: 92px;
+        letter-spacing: -0.01em;
+        color: #fff;
+        font-variant-numeric: tabular-nums;
+        transform-origin: 0% 50%;
+        white-space: nowrap;
+      }
+      .range {
+        position: relative;
+        margin-top: 18px;
+        height: 16px;
+      }
+      .range .track {
+        position: absolute;
+        inset: 0;
+        border-radius: 8px;
+        background: var(--card-b);
+      }
+      .range .fill {
+        position: absolute;
+        left: 18%;
+        width: 64%;
+        top: 0;
+        bottom: 0;
+        border-radius: 8px;
+        background: linear-gradient(90deg, #785afc, #00c6fc);
+        transform-origin: 0% 50%;
+      }
+      .range .marker {
+        position: absolute;
+        left: calc(55% - 18px);
+        top: -10px;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: #fff;
+        border: 7px solid var(--cyan);
+        box-shadow: 0 0 0 7px rgba(0, 198, 252, 0.2);
+      }
+      .range-l {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 18px;
+        font-weight: 700;
+        font-size: 21px;
+        color: #b7afd0;
+      }
+      .conf {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        gap: 26px;
+        padding: 22px 28px;
+        border-radius: 28px;
+        background: var(--card);
+        border: 2px solid var(--card-b);
+      }
+      .ringbox {
+        position: relative;
+        flex: none;
+        width: 124px;
+        height: 124px;
+      }
+      .ringbox svg {
+        position: absolute;
+        inset: 0;
+        width: 124px;
+        height: 124px;
+      }
+      .ringbox .pct {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 900;
+        font-size: 31px;
+        color: #fff;
+        font-variant-numeric: tabular-nums;
+      }
+      .conf-a {
+        font-weight: 700;
+        font-size: 26px;
+        color: var(--txt);
+      }
+      .conf-b {
+        margin-top: 6px;
+        font-size: 21px;
+        color: var(--muted);
+      }
+      .chips {
+        margin-top: 20px;
+        display: flex;
+        gap: 12px;
+      }
+      .chip {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        height: 50px;
+        padding: 0 18px;
+        border-radius: 25px;
+        background: var(--card);
+        border: 2px solid var(--card-b);
+        font-weight: 700;
+        font-size: 20px;
+        color: #dcd4f2;
+        transform-origin: 50% 50%;
+      }
+      .chip .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--cyan);
+      }
+
+      /* Détecteur */
+      .det-head .sh-title {
+        font-size: 46px;
+      }
+      .map {
+        position: relative;
+        margin-top: 24px;
+        width: 608px;
+        height: 400px;
+        border-radius: 28px;
+        overflow: hidden;
+        background: #17132a;
+        border: 2px solid var(--card-b);
+      }
+      .map svg {
+        position: absolute;
+        inset: 0;
+        width: 604px;
+        height: 396px;
+      }
+      .road {
+        fill: none;
+        stroke-linecap: round;
+      }
+      .road.big {
+        stroke: #2e2750;
+        stroke-width: 10;
+      }
+      .road.small {
+        stroke: #251f42;
+        stroke-width: 5;
+      }
+      #river {
+        fill: none;
+        stroke: #1c3553;
+        stroke-width: 22;
+        stroke-linecap: round;
+      }
+      .dpe-t {
+        font-family: Inter, sans-serif;
+        font-weight: 700;
+        font-size: 20px;
+      }
+      #det-badge {
+        position: absolute;
+        left: 18px;
+        top: 18px;
+        height: 50px;
+        padding: 0 18px;
+        border-radius: 25px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(8, 30, 44, 0.92);
+        border: 2px solid rgba(0, 198, 252, 0.55);
+        color: #bdefff;
+        font-weight: 700;
+        font-size: 21px;
+        transform-origin: 0% 50%;
+      }
+      #det-badge svg.i {
+        flex: none;
+        width: 26px;
+        height: 26px;
+      }
+      #lead {
+        position: absolute;
+        left: 26px;
+        right: 26px;
+        top: 560px;
+        padding: 20px 22px;
+        border-radius: 26px;
+        background: var(--card);
+        border: 2px solid #3a2f5e;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+      }
+      .lead-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .lead-t {
+        flex: 1;
+        min-width: 0;
+      }
+      .lead-a {
+        font-weight: 700;
+        font-size: 24px;
+        color: var(--txt);
+      }
+      .lead-b {
+        margin-top: 3px;
+        font-size: 20px;
+        color: var(--muted);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .follow {
+        flex: none;
+        height: 54px;
+        padding: 0 24px;
+        border-radius: 16px;
+        background: var(--cyan);
+        color: #03141c;
+        font-weight: 700;
+        font-size: 21px;
+        display: flex;
+        align-items: center;
+        transform-origin: 50% 50%;
+      }
+      .minis {
+        margin-top: 14px;
+        display: flex;
+        gap: 10px;
+      }
+      .mini {
+        height: 42px;
+        padding: 0 16px;
+        border-radius: 21px;
+        background: var(--violet-bg);
+        color: #cdbcff;
+        font-weight: 700;
+        font-size: 19px;
+        display: flex;
+        align-items: center;
+      }
+
+      /* ---------- Scène 6 : end card ---------- */
+      #glowC {
+        position: absolute;
+        left: 40px;
+        top: 60px;
+        width: 1000px;
+        height: 1000px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(0, 198, 252, 0.24) 0%, rgba(0, 198, 252, 0) 60%);
+        transform-origin: 50% 50%;
+      }
+      #logo {
+        position: absolute;
+        left: 320px;
+        top: 330px;
+        transform-origin: 220px 217px;
+        width: 440px;
+        height: 440px;
+        overflow: visible;
+      }
+      #edges line {
+        stroke: #34d6ff;
+        stroke-width: 2.6;
+        stroke-linecap: round;
+        opacity: 0.9;
+      }
+      #nodes circle.node {
+        fill: #7fe6ff;
+      }
+      #nodes circle.halo {
+        fill: rgba(0, 198, 252, 0.28);
+      }
+      #wm-big {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 812px;
+        justify-content: center;
+        align-items: flex-end;
+      }
+      #wm-big .wm-t {
+        display: flex;
+        font-size: 168px;
+        letter-spacing: 0.04em;
+      }
+      #wm-big .lm {
+        display: block;
+        overflow: hidden;
+        line-height: 1.04;
+      }
+      #wm-big .lm > span {
+        display: block;
+      }
+      #wm-big .wm-o {
+        width: 128px;
+        height: 128px;
+        margin-left: 4px;
+        margin-bottom: 24px;
+        overflow: visible;
+      }
+      #tagline {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 1018px;
+        text-align: center;
+        font-family: "Source Serif 4", serif;
+        font-size: 54px;
+        color: #dce8f2;
+      }
+      #cta {
+        position: absolute;
+        left: 230px;
+        top: 1122px;
+        width: 620px;
+        height: 104px;
+        border-radius: 52px;
+        background: var(--cyan);
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 37px;
+        color: #03141c;
+        transform-origin: 50% 50%;
+      }
+      #sheen {
+        position: absolute;
+        left: 0;
+        top: -20px;
+        bottom: -20px;
+        width: 140px;
+        background: linear-gradient(100deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0));
+      }
+      .cta-t {
+        position: relative;
+      }
+      #url {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 1262px;
+        text-align: center;
+        font-size: 33px;
+        letter-spacing: 0.02em;
+        color: #97abbd;
+      }
+
+      /* ---------- V2 : écran verrouillé + notification ---------- */
+      #scr-brief {
+        opacity: 0;
+        transform-origin: 50% 30%;
+      }
+      #sb-time {
+        opacity: 0;
+      }
+      #scr-lock {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at 28% 22%, rgba(0, 198, 252, 0.3), rgba(0, 198, 252, 0) 52%),
+          radial-gradient(circle at 78% 78%, rgba(120, 90, 252, 0.38), rgba(120, 90, 252, 0) 58%),
+          #0c0a18;
+        transform-origin: 50% 30%;
+      }
+      .lk-hello {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 112px;
+        text-align: center;
+        font-size: 27px;
+        color: #d6dcf5;
+      }
+      .lk-time {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 190px;
+        text-align: center;
+        font-weight: 700;
+        font-size: 170px;
+        letter-spacing: -0.02em;
+        line-height: 1;
+        color: #f4f6ff;
+      }
+      #notif {
+        position: absolute;
+        left: 26px;
+        right: 26px;
+        top: 430px;
+        border-radius: 32px;
+        transform-origin: 50% 0%;
+      }
+      #notifIn {
+        position: relative;
+        display: flex;
+        gap: 18px;
+        align-items: flex-start;
+        padding: 22px 24px;
+        border-radius: 32px;
+        background: rgba(38, 36, 60, 0.86);
+        border: 2px solid rgba(255, 255, 255, 0.14);
+        overflow: hidden;
+        transform-origin: 50% 50%;
+      }
+      .nt-ic {
+        flex: none;
+        width: 62px;
+        height: 62px;
+        border-radius: 17px;
+        background: linear-gradient(145deg, #8a6bff, #5b3fd6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .nt-ic svg {
+        width: 50px;
+        height: 50px;
+      }
+      .nt-body {
+        flex: 1;
+        min-width: 0;
+      }
+      .nt-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+      .nt-app {
+        font-weight: 700;
+        font-size: 21px;
+        letter-spacing: 0.04em;
+        color: #e6e8f8;
+      }
+      .nt-when {
+        font-size: 20px;
+        color: #b9bdd9;
+      }
+      .nt-title {
+        margin-top: 6px;
+        font-weight: 700;
+        font-size: 26px;
+        color: #fff;
+      }
+      .nt-text {
+        margin-top: 4px;
+        font-size: 22px;
+        color: #d5d8ee;
+      }
+      .tap2 {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 80px;
+        height: 80px;
+        margin: -40px 0 0 -40px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.35);
+      }
+
+      /* ---------- V2 : scène « quotidien » ---------- */
+      #lifehead {
+        position: absolute;
+        left: 84px;
+        top: 236px;
+        width: 912px;
+        height: 420px;
+      }
+      #photo {
+        position: absolute;
+        left: 60px;
+        top: 700px;
+        width: 960px;
+        height: 593px;
+        border-radius: 44px;
+        overflow: hidden;
+        box-shadow:
+          0 40px 110px rgba(0, 0, 0, 0.65),
+          0 0 0 2px rgba(255, 255, 255, 0.08);
+        transform-origin: 50% 50%;
+      }
+      #photo img {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 960px;
+        height: 593px;
+        transform-origin: 50% 42%;
+      }
+      #photo .vign {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(5, 7, 12, 0) 52%, rgba(5, 7, 12, 0.6) 100%);
+      }
+      .lchips {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 34px;
+        display: flex;
+        justify-content: center;
+        gap: 14px;
+      }
+      .lchip {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        height: 62px;
+        padding: 0 22px 0 12px;
+        border-radius: 31px;
+        background: rgba(255, 255, 255, 0.94);
+        color: #0e1630;
+        font-weight: 700;
+        font-size: 22px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+        transform-origin: 50% 50%;
+      }
+      .lci {
+        flex: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(0, 198, 252, 0.16);
+        color: #0a86ad;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .lci svg.i {
+        width: 22px;
+        height: 22px;
+      }
+
+      /* ---------- V2 : robot + étincelles ---------- */
+      #robotShadow {
+        position: absolute;
+        left: 390px;
+        top: 748px;
+        width: 300px;
+        height: 46px;
+        border-radius: 50%;
+        background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0) 70%);
+        transform-origin: 50% 50%;
+      }
+      #robotWrap {
+        position: absolute;
+        left: 347px;
+        top: 300px;
+        width: 386px;
+        height: 470px;
+        transform-origin: 50% 100%;
+      }
+      #robotImg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 386px;
+        height: 470px;
+        transform-origin: 50% 90%;
+      }
+      #spkR,
+      #spkC {
+        position: absolute;
+        inset: 0;
+      }
+      .spk {
+        position: absolute;
+        transform-origin: 50% 50%;
+        overflow: visible;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Icônes (tracés inspirés de Lucide) -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <defs>
+        <symbol id="i-reply" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5" /><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11" /></symbol>
+        <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" /><path d="M14 2v4a2 2 0 0 0 2 2h4" /><path d="M16 13H8" /><path d="M16 17H8" /></symbol>
+        <symbol id="i-cake" viewBox="0 0 24 24"><path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8" /><path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2-1 2-1" /><path d="M2 21h20" /><path d="M7 8v3" /><path d="M12 8v3" /><path d="M17 8v3" /></symbol>
+        <symbol id="i-zap" viewBox="0 0 24 24"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" /></symbol>
+        <symbol id="i-bank" viewBox="0 0 24 24"><path d="M3 22h18" /><path d="M6 18v-7" /><path d="M10 18v-7" /><path d="M14 18v-7" /><path d="M18 18v-7" /><path d="M12 2 20 7H4z" /></symbol>
+        <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></symbol>
+        <symbol id="i-euro" viewBox="0 0 24 24"><path d="M4 10h12" /><path d="M4 14h9" /><path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2" /></symbol>
+        <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4" /><path d="M8 2v4" /><path d="M3 10h18" /></symbol>
+        <symbol id="i-mic" viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><path d="M12 19v3" /></symbol>
+        <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></symbol>
+        <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14" /><path d="M12 5v14" /></symbol>
+        <symbol id="i-back" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" /></symbol>
+        <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 5-5.5 10.2-7.4 11.8a1 1 0 0 1-1.2 0C9.5 20.2 4 15 4 10a8 8 0 0 1 16 0" /><circle cx="12" cy="10" r="3" /></symbol>
+        <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></symbol>
+        <symbol id="i-home" viewBox="0 0 24 24"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /><path d="M3 10a2 2 0 0 1 .7-1.5l7-6a2 2 0 0 1 2.6 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></symbol>
+        <symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /><path d="m13.4 10.6 5.7-5.7" /></symbol>
+      </defs>
+    </svg>
+
+    <div id="root" data-composition-id="main" data-start="0" data-duration="24.5" data-width="1080" data-height="1920">
+      <!-- ============ FOND ============ -->
+      <section id="s-bg" class="clip" data-start="0" data-duration="24.5" data-track-index="0">
+        <div id="grid"></div>
+        <div id="glowA"></div>
+        <div id="glowB"></div>
+      </section>
+
+      <!-- ============ 1 · ACCROCHE ============ -->
+      <section id="s-hook" class="clip" data-start="0" data-duration="2.75" data-track-index="1">
+        <div id="hook-ringwrap">
+          <svg id="hook-ring" viewBox="0 0 600 600" width="600" height="600">
+            <g id="ticks"></g>
+            <circle cx="300" cy="300" r="290" fill="none" stroke="rgba(0,198,252,0.16)" stroke-width="3" />
+            <circle id="ring" cx="300" cy="300" r="290" fill="none" stroke="#00C6FC" stroke-width="5" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" transform="rotate(-90 300 300)" />
+            <g id="hand">
+              <circle cx="300" cy="10" r="24" fill="rgba(0,198,252,0.25)" />
+              <circle cx="300" cy="10" r="11" fill="#00C6FC" />
+            </g>
+          </svg>
+          <div id="hook-time"><span class="mask" data-layout-allow-overflow><span data-layout-allow-occlusion>8H00.</span></span></div>
+        </div>
+        <div id="hook-lines">
+          <span class="mask" id="hook-l1" data-layout-allow-overflow><span data-layout-allow-occlusion>TA JOURNÉE</span></span>
+          <span class="mask" id="hook-l2" data-layout-allow-overflow><span data-layout-allow-occlusion class="cy">EST DÉJÀ TRIÉE.</span></span>
+        </div>
+      </section>
+
+      <!-- ============ BARRE DE MARQUE ============ -->
+      <section id="s-top" class="clip" data-start="0" data-duration="20.9" data-track-index="4">
+        <div id="topbar">
+          <div class="wm wm-sm">
+            <span class="wm-t">LIM</span>
+            <svg class="wm-o" viewBox="0 0 36 36"><circle cx="18" cy="18" r="13.8" fill="none" stroke="#00C6FC" stroke-width="6.4" /></svg>
+          </div>
+          <div id="prog">
+            <span class="seg" id="seg1"><i></i></span>
+            <span class="seg" id="seg2"><i></i></span>
+            <span class="seg" id="seg3"><i></i></span>
+            <span class="seg" id="seg4"><i></i></span>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ============ 2-5 · APP ============ -->
+      <section id="s-app" class="clip" data-start="2.45" data-duration="15.6" data-track-index="2">
+        <div id="chapters">
+          <div class="chap" id="ch1">
+            <div class="ch-inner">
+              <div class="ch-label">01 · BRIEF DU MATIN</div>
+              <div class="ch-h">
+                <span class="mask" data-layout-allow-overflow><span data-layout-allow-occlusion>5 PRIORITÉS.</span></span>
+                <span class="mask" data-layout-allow-overflow><span data-layout-allow-occlusion class="cy">ZÉRO OUBLI.</span></span>
+              </div>
+              <div class="ch-bar"></div>
+            </div>
+          </div>
+          <div class="chap" id="ch2">
+            <div class="ch-inner">
+              <div class="ch-label">02 · CHAT &amp; DICTÉE</div>
+              <div class="ch-h">
+                <span class="mask" data-layout-allow-overflow><span data-layout-allow-occlusion>TU PARLES.</span></span>
+                <span class="mask" data-layout-allow-overflow><span data-layout-allow-occlusion class="cy">LIMO RANGE.</span></span>
+              </div>
+              <div class="ch-bar"></div>
+            </div>
+          </div>
+          <div class="chap" id="ch3">
+            <div class="ch-inner">
+              <div class="ch-label">03 · ESTIMATION</div>
+              <div class="ch-h">
+                <span class="mask" data-layout-allow-overflow><span data-layout-allow-occlusion>ESTIME JUSTE.</span></span>
+                <span class="mask" data-layout-allow-overflow><span data-layout-allow-occlusion class="cy">VENTES RÉELLES.</span></span>
+              </div>
+              <div class="ch-bar"></div>
+            </div>
+          </div>
+          <div class="chap" id="ch4">
+            <div class="ch-inner">
+              <div class="ch-label">04 · DÉTECTEUR DE VENTES</div>
+              <div class="ch-h">
+                <span class="mask" data-layout-allow-overflow><span data-layout-allow-occlusion>NOUVEAU DPE&#8239;?</span></span>
+                <span class="mask" data-layout-allow-overflow><span data-layout-allow-occlusion class="cy">FUTUR VENDEUR.</span></span>
+              </div>
+              <div class="ch-bar"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="phoneWrap" data-layout-allow-overflow>
+          <div id="phone">
+            <div id="screen">
+              <!-- Écran : verrouillé + notification -->
+              <div id="scr-lock">
+                <div class="lk-hello">Bonjour</div>
+                <div class="lk-time">8:00</div>
+                <div id="notif">
+                  <div id="notifIn">
+                    <div class="nt-ic">
+                        <svg viewBox="0 0 64 64">
+                          <line x1="32" y1="19" x2="32" y2="12" stroke="#15131f" stroke-width="2.4" />
+                          <circle cx="32" cy="10" r="3.6" fill="#00C6FC" />
+                          <ellipse cx="32" cy="36" rx="19" ry="17" fill="#F5F4FA" />
+                          <rect x="18.5" y="27" width="27" height="14.5" rx="7.2" fill="#0B0B12" />
+                          <path d="M23.8 35.6a2.9 2.9 0 0 1 5.8 0M34.4 35.6a2.9 2.9 0 0 1 5.8 0" fill="none" stroke="#00C6FC" stroke-width="2.3" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <div class="nt-body">
+                      <div class="nt-top"><span class="nt-app">LIMO</span><span class="nt-when">maintenant</span></div>
+                      <div class="nt-title">Ton brief du matin est prêt</div>
+                      <div class="nt-text">5 actions prioritaires · 1 rappel urgent</div>
+                    </div>
+                    <span class="tap2"></span>
+                  </div>
+                </div>
+              </div>
+              <div id="statusbar">
+                <span id="sb-time">8:00</span>
+                <span class="island"></span>
+                <svg class="sb-icons" viewBox="0 0 112 24">
+                  <rect x="0" y="15" width="5" height="7" rx="1.5" fill="#F4F2FA" />
+                  <rect x="8" y="11" width="5" height="11" rx="1.5" fill="#F4F2FA" />
+                  <rect x="16" y="7" width="5" height="15" rx="1.5" fill="#F4F2FA" />
+                  <rect x="24" y="3" width="5" height="19" rx="1.5" fill="#F4F2FA" />
+                  <path d="M40 10.5a14 14 0 0 1 20 0M44 14.5a8 8 0 0 1 12 0M48.5 18.5a2 2 0 0 1 3 0" fill="none" stroke="#F4F2FA" stroke-width="2.6" stroke-linecap="round" />
+                  <rect x="70" y="4" width="36" height="17" rx="5" fill="none" stroke="rgba(244,242,250,0.55)" stroke-width="2" />
+                  <rect x="73" y="7" width="27" height="11" rx="2.5" fill="#F4F2FA" />
+                  <rect x="108" y="9.5" width="2.5" height="6" rx="1" fill="rgba(244,242,250,0.55)" />
+                </svg>
+              </div>
+
+              <!-- Écran : Aujourd'hui -->
+              <div class="scr" id="scr-brief">
+                <div class="scr-head" id="brief-head">
+                  <div>
+                    <div class="sh-title">Aujourd’hui</div>
+                    <div class="sh-sub">Ce matin · 8:00</div>
+                  </div>
+                  <div class="pill-count" data-layout-allow-overlap><span id="cnt5" data-layout-allow-overlap>5 actions</span><span id="cnt4" data-layout-allow-overlap>4 actions</span></div>
+                </div>
+                <div class="sec-label" id="brief-sec">TES PRIORITÉS</div>
+                <div class="cards">
+                  <div class="card" id="c1">
+                    <div class="ic cyan"><svg class="i"><use href="#i-reply" /></svg></div>
+                    <div class="ct">
+                      <div class="t">Rappeler M. Albert<i class="strike"></i></div>
+                      <div class="r">Il attend ton appel aujourd’hui</div>
+                    </div>
+                    <div class="chk">
+                      <span class="chk-ring"></span><span class="chk-bg"></span>
+                      <svg class="chk-svg" viewBox="0 0 44 44"><path d="M13 22.5l6.5 6.5L31.5 16" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" /></svg>
+                    </div>
+                    <span class="tap"></span>
+                  </div>
+                  <div class="card">
+                    <div class="ic"><svg class="i"><use href="#i-file" /></svg></div>
+                    <div class="ct">
+                      <div class="t">Mandat Dupont : J-15</div>
+                      <div class="r">Proposer le renouvellement</div>
+                    </div>
+                    <div class="chk"><span class="chk-ring"></span></div>
+                  </div>
+                  <div class="card">
+                    <div class="ic"><svg class="i"><use href="#i-cake" /></svg></div>
+                    <div class="ct">
+                      <div class="t">Anniversaire de Mme Roy</div>
+                      <div class="r">SMS prêt à envoyer</div>
+                    </div>
+                    <div class="chk"><span class="chk-ring"></span></div>
+                  </div>
+                  <div class="card">
+                    <div class="ic"><svg class="i"><use href="#i-zap" /></svg></div>
+                    <div class="ct">
+                      <div class="t">DPE caduc · maison Delmas</div>
+                      <div class="r">Établi avant juillet 2021</div>
+                    </div>
+                    <div class="chk"><span class="chk-ring"></span></div>
+                  </div>
+                  <div class="card">
+                    <div class="ic"><svg class="i"><use href="#i-bank" /></svg></div>
+                    <div class="ct">
+                      <div class="t">Prêt Durand : vendredi</div>
+                      <div class="r">Condition suspensive à suivre</div>
+                    </div>
+                    <div class="chk"><span class="chk-ring"></span></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Écran : chat LIMO -->
+              <div class="scr" id="scr-chat">
+                <div class="chat-head">
+                  <div class="avatar">
+                    <svg viewBox="0 0 64 64">
+                      <line x1="32" y1="19" x2="32" y2="12" stroke="#15131f" stroke-width="2.4" />
+                      <circle cx="32" cy="10" r="3.6" fill="#00C6FC" />
+                      <ellipse cx="32" cy="36" rx="19" ry="17" fill="#F5F4FA" />
+                      <rect x="18.5" y="27" width="27" height="14.5" rx="7.2" fill="#0B0B12" />
+                      <path d="M23.8 35.6a2.9 2.9 0 0 1 5.8 0M34.4 35.6a2.9 2.9 0 0 1 5.8 0" fill="none" stroke="#00C6FC" stroke-width="2.3" stroke-linecap="round" />
+                    </svg>
+                  </div>
+                  <div class="ch-meta">
+                    <div class="nm">LIMO</div>
+                    <div class="ds">Ton bras droit · il connaît tes clients</div>
+                  </div>
+                  <div class="nbtn"><svg class="i"><use href="#i-plus" /></svg>Nouvelle</div>
+                </div>
+                <div class="conv">
+                  <div id="bubble">
+                    <div class="txt">Visite des Martin chez les Type. Offre à 385&#8239;000&#8239;€, réponse vendredi.</div>
+                    <div class="listen">
+                      <svg class="i"><use href="#i-mic" /></svg>
+                      <div id="wave"></div>
+                    </div>
+                  </div>
+                  <div id="typing"><i></i><i></i><i></i></div>
+                  <div id="answer">C’est noté. Dossier <b>Type</b> mis à jour :</div>
+                  <div id="receipt">
+                    <div class="row">
+                      <div class="ric"><svg class="i"><use href="#i-users" /></svg></div>
+                      <div class="rl">Acquéreurs</div>
+                      <div class="rv">Famille Martin</div>
+                      <div class="rchk"><svg viewBox="0 0 34 34"><path d="M10 17.5l4.8 4.8L24.5 12.5" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" /></svg></div>
+                    </div>
+                    <div class="row">
+                      <div class="ric"><svg class="i"><use href="#i-euro" /></svg></div>
+                      <div class="rl">Offre</div>
+                      <div class="rv">385&#8239;000&#8239;€</div>
+                      <div class="rchk"><svg viewBox="0 0 34 34"><path d="M10 17.5l4.8 4.8L24.5 12.5" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" /></svg></div>
+                    </div>
+                    <div class="row">
+                      <div class="ric"><svg class="i"><use href="#i-cal" /></svg></div>
+                      <div class="rl">Relance vendeur</div>
+                      <div class="rv">Vendredi</div>
+                      <div class="rchk"><svg viewBox="0 0 34 34"><path d="M10 17.5l4.8 4.8L24.5 12.5" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" /></svg></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Écran : estimation -->
+              <div class="scr" id="scr-est">
+                <div class="est-head">
+                  <div class="sh-title">Estimation</div>
+                  <div class="sh-sub">Maison 148 m² · Brive-la-Gaillarde</div>
+                </div>
+                <div class="hero">
+                  <div class="lbl">VALEUR ESTIMÉE</div>
+                  <div class="num-wrap"><span id="est-num">0&#8239;€</span></div>
+                  <div class="range">
+                    <span class="track"></span><span class="fill"></span><span class="marker"></span>
+                  </div>
+                  <div class="range-l"><span>372&#8239;000&#8239;€</span><span>405&#8239;000&#8239;€</span></div>
+                </div>
+                <div class="conf">
+                  <div class="ringbox">
+                    <svg viewBox="0 0 124 124">
+                      <circle cx="62" cy="62" r="52" fill="none" stroke="#2A2340" stroke-width="13" />
+                      <circle id="conf-ring" cx="62" cy="62" r="52" fill="none" stroke="#00C6FC" stroke-width="13" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" transform="rotate(-90 62 62)" />
+                    </svg>
+                    <div class="pct" id="conf-pct">0&#8239;%</div>
+                  </div>
+                  <div class="conf-t">
+                    <div class="conf-a">Indice de confiance</div>
+                    <div class="conf-b">Élevé · 12 ventes comparables</div>
+                  </div>
+                </div>
+                <div class="chips">
+                  <span class="chip"><span class="dot"></span>DVF · 3 ans</span>
+                  <span class="chip"><span class="dot"></span>Cadastre IGN</span>
+                  <span class="chip"><span class="dot"></span>DPE ADEME</span>
+                </div>
+              </div>
+
+              <!-- Écran : détecteur de ventes -->
+              <div class="scr" id="scr-det">
+                <div class="det-head">
+                  <div class="sh-title">Détecteur de ventes</div>
+                  <div class="sh-sub">Brive-la-Gaillarde · 7 derniers jours</div>
+                </div>
+                <div class="map" data-layout-allow-overflow>
+                  <svg viewBox="0 0 604 396">
+                    <path id="river" d="M-20 300 C 90 270, 160 350, 260 318 S 430 230, 520 262 S 620 300, 640 292" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" />
+                    <path class="road small" d="M0 58 L604 30" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" />
+                    <path class="road small" d="M0 196 L604 168" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" />
+                    <path class="road small" d="M204 0 L228 396" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" />
+                    <path class="road small" d="M404 0 L420 396" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" />
+                    <path class="road small" d="M0 372 L604 340" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" />
+                    <path class="road small" d="M150 396 L470 0" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" />
+                    <path class="road big" d="M0 118 L604 86" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" />
+                    <path class="road big" d="M62 0 L146 396" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" />
+                    <path class="road big" d="M318 0 L296 396" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" />
+                    <path class="road big" d="M0 244 C 200 226, 400 262, 604 214" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" />
+                    <path class="road big" d="M474 0 L556 396" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" />
+
+                    <g class="pin" data-x="184" data-y="160">
+                      <circle class="pulse" cx="184" cy="160" r="12" fill="none" stroke="#00C6FC" stroke-width="3" opacity="0" />
+                      <circle cx="184" cy="160" r="24" fill="rgba(0,198,252,0.2)" />
+                      <circle cx="184" cy="160" r="11" fill="#00C6FC" stroke="#FFFFFF" stroke-width="3" />
+                      <rect x="202" y="118" width="38" height="32" rx="8" fill="#F0822D" />
+                      <text class="dpe-t" x="221" y="141" text-anchor="middle" fill="#1B1B1B">F</text>
+                    </g>
+                    <g class="pin" data-x="382" data-y="292">
+                      <circle class="pulse" cx="382" cy="292" r="12" fill="none" stroke="#00C6FC" stroke-width="3" opacity="0" />
+                      <circle cx="382" cy="292" r="24" fill="rgba(0,198,252,0.2)" />
+                      <circle cx="382" cy="292" r="11" fill="#00C6FC" stroke="#FFFFFF" stroke-width="3" />
+                      <rect x="400" y="250" width="38" height="32" rx="8" fill="#E53935" />
+                      <text class="dpe-t" x="419" y="273" text-anchor="middle" fill="#FFFFFF">G</text>
+                    </g>
+                    <g class="pin" data-x="516" data-y="138">
+                      <circle class="pulse" cx="516" cy="138" r="12" fill="none" stroke="#00C6FC" stroke-width="3" opacity="0" />
+                      <circle cx="516" cy="138" r="24" fill="rgba(0,198,252,0.2)" />
+                      <circle cx="516" cy="138" r="11" fill="#00C6FC" stroke="#FFFFFF" stroke-width="3" />
+                      <rect x="534" y="96" width="38" height="32" rx="8" fill="#F4C20D" />
+                      <text class="dpe-t" x="553" y="119" text-anchor="middle" fill="#1B1B1B">E</text>
+                    </g>
+                  </svg>
+                  <div id="det-badge"><svg class="i"><use href="#i-radar" /></svg>3 nouveaux DPE</div>
+                </div>
+                <div id="lead">
+                  <div class="lead-row">
+                    <div class="ic cyan"><svg class="i"><use href="#i-pin" /></svg></div>
+                    <div class="lead-t">
+                      <div class="lead-a">Nouvelle piste</div>
+                      <div class="lead-b">22 rue des Démonstrations · DPE F</div>
+                    </div>
+                    <div class="follow">Suivre</div>
+                  </div>
+                  <div class="minis">
+                    <span class="mini">Boîtage J+7</span>
+                    <span class="mini">Courrier J+10</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 5b · TON QUOTIDIEN AVEC LIMO ============ -->
+      <section id="s-life" class="clip" data-start="17.45" data-duration="3.5" data-track-index="5">
+        <div id="lifehead">
+          <div class="ch-inner" id="lifeInner">
+            <div class="ch-label">AVEC LIMO</div>
+            <div class="ch-h">
+              <span class="mask" data-layout-allow-overflow><span data-layout-allow-occlusion>MOINS D’ADMIN.</span></span>
+              <span class="mask" data-layout-allow-overflow><span class="cy" data-layout-allow-occlusion>PLUS DE TERRAIN.</span></span>
+            </div>
+            <div class="ch-bar"></div>
+          </div>
+        </div>
+        <div id="photo" data-layout-allow-overflow>
+          <img src="assets/img/bureau-vue-mer.jpg" alt="Le robot LIMO sur un bureau ensoleillé avec vue sur la mer" />
+          <div class="vign"></div>
+          <div class="lchips">
+            <span class="lchip"><span class="lci"><svg class="i"><use href="#i-mail" /></svg></span>Relances prêtes</span>
+            <span class="lchip"><span class="lci"><svg class="i"><use href="#i-home" /></svg></span>Estimations DVF</span>
+            <span class="lchip"><span class="lci"><svg class="i"><use href="#i-users" /></svg></span>Suivi vendeur</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 6 · END CARD ============ -->
+      <section id="s-end" class="clip" data-start="20.45" data-duration="4.05" data-track-index="3">
+        <div id="glowC"></div>
+        <div id="robotShadow"></div>
+        <div id="robotWrap"><img id="robotImg" src="assets/img/limo-robot.png" alt="Robot mascotte LIMO" /></div>
+        <svg id="logo" viewBox="0 0 400 400" width="440" height="440">
+          <path id="houseFill" d="M88 196 L200 92 L312 196 L312 330 L232 330 L232 250 L168 250 L168 330 L88 330 Z" fill="#081326" />
+          <g id="edges"></g>
+          <g id="nodes"></g>
+          <path id="houseLine" d="M88 196 L200 92 L312 196 L312 330 L232 330 L232 250 L168 250 L168 330 L88 330 Z" fill="none" stroke="#00C6FC" stroke-width="5" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" />
+          <path id="roofRim" d="M56 212 L200 80 L344 212" fill="none" stroke="#00C6FC" stroke-width="38" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" />
+          <path id="roof" d="M56 212 L200 80 L344 212" fill="none" stroke="#18295A" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" />
+        </svg>
+        <div id="spkR"></div>
+        <div id="wm-big" class="wm">
+          <span class="wm-t"><span class="lm" data-layout-allow-overflow><span data-layout-allow-occlusion>L</span></span><span class="lm" data-layout-allow-overflow><span data-layout-allow-occlusion>I</span></span><span class="lm" data-layout-allow-overflow><span data-layout-allow-occlusion>M</span></span></span>
+          <svg class="wm-o" viewBox="0 0 128 128"><circle id="wmO" cx="64" cy="64" r="52" fill="none" stroke="#00C6FC" stroke-width="23" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" transform="rotate(-90 64 64)" /></svg>
+        </div>
+        <div id="tagline">Ton chef de cabinet IA.</div>
+        <div id="cta" data-layout-allow-overflow><span id="sheen"></span><span class="cta-t">14 jours gratuits · sans CB</span></div>
+        <div id="spkC"></div>
+        <div id="url">app.leadengineai.fr</div>
+      </section>
+
+      <!-- ============ SON : effets synchronisés (outils/sfx.py) ============ -->
+      <audio id="sfx" src="assets/audio/sfx.wav" data-start="0" data-duration="24.5" data-track-index="10" data-volume="1"></audio>
+    </div>
+
+    <script type="application/json" id="cues">
+      {
+        "duration": 24.5,
+        "hook": { "time": 0.1, "ring": 0.12, "ringDur": 2.0, "l1": 0.8, "l2": 0.95, "exit": 2.2 },
+        "brief": { "rise": 2.5, "title": 2.62, "notif": 3.2, "tap": 3.95, "open": 4.05, "head": 4.18, "cards": 4.32, "check": 5.6, "count": 5.9 },
+        "chat": { "out": 7.05, "title": 7.33, "swap": 7.1, "pill": 7.8, "expand": 8.7, "words": 8.8, "typing": 9.28, "answer": 9.8, "receipt": 9.95, "checks": 10.25 },
+        "est": { "out": 11.05, "title": 11.33, "swap": 11.1, "count": 11.7, "countDur": 1.35, "fill": 12.1, "marker": 12.15, "ring": 12.7, "ringDur": 1.1, "chips": 13.3 },
+        "det": { "out": 14.45, "title": 14.73, "swap": 14.5, "map": 14.85, "pins": 15.5, "badge": 16.0, "lead": 16.3, "minis": 16.6, "press": 17.0 },
+        "life": { "out": 17.5, "phoneOut": 17.35, "photo": 17.72, "title": 17.8, "chips": 18.5, "exit": 20.4 },
+        "end": { "glow": 20.5, "house": 20.58, "toBelly": 21.6, "robot": 21.72, "word": 22.1, "ring": 22.26, "tag": 22.5, "cta": 22.75, "sparkle": 22.8, "sheen": 23.15, "url": 23.0 }
+      }
+    </script>
+    <script>
+      (function () {
+        const $ = (s) => document.querySelector(s);
+        const $$ = (s) => Array.from(document.querySelectorAll(s));
+        const NS = "http://www.w3.org/2000/svg";
+        const C = JSON.parse($("#cues").textContent);
+
+        /* ---------- construction (déterministe) ---------- */
+        // Graduations de l'horloge
+        const ticks = $("#ticks");
+        for (let i = 0; i < 12; i++) {
+          const a = ((i * 30 - 90) * Math.PI) / 180;
+          const r1 = 266;
+          const r2 = i % 3 === 0 ? 238 : 250;
+          const l = document.createElementNS(NS, "line");
+          l.setAttribute("x1", (300 + Math.cos(a) * r1).toFixed(2));
+          l.setAttribute("y1", (300 + Math.sin(a) * r1).toFixed(2));
+          l.setAttribute("x2", (300 + Math.cos(a) * r2).toFixed(2));
+          l.setAttribute("y2", (300 + Math.sin(a) * r2).toFixed(2));
+          ticks.appendChild(l);
+        }
+
+        // Logo maison-réseau
+        const N = [
+          [200, 112], [158, 152], [242, 152], [96, 204], [304, 204], [186, 190], [226, 184], [140, 214],
+          [262, 214], [200, 228], [116, 252], [284, 252], [168, 250], [232, 250], [96, 288], [304, 288],
+          [140, 296], [260, 296], [96, 326], [164, 326], [236, 326], [304, 326],
+        ];
+        const EDGES = [
+          [0, 1], [0, 2], [1, 2], [0, 5], [0, 6], [1, 5], [2, 6], [5, 6],
+          [1, 3], [1, 7], [3, 7], [2, 4], [2, 8], [4, 8],
+          [5, 7], [5, 9], [6, 9], [6, 8], [7, 9], [8, 9],
+          [3, 10], [7, 10], [4, 11], [8, 11],
+          [7, 12], [9, 12], [9, 13], [8, 13], [12, 13], [10, 12], [11, 13],
+          [10, 14], [10, 16], [12, 16], [14, 16], [11, 15], [11, 17], [13, 17], [15, 17],
+          [14, 18], [16, 18], [16, 19], [12, 19], [15, 21], [17, 21], [17, 20], [13, 20],
+          [18, 19], [20, 21],
+        ];
+        const topY = (e) => Math.min(N[e[0]][1], N[e[1]][1]) * 1000 + Math.min(N[e[0]][0], N[e[1]][0]);
+        const gE = $("#edges");
+        EDGES.slice()
+          .sort((a, b) => topY(a) - topY(b))
+          .forEach((e) => {
+            const l = document.createElementNS(NS, "line");
+            l.setAttribute("x1", N[e[0]][0]);
+            l.setAttribute("y1", N[e[0]][1]);
+            l.setAttribute("x2", N[e[1]][0]);
+            l.setAttribute("y2", N[e[1]][1]);
+            l.setAttribute("pathLength", "1");
+            l.setAttribute("stroke-dasharray", "1");
+            l.setAttribute("stroke-dashoffset", "1");
+            gE.appendChild(l);
+          });
+        const gN = $("#nodes");
+        const nodeEls = [];
+        N.map((p) => p)
+          .sort((a, b) => a[1] * 1000 + a[0] - (b[1] * 1000 + b[0]))
+          .forEach((p) => {
+            const h = document.createElementNS(NS, "circle");
+            h.setAttribute("class", "halo");
+            h.setAttribute("cx", p[0]);
+            h.setAttribute("cy", p[1]);
+            h.setAttribute("r", "15");
+            const c = document.createElementNS(NS, "circle");
+            c.setAttribute("class", "node");
+            c.setAttribute("cx", p[0]);
+            c.setAttribute("cy", p[1]);
+            c.setAttribute("r", "7.5");
+            gN.appendChild(h);
+            gN.appendChild(c);
+            nodeEls.push({ h, c, x: p[0], y: p[1] });
+          });
+
+        // Mots de la bulle (transcription) et barres de l'onde
+        const txt = $("#bubble .txt");
+        const words = txt.textContent.trim().split(" ");
+        txt.textContent = "";
+        words.forEach((w, i) => {
+          const s = document.createElement("span");
+          s.className = "w";
+          s.textContent = w;
+          s.style.display = "inline-block";
+          txt.appendChild(s);
+          if (i < words.length - 1) txt.appendChild(document.createTextNode(" "));
+        });
+        const wave = $("#wave");
+        for (let i = 0; i < 16; i++) wave.appendChild(document.createElement("i"));
+
+        // Étincelles (positions dérivées de l'index : aucun hasard)
+        const makeSparkles = (host, cx, cy, n, rx, ry, seed) => {
+          const colors = ["#00C6FC", "#FFFFFF", "#9EEBFF"];
+          const out = [];
+          for (let i = 0; i < n; i++) {
+            const size = 14 + ((i * 7 + seed) % 4) * 5;
+            const s = document.createElementNS(NS, "svg");
+            s.setAttribute("viewBox", "0 0 20 20");
+            s.setAttribute("class", "spk");
+            s.style.left = cx - size / 2 + "px";
+            s.style.top = cy - size / 2 + "px";
+            s.style.width = size + "px";
+            s.style.height = size + "px";
+            const p = document.createElementNS(NS, "path");
+            p.setAttribute("d", "M10 0 L12.2 7.8 L20 10 L12.2 12.2 L10 20 L7.8 12.2 L0 10 L7.8 7.8 Z");
+            p.setAttribute("fill", colors[(i + seed) % 3]);
+            s.appendChild(p);
+            host.appendChild(s);
+            const a = (i / n) * Math.PI * 2 + (((i * 5 + seed) % 7) - 3) * 0.06;
+            const r = 1 + ((i * 37 + seed * 11) % 50) / 100;
+            out.push({ el: s, dx: Math.cos(a) * rx * r, dy: Math.sin(a) * ry * r, rot: (i % 2 ? 1 : -1) * (60 + ((i * 13) % 50)) });
+          }
+          return out;
+        };
+        const spkR = makeSparkles($("#spkR"), 540, 540, 14, 250, 250, 1);
+        const spkC = makeSparkles($("#spkC"), 540, 1174, 16, 380, 120, 3);
+
+        const fmtEUR = (v) => String(Math.round(v / 100) * 100).replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " €";
+
+        /* ---------- timeline ---------- */
+        const tl = gsap.timeline({ paused: true });
+        tl.set("#bubble", { clipPath: "inset(39px 0px 39px 260px round 36px 36px 36px 36px)" }, 0);
+        const D = C.duration;
+
+        // Fond vivant
+        tl.fromTo("#grid", { y: 0 }, { y: -48, duration: D, ease: "none" }, 0);
+        tl.fromTo("#glowA", { opacity: 0 }, { opacity: 1, duration: 1.0, ease: "power1.out" }, 0);
+        tl.fromTo("#glowA", { scale: 1 }, { scale: 1.12, duration: 2.2, ease: "sine.inOut", yoyo: true, repeat: 9, immediateRender: false }, 1.0);
+        tl.fromTo("#glowB", { opacity: 0 }, { opacity: 1, duration: 1.4, ease: "power1.out" }, 0.2);
+        tl.fromTo("#glowB", { x: -60, y: 60 }, { x: 60, y: -60, duration: D, ease: "none", immediateRender: false }, 0);
+
+        // 1 · Accroche
+        const H = C.hook;
+        tl.fromTo("#topbar", { opacity: 0, y: -18 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.35);
+        tl.fromTo("#ticks line", { opacity: 0 }, { opacity: 1, duration: 0.3, stagger: 0.03, ease: "power1.out" }, 0.08);
+        tl.fromTo("#ring", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: H.ringDur, ease: "power1.inOut" }, H.ring);
+        tl.fromTo("#hand", { rotation: 0, svgOrigin: "300 300" }, { rotation: 360, svgOrigin: "300 300", duration: H.ringDur, ease: "power1.inOut" }, H.ring);
+        tl.fromTo("#hook-time .mask > span", { yPercent: 115 }, { yPercent: 0, duration: 0.75, ease: "expo.out" }, H.time);
+        tl.fromTo("#hook-l1 > span", { yPercent: 115 }, { yPercent: 0, duration: 0.6, ease: "power4.out" }, H.l1);
+        tl.fromTo("#hook-l2 > span", { yPercent: 115 }, { yPercent: 0, duration: 0.6, ease: "power4.out" }, H.l2);
+        tl.to("#hook-ringwrap", { scale: 0.72, opacity: 0, duration: 0.42, ease: "power2.in" }, H.exit);
+        tl.to("#hook-lines", { y: -110, opacity: 0, duration: 0.36, ease: "power2.in" }, H.exit + 0.06);
+
+        // Chapitres (titres) — entrée / sortie ; échange d'écrans
+        const chIn = (n, t) => {
+          tl.fromTo(`#ch${n} .ch-label`, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, t);
+          tl.fromTo(`#ch${n} .mask > span`, { yPercent: 115 }, { yPercent: 0, duration: 0.62, ease: "expo.out", stagger: 0.08 }, t + 0.06);
+          tl.fromTo(`#ch${n} .ch-bar`, { scaleX: 0 }, { scaleX: 1, duration: 0.55, ease: "power3.out" }, t + 0.25);
+          tl.fromTo(`#seg${n} i`, { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power2.out" }, t + 0.1);
+        };
+        const chOut = (n, t) => {
+          tl.to(`#ch${n} .ch-inner`, { y: -36, opacity: 0, duration: 0.28, ease: "power2.in" }, t);
+        };
+        const scrSwap = (from, to, t) => {
+          tl.to(from, { opacity: 0, y: -36, duration: 0.3, ease: "power2.in" }, t);
+          tl.fromTo(to, { opacity: 0, y: 56 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, t + 0.25);
+        };
+
+        // 2 · Brief du matin : écran verrouillé → notification → brief
+        const B = C.brief;
+        chIn(1, B.title);
+        tl.fromTo("#phoneWrap", { y: 1050 }, { y: 0, duration: 1.0, ease: "power4.out" }, B.rise);
+        tl.fromTo("#phone", { y: 0 }, { y: -14, duration: 14, ease: "sine.inOut" }, B.rise + 0.8);
+        tl.fromTo("#notif", { y: -190, opacity: 0, scale: 0.94 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, B.notif);
+        tl.fromTo("#notif .tap2", { scale: 0.3, opacity: 0 }, { scale: 0.5, opacity: 1, duration: 0.06, ease: "none" }, B.tap);
+        tl.to("#notif .tap2", { scale: 6, opacity: 0, duration: 0.5, ease: "power2.out" }, B.tap + 0.06);
+        tl.fromTo("#notifIn", { scale: 1 }, { scale: 0.96, duration: 0.09, ease: "power2.in" }, B.tap);
+        tl.to("#notifIn", { scale: 1, duration: 0.25, ease: "back.out(2.5)" }, B.tap + 0.09);
+        tl.to("#scr-lock", { opacity: 0, y: -140, duration: 0.3, ease: "power2.in" }, B.open);
+        tl.fromTo("#sb-time", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out" }, B.open + 0.15);
+        tl.fromTo("#scr-brief", { opacity: 0, scale: 0.94 }, { opacity: 1, scale: 1, duration: 0.45, ease: "power3.out" }, B.open + 0.18);
+        tl.fromTo("#brief-head", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, B.head);
+        tl.fromTo("#brief-sec", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.out" }, B.head + 0.1);
+        tl.fromTo("#scr-brief .card", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out", stagger: 0.09 }, B.cards);
+        tl.fromTo("#c1 .tap", { scale: 0.4, opacity: 0 }, { scale: 0.6, opacity: 1, duration: 0.06, ease: "none" }, B.check - 0.06);
+        tl.to("#c1 .tap", { scale: 2.4, opacity: 0, duration: 0.5, ease: "power2.out" }, B.check);
+        tl.fromTo("#c1 .chk-bg", { scale: 0 }, { scale: 1, duration: 0.36, ease: "back.out(2.2)" }, B.check);
+        tl.fromTo("#c1 .chk-svg path", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.3, ease: "power2.out" }, B.check + 0.12);
+        tl.fromTo("#c1 .strike", { scaleX: 0 }, { scaleX: 1, duration: 0.36, ease: "power2.inOut" }, B.check + 0.2);
+        tl.to(["#c1 .ct", "#c1 .ic"], { opacity: 0.42, duration: 0.35, ease: "power1.out" }, B.check + 0.26);
+        tl.to("#cnt5", { yPercent: -100, opacity: 0, duration: 0.3, ease: "power2.in" }, B.count);
+        tl.fromTo("#cnt4", { yPercent: 100, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.4, ease: "back.out(1.6)" }, B.count + 0.06);
+
+        // 3 · Chat & dictée
+        const Ch = C.chat;
+        chOut(1, Ch.out);
+        chIn(2, Ch.title);
+        scrSwap("#scr-brief", "#scr-chat", Ch.swap);
+        tl.fromTo("#bubble", { opacity: 0, scale: 0.86 }, { opacity: 1, scale: 1, duration: 0.38, ease: "back.out(1.8)" }, Ch.pill);
+        $$("#wave i").forEach((b, i) => {
+          const amp = 0.3 + 0.7 * Math.abs(Math.sin(i * 1.37 + 0.4));
+          const d = 0.14 + (0.05 * ((i * 7) % 5)) / 4;
+          const reps = Math.max(1, Math.floor(0.9 / d) - 1);
+          tl.fromTo(b, { scaleY: 0.18 }, { scaleY: amp, duration: d, ease: "sine.inOut", yoyo: true, repeat: reps }, Ch.pill + 0.07 + (i % 4) * 0.02);
+        });
+        tl.to("#bubble", { clipPath: "inset(0px 0px 0px 0px round 28px 28px 10px 28px)", duration: 0.5, ease: "power3.inOut" }, Ch.expand);
+        tl.to(".listen", { opacity: 0, duration: 0.2, ease: "power1.in" }, Ch.expand);
+        tl.fromTo("#bubble .w", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out", stagger: 0.035 }, Ch.words);
+        tl.fromTo("#typing", { opacity: 0 }, { opacity: 1, duration: 0.18, ease: "power1.out" }, Ch.typing);
+        $$("#typing i").forEach((d, i) => {
+          tl.fromTo(d, { y: 0 }, { y: -9, duration: 0.14, ease: "sine.inOut", yoyo: true, repeat: 3 }, Ch.typing + 0.05 + i * 0.07);
+        });
+        tl.to("#typing", { opacity: 0, duration: 0.15, ease: "power1.in" }, Ch.typing + 0.45);
+        tl.fromTo("#answer", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, Ch.answer);
+        tl.fromTo("#receipt", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, Ch.receipt);
+        tl.fromTo("#receipt .row", { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: 0.35, ease: "power2.out", stagger: 0.13 }, Ch.receipt + 0.12);
+        tl.fromTo("#receipt .rchk", { scale: 0 }, { scale: 1, duration: 0.34, ease: "back.out(2.4)", stagger: 0.13 }, Ch.checks);
+        tl.fromTo("#receipt .rchk path", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.26, ease: "power2.out", stagger: 0.13 }, Ch.checks + 0.1);
+
+        // 4 · Estimation
+        const Es = C.est;
+        chOut(2, Es.out);
+        chIn(3, Es.title);
+        scrSwap("#scr-chat", "#scr-est", Es.swap);
+        const estNum = $("#est-num");
+        const estP = { v: 0 };
+        tl.to(estP, { v: 389000, duration: Es.countDur, ease: "power3.out", onUpdate: () => { estNum.textContent = fmtEUR(estP.v); } }, Es.count);
+        tl.fromTo("#est-num", { scale: 0.62 }, { scale: 1, duration: Es.countDur, ease: "power3.out" }, Es.count);
+        tl.fromTo("#scr-est .range .fill", { scaleX: 0 }, { scaleX: 1, duration: 0.75, ease: "power3.out" }, Es.fill);
+        tl.fromTo("#scr-est .range .marker", { x: -201, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, Es.marker);
+        tl.fromTo("#scr-est .range-l", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, Es.marker + 0.3);
+        const confPct = $("#conf-pct");
+        const cP = { v: 0 };
+        tl.fromTo("#conf-ring", { strokeDashoffset: 1 }, { strokeDashoffset: 0.14, duration: Es.ringDur, ease: "power2.out" }, Es.ring);
+        tl.to(cP, { v: 86, duration: Es.ringDur, ease: "power2.out", onUpdate: () => { confPct.textContent = Math.round(cP.v) + " %"; } }, Es.ring);
+        tl.fromTo("#scr-est .conf-t", { opacity: 0, x: 16 }, { opacity: 1, x: 0, duration: 0.45, ease: "power2.out" }, Es.ring + 0.1);
+        tl.fromTo("#scr-est .chip", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.42, ease: "back.out(1.8)", stagger: 0.09 }, Es.chips);
+
+        // 5 · Détecteur de ventes
+        const De = C.det;
+        chOut(3, De.out);
+        chIn(4, De.title);
+        scrSwap("#scr-est", "#scr-det", De.swap);
+        tl.fromTo("#river", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.9, ease: "power2.inOut" }, De.map - 0.05);
+        tl.fromTo("#scr-det .road", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.7, ease: "power2.inOut", stagger: 0.045 }, De.map);
+        $$("#scr-det .pin").forEach((g, i) => {
+          const x = g.dataset.x;
+          const y = g.dataset.y;
+          const t = De.pins + i * 0.16;
+          tl.fromTo(g, { scale: 0, svgOrigin: `${x} ${y}` }, { scale: 1, svgOrigin: `${x} ${y}`, duration: 0.45, ease: "back.out(2.2)" }, t);
+          const p = g.querySelector(".pulse");
+          tl.fromTo(p, { opacity: 0, attr: { r: 12 } }, { opacity: 0.85, attr: { r: 12 }, duration: 0.02, ease: "none" }, t + 0.1);
+          tl.to(p, { opacity: 0, attr: { r: 46 }, duration: 0.95, ease: "power1.out", repeat: 1 }, t + 0.12);
+        });
+        tl.fromTo("#det-badge", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.8)" }, De.badge);
+        tl.fromTo("#lead", { opacity: 0, y: 90 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, De.lead);
+        tl.fromTo("#lead .mini", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out", stagger: 0.08 }, De.minis);
+        tl.fromTo("#lead .follow", { scale: 1 }, { scale: 0.9, duration: 0.1, ease: "power2.in" }, De.press - 0.05);
+        tl.to("#lead .follow", { scale: 1, duration: 0.4, ease: "back.out(3)" }, De.press + 0.05);
+
+        // 5b · Ton quotidien avec LIMO (photo qui donne envie)
+        const L = C.life;
+        chOut(4, L.out);
+        tl.to("#phoneWrap", { y: 1150, duration: 0.45, ease: "power2.in" }, L.phoneOut);
+        tl.fromTo("#photo", { opacity: 0, y: 160, scale: 0.92 }, { opacity: 1, y: 0, scale: 1, duration: 0.75, ease: "power3.out" }, L.photo);
+        tl.fromTo("#photo img", { scale: 1 }, { scale: 1.1, duration: 3.3, ease: "none" }, L.photo);
+        tl.fromTo("#lifehead .ch-label", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, L.title);
+        tl.fromTo("#lifehead .mask > span", { yPercent: 115 }, { yPercent: 0, duration: 0.62, ease: "expo.out", stagger: 0.08 }, L.title + 0.06);
+        tl.fromTo("#lifehead .ch-bar", { scaleX: 0 }, { scaleX: 1, duration: 0.55, ease: "power3.out" }, L.title + 0.25);
+        tl.fromTo("#photo .lchip", { opacity: 0, y: 26, scale: 0.8 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "back.out(1.8)", stagger: 0.14 }, L.chips);
+        tl.to("#lifeInner", { y: -36, opacity: 0, duration: 0.3, ease: "power2.in" }, L.exit);
+        tl.to("#photo", { opacity: 0, y: -50, scale: 0.94, duration: 0.4, ease: "power2.in" }, L.exit);
+        tl.to("#topbar", { opacity: 0, y: -16, duration: 0.3, ease: "power2.in" }, L.exit + 0.05);
+
+        // 6 · Fin : le logo se dessine, se pose sur le ventre du robot, puis l'offre
+        const En = C.end;
+        tl.fromTo("#glowC", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 1.1, ease: "power2.out" }, En.glow);
+        tl.to("#glowC", { scale: 1.08, duration: 0.9, ease: "sine.inOut", yoyo: true, repeat: 1 }, En.glow + 1.3);
+        tl.fromTo("#logo", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out" }, En.house - 0.05);
+        tl.fromTo(["#roofRim", "#roof"], { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.55, ease: "power3.inOut" }, En.house);
+        tl.fromTo("#houseLine", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.7, ease: "power2.inOut" }, En.house + 0.1);
+        tl.fromTo("#houseFill", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power1.out" }, En.house + 0.3);
+        tl.fromTo("#edges line", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.25, ease: "power1.out", stagger: 0.007 }, En.house + 0.35);
+        nodeEls.forEach((n, i) => {
+          const t = En.house + 0.45 + i * 0.01;
+          tl.fromTo(n.c, { scale: 0, svgOrigin: `${n.x} ${n.y}` }, { scale: 1, svgOrigin: `${n.x} ${n.y}`, duration: 0.28, ease: "back.out(2.6)" }, t);
+          tl.fromTo(n.h, { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "power1.out" }, t + 0.12);
+        });
+        tl.to("#logo", { x: -15.5, y: 123.3, scale: 0.248, duration: 0.4, ease: "power3.inOut" }, En.toBelly);
+        tl.to("#logo", { opacity: 0, duration: 0.14, ease: "power1.in" }, En.toBelly + 0.28);
+        tl.fromTo("#robotWrap", { opacity: 0, scale: 0.55, y: 60 }, { opacity: 1, scale: 1, y: 0, duration: 0.6, ease: "back.out(1.7)" }, En.robot);
+        tl.fromTo("#robotShadow", { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out" }, En.robot + 0.05);
+        tl.fromTo("#robotImg", { y: 0, rotation: 0 }, { y: -12, rotation: 1.6, duration: 0.85, ease: "sine.inOut", yoyo: true, repeat: 1 }, En.robot + 0.62);
+        tl.to("#robotShadow", { scale: 0.86, opacity: 0.7, duration: 0.85, ease: "sine.inOut", yoyo: true, repeat: 1 }, En.robot + 0.62);
+        const burst = (list, t) =>
+          list.forEach((s, i) => {
+            const t0 = t + (i % 5) * 0.015;
+            tl.fromTo(s.el, { x: 0, y: 0, scale: 0, rotation: 0, opacity: 1 }, { x: s.dx * 0.72, y: s.dy * 0.72, scale: 1, rotation: s.rot * 0.6, duration: 0.34, ease: "power2.out" }, t0);
+            tl.to(s.el, { x: s.dx, y: s.dy, scale: 0.3, rotation: s.rot, opacity: 0, duration: 0.55, ease: "power1.in" }, t0 + 0.34);
+          });
+        burst(spkR, En.robot + 0.1);
+        burst(spkC, En.sparkle);
+        tl.fromTo("#wm-big .lm > span", { yPercent: 110 }, { yPercent: 0, duration: 0.6, ease: "expo.out", stagger: 0.07 }, En.word);
+        tl.fromTo("#wmO", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.55, ease: "power2.inOut" }, En.ring);
+        tl.fromTo("#tagline", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, En.tag);
+        tl.fromTo("#cta", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.55, ease: "back.out(1.7)" }, En.cta);
+        tl.fromTo("#sheen", { x: -200 }, { x: 760, duration: 0.9, ease: "power2.inOut" }, En.sheen);
+        tl.fromTo("#url", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, En.url);
+
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>
