@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — Reel 1 · POV : ta journée avec LIMO</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <style>
+      @font-face {
+        font-family: "Anton";
+        src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("assets/fonts/source-serif-4-latin-600-normal.woff2") format("woff2");
+        font-weight: 600;
+        font-style: normal;
+      }
+      #clock {
+        position: absolute;
+        left: 84px;
+        top: 222px;
+        width: 760px;
+        height: 250px;
+        font-family: "Anton", sans-serif;
+        font-size: 196px;
+        color: var(--fg);
+      }
+      #clockMask {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+      #clock .d {
+        position: absolute;
+        left: 0;
+        top: 0;
+        line-height: 1.25;
+        white-space: nowrap;
+      }
+      #clock .d i {
+        font-style: normal;
+        color: var(--cyan);
+      }
+      .cap {
+        position: absolute;
+        left: 84px;
+        top: 480px;
+        width: 912px;
+        font-weight: 700;
+        font-size: 46px;
+        line-height: 1.2;
+        color: var(--fg);
+      }
+      .cap em {
+        font-style: normal;
+        color: var(--cyan);
+      }
+      #daybar {
+        position: absolute;
+        left: 84px;
+        top: 632px;
+        width: 912px;
+        height: 24px;
+      }
+      #daybar .track {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 9px;
+        height: 6px;
+        border-radius: 3px;
+        background: rgba(200, 225, 255, 0.14);
+      }
+      #daybar .fill {
+        position: absolute;
+        left: 0;
+        width: 912px;
+        top: 9px;
+        height: 6px;
+        border-radius: 3px;
+        background: linear-gradient(90deg, #ffb86b, #00c6fc 55%, #9b7bff);
+        transform-origin: 0% 50%;
+      }
+      #daybar .sun {
+        position: absolute;
+        left: -12px;
+        top: 0;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow:
+          0 0 0 5px rgba(0, 198, 252, 0.35),
+          0 0 26px 6px rgba(0, 198, 252, 0.55);
+      }
+      #daybar .lb {
+        position: absolute;
+        top: 30px;
+        font-weight: 700;
+        font-size: 20px;
+        color: var(--muted2);
+      }
+      #hook {
+        position: absolute;
+        left: 84px;
+        top: 440px;
+        width: 912px;
+        font-family: "Anton", sans-serif;
+        font-size: 120px;
+        color: var(--fg);
+      }
+      #hook .mask {
+        line-height: 1.32;
+        margin-bottom: -0.22em;
+      }
+      #hook .pov {
+        color: var(--cyan);
+        font-size: 150px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="33.5" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="33.5" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/reel-1-pov.wav" data-start="0" data-duration="33.5" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 33.5;
+
+        /* ---------- décor : fond + lumière qui suit la journée ---------- */
+        K.bg(root, { dur: D });
+        const sun = K.h("div", "k-glow", null, root);
+        [sun].forEach((x) => x.setAttribute("data-layout-allow-overflow", ""));
+        Object.assign(sun.style, { left: "480px", top: "-560px", width: "1300px", height: "1300px", background: "radial-gradient(circle, rgba(255,184,107,.22) 0%, rgba(255,184,107,0) 60%)" });
+        const dusk = K.h("div", "k-glow", null, root);
+        dusk.setAttribute("data-layout-allow-overflow", "");
+        Object.assign(dusk.style, { left: "-420px", top: "-500px", width: "1400px", height: "1400px", background: "radial-gradient(circle, rgba(155,123,255,.24) 0%, rgba(155,123,255,0) 60%)" });
+        tl.fromTo(sun, { opacity: 0 }, { opacity: 1, duration: 1.2, ease: "power1.out" }, 0);
+        tl.to(sun, { opacity: 0, duration: 16, ease: "none" }, 4);
+        tl.fromTo(dusk, { opacity: 0 }, { opacity: 1, duration: 11, ease: "none" }, 18);
+
+        const wm = K.wordmark(root, { x: 84, y: 146, size: 46 });
+        tl.fromTo(wm, { opacity: 0, y: -16 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.3);
+
+        /* ---------- la journée ---------- */
+        const BEATS = [
+          ["08:00", 8.0, "Ton brief t’attend <em>déjà</em>.", "brief", 2.5],
+          ["09:30", 9.5, "Un anniversaire ? <em>SMS prêt</em>, 1 tap.", "sms", 2.5],
+          ["10:45", 10.75, "Tu sors de visite : <em>tu dictes</em>, il range.", "dictee", 2.7],
+          ["12:15", 12.25, "Compromis déposé : <em>fiche remplie</em>.", "doc", 2.6],
+          ["14:00", 14.0, "Estimation sur les <em>ventes réelles</em>.", "estim", 2.4],
+          ["15:30", 15.5, "Annonce écrite en <em>10 secondes</em>.", "annonce", 2.6],
+          ["16:00", 16.0, "Posts prêts, <em>LinkedIn publié</em>.", "posts", 2.2],
+          ["16:30", 16.5, "Photo habillée : <em>VENDU</em>.", "photo", 2.1],
+          ["17:30", 17.5, "Avis Google ? <em>Réponse publiée</em>.", "avis", 2.5],
+          ["18:15", 18.25, "3 nouveaux DPE = <em>3 pistes</em>.", "detect", 2.4],
+          ["19:00", 19.0, "Question de droit ? <em>Réponse sourcée</em>.", "droit", 2.4],
+        ];
+        const T0 = 2.3;
+        const starts = [];
+        let acc = T0;
+        BEATS.forEach((b) => {
+          starts.push(acc);
+          acc += b[4];
+        });
+        const TEND = acc; // fin de la journée
+        const TIMES = ["07:59", ...BEATS.map((b) => b[0]), "19:30"];
+        const hourAt = (h) => (h - 8) / (19.5 - 8);
+
+        // Horloge (grands chiffres qui défilent)
+        const clock = K.h("div", "", `<div id="clockMask" data-layout-allow-overflow></div>`, root);
+        clock.id = "clock";
+        const cm = K.$("#clockMask", clock);
+        const digits = TIMES.map((x) => K.h("div", "d", x.replace(":", "<i>:</i>"), cm));
+        digits.forEach((d) => { d.setAttribute("data-layout-allow-occlusion", ""); d.setAttribute("data-layout-allow-overlap", ""); });
+        const flip = (k, t) => {
+          tl.to(digits[k - 1], { yPercent: -100, opacity: 0, duration: 0.3, ease: "power3.in" }, t);
+          tl.fromTo(digits[k], { yPercent: 100, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.38, ease: "power3.out" }, t + 0.08);
+          K.sfx(t, "clack", 0.22);
+        };
+        digits.slice(1).forEach((d) => tl.set(d, { opacity: 0 }, 0));
+
+        // Accroche
+        const hook = K.h("div", "", `<span class="mask pov" data-layout-allow-overflow><span data-layout-allow-occlusion>POV :</span></span><span class="mask" data-layout-allow-overflow><span data-layout-allow-occlusion>T’AS UN CHEF</span></span><span class="mask" data-layout-allow-overflow><span data-layout-allow-occlusion>DE CABINET IA.</span></span>`, root);
+        hook.id = "hook";
+        const hs = K.$$(".mask > span", hook);
+        tl.fromTo(hs, { yPercent: 115 }, { yPercent: 0, duration: 0.6, ease: "expo.out", stagger: 0.12 }, 0.08);
+        K.sfx(0.1, "slam", 0.5);
+        hs.forEach((s, i) => i && K.sfx(0.08 + i * 0.12, "whoosh", 0.12, i % 2 ? 0.3 : -0.3, { d: 0.32, f0: 700, f1: 5000, pk: 0.7 }));
+        tl.fromTo(clock, { y: 700, opacity: 0 }, { y: 700, opacity: 1, duration: 0.3, ease: "power1.out" }, 0.55);
+        [0.7, 1.15, 1.6].forEach((t, i) => K.sfx(t, i % 2 ? "tock" : "tick", 0.2));
+        flip(1, 1.9);
+        tl.to(hook, { y: -120, opacity: 0, duration: 0.35, ease: "power2.in" }, 2.05);
+        tl.to(clock, { y: 0, duration: 0.55, ease: "power3.inOut" }, 2.1);
+        K.sfx(2.05, "whoosh", 0.22, 0, { d: 0.45, f0: 2500, f1: 500, pk: 0.35 });
+
+        // Barre de la journée
+        const bar = K.h("div", "", `<div class="track"></div><div class="fill"></div><div class="sun"></div><span class="lb" style="left:0">8h</span><span class="lb" style="right:0">19h30</span>`, root);
+        bar.id = "daybar";
+        const fill = K.$(".fill", bar);
+        const sunDot = K.$(".sun", bar);
+        tl.fromTo(bar, { opacity: 0 }, { opacity: 1, duration: 0.4 }, T0 + 0.1);
+        tl.fromTo(fill, { scaleX: 0 }, { scaleX: hourAt(BEATS[0][1]), duration: 0.6, ease: "power2.out" }, T0 + 0.15);
+        tl.fromTo(sunDot, { x: 0 }, { x: 912 * hourAt(BEATS[0][1]), duration: 0.6, ease: "power2.out" }, T0 + 0.15);
+
+        // Téléphone
+        const ph = K.phone(root, { x: 190, y: 700, scale: 1.12 });
+        ph.time.innerHTML = TIMES.slice(1).map((x) => `<span class="st">${x.replace(/^0/, "")}</span>`).join("");
+        const st = K.$$(".st", ph.time);
+        st.slice(1).forEach((s) => tl.set(s, { opacity: 0 }, 0));
+        tl.fromTo(ph.el, { y: 1300 }, { y: 0, duration: 0.95, ease: "power4.out" }, T0);
+        K.sfx(T0 - 0.05, "whoosh", 0.28, 0, { d: 0.7, f0: 180, f1: 1500, pk: 0.6 });
+
+        // Composants dans l'écran + légendes
+        const MAKERS = { brief: K.brief, sms: K.sms, dictee: K.dictee, doc: K.doc, estim: K.estim, annonce: K.annonce, posts: K.posts, photo: K.photo, avis: K.avis, detect: K.detect, droit: K.droit };
+        const comps = BEATS.map((b) => MAKERS[b[3]](ph.slot));
+        const caps = BEATS.map((b) => K.h("div", "cap", b[2], root));
+        caps.push(K.h("div", "cap", "Tout est fait. <em>Tu rentres.</em>", root));
+        BEATS.forEach((b, k) => {
+          const t = starts[k];
+          if (k > 0) {
+            flip(k + 1, t);
+            tl.to(fill, { scaleX: hourAt(b[1]), duration: 0.6, ease: "power2.out" }, t);
+            tl.to(sunDot, { x: 912 * hourAt(b[1]), duration: 0.6, ease: "power2.out" }, t);
+            tl.to(st[k - 1], { opacity: 0, duration: 0.01 }, t + 0.1);
+            tl.fromTo(st[k], { opacity: 0 }, { opacity: 1, duration: 0.01 }, t + 0.1);
+            K.fout(comps[k - 1].el, t - 0.12, { y: -30 });
+            K.sfx(t - 0.12, "swipe", 0.12);
+          }
+          K.fin(caps[k], t + 0.05, { y: 20 });
+          K.fout(caps[k], t + b[4] - 0.14, { y: -16, d: 0.22 });
+          comps[k].play(t + 0.14);
+        });
+
+        // Fin de journée
+        K.fout(comps[comps.length - 1].el, TEND - 0.12, { y: -30 });
+        tl.to(ph.el, { y: 1250, duration: 0.5, ease: "power3.in" }, TEND - 0.05);
+        K.sfx(TEND - 0.05, "whoosh", 0.2, 0, { d: 0.5, f0: 2400, f1: 400, pk: 0.4 });
+        flip(TIMES.length - 1, TEND);
+        tl.to(fill, { scaleX: 1, duration: 0.6, ease: "power2.out" }, TEND);
+        tl.to(sunDot, { x: 912, duration: 0.6, ease: "power2.out" }, TEND);
+        K.fin(caps[caps.length - 1], TEND + 0.1, { y: 20 });
+        K.sfx(TEND + 0.2, "success", 0.24);
+        const TE = TEND + 1.25;
+        K.fout([clock, caps[caps.length - 1], bar, wm], TE - 0.2, { y: -30, d: 0.3 });
+        window.__TE = TE;
+        K.endCard(root, TE);
+
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

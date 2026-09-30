@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="fr" class="theme-light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — Reel 5 · 11 tâches que tu ne feras plus jamais à la main</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <style>
+      @font-face {
+        font-family: "Anton";
+        src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("assets/fonts/source-serif-4-latin-600-normal.woff2") format("woff2");
+        font-weight: 600;
+        font-style: normal;
+      }
+      #topTag {
+        position: absolute;
+        right: 84px;
+        top: 150px;
+        height: 48px;
+        padding: 0 18px;
+        border-radius: 24px;
+        display: flex;
+        align-items: center;
+        background: var(--violet);
+        color: #fff;
+        font-family: Montserrat, sans-serif;
+        font-weight: 700;
+        font-size: 20px;
+        letter-spacing: 0.2em;
+      }
+      .num {
+        position: absolute;
+        left: 70px;
+        top: 255px;
+        font-family: "Anton", sans-serif;
+        font-size: 400px;
+        line-height: 1;
+        color: var(--violet);
+        transform-origin: 30% 60%;
+      }
+      .num small {
+        font-size: 150px;
+        color: #0e1630;
+        opacity: 0.18;
+      }
+      .ttl {
+        position: absolute;
+        left: 84px;
+        top: 680px;
+        width: 912px;
+        font-family: "Anton", sans-serif;
+        font-size: 84px;
+        line-height: 1.12;
+        color: var(--fg);
+      }
+      #hook {
+        position: absolute;
+        left: 84px;
+        top: 470px;
+        width: 912px;
+        font-family: "Anton", sans-serif;
+        font-size: 124px;
+        color: var(--fg);
+      }
+      #hook .mask {
+        line-height: 1.32;
+        margin-bottom: -0.22em;
+      }
+      #hook .vi {
+        color: var(--violet);
+      }
+      #outro {
+        position: absolute;
+        left: 84px;
+        top: 640px;
+        width: 912px;
+        font-family: "Anton", sans-serif;
+        font-size: 118px;
+        line-height: 1.12;
+        color: var(--fg);
+      }
+      #outro em {
+        font-style: normal;
+        color: var(--violet);
+      }
+      #outro small {
+        display: block;
+        margin-top: 30px;
+        font-family: Inter, sans-serif;
+        font-weight: 700;
+        font-size: 38px;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="37" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="37" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/reel-5-top11.wav" data-start="0" data-duration="37" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 37;
+        K.bg(root, { dur: D, light: true });
+        const wm = K.wordmark(root, { x: 84, y: 146, size: 46 });
+        const tag = K.h("div", "", "TOP 11", root);
+        tag.id = "topTag";
+        tl.fromTo([wm, tag], { opacity: 0, y: -16 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out", stagger: 0.08 }, 0.3);
+
+        /* ---------- accroche ---------- */
+        const hook = K.h("div", "", ["<span class='vi' style='font-size:190px'>11 TÂCHES</span>", "QUE TU NE FERAS", "PLUS JAMAIS", "<span class='vi'>À LA MAIN.</span>"].map((l) => `<span class="mask" data-layout-allow-overflow><span data-layout-allow-occlusion data-layout-allow-overlap>${l}</span></span>`).join(""), root);
+        hook.id = "hook";
+        const hs = K.$$(".mask > span", hook);
+        tl.fromTo(hs, { yPercent: 115 }, { yPercent: 0, duration: 0.55, ease: "expo.out", stagger: 0.12 }, 0.06);
+        K.sfx(0.08, "slam", 0.5);
+        hs.forEach((s, i) => i && K.sfx(0.06 + i * 0.12, "whoosh", 0.12, i % 2 ? 0.3 : -0.3, { d: 0.3, f0: 700, f1: 5000, pk: 0.7 }));
+        tl.to(hook, { x: -300, opacity: 0, duration: 0.35, ease: "power2.in" }, 2.05);
+        K.sfx(2.05, "whoosh", 0.2, -0.5, { d: 0.4, f0: 2500, f1: 500, pk: 0.35 });
+
+        /* ---------- le décompte ---------- */
+        const ITEMS = [
+          ["SOUHAITER LES ANNIVERSAIRES", "sms"],
+          ["RÉPONDRE AUX AVIS", "avis"],
+          ["HABILLER TES PHOTOS", "photo"],
+          ["POSTER SUR LES RÉSEAUX", "posts"],
+          ["VÉRIFIER UNE RÈGLE DE DROIT", "droit"],
+          ["NOTER TES VISITES", "dictee"],
+          ["RECOPIER UN COMPROMIS", "doc"],
+          ["ÉCRIRE TES ANNONCES", "annonce"],
+          ["ESTIMER UN BIEN", "estim"],
+          ["CHERCHER DES VENDEURS", "detect"],
+          ["SAVOIR QUI RELANCER", "brief"],
+        ];
+        const MAKERS = { brief: K.brief, dictee: K.dictee, doc: K.doc, estim: K.estim, annonce: K.annonce, posts: K.posts, photo: K.photo, sms: K.sms, avis: K.avis, detect: K.detect, droit: K.droit };
+        const stage = K.stage(root, { x: 205, y: 900, scale: 1.1, h: 600 });
+        let t = 2.35;
+        ITEMS.forEach((it, i) => {
+          const n = ITEMS.length - i;
+          const num = K.h("div", "num", `${n}<small>/11</small>`, root);
+          // La zone de police d'Anton (ascendante/descendante) dépasse le chiffre visible : pas de chevauchement réel.
+          num.setAttribute("data-layout-allow-overlap", "");
+          const ttl = K.h("div", "ttl", it[0], root);
+          const comp = MAKERS[it[1]](stage);
+          tl.fromTo(num, { opacity: 0, x: 620, rotation: 14 }, { opacity: 1, x: 0, rotation: 0, duration: 0.42, ease: "back.out(1.5)" }, t);
+          K.sfx(t + 0.12, "slam", 0.34);
+          K.fin(ttl, t + 0.14, { y: 30, d: 0.4 });
+          const end = comp.play(t + 0.34);
+          const out = end + 0.12;
+          tl.to([num, ttl], { x: -420, opacity: 0, duration: 0.3, ease: "power2.in", stagger: 0.03 }, out);
+          tl.to(comp.el, { x: -420, opacity: 0, duration: 0.3, ease: "power2.in" }, out + 0.04);
+          K.sfx(out, "whoosh", 0.16, -0.5, { d: 0.35, f0: 2600, f1: 600, pk: 0.3 });
+          t = out + 0.3;
+        });
+
+        /* ---------- question finale ---------- */
+        const outro = K.h("div", "", "LEQUEL TU TESTES <em>EN PREMIER</em> ?<small>Réponds en commentaire</small>", root);
+        outro.id = "outro";
+        K.fin(outro, t, { y: 40 });
+        K.sfx(t, "slam", 0.3);
+        const TE = t + 1.7;
+        K.fout([outro, wm, tag], TE - 0.25, { y: -30, d: 0.28 });
+        window.__TE = TE;
+        K.endCard(root, TE);
+
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

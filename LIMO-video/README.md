@@ -7,10 +7,33 @@ Tout le matériel des Reels de l'application **LIMO** (app.leadengineai.fr), ré
 
 | Dossier | Ce qu'il contient |
 |---|---|
-| `rendus/` | **`LIMO-reel-v2.mp4`** : version actuelle (24,5 s, effets sonores, offre 14 jours). `LIMO-reel-v1.mp4` : 1re version (20 s, sans son, offre « 1 mois », **obsolète**). `apercus/` : planches d'images clés |
+| `rendus/v3/` | **Les 5 Reels viraux V3** (33 à 37 s, effets sonores, offre 14 jours) : ce sont les versions à publier |
+| `rendus/` | `LIMO-reel-v2.mp4` : V2 (24,5 s, 4 outils, offre 14 jours). `LIMO-reel-v1.mp4` : 1re version (20 s, sans son, offre « 1 mois », **obsolète**). `apercus/` : planches d'images clés de chaque version |
+| `reels-v3/` | Source des 5 Reels V3 : `reels/` (un fichier par Reel), `assets/kit/` (composants partagés), `outils/run.sh` (sons → contrôle → rendu). Mode d'emploi : `reels-v3/README.md` |
 | `projet-hyperframes/` | Source de la V2 : `index.html` (la composition), `assets/` (polices, GSAP, robot détouré, photo, `audio/sfx.wav`), `outils/sfx.py` (générateur des effets sonores), `BRIEF.md`, `STORYBOARD.md` |
 | `sources/` | Fichiers fournis : `images/` (affiche robot, logo, pubs, landing mobile) et `videos/` (pub « Analyseur de dossier », vidéo UGC IA) |
 | `archives/` | Sources de la V1 (zip) |
+
+## 🚀 La V3 : 5 Reels, 5 formats viraux, les 11 outils à chaque fois
+
+Chaque Reel montre **les 11 outils en situation** (brief du jour, dictée → fiche, compromis PDF → fiche,
+estimation, annonce, posts réseaux, photo « VENDU », SMS anniversaire, avis Google, détecteur de ventes,
+question juridique) et finit sur « 14 jours gratuits · sans CB ».
+
+| Fichier (`rendus/v3/`) | Format | Durée | Ce qui accroche |
+|---|---|---|---|
+| `LIMO-v3-1-POV-journee.mp4` | POV « une journée avec » | 33,5 s | « POV : t'as un chef de cabinet IA. » L'horloge défile de 7 h 59 à 19 h 30, le téléphone enchaîne les outils, chute « Tout est fait. Tu rentres. » |
+| `LIMO-v3-2-speedrun.mp4` | Speedrun / chrono | 33,1 s | Compte à rebours 3-2-1-GO, 11 manches chronométrées, « NOUVEAU RECORD », « Et toi, t'es à combien ? » (réponses en commentaire) |
+| `LIMO-v3-3-sans-vs-avec.mp4` | Avant / après + score | 35,6 s | Écran partagé : la galère en haut (post-it perdu, 12 pages à recopier…), LIMO en bas, score 0-11, « Le match est plié. » |
+| `LIMO-v3-4-conversation.mp4` | Conversation / chat | 35,3 s | « J'ai laissé mon IA gérer ma journée d'agent immo… » : chaque demande reçoit sa réponse, chute « T'es qui en fait ? » |
+| `LIMO-v3-5-top-11.mp4` | Top / décompte (thème clair) | 37 s | « 11 tâches que tu ne feras plus jamais à la main », décompte 11 → 1, « Lequel tu testes en premier ? » |
+
+**Conseils de publication**
+
+- Un Reel tous les 2-3 jours plutôt que les 5 d'un coup ; commencer par le 3 (avant/après), le plus parlant.
+- Couverture : choisir dans Instagram l'image de l'accroche (première seconde).
+- Les effets sonores sont intégrés. Pour ajouter une musique tendance dans Instagram, la mettre à 10-20 % du volume.
+- Reels 2 et 5 : épingler un premier commentaire qui relance la question posée à la fin.
 
 ## 🎬 La V2 en bref (1080×1920, 30 i/s, 24,5 s)
 
@@ -44,6 +67,10 @@ npx hyperframes@0.8.96 render -o renders/LIMO-reel.mp4 -q delivery -f 30
 ## ⚖️ À savoir
 
 - Données affichées **100 % fictives** (compte démo « Jean & Marie TYPE », noms d'exemple).
+- Offre affichée dans les Reels : **14 jours gratuits, sans CB**. La landing page indiquait encore « Essayer gratuitement 1 mois » :
+  à aligner avant de publier, sinon l'écart entre la pub et le site peut être reproché (publicité trompeuse).
+- Posts réseaux : seul LinkedIn apparaît « Publié » (publication directe réelle) ; Instagram et Facebook sont « Prêts à publier ».
+- Speedrun : la mention « Vidéo accélérée ×4 » reste affichée sous le chrono.
 - Effets sonores **synthétisés** par `outils/sfx.py` : aucun échantillon externe, libres de droits.
 - Polices Anton, Source Serif 4, Inter, Montserrat : licence SIL OFL. GSAP : licence standard gratuite.
 - Le bilan interne LIMO (.docx) n'est **pas** versionné ici : ce dépôt est public.

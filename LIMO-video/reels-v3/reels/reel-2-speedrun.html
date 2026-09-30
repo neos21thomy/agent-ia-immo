@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — Reel 2 · Speedrun : toute la paperasse d'un mandat</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <style>
+      @font-face {
+        font-family: "Anton";
+        src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("assets/fonts/source-serif-4-latin-600-normal.woff2") format("woff2");
+        font-weight: 600;
+        font-style: normal;
+      }
+      #srTag {
+        position: absolute;
+        right: 84px;
+        top: 150px;
+        height: 48px;
+        padding: 0 18px;
+        border-radius: 24px;
+        display: flex;
+        align-items: center;
+        border: 2px solid rgba(0, 198, 252, 0.6);
+        font-family: Montserrat, sans-serif;
+        font-weight: 700;
+        font-size: 20px;
+        letter-spacing: 0.22em;
+        color: var(--cyan);
+      }
+      #timer {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 222px;
+        text-align: center;
+        font-family: "JetBrains Mono", monospace;
+        font-weight: 700;
+        font-size: 128px;
+        letter-spacing: -0.02em;
+        color: var(--fg);
+        font-variant-numeric: tabular-nums;
+        transform-origin: 50% 50%;
+      }
+      #ff {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 392px;
+        display: flex;
+        justify-content: center;
+      }
+      #ff .k-chip {
+        height: 40px;
+        font-size: 17px;
+        color: var(--muted);
+      }
+      .splabel {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 458px;
+        text-align: center;
+        font-family: Montserrat, sans-serif;
+        font-weight: 700;
+        font-size: 28px;
+        letter-spacing: 0.08em;
+        color: var(--fg);
+      }
+      .splabel em {
+        font-style: normal;
+        color: var(--cyan);
+      }
+      #dots {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 510px;
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+      }
+      #dots i {
+        position: relative;
+        display: block;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: rgba(200, 225, 255, 0.18);
+      }
+      #dots i b {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background: var(--ok);
+        transform-origin: 50% 50%;
+      }
+      .srow {
+        position: absolute;
+        left: 84px;
+        top: 1430px;
+        width: 912px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        font-weight: 700;
+        font-size: 28px;
+        color: var(--fg);
+      }
+      .srow .ok {
+        flex: none;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: var(--ok);
+        color: #04241a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .srow .ok svg.i {
+        width: 22px;
+        height: 22px;
+        stroke-width: 3.2;
+      }
+      .srow .nm {
+        flex: 1;
+      }
+      .srow .tm {
+        font-family: "JetBrains Mono", monospace;
+        color: var(--ok);
+      }
+      #hook {
+        position: absolute;
+        left: 84px;
+        top: 600px;
+        width: 912px;
+        font-family: "Anton", sans-serif;
+        font-size: 104px;
+        color: var(--fg);
+      }
+      #hook .mask {
+        line-height: 1.32;
+        margin-bottom: -0.22em;
+      }
+      #hook .big {
+        font-size: 200px;
+        color: var(--cyan);
+      }
+      .cd {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 760px;
+        text-align: center;
+        font-family: "Anton", sans-serif;
+        font-size: 330px;
+        line-height: 1.2;
+        color: var(--fg);
+        transform-origin: 50% 50%;
+      }
+      .cd.go {
+        color: var(--ok);
+      }
+      #record {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 640px;
+        text-align: center;
+      }
+      #record .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        height: 84px;
+        padding: 0 34px;
+        border-radius: 42px;
+        background: var(--ok);
+        color: #04241a;
+        font-family: "Anton", sans-serif;
+        font-size: 54px;
+        letter-spacing: 0.04em;
+        transform-origin: 50% 50%;
+      }
+      #record .badge svg.i {
+        width: 46px;
+        height: 46px;
+        stroke-width: 2.4;
+      }
+      #record .q {
+        margin-top: 40px;
+        font-family: "Anton", sans-serif;
+        font-size: 96px;
+        line-height: 1.15;
+        color: var(--fg);
+      }
+      #record .q em {
+        font-style: normal;
+        color: var(--cyan);
+      }
+      #record .s {
+        margin-top: 18px;
+        font-weight: 700;
+        font-size: 34px;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="33.1" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="33.1" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/reel-2-speedrun.wav" data-start="0" data-duration="33.1" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 33.1;
+        K.bg(root, { dur: D });
+
+        const wm = K.wordmark(root, { x: 84, y: 146, size: 46 });
+        const tag = K.h("div", "", "SPEEDRUN", root);
+        tag.id = "srTag";
+        const timer = K.h("div", "", "00:00.00", root);
+        timer.id = "timer";
+        const ff = K.h("div", "", `<span class="k-chip">${K.icon("timer")}Vidéo accélérée ×4</span>`, root);
+        ff.id = "ff";
+        tl.fromTo([wm, tag], { opacity: 0, y: -16 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out", stagger: 0.08 }, 0.3);
+        tl.fromTo(timer, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.6)" }, 0.45);
+        tl.fromTo(ff, { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.6);
+
+        /* ---------- accroche + compte à rebours ---------- */
+        const hook = K.h("div", "", `<span class="mask big" data-layout-allow-overflow><span data-layout-allow-occlusion data-layout-allow-overlap>SPEEDRUN</span></span><span class="mask" data-layout-allow-overflow><span data-layout-allow-occlusion data-layout-allow-overlap>TOUTE LA PAPERASSE</span></span><span class="mask" data-layout-allow-overflow><span class="cy" data-layout-allow-occlusion data-layout-allow-overlap>D’UN MANDAT.</span></span>`, root);
+        hook.id = "hook";
+        const hs = K.$$(".mask > span", hook);
+        tl.fromTo(hs, { yPercent: 115 }, { yPercent: 0, duration: 0.55, ease: "expo.out", stagger: 0.1 }, 0.06);
+        K.sfx(0.08, "slam", 0.5);
+        K.sfx(0.2, "whoosh", 0.14, -0.3, { d: 0.3, f0: 700, f1: 5000, pk: 0.7 });
+        K.sfx(0.3, "whoosh", 0.14, 0.3, { d: 0.3, f0: 800, f1: 6000, pk: 0.7 });
+        tl.to(hook, { y: -120, opacity: 0, duration: 0.3, ease: "power2.in" }, 1.1);
+        ["3", "2", "1", "GO !"].forEach((x, i) => {
+          const c = K.h("div", "cd" + (i === 3 ? " go" : ""), x, root);
+          const t = 1.25 + i * 0.38;
+          tl.fromTo(c, { opacity: 0, scale: 1.7 }, { opacity: 1, scale: 1, duration: 0.2, ease: "power3.out" }, t);
+          tl.to(c, { opacity: 0, scale: 0.8, duration: 0.16, ease: "power2.in" }, t + (i === 3 ? 0.34 : 0.24));
+          K.sfx(t, i === 3 ? "go" : "beep", i === 3 ? 0.3 : 0.26, 0, { f: 880 });
+        });
+        const T0 = 2.75;
+
+        /* ---------- les manches ---------- */
+        const SPLITS = [
+          ["BRIEF DU JOUR", "brief"],
+          ["FICHE VENDEUR DICTÉE", "dictee"],
+          ["COMPROMIS → FICHE", "doc"],
+          ["ESTIMATION", "estim"],
+          ["ANNONCE SEO", "annonce"],
+          ["POSTS + LINKEDIN", "posts"],
+          ["PHOTO « VENDU »", "photo"],
+          ["SMS CLIENT", "sms"],
+          ["RÉPONSE AVIS GOOGLE", "avis"],
+          ["PISTES DPE", "detect"],
+          ["QUESTION JURIDIQUE", "droit"],
+        ];
+        const NICE = ["Brief du jour", "Fiche vendeur", "Compromis lu", "Estimation", "Annonce SEO", "Posts + LinkedIn", "Photo VENDU", "SMS client", "Avis Google", "Pistes DPE", "Question juridique"];
+        const MAKERS = { brief: K.brief, dictee: K.dictee, doc: K.doc, estim: K.estim, annonce: K.annonce, posts: K.posts, photo: K.photo, sms: K.sms, avis: K.avis, detect: K.detect, droit: K.droit };
+        const stage = K.stage(root, { x: 151, y: 562, scale: 1.28, h: 600 });
+        const labels = SPLITS.map((s, i) => K.h("div", "splabel", `MANCHE ${String(i + 1).padStart(2, "0")}/${SPLITS.length} · <em>${s[0]}</em>`, root));
+        const dots = K.h("div", "", SPLITS.map(() => "<i><b></b></i>").join(""), root);
+        dots.id = "dots";
+        tl.fromTo(dots, { opacity: 0 }, { opacity: 1, duration: 0.3 }, T0);
+        const dotsB = K.$$("b", dots);
+        const fmt = (s) => {
+          const m = Math.floor(s / 60);
+          const r = s - m * 60;
+          return String(m).padStart(2, "0") + ":" + r.toFixed(2).padStart(5, "0");
+        };
+        const rows = [];
+        let s = T0;
+        const done = [];
+        SPLITS.forEach((sp, k) => {
+          const comp = MAKERS[sp[1]](stage);
+          const end = comp.play(s + 0.05);
+          K.fin(labels[k], s, { y: 14, d: 0.3 });
+          K.fout(labels[k], end + 0.15, { y: -10, d: 0.2 });
+          const d = end - 0.05;
+          done.push(d);
+          tl.fromTo(dotsB[k], { scale: 0 }, { scale: 1, duration: 0.3, ease: "back.out(2.5)" }, d);
+          K.fout(comp.el, end + 0.15, { y: -40 });
+          if (k < SPLITS.length - 1) K.sfx(end + 0.15, "swipe", 0.1);
+          s = end + 0.3;
+        });
+        const TEND = done[done.length - 1];
+        const P = { v: 0 };
+        const SPEED = 4;
+        tl.to(P, { v: (TEND - T0) * SPEED, duration: TEND - T0, ease: "none", onUpdate: () => { timer.textContent = fmt(P.v); } }, T0);
+        SPLITS.forEach((sp, k) => {
+          const d = done[k];
+          const r = K.h("div", "srow", `<span class="ok">${K.icon("check")}</span><span class="nm">${NICE[k]}</span><span class="tm">${fmt((d - T0) * SPEED)}</span>`, root);
+          rows.push(r);
+          tl.fromTo(r, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, d);
+          K.sfx(d, "split", 0.22, 0.2);
+          for (let i = 0; i < k; i++) {
+            const age = k - i;
+            if (age <= 3) tl.to(rows[i], { y: -64 * age, opacity: age >= 3 ? 0 : 1 - 0.3 * age, duration: 0.3, ease: "power2.out" }, d);
+          }
+        });
+
+        /* ---------- record ---------- */
+        const F = TEND + 0.25;
+        tl.to(timer, { color: "#2bd99a", scale: 1.12, duration: 0.25, ease: "power2.out" }, TEND);
+        tl.to(timer, { scale: 1, duration: 0.35, ease: "back.out(2)" }, TEND + 0.25);
+        const rec = K.h("div", "", `<div class="badge">${K.icon("trophy")}NOUVEAU RECORD</div><div class="q">ET TOI, T’ES<br>À <em>COMBIEN</em> ?</div><div class="s">Ton temps en commentaire</div>`, root);
+        rec.id = "record";
+        K.pop(K.$(".badge", rec), F, { s: 0.5, d: 0.5, e: "back.out(2)" });
+        K.sfx(F, "fanfare", 0.26);
+        K.burst(K.sparkles(root, 540, 682, 16, 380, 150, 5), F + 0.05);
+        K.fin(K.$(".q", rec), F + 0.45, { y: 30 });
+        K.sfx(F + 0.45, "whoosh", 0.14, 0, { d: 0.35, f0: 700, f1: 5000, pk: 0.6 });
+        K.fin(K.$(".s", rec), F + 0.75, { y: 14 });
+        const TE = F + 2.1;
+        K.fout([timer, ff, dots, rec, wm, tag, ...rows.slice(-3)], TE - 0.3, { y: -30, d: 0.3 });
+        window.__TE = TE;
+        K.endCard(root, TE, { cta: "14 jours gratuits · sans CB" });
+
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>
