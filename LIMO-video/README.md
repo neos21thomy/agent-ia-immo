@@ -54,6 +54,23 @@ Une série en 5 niveaux qui avance d'épisode en épisode. Chaque vidéo s'ouvre
 
 Source : `reels-v3/reels/serie-n1-declic.html`.
 
+### Versions avec musique (`rendus/v3-musique/`, `rendus/v3-15s-musique/`, `rendus/serie/*-musique.mp4`)
+
+Chaque vidéo existe en deux versions : **bruitages seuls** (pour poser un son tendance dans Instagram) et **bruitages + musique** (suffixe `-musique`).
+Les musiques sont composées par `reels-v3/outils/music.py`, synthétisées sans aucun échantillon externe, donc libres de droits.
+Elles sont calées sur le rythme de chaque vidéo : intro filtrée pendant l'accroche, groove qui démarre à la fin de l'accroche, frappe finale sur la carte LIMO.
+
+| Style | Vidéos |
+|---|---|
+| House 122 BPM | POV (long et 15 s) |
+| Synthwave rapide 140 BPM | Speedrun (long et 15 s) |
+| Trap 140 BPM | Sans vs Avec (long et 15 s) |
+| Lo-fi 88 BPM | Conversation (long et 15 s) |
+| Pop house 124 BPM | Top 11 / Top 3 |
+| Montée cinématique 100 BPM, drop sur « L'IA fait déjà partie de ta vie » | Série niveau 1 |
+
+Refaire une version : `python3 reels-v3/outils/music.py <reel> reels-v3/.sfx/<reel>.json reels-v3/assets/audio/<reel>.wav sortie.wav`, puis remplacer la piste audio du MP4 avec FFmpeg.
+
 **Conseils de publication**
 
 - Un Reel tous les 2-3 jours plutôt que les 5 d'un coup ; commencer par le 3 (avant/après), le plus parlant.
