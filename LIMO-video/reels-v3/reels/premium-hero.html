@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — Film premium · Ton CRM stocke, LIMO travaille</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <style>
+      @font-face {
+        font-family: "Anton";
+        src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+      :root {
+        --navy: #0b1030;
+        --vio: #7b5cff;
+        --vio-l: #a893ff;
+        --teal: #2fd6c8;
+      }
+      body {
+        background: #06081a;
+      }
+      .mont {
+        font-family: Montserrat, sans-serif;
+      }
+      .ab {
+        position: absolute;
+      }
+      .ctr {
+        left: 60px;
+        right: 60px;
+        text-align: center;
+      }
+      .h-big {
+        font-family: Montserrat, sans-serif;
+        font-weight: 800;
+        color: #fff;
+        letter-spacing: -0.01em;
+      }
+      .h-mid {
+        font-family: Montserrat, sans-serif;
+        font-weight: 700;
+        font-size: 60px;
+        line-height: 1.18;
+        color: #fff;
+      }
+      .h-mid em,
+      .h-big em {
+        font-style: normal;
+        background: linear-gradient(90deg, var(--vio-l), var(--vio) 55%, #00c6fc);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .serif {
+        font-family: "Source Serif 4", serif;
+        color: #c9c6e6;
+      }
+      .mask {
+        display: block;
+        overflow: hidden;
+        line-height: 1.22;
+        margin-bottom: -0.12em;
+      }
+      .mask > span {
+        display: inline-block;
+      }
+      #photo {
+        left: 60px;
+        top: 650px;
+        width: 960px;
+        height: 578px;
+        border-radius: 44px;
+        overflow: hidden;
+        box-shadow: 0 40px 90px rgba(0, 0, 0, 0.55);
+      }
+      #photo img {
+        width: 960px;
+        height: 578px;
+        object-fit: cover;
+        transform-origin: 62% 40%;
+      }
+      #halo {
+        left: 40px;
+        top: 360px;
+        width: 1000px;
+        height: 1300px;
+        background: radial-gradient(closest-side, rgba(123, 92, 255, 0.45), rgba(123, 92, 255, 0));
+      }
+      #ph {
+        left: 213px;
+        top: 470px;
+        width: 654px;
+        height: 1312px;
+        transform-origin: 327px 1000px;
+      }
+      #scrim {
+        left: 0;
+        top: 0;
+        width: 1080px;
+        height: 640px;
+        background: linear-gradient(180deg, #06081a 0%, #06081a 62%, rgba(6, 8, 26, 0));
+      }
+      #ph img {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 654px;
+        height: 1312px;
+        filter: drop-shadow(0 50px 70px rgba(0, 0, 0, 0.6));
+      }
+      .ring {
+        position: absolute;
+        border-radius: 22px;
+        border: 5px solid #00c6fc;
+        box-shadow: 0 0 30px rgba(0, 198, 252, 0.7), inset 0 0 18px rgba(0, 198, 252, 0.35);
+      }
+      #notif {
+        left: 90px;
+        top: 700px;
+        width: 900px;
+        height: 170px;
+        border-radius: 34px;
+        background: #ffffff;
+        box-shadow: 0 30px 70px rgba(10, 8, 40, 0.55);
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        padding: 0 34px;
+      }
+      #notif .bl {
+        flex: none;
+        width: 96px;
+        height: 96px;
+        border-radius: 26px;
+        background: linear-gradient(145deg, #8b6dff, #6a4de8);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #notif .bl svg.i {
+        width: 50px;
+        height: 50px;
+      }
+      #notif .tx {
+        flex: 1;
+        font-family: Montserrat, sans-serif;
+      }
+      #notif .tp {
+        display: flex;
+        justify-content: space-between;
+        font-weight: 700;
+        font-size: 22px;
+        letter-spacing: 0.12em;
+        color: var(--vio);
+      }
+      #notif .tp span {
+        letter-spacing: 0;
+        font-weight: 500;
+        color: #6e6c85;
+      }
+      #notif b {
+        display: block;
+        margin-top: 8px;
+        font-weight: 600;
+        font-size: 36px;
+        line-height: 1.25;
+        color: #16193a;
+      }
+      #cap {
+        top: 170px;
+        height: 260px;
+      }
+      #cap > div {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+      }
+      .bar {
+        width: 120px;
+        height: 8px;
+        border-radius: 4px;
+        background: var(--teal);
+        margin: 34px auto 0;
+        transform-origin: 50% 50%;
+      }
+      #house {
+        left: 290px;
+        top: 470px;
+        width: 500px;
+        height: 441px;
+      }
+      #house img {
+        width: 500px;
+        height: 441px;
+      }
+      #wm {
+        top: 930px;
+        font-family: Montserrat, sans-serif;
+        font-weight: 400;
+        font-size: 150px;
+        letter-spacing: 0.14em;
+        color: #fff;
+        padding-left: 0.14em;
+      }
+      #tag {
+        top: 1140px;
+        font-family: Montserrat, sans-serif;
+        font-weight: 600;
+        font-size: 34px;
+        letter-spacing: 0.42em;
+        color: var(--vio-l);
+        padding-left: 0.42em;
+      }
+      #cta {
+        left: 170px;
+        top: 1330px;
+        width: 740px;
+        height: 130px;
+        border-radius: 65px;
+        background: linear-gradient(90deg, #7b5cff, #5a3fe0);
+        box-shadow: 0 24px 60px rgba(123, 92, 255, 0.55);
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: Montserrat, sans-serif;
+        font-weight: 700;
+        font-size: 44px;
+        color: #fff;
+      }
+      #cta i {
+        position: absolute;
+        top: -20px;
+        left: 0;
+        width: 120px;
+        height: 170px;
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0));
+        transform: skewX(-20deg);
+      }
+      .chips {
+        top: 1500px;
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+      }
+      .chips span {
+        height: 58px;
+        padding: 0 24px;
+        border-radius: 29px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border: 2px solid rgba(47, 214, 200, 0.5);
+        background: rgba(47, 214, 200, 0.1);
+        font-family: Montserrat, sans-serif;
+        font-weight: 600;
+        font-size: 25px;
+        color: #bff5ef;
+        white-space: nowrap;
+      }
+      .chips span svg.i {
+        width: 26px;
+        height: 26px;
+        flex: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="22.5" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="22.5" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/premium-hero.wav" data-start="0" data-duration="22.5" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script>
+      (function () {
+        const SHORT = false; // la version 15 s est générée en passant ce drapeau à true
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 22.5;
+        K.bg(root, { dur: D });
+        const ab = (cls, html, css) => {
+          const e = K.h("div", "ab " + (cls || ""), html, root);
+          if (css) Object.assign(e.style, css);
+          return e;
+        };
+        const lines = (arr) => arr.map((l) => `<span class="mask" data-layout-allow-overflow><span data-layout-allow-occlusion data-layout-allow-overlap>${l}</span></span>`).join("");
+        const rise = (el, t, st = 0.1) => {
+          const s = K.$$(".mask > span", el);
+          tl.fromTo(s, { yPercent: 110 }, { yPercent: 0, duration: 0.6, ease: "expo.out", stagger: st }, t);
+          s.forEach((x, i) => K.sfx(t + i * st, "whoosh", 0.1, i % 2 ? 0.3 : -0.3, { d: 0.3, f0: 700, f1: 4500, pk: 0.6 }));
+        };
+        let t = 0;
+
+        /* ---------- 1 · la douleur : 21 h 47 ---------- */
+        const clock = ab("ctr h-big", lines(["21 H 47."]), { top: "560px", fontSize: "200px" });
+        const s1 = ab("ctr serif", "", { top: "860px", fontSize: "58px", lineHeight: "1.3", color: "#e8e6f7" });
+        rise(clock, 0.1);
+        K.sfx(0.12, "slam", 0.4);
+        [0.9, 1.4, 1.9, 2.4].forEach((x, i) => K.sfx(x, i % 2 ? "tock" : "tick", 0.14));
+        K.type(s1, "Et tu recopies encore un compromis…", 0.75, 1.3, 0.05);
+        t = SHORT ? 2.4 : 2.9;
+        K.fout([clock, s1], t - 0.3, { y: -50, d: 0.3 });
+        K.sfx(t - 0.3, "whoosh", 0.16, 0, { d: 0.4, f0: 2500, f1: 500, pk: 0.35 });
+
+        /* ---------- 2 · pendant ce temps (version longue) ---------- */
+        if (!SHORT) {
+          const s2a = ab("ctr h-mid", lines(["Pendant que tu cherches", "<em>qui relancer…</em>"]), { top: "300px" });
+          const photo = ab("", `<img src="assets/img/bureau-robot.jpg" alt="Le robot LIMO au bureau" />`);
+          photo.id = "photo";
+          const s2b = ab("ctr serif", "…d’autres ont déjà pris de l’avance.", { top: "1300px", fontSize: "54px" });
+          rise(s2a, t);
+          tl.fromTo(photo, { opacity: 0, y: 90, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: "power3.out" }, t + 0.25);
+          tl.fromTo(K.$("img", photo), { scale: 1.02 }, { scale: 1.12, duration: 3.6, ease: "none" }, t + 0.25);
+          K.sfx(t + 0.25, "whoosh", 0.18, 0, { d: 0.6, f0: 200, f1: 1800, pk: 0.6 });
+          K.fin(s2b, t + 1.3, { y: 20 });
+          t += 3.5;
+          K.fout([s2a, s2b], t - 0.35, { y: -30, d: 0.3 });
+          tl.to(photo, { opacity: 0, scale: 0.9, y: -60, duration: 0.4, ease: "power2.in" }, t - 0.35);
+          K.sfx(t - 0.35, "swipe", 0.12);
+        }
+
+        /* ---------- 3 · le vrai écran LIMO ---------- */
+        const halo = ab("", null);
+        halo.id = "halo";
+        halo.setAttribute("data-layout-allow-overflow", "");
+        const ph = ab("", `<img src="assets/img/phone-limo.png" alt="L’application LIMO sur téléphone" />`);
+        ph.id = "ph";
+        ph.setAttribute("data-layout-allow-overflow", "");
+        // zones de l'écran (coordonnées du visuel ×1,3)
+        const ring = (x, y, w, h) => {
+          const r = K.h("div", "ring", null, ph);
+          Object.assign(r.style, { left: x + "px", top: y + "px", width: w + "px", height: h + "px" });
+          r.setAttribute("data-layout-allow-overflow", "");
+          return r;
+        };
+        const rMandat = ring(88, 905, 468, 92);
+        const rAnniv = ring(76, 1003, 482, 92);
+        const scrim = ab("", null);
+        scrim.id = "scrim";
+        const cap = ab("ctr", "", {});
+        cap.id = "cap";
+        const caps = [
+          "Chaque matin, LIMO te dit<br><em>qui appeler.</em>",
+          "Il repère les<br><em>nouveaux mandats.</em>",
+          "Et il n’oublie<br><em>aucun client.</em>",
+        ].map((c) => K.h("div", "h-mid", c, cap));
+        const notif = ab("", `<div class="bl">${K.icon("bell")}</div><div class="tx"><div class="tp">RAPPEL<span>Maintenant</span></div><b>M. Albert attend ton rappel aujourd’hui.</b></div>`);
+        notif.id = "notif";
+        const T3 = t;
+        tl.set([...caps, rMandat, rAnniv, notif], { opacity: 0 }, 0);
+        tl.fromTo(halo, { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.8, ease: "power2.out" }, T3);
+        tl.fromTo(ph, { y: 1600, rotation: 8, opacity: 0 }, { y: 0, rotation: -3, opacity: 1, duration: 0.9, ease: "power4.out" }, T3);
+        K.sfx(T3, "whoosh", 0.26, 0, { d: 0.7, f0: 180, f1: 1500, pk: 0.6 });
+        K.fin(caps[0], T3 + 0.35, { y: 24 });
+        tl.fromTo(notif, { opacity: 0, y: -160, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(1.6)" }, T3 + 1.1);
+        K.sfx(T3 + 1.1, "notif", 0.3);
+        tl.fromTo(K.$(".bl", notif), { rotation: 0 }, { rotation: 14, duration: 0.08, ease: "none", yoyo: true, repeat: 5 }, T3 + 1.5);
+        let t3 = T3 + 2.7;
+        tl.to(notif, { opacity: 0, y: -80, scale: 0.94, duration: 0.35, ease: "power2.in" }, t3);
+        K.fout(caps[0], t3, { y: -20, d: 0.25 });
+        // zoom sur « Nouveau mandat détecté »
+        const zoom = (el, oy, t0, cIdx) => {
+          tl.to(ph, { scale: 1.45, rotation: 0, y: 1000 - (1470 + (oy - 1000) * 1.45), duration: 0.8, ease: "power3.inOut" }, t0);
+          if (cIdx === 1) tl.fromTo(scrim, { opacity: 0 }, { opacity: 1, duration: 0.5 }, t0 + 0.1);
+          K.sfx(t0, "whoosh", 0.16, 0.3, { d: 0.5, f0: 400, f1: 2600, pk: 0.5 });
+          tl.fromTo(el, { opacity: 0, scale: 1.12 }, { opacity: 1, scale: 1, duration: 0.35, ease: "power2.out" }, t0 + 0.6);
+          K.sfx(t0 + 0.65, "success", 0.2);
+          K.fin(caps[cIdx], t0 + 0.3, { y: 24 });
+        };
+        zoom(rMandat, 951, t3 + 0.1, 1);
+        t3 += 2.0;
+        if (!SHORT) {
+          tl.to(rMandat, { opacity: 0, duration: 0.25 }, t3);
+          K.fout(caps[1], t3, { y: -20, d: 0.25 });
+          zoom(rAnniv, 1049, t3 + 0.05, 2);
+          t3 += 2.0;
+        }
+        t = t3 + 0.2;
+        tl.to([ph, halo, rMandat, rAnniv, scrim], { opacity: 0, y: "+=260", duration: 0.45, ease: "power2.in" }, t - 0.2);
+        K.fout(cap, t - 0.2, { y: -20, d: 0.3 });
+        K.sfx(t - 0.2, "whoosh", 0.2, 0, { d: 0.45, f0: 2400, f1: 400, pk: 0.4 });
+
+        /* ---------- 4 · le slogan ---------- */
+        const slo = ab("ctr h-big", lines(["TON CRM", "STOCKE.", "<em>LIMO</em>", "<em>TRAVAILLE.</em>"]), { top: "470px", fontSize: "150px" });
+        const bar = ab("ctr", `<div class="bar"></div>`, { top: "1190px" });
+        const sub = ab("ctr serif", "Plus aucune vente ne se perd par oubli.", { top: "1290px", fontSize: "48px" });
+        tl.set(slo, { opacity: 0 }, 0);
+        tl.set(slo, { opacity: 1 }, t + 0.05);
+        rise(slo, t + 0.1, 0.13);
+        K.sfx(t + 0.1, "slam", 0.35);
+        K.sfx(t + 0.49, "slam", 0.45);
+        tl.fromTo(K.$(".bar", bar), { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, t + 0.8);
+        K.fin(sub, t + 1.0, { y: 16 });
+        t += SHORT ? 2.6 : 3.1;
+        K.fout([slo, bar, sub], t - 0.3, { y: -40, d: 0.3 });
+
+        /* ---------- 5 · la maison + LIMO ---------- */
+        const house = ab("", `<img src="assets/img/limo-house.png" alt="Logo LIMO" />`);
+        house.id = "house";
+        const wm = ab("ctr", "LIMO");
+        wm.id = "wm";
+        const tag = ab("ctr", "CHEF DE CABINET IMMO");
+        tag.id = "tag";
+        tl.fromTo(house, { opacity: 0, scale: 0.6, filter: "blur(18px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.8, ease: "power3.out" }, t);
+        K.sfx(t, "riser", 0.14, 0, { d: 0.5 });
+        K.sfx(t + 0.45, "thump", 0.45);
+        K.burst(K.sparkles(root, 540, 690, 14, 300, 260, 2), t + 0.45);
+        tl.fromTo(wm, { opacity: 0, scaleX: 1.35, scaleY: 1 }, { opacity: 1, scaleX: 1, scaleY: 1, duration: 0.8, ease: "power3.out" }, t + 0.35);
+        K.fin(tag, t + 0.7, { y: 14 });
+        const T6 = t + (SHORT ? 1.6 : 2.0);
+
+        /* ---------- 6 · l'appel à l'essai ---------- */
+        tl.to(house, { scale: 0.52, y: -310, duration: 0.6, ease: "power3.inOut" }, T6);
+        tl.to(wm, { scale: 0.55, y: -470, duration: 0.6, ease: "power3.inOut" }, T6);
+        K.fout(tag, T6, { y: -20, d: 0.25 });
+        const h6 = ab("ctr h-big", lines(["Essaie-le", "<em>14 jours.</em>"]), { top: "780px", fontSize: "132px" });
+        const cta = ab("", `<i></i>Commencer gratuitement →`);
+        cta.id = "cta";
+        const chips = ab("ctr chips", `<span>${K.icon("check")}Sans carte bancaire</span><span>${K.icon("check")}Sans engagement</span>`);
+        const url = ab("ctr mont", "app.leadengineai.fr", { top: "1620px", fontSize: "34px", fontWeight: "600", color: "#c9c6e6" });
+        tl.set(h6, { opacity: 0 }, 0);
+        tl.set(h6, { opacity: 1 }, T6 + 0.3);
+        rise(h6, T6 + 0.35, 0.12);
+        K.sfx(T6 + 0.4, "slam", 0.35);
+        K.pop(cta, T6 + 0.9, { s: 0.7, d: 0.55, e: "back.out(1.7)" });
+        K.sfx(T6 + 0.9, "cta", 0.22);
+        tl.fromTo(K.$("i", cta), { x: -160 }, { x: 900, duration: 0.9, ease: "power2.inOut" }, T6 + 1.5);
+        tl.to(cta, { scale: 1.05, duration: 0.35, ease: "sine.inOut", yoyo: true, repeat: 3 }, T6 + 1.6);
+        K.fin(K.$$("span", chips), T6 + 1.2, { y: 14, st: 0.1 });
+        K.fin(url, T6 + 1.45, { y: 10 });
+        K.burst(K.sparkles(root, 540, 1395, 14, 420, 110, 4), T6 + 1.0);
+        window.__TE = T6 + 0.35; // frappe musicale sur « Essaie-le 14 jours »
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

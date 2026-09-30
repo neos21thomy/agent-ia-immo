@@ -31,6 +31,8 @@ PRESETS = {
     "short-4-conversation": ("lofi", 88, 1.55),
     "short-5-top3": ("pop", 124, 2.35),
     "serie-n1-declic": ("epic", 100, 2.45, 13.05),
+    "premium-hero": ("epic", 100, 2.9, 6.4),
+    "premium-15s": ("epic", 100, 2.4, 2.4),
 }
 
 # progressions (MIDI) : accords (3-4 notes) et fondamentale de basse

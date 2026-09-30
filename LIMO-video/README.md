@@ -14,6 +14,22 @@ Tout le matériel des Reels de l'application **LIMO** (app.leadengineai.fr), ré
 | `sources/` | Fichiers fournis : `images/` (affiche robot, logo, pubs, landing mobile) et `videos/` (pub « Analyseur de dossier », vidéo UGC IA) |
 | `archives/` | Sources de la V1 (zip) |
 
+## ⭐ Films premium (`rendus/premium/`) : à mettre en avant
+
+Construits avec **les visuels fournis** : le vrai écran LIMO détouré de la pub « Ton CRM stocke », la maison lumineuse du logo et la photo du robot au bureau vue mer.
+Il y a quatre fichiers : 22 s et 15 s, chacun en version bruitages seuls et en version `-musique`.
+
+| Temps (22 s) | Scène |
+|---|---|
+| 0 – 2,9 s | « 21 H 47. Et tu recopies encore un compromis… » |
+| 2,9 – 6,4 s | « Pendant que tu cherches qui relancer… » (photo du robot au bureau) « …d'autres ont déjà pris de l'avance. » |
+| 6,4 – 13,3 s | Le vrai écran LIMO : notification « M. Albert attend ton rappel aujourd'hui », zoom sur « Nouveau mandat détecté » puis « Anniversaire client » |
+| 13,3 – 16,4 s | « TON CRM STOCKE. LIMO TRAVAILLE. Plus aucune vente ne se perd par oubli. » |
+| 16,4 – 18,4 s | La maison lumineuse, LIMO, chef de cabinet immo |
+| 18,4 – 22,5 s | « Essaie-le 14 jours. » Bouton « Commencer gratuitement », sans carte bancaire, sans engagement |
+
+Sources : `reels-v3/reels/premium-hero.html` et `premium-15s.html`. Nouveaux visuels dans `reels-v3/assets/img/` : `phone-limo.png`, `limo-house.png`, `bureau-robot.jpg`.
+
 ## 🚀 La V3 : 5 Reels, 5 formats viraux, les 11 outils à chaque fois
 
 Chaque Reel montre **les 11 outils en situation** (brief du jour, dictée → fiche, compromis PDF → fiche,
