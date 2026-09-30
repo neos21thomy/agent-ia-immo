@@ -5,7 +5,10 @@ Usage : python3 outils/hooks.py   (réécrit reels/hook-*.html)
 """
 import pathlib
 
-from naturel import FACES, SHELL
+from naturel import FACES as _FACES, SHELL
+
+# Montserrat 800 embarquée localement : l'accroche doit être dans la bonne police dès l'image 1
+FACES = _FACES + """      @font-face { font-family: "Montserrat Hook"; src: url("assets/fonts/montserrat-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-style: normal; }\n"""
 
 FILMS = {}
 

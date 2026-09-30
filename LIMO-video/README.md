@@ -37,6 +37,8 @@ Chaque film fait de 14 à 15,6 s et existe en version bruitages seuls et en vers
 et les 2, 5 et 7 sont les plus forts en publicité sponsorisée.
 Les chiffres et les noms sont fictifs ; les écrans d'estimation et de carte portent la mention « Exemple fictif ».
 
+**Couverture Instagram** : choisis l'image vers 1,5 s (le mot violet et la phrase sous le hook sont alors affichés).
+
 Sources : `reels-v3/reels/hook-*.html`, générés par `reels-v3/outils/hooks.py` (fonctions `N.hook` et `N.chip` du kit naturel).
 
 ## 🌿 Série finale « LIMO naturel » : 10 Reels (`rendus/naturel/`), à publier en priorité
