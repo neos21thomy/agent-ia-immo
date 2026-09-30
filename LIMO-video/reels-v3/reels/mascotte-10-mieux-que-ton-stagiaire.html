@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — 3 trucs que je fais mieux que ton stagiaire</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/naturel.css" />
+    <style>
+      @font-face { font-family: "Anton"; src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Source Serif 4"; src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; }
+      @font-face { font-family: "Montserrat Hook"; src: url("assets/fonts/montserrat-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-style: normal; }
+      .num { font-family: "Montserrat Hook", Montserrat, sans-serif; font-weight: 800; font-size: 200px; color: var(--vio); line-height: 1; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="15.4" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="15.4" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/mascotte-10-mieux-que-ton-stagiaire.wav" data-start="0" data-duration="15.4" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/naturel.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 15.4;
+        N.init(tl, root, D);
+        const endM = (M, left, top, W, t) => {
+          const H = (W * 904) / 747;
+          const s = 260 / W;
+          M.move(t, { x: 890 - (left + W / 2), y: 1610 - (top + H / 2), scale: s, rotation: -8 }, 0.7);
+          M.expr("happy", t + 0.1, false);
+          M.wave(t + 0.9);
+          M.blink(t + 2.4);
+        };
+
+        const hk = N.hook(["3 TRUCS QUE JE", "FAIS MIEUX QUE", "<span class='hl'>TON STAGIAIRE.</span>"], { top: "280px", fontSize: "92px" });
+        const M = N.mascot({ left: "300px", top: "980px", width: "480px" }, { expr: "wink" });
+        M.float(0, 12, 10);
+        M.blink(1.7);
+        N.out(hk, 2.4, { y: -40 });
+        const R = [["3", "Je ne dors jamais.", "sleep", "open"], ["2", "Je n’oublie aucune relance.", "think", "happy"], ["1", "Je ne demande pas<br>d’augmentation.", "euro", "wink"]];
+        R.forEach((r, i) => {
+          const t = 2.6 + i * 2.2;
+          const n = N.ab("ctr num", r[0], { top: "250px" });
+          N.hide(n);
+          tl.fromTo(n, { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)" }, t);
+          K.sfx(t, "slam", 0.22);
+          const c = N.ab("ctr n-head", r[1], { top: "500px", fontSize: "62px" });
+          N.hide(c);
+          K.fin(c, t + 0.2, { y: 20, d: 0.35 });
+          M.expr(r[2], t + 0.2);
+          M.expr(r[3], t + 1.2, false);
+          M.hop(t + 1.2, 50);
+          N.out([n, c], t + 2.0, { y: -20, d: 0.2 });
+        });
+        const b = N.say("Mais garde-le :<br>il fait très bien le café.", { left: "190px", top: "680px", width: "700px" }, 9.4);
+        M.expr("wink", 9.4, false);
+        M.hop(9.5, 90);
+        N.out(b, 11.4, { y: -10, d: 0.2 });
+        window.__TE = 11.6;
+        N.outro(11.6, "demo");
+        endM(M, 300, 980, 480, 11.5);
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

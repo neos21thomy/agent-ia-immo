@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — POV : un agent immo m’installe</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/naturel.css" />
+    <style>
+      @font-face { font-family: "Anton"; src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Source Serif 4"; src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; }
+      @font-face { font-family: "Montserrat Hook"; src: url("assets/fonts/montserrat-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-style: normal; }
+      .big { font-family: "Montserrat Hook", Montserrat, sans-serif; font-weight: 800; font-size: 150px; color: var(--navy); line-height: 1; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="14.8" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="14.8" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/mascotte-09-pov-installation.wav" data-start="0" data-duration="14.8" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/naturel.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 14.8;
+        N.init(tl, root, D);
+        const endM = (M, left, top, W, t) => {
+          const H = (W * 904) / 747;
+          const s = 260 / W;
+          M.move(t, { x: 890 - (left + W / 2), y: 1610 - (top + H / 2), scale: s, rotation: -8 }, 0.7);
+          M.expr("happy", t + 0.1, false);
+          M.wave(t + 0.9);
+          M.blink(t + 2.4);
+        };
+
+        const hk = N.hook(["POV :", "UN AGENT IMMO", "<span class='hl'>M’INSTALLE.</span>"], { top: "260px", fontSize: "100px" });
+        const M = N.mascot({ left: "300px", top: "980px", width: "480px" });
+        M.float(0, 11, 10);
+        M.wave(0.4);
+        N.out(hk, 2.4, { y: -40 });
+        const b1 = N.say("Montre-moi<br>tes contacts.", { left: "240px", top: "680px", width: "600px" }, 2.6);
+        M.expr("open", 2.6, false);
+        N.out(b1, 3.8, { y: -10, d: 0.15 });
+        const big = N.ab("ctr big", `<span>0</span><div class="n-body" style="font-size:40px;margin-top:10px"><b>contacts</b> dont 37 à relancer</div>`, { top: "330px" });
+        N.hide(big);
+        tl.set(big, { opacity: 1 }, 3.9);
+        K.count(K.$("span", big), 842, 3.9, 1.0, (v) => String(Math.round(v)), { ticks: 12 });
+        M.expr("wow", 4.9);
+        M.shake(4.9, 0.3);
+        const b2 = N.say("Ok. Je m’occupe<br>des <span class='v'>37 relances</span>.", { left: "240px", top: "680px", width: "600px" }, 5.5);
+        M.expr("angry", 5.5, false);
+        M.glow(5.6, 1.0);
+        N.out([big, b2], 7.0, { y: -10, d: 0.2 });
+        const b3 = N.say("Et tes annonces…<br>on va les <span class='v'>réécrire</span>.", { left: "240px", top: "680px", width: "600px" }, 7.2);
+        M.expr("dizzy", 7.3, false);
+        M.tilt(7.4, -12);
+        M.tilt(8.4, 0, 0.2);
+        N.out(b3, 8.6, { y: -10, d: 0.15 });
+        const b4 = N.say("Terminé. Tu fais quoi<br>de ton <span class='v'>après-midi</span> ?", { left: "190px", top: "680px", width: "700px" }, 8.8);
+        M.expr("wink", 8.8, false);
+        M.hop(8.9, 90);
+        N.out(b4, 10.8, { y: -10, d: 0.2 });
+        window.__TE = 11.0;
+        N.outro(11.0, "dm");
+        endM(M, 300, 980, 480, 10.9);
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

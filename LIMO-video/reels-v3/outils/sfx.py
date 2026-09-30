@@ -230,7 +230,22 @@ def go():
     return y
 
 
+def chirp(n=4, seed=1):
+    """Petits bips de robot (la mascotte « parle »)."""
+    r = np.random.default_rng(seed)
+    y = np.zeros(int((0.075 * n + 0.2) * SR))
+    for i in range(n):
+        f0 = r.uniform(900, 2200)
+        f1 = f0 * r.uniform(0.7, 1.5)
+        d = r.uniform(0.045, 0.07)
+        b = sweep(d, f0, f1) * np.minimum(1, (d - t_axis(d)) / 0.01) * np.minimum(1, t_axis(d) / 0.003)
+        a = int(i * 0.075 * SR)
+        y[a : a + len(b)] += b
+    return y
+
+
 SOUNDS = {
+    "chirp": lambda e: chirp(e.get("n", 4), int(e["t"] * 100) % 997 + 1),
     "tick": lambda e: tick(e.get("f", 2600)),
     "tock": lambda e: tick(1900),
     "type": lambda e: type_click(e.get("f", 2800)),

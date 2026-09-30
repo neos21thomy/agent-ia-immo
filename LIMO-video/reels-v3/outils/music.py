@@ -63,6 +63,16 @@ PRESETS = {
     "hook-08-avant-8h": ("lofi", 88, 0.3),
     "hook-09-ne-like-pas": ("pop", 124, 0.3),
     "hook-10-le-test": ("house", 122, 0.3),
+    "mascotte-01-salut-agent-immo": ("pop", 124, 0.3),
+    "mascotte-02-entretien-embauche": ("house", 122, 0.3),
+    "mascotte-03-3h-du-matin": ("lofi", 88, 0.3),
+    "mascotte-04-il-reagit": ("trap", 140, 0.3),
+    "mascotte-05-vrai-ou-faux": ("pop", 124, 0.3),
+    "mascotte-06-pendant-ton-cafe": ("lofi", 88, 0.3),
+    "mascotte-07-ne-me-dis-pas": ("house", 122, 0.3),
+    "mascotte-08-duel": ("speed", 140, 0.3),
+    "mascotte-09-pov-installation": ("pop", 124, 0.3),
+    "mascotte-10-mieux-que-ton-stagiaire": ("house", 122, 0.3),
 }
 
 # progressions (MIDI) : accords (3-4 notes) et fondamentale de basse

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — 3 h du matin</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/naturel.css" />
+    <style>
+      @font-face { font-family: "Anton"; src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Source Serif 4"; src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; }
+      @font-face { font-family: "Montserrat Hook"; src: url("assets/fonts/montserrat-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-style: normal; }
+
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="15.4" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="15.4" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/mascotte-03-3h-du-matin.wav" data-start="0" data-duration="15.4" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/naturel.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 15.4;
+        N.init(tl, root, D);
+        const endM = (M, left, top, W, t) => {
+          const H = (W * 904) / 747;
+          const s = 260 / W;
+          M.move(t, { x: 890 - (left + W / 2), y: 1610 - (top + H / 2), scale: s, rotation: -8 }, 0.7);
+          M.expr("happy", t + 0.1, false);
+          M.wave(t + 0.9);
+          M.blink(t + 2.4);
+        };
+
+        const night = N.ab("", null, { left: "0", top: "0", width: "1080px", height: "1920px", background: "linear-gradient(180deg, #10122b 0%, #23265c 100%)" });
+        const hk = N.hook(["3 H DU MATIN<span class='v'>.</span>", "TOI, TU DORS<span class='v'>.</span>", "<span class='hl'>LUI, NON.</span>"], { top: "300px", fontSize: "100px", color: "#ffffff" });
+        const M = N.mascot({ left: "300px", top: "1020px", width: "480px" }, { expr: "open" });
+        M.float(0, 7, 10);
+        M.glow(0.4, 1.4);
+        N.out(hk, 2.5, { y: -40 });
+        const L = [["ANNONCE", "3:02", "Maison à Allassac : annonce rédigée, mentions légales incluses."], ["RELANCES", "3:15", "12 relances vendeurs préparées pour demain."], ["AVIS GOOGLE", "4:40", "2 réponses prêtes à publier."], ["BRIEF DU MATIN", "6:00", "Ta journée est prête. On commence par M. Albert."]];
+        const ns = L.map((l, i) => {
+          const t = 2.8 + i * 0.95;
+          M.blink(t + 0.4);
+          return N.notif({ title: l[0], time: l[1], text: l[2], g: 0.2 }, { left: "90px", top: 170 + i * 200 + "px" }, t);
+        });
+        M.glow(3.8, 1.2);
+        N.out(ns, 7.2, { y: -30 });
+        tl.to(night, { opacity: 0, duration: 0.9, ease: "power2.inOut" }, 7.3);
+        K.sfx(7.3, "riser", 0.12, 0, { d: 0.8 });
+        M.expr("happy", 7.8);
+        M.wave(7.9);
+        const b = N.say("Bonjour ! Ta journée<br>est <span class='v'>déjà prête</span>.", { left: "190px", top: "760px", width: "700px" }, 8.0);
+        K.sfx(8.0, "success", 0.2);
+        N.out(b, 10.0, { y: -10, d: 0.2 });
+        const c = N.cap("Il bosse la nuit.<br>Toi, tu signes le jour.", { top: "560px" }, 10.2, { dark: true });
+        N.out(c, 11.6, { y: -20 });
+        window.__TE = 11.8;
+        N.outro(11.8, "essai");
+        endM(M, 300, 1020, 480, 11.7);
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

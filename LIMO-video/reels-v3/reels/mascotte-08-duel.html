@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — Agent seul VS agent + LIMO</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/naturel.css" />
+    <style>
+      @font-face { font-family: "Anton"; src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Source Serif 4"; src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; }
+      @font-face { font-family: "Montserrat Hook"; src: url("assets/fonts/montserrat-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-style: normal; }
+      .col { width: 440px; top: 360px; }
+      .col h4 { margin: 0 0 18px; font-family: "Montserrat Hook", Montserrat, sans-serif; font-weight: 800; font-size: 40px; text-align: center; }
+      .tk { height: 130px; margin-bottom: 18px; padding: 20px 24px; }
+      .tk b { display: flex; justify-content: space-between; font-size: 30px; font-weight: 700; color: #1c1c1e; }
+      .tk b em { font-style: normal; }
+      .tk .br { margin-top: 18px; height: 18px; border-radius: 9px; background: #efeff4; overflow: hidden; }
+      .tk .br i { display: block; height: 100%; width: 100%; border-radius: 9px; transform-origin: 0 50%; }
+      .tot { font-family: "Montserrat Hook", Montserrat, sans-serif; font-weight: 800; font-size: 64px; text-align: center; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="15.4" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="15.4" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/mascotte-08-duel.wav" data-start="0" data-duration="15.4" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/naturel.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 15.4;
+        N.init(tl, root, D);
+        const endM = (M, left, top, W, t) => {
+          const H = (W * 904) / 747;
+          const s = 260 / W;
+          M.move(t, { x: 890 - (left + W / 2), y: 1610 - (top + H / 2), scale: s, rotation: -8 }, 0.7);
+          M.expr("happy", t + 0.1, false);
+          M.wave(t + 0.9);
+          M.blink(t + 2.4);
+        };
+
+        const hk = N.hook(["AGENT SEUL", "<span class='v'>VS</span>", "<span class='hl'>AGENT + LIMO</span>"], { top: "320px", fontSize: "106px" });
+        const M = N.mascot({ left: "350px", top: "1180px", width: "380px" }, { expr: "angry" });
+        M.float(0, 12, 8);
+        M.blink(1.5);
+        N.out(hk, 2.3, { y: -40 });
+        const T = [["Annonce", "45 min", "2 min"], ["Relances", "1 h", "5 min"], ["Compte rendu", "30 min", "1 min"], ["Avis Google", "20 min", "1 min"]];
+        const col = (x, title, color, idx) => N.ab("col", `<h4 style="color:${color}">${title}</h4>` + T.map((r) => `<div class="n-card tk"><b>${r[0]}<em style="color:${color}">${r[idx]}</em></b><div class="br"><i style="background:${color}"></i></div></div>`).join(""), { left: x + "px" });
+        const A = col(80, "SEUL", "#6e6e78", 1), B = col(560, "+ LIMO", "#6b4fe0", 2);
+        [A, B].forEach((c) => { N.hide(c); K.fin(c, 2.5, { y: 30, d: 0.4 }); });
+        K.sfx(2.6, "go", 0.2);
+        M.expr("open", 2.6, false);
+        K.$$(".br i", A).forEach((b, i) => tl.fromTo(b, { scaleX: 0 }, { scaleX: 1, duration: 5.5, ease: "none" }, 2.9 + i * 0.1));
+        K.$$(".br i", B).forEach((b, i) => { tl.fromTo(b, { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power2.out" }, 2.9 + i * 0.6); K.sfx(3.4 + i * 0.6, "success", 0.12); });
+        M.hop(5.4, 70);
+        M.expr("heart", 5.4);
+        const tA = N.ab("tot", `<span>0</span>`, { left: "80px", top: "1060px", width: "440px", color: "#6e6e78" });
+        const tB = N.ab("tot", `<span>0</span>`, { left: "560px", top: "1060px", width: "440px", color: "#6b4fe0" });
+        [tA, tB].forEach((x) => { N.hide(x); tl.set(x, { opacity: 1 }, 5.8); });
+        K.count(K.$("span", tA), 155, 5.8, 1.2, (v) => { const m = Math.round(v); return Math.floor(m / 60) + " h " + String(m % 60).padStart(2, "0"); }, { ticks: 8 });
+        K.count(K.$("span", tB), 9, 5.8, 1.2, (v) => Math.round(v) + " min", { ticks: 0 });
+        K.sfx(7.1, "thump", 0.3);
+        const fx = N.text("ctr n-body", "Temps indicatifs", { top: "1150px", fontSize: "24px" }, 6.0);
+        N.out([A, B, tA, tB, fx], 9.2, { y: -30 });
+        const c = N.cap("Tu choisis quelle équipe ?", { top: "700px" }, 9.5, { dark: true });
+        M.expr("wink", 9.5);
+        N.out(c, 11.4, { y: -20 });
+        window.__TE = 11.6;
+        N.outro(11.6, "essai");
+        endM(M, 350, 1180, 380, 11.5);
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

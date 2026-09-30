@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — Salut l’agent immo, moi c’est LIMO</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/naturel.css" />
+    <style>
+      @font-face { font-family: "Anton"; src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Source Serif 4"; src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; }
+      @font-face { font-family: "Montserrat Hook"; src: url("assets/fonts/montserrat-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-style: normal; }
+
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="15.2" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="15.2" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/mascotte-01-salut-agent-immo.wav" data-start="0" data-duration="15.2" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/naturel.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 15.2;
+        N.init(tl, root, D);
+        const endM = (M, left, top, W, t) => {
+          const H = (W * 904) / 747;
+          const s = 260 / W;
+          M.move(t, { x: 890 - (left + W / 2), y: 1610 - (top + H / 2), scale: s, rotation: -8 }, 0.7);
+          M.expr("happy", t + 0.1, false);
+          M.wave(t + 0.9);
+          M.blink(t + 2.4);
+        };
+
+        const hk = N.hook(["TON NOUVEL", "<span class='hl'>ASSISTANT</span>", "EST ARRIVÉ<span class='v'>.</span>"], { top: "220px", fontSize: "108px" });
+        const M = N.mascot({ left: "260px", top: "800px", width: "560px" });
+        M.float(0, 11);
+        M.wave(0.3);
+        M.blink(1.9);
+        const b0 = N.say("Salut l’agent immo !<br><span class='v'>Moi, c’est LIMO.</span>", { left: "190px", top: "600px", width: "700px" }, 0.9);
+        N.out([hk], 2.7, { y: -40 });
+        N.out(b0, 2.7, { y: -10, d: 0.2 });
+        const L = [["J’écris tes annonces.", "open", "Mentions légales incluses"], ["Je relance tes vendeurs.", "wink", "Au bon moment, avec le bon message"], ["Je réponds à tes avis Google.", "happy", "En 1 minute"], ["Je prépare ta journée.", "open", "Chaque matin à 7 h 30"]];
+        const bs = L.map((l, i) => {
+          const t = 3.0 + i * 1.5;
+          const b = N.say(`${l[0]}<small>${l[2]}</small>`, { left: "140px", top: "430px", width: "800px" }, t);
+          M.expr(l[1], t, false);
+          if (i === 3) M.glow(t, 1.2);
+          M.hop(t + 0.1, 50);
+          if (i < 3) N.out(b, t + 1.35, { y: -10, d: 0.15 });
+          return b;
+        });
+        N.out(bs[3], 9.0, { y: -10, d: 0.15 });
+        const b5 = N.say("Et je ne prends <span class='v'>jamais</span><br>de vacances.", { left: "190px", top: "480px", width: "700px" }, 9.2, { cls: "" });
+        M.expr("wink", 9.3);
+        M.hop(9.4);
+        N.out(b5, 11.2, { y: -10, d: 0.2 });
+        window.__TE = 11.4;
+        N.outro(11.4, "dm");
+        endM(M, 260, 800, 560, 11.3);
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

@@ -518,3 +518,17 @@ body {
   height: 40px;
   stroke-width: 2.6;
 }
+/* ---- mascotte officielle LIMO ---- */
+.m-out { position: absolute; }
+.m-in { position: absolute; inset: 0; transform-origin: 50% 100%; }
+.m-in img, .m-in svg { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+.m-shadow { position: absolute; left: 18%; right: 18%; bottom: -5%; height: 7%; border-radius: 50%; background: radial-gradient(closest-side, rgba(27,31,75,.28), rgba(27,31,75,0)); }
+.n-bub2 { position: absolute; padding: 26px 34px; border-radius: 40px; background: #fff; box-shadow: 0 16px 40px rgba(27,31,75,.16);
+  font-family: Montserrat, sans-serif; font-weight: 700; font-size: 46px; line-height: 1.22; color: var(--navy); text-align: center; }
+.n-bub2 .v { color: var(--vio); }
+.n-bub2 i.tl { position: absolute; width: 44px; height: 44px; background: #fff; transform: rotate(45deg); border-radius: 6px; }
+.n-bub2.dark { background: var(--navy); color: #fff; }
+.n-bub2.dark i.tl { background: var(--navy); }
+.n-bub2.vio { background: var(--vio); color: #fff; }
+.n-bub2.vio i.tl { background: var(--vio); }
+.n-bub2 small { display: block; margin-top: 8px; font-size: 30px; font-weight: 600; color: var(--mut); }

@@ -14,6 +14,36 @@ Tout le matériel des Reels de l'application **LIMO** (app.leadengineai.fr), ré
 | `sources/` | Fichiers fournis : `images/` (affiche robot, logo, pubs, landing mobile) et `videos/` (pub « Analyseur de dossier », vidéo UGC IA) |
 | `archives/` | Sources de la V1 (zip) |
 
+## 📚 Catalogue de toutes les vidéos
+
+- **`rendus/CATALOGUE.html`** : ouvre-le dans ton navigateur, toutes les vidéos se lisent sur une seule page (aperçu, accroche, fin, liens de téléchargement).
+- **`rendus/CATALOGUE.md`** : le même catalogue, lisible directement sur GitHub.
+- **`rendus/PROMPTS-MASCOTTE-GPT-HIGGSFIELD.md`** : prompts prêts à coller pour générer des images (ChatGPT) et des plans animés (Higgsfield) de la mascotte.
+- Pour le mettre à jour : `cd reels-v3 && python3 outils/catalogue.py`.
+
+## 🤖 Série « Mascotte » : 10 Reels (`rendus/mascotte/`), avec la mascotte officielle
+
+La mascotte officielle (`sources/images/mascotte-limo-officielle.webp`) est animée : visière vidée, **yeux redessinés en SVG avec 12 expressions**
+(content, ouverts, clin d'œil, ronds, triste, énervé, K.-O., cœurs, €, endormi, pensif, cligne), antenne qui s'allume, flottement, sauts, salut.
+Elle parle en bulles avec des petits bips de robot. Chaque film fait de 14,6 à 17,6 s et existe en version bruitages seuls et en version `-musique`.
+
+| # | Fichier `LIMO-mascotte-…` | Accroche | Fin |
+|---|---|---|---|
+| 1 | `01-salut-agent-immo` | « Ton nouvel assistant est arrivé. » Il se présente | Message privé « LIMO » |
+| 2 | `02-entretien-embauche` | « Poste : assistant d'agent immo. » Tampon EMBAUCHÉ | Essai 14 jours |
+| 3 | `03-3h-du-matin` | « 3 h du matin. Toi, tu dors. Lui, non. » | Essai 14 jours |
+| 4 | `04-il-reagit` | « LIMO réagit à tes habitudes. » | Commentaire « LIMO » |
+| 5 | `05-vrai-ou-faux` | « Vrai ou faux ? » (DPE, prix honoraires inclus) | Commentaire « LIMO » |
+| 6 | `06-pendant-ton-cafe` | « Pendant ton café, j'ai fait ça. » | Démo 15 min |
+| 7 | `07-ne-me-dis-pas` | « Ne me dis pas que tu fais encore ça… » | Message privé « LIMO » |
+| 8 | `08-duel` | « Agent seul VS agent + LIMO » | Essai 14 jours |
+| 9 | `09-pov-installation` | « POV : un agent immo m'installe. » | Message privé « LIMO » |
+| 10 | `10-mieux-que-ton-stagiaire` | « 3 trucs que je fais mieux que ton stagiaire. » | Démo 15 min |
+
+**Ordre conseillé** : 2, 4, 10, 3, 5, 1, 7, 9, 6, 8. L'entretien d'embauche (2) et « mieux que ton stagiaire » (10) sont les plus partageables.
+
+Sources : `reels-v3/reels/mascotte-*.html`, générés par `reels-v3/outils/mascotte.py` (fonctions `N.mascot` et `N.say` du kit naturel).
+
 ## 🪝 Série « Hooks » : 10 Reels (`rendus/hooks/`), accroche lisible dès la 1re image
 
 Même charte que la série naturelle. L'accroche est **déjà à l'écran sur la première image** (donc aussi sur la vignette),

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — Ne me dis pas que tu fais encore ça</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/naturel.css" />
+    <style>
+      @font-face { font-family: "Anton"; src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Source Serif 4"; src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; }
+      @font-face { font-family: "Montserrat Hook"; src: url("assets/fonts/montserrat-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-style: normal; }
+      .old { left: 140px; width: 800px; height: 300px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 50px; font-size: 44px; line-height: 1.25; font-weight: 700; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="15.2" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="15.2" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/mascotte-07-ne-me-dis-pas.wav" data-start="0" data-duration="15.2" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/naturel.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 15.2;
+        N.init(tl, root, D);
+        const endM = (M, left, top, W, t) => {
+          const H = (W * 904) / 747;
+          const s = 260 / W;
+          M.move(t, { x: 890 - (left + W / 2), y: 1610 - (top + H / 2), scale: s, rotation: -8 }, 0.7);
+          M.expr("happy", t + 0.1, false);
+          M.wave(t + 0.9);
+          M.blink(t + 2.4);
+        };
+
+        const hk = N.hook(["NE ME DIS PAS", "QUE TU FAIS", "<span class='hl'>ENCORE ÇA…</span>"], { top: "260px", fontSize: "100px" });
+        const M = N.mascot({ left: "300px", top: "980px", width: "480px" }, { expr: "sad" });
+        M.float(0, 11, 10);
+        N.out(hk, 2.5, { y: -40 });
+        const O = [["Des post-it collés<br>partout sur l’écran.", "#ffe98a", "#5a4a00", "Rappels automatiques"], ["« contacts_2019_V3_final.xlsx »", "#e3f4e6", "#1d5a2c", "Fiches contacts à jour"], ["Le carnet de visites<br>griffonné.", "#f3ece2", "#5a4630", "Compte rendu de visite prêt"]];
+        O.forEach((o, i) => {
+          const t = 2.7 + i * 2.2;
+          const c = N.ab("n-card old", o[0], { top: "380px", background: o[1], color: o[2], transform: `rotate(${i % 2 ? 2 : -2}deg)` });
+          N.hide(c);
+          tl.fromTo(c, { opacity: 0, y: -200, rotation: -8 }, { opacity: 1, y: 0, rotation: i % 2 ? 2 : -2, duration: 0.45, ease: "bounce.out" }, t);
+          K.sfx(t + 0.2, "drop", 0.25);
+          M.expr(i === 1 ? "dizzy" : "wow", t + 0.3);
+          M.shake(t + 0.35, 0.3);
+          M.expr("angry", t + 1.0, false);
+          M.glow(t + 1.0, 0.6);
+          K.sfx(t + 1.1, "scan", 0.16, 0, { d: 0.4 });
+          tl.to(c, { scale: 0, rotation: 30, opacity: 0, duration: 0.3, ease: "back.in(2)" }, t + 1.2);
+          const n = N.chip(`${K.icon("check")}${o[3]}`, { top: "500px" }, t + 1.5);
+          n.querySelector("span").style.cssText = "height:88px;font-size:40px;padding:0 36px";
+          M.expr("happy", t + 1.5, false);
+          N.out(n, t + 2.1, { y: -10, d: 0.15 });
+        });
+        const b = N.say("Voilà. Bienvenue<br>au <span class='v'>XXIe siècle</span>.", { left: "190px", top: "700px", width: "700px" }, 9.5);
+        M.expr("wink", 9.5, false);
+        M.hop(9.6, 80);
+        N.out(b, 11.2, { y: -10, d: 0.2 });
+        window.__TE = 11.4;
+        N.outro(11.4, "dm");
+        endM(M, 300, 980, 480, 11.3);
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

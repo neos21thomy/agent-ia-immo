@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — Vrai ou faux, spécial agents immo</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/naturel.css" />
+    <style>
+      @font-face { font-family: "Anton"; src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Source Serif 4"; src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; }
+      @font-face { font-family: "Montserrat Hook"; src: url("assets/fonts/montserrat-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-style: normal; }
+      .vf { display: flex; gap: 30px; justify-content: center; }
+      .vf span { width: 300px; height: 110px; border-radius: 55px; background: #fff; box-shadow: 0 10px 30px rgba(27,31,75,.12); display: flex; align-items: center; justify-content: center;
+        font-family: "Montserrat Hook", Montserrat, sans-serif; font-weight: 800; font-size: 44px; color: var(--navy); }
+      .qc { padding: 40px 46px; font-size: 44px; line-height: 1.3; font-weight: 600; text-align: center; }
+      .ex { padding: 30px 40px; font-size: 32px; line-height: 1.38; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="17.6" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="17.6" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/mascotte-05-vrai-ou-faux.wav" data-start="0" data-duration="17.6" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/naturel.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 17.6;
+        N.init(tl, root, D);
+        const endM = (M, left, top, W, t) => {
+          const H = (W * 904) / 747;
+          const s = 260 / W;
+          M.move(t, { x: 890 - (left + W / 2), y: 1610 - (top + H / 2), scale: s, rotation: -8 }, 0.7);
+          M.expr("happy", t + 0.1, false);
+          M.wave(t + 0.9);
+          M.blink(t + 2.4);
+        };
+
+        const hk = N.hook(["VRAI", "OU <span class='hl'>FAUX ?</span>"], { top: "300px", fontSize: "140px" });
+        const s1 = N.text("ctr n-body", "<b>Spécial agents immo. 2 questions.</b>", { top: "680px", fontSize: "44px" }, 0.8);
+        const M = N.mascot({ left: "320px", top: "1120px", width: "440px" }, { expr: "think" });
+        M.float(0, 14, 10);
+        N.out([hk, s1], 2.3, { y: -40 });
+        const Q = [
+          ["Un DPE réalisé en 2019 est encore valable pour vendre.", 1, "Les DPE faits entre 2018 et mi-2021 ne sont <b>plus valables depuis le 1er janvier 2025</b>."],
+          ["Si l’acquéreur paie les honoraires, le prix affiché doit les inclure.", 0, "Prix <b>honoraires inclus</b>, avec le taux d’honoraires TTC affiché à côté."],
+        ];
+        Q.forEach((q, i) => {
+          const t = 2.5 + i * 5.2;
+          const lab = N.chip(`QUESTION ${i + 1} / 2`, { top: "230px" }, t);
+          const card = N.ab("n-card qc", q[0], { left: "90px", top: "330px", width: "900px" });
+          N.hide(card);
+          K.fin(card, t, { y: 30, d: 0.4 });
+          const vf = N.ab("ctr vf", `<span>VRAI</span><span>FAUX</span>`, { top: "640px" });
+          N.hide(vf);
+          tl.set(vf, { opacity: 1 }, t + 0.4);
+          K.pop(K.$$("span", vf), t + 0.4, { st: 0.1 });
+          M.expr("think", t, false);
+          [0, 1, 2].forEach((k) => { K.sfx(t + 1.0 + k * 0.5, "beep", 0.12, 0, { f: 880 }); M.blink(t + 1.0 + k * 0.5); });
+          const good = K.$$("span", vf)[q[1]], bad = K.$$("span", vf)[1 - q[1]];
+          tl.to(good, { backgroundColor: "#2cc4b5", color: "#ffffff", scale: 1.06, duration: 0.3 }, t + 2.5);
+          tl.to(bad, { opacity: 0.45, duration: 0.3 }, t + 2.5);
+          K.sfx(t + 2.5, "success", 0.26);
+          M.expr("happy", t + 2.5, false);
+          M.hop(t + 2.55, 70);
+          const ex = N.ab("n-card ex", `<div style="display:flex;align-items:center;gap:14px;margin-bottom:10px"><img src="assets/img/limo-house-ad.png" alt="" style="width:48px;height:48px;object-fit:contain" /><b style="font-size:26px;color:#6b4fe0">LIMO t’explique</b></div>${q[2]}`, { left: "90px", top: "800px", width: "900px" });
+          N.hide(ex);
+          K.fin(ex, t + 2.9, { y: 20, d: 0.35 });
+          K.sfx(t + 2.9, "chirp", 0.12);
+          N.out([lab, card, vf, ex], t + 4.9, { y: -20, d: 0.25 });
+        });
+        const c = N.cap("T’as eu 2 / 2 ?<br>Dis-le en commentaire.", { top: "600px" }, 12.9, { dark: true });
+        M.expr("wink", 12.9);
+        N.out(c, 13.8, { y: -20 });
+        window.__TE = 14.0;
+        N.outro(14.0, "comment");
+        endM(M, 320, 1120, 440, 13.9);
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>
