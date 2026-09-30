@@ -8,3 +8,4 @@ renders/
 index.html
 # Sons régénérés à l'identique par outils/run.sh (le son final est dans les MP4 de ../rendus/)
 assets/audio/*.wav
+__pycache__/
