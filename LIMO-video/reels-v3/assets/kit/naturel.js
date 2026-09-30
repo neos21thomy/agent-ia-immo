@@ -190,25 +190,29 @@
     return el;
   };
   // Carte de fin sobre, au logo LIMO
-  N.outro = (t, kind = "essai") => {
-    const logo = N.ab("", `<img src="assets/img/limo-logo-ad.png" alt="LIMO" style="width:100%;height:100%" />`, { left: "290px", top: "360px", width: "500px", height: "189px" });
+  N.outro = (t, kind = "essai", o = {}) => {
+    // pub : carte remontée pour rester hors des zones couvertes par l'interface des pubs Reels/Stories
+    const dy = o.dy ?? (kind === "pub" ? -150 : 0);
+    const Y = (v) => v + dy + "px";
+    const logo = N.ab("", `<img src="assets/img/limo-logo-ad.png" alt="LIMO" style="width:100%;height:100%" />`, { left: "290px", top: Y(360), width: "500px", height: "189px" });
     N.hide(logo);
     tl.fromTo(logo, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, t);
     K.sfx(t + 0.05, "thump", 0.3);
-    const tag = N.text("ctr n-body", "Ton chef de cabinet immo.", { top: "600px", fontSize: "40px", fontWeight: "600", color: "#1b1f4b" }, t + 0.3);
+    const tag = N.text("ctr n-body", "Ton chef de cabinet immo.", { top: Y(600), fontSize: "40px", fontWeight: "600", color: "#1b1f4b" }, t + 0.3);
     const C = {
       dm: ["ÉCRIS-MOI <span class='n-kw'>LIMO</span>", "EN MESSAGE PRIVÉ<span class='v'>.</span>", K.icon("send") + "Je t’ouvre ton accès"],
       comment: ["COMMENTE <span class='n-kw'>LIMO</span>", "JE T’ENVOIE L’ACCÈS<span class='v'>.</span>", K.icon("msg") + "Accès offert 14 jours"],
       demo: ["RÉSERVE TA DÉMO", "DE 15 MINUTES<span class='v'>.</span>", K.icon("clock") + "Réserver ma démo"],
       essai: ["ESSAIE-LE", "14 JOURS<span class='v'>.</span>", "Commencer gratuitement →"],
+      pub: ["ESSAIE LIMO", "14 JOURS OFFERTS<span class='v'>.</span>", "Essai gratuit en 2 minutes →"],
     }[kind];
-    const h = N.head([C[0], C[1]], { top: "780px", fontSize: "78px" }, t + 0.55);
-    const cta = N.ab("n-cta", `<span>${C[2]}</span>`, { left: "0", right: "0", top: "1130px" });
+    const h = N.head([C[0], C[1]], { top: Y(780), fontSize: "78px" }, t + 0.55);
+    const cta = N.ab("n-cta", `<span>${C[2]}</span>`, { left: "0", right: "0", top: Y(1130) });
     N.hide(cta);
     tl.set(cta, { opacity: 1 }, t + 1.1);
     K.pop(K.$("span", cta), t + 1.1, { s: 0.8, d: 0.45, e: "back.out(1.6)" });
     K.sfx(t + 1.1, "cta", 0.18);
-    const sub = N.text("ctr n-body", (kind === "demo" ? "<b>Lien en bio</b><br>" : "") + "Sans carte bancaire · Sans engagement<br><b>app.leadengineai.fr</b>", { top: "1290px", fontSize: "30px" }, t + 1.35);
+    const sub = N.text("ctr n-body", (kind === "demo" ? "<b>Lien en bio</b><br>" : "") + "Sans carte bancaire · Sans engagement<br><b>app.leadengineai.fr</b>", { top: Y(1290), fontSize: "30px" }, t + 1.35);
     return t + 3.6;
   };
 })();

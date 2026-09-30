@@ -12,6 +12,14 @@ V = R / "apercus" / "vignettes"
 
 # (dossier, titre, statut, description, [(fichier sans extension, accroche, appel à l'action)])
 SERIES = [
+    ("pubs/9x16", "📣 Publicités Meta : 6 pubs (9:16 et 4:5)", "⭐ À publier en priorité",
+     "Versions sponsorisées : musique intégrée, fin « Essaie LIMO, 14 jours offerts » dans la zone visible. Les versions 4:5 (fil d'actualité) sont dans pubs/4x5/. Textes, ciblage et budget : pubs/KIT-PUB-META.md.",
+     [("LIMO-pub-01-trois-agences-9x16", "« Ton vendeur a appelé 3 agences. »", "Essai 14 jours (bouton pub)"),
+      ("LIMO-pub-02-ton-concurrent-9x16", "« Ton concurrent utilise déjà ça. »", "Essai 14 jours (bouton pub)"),
+      ("LIMO-pub-03-qui-va-vendre-9x16", "« Et si tu savais qui va vendre dans ta rue ? »", "Essai 14 jours (bouton pub)"),
+      ("LIMO-pub-04-entretien-embauche-9x16", "Mascotte : « Poste : assistant d'agent immo. »", "Essai 14 jours (bouton pub)"),
+      ("LIMO-pub-05-mieux-que-ton-stagiaire-9x16", "Mascotte : « 3 trucs que je fais mieux que ton stagiaire. »", "Essai 14 jours (bouton pub)"),
+      ("LIMO-pub-06-rappelez-moi-en-mars-9x16", "« Rappelez-moi en mars. » → signé ailleurs", "Essai 14 jours (bouton pub)")]),
     ("mascotte", "🤖 Série « Mascotte » : 10 Reels", "⭐ À publier en priorité",
      "La mascotte officielle LIMO parle aux agents immo : yeux animés (12 expressions), bulles, petits bips de robot. Charte lavande LIMO.",
      [("LIMO-mascotte-01-salut-agent-immo", "« Ton nouvel assistant est arrivé. » La mascotte se présente : annonces, relances, avis, brief", "Message privé « LIMO »"),
@@ -106,6 +114,8 @@ def main():
                 continue
             mdir = MUSIC_DIR.get(folder, folder)
             fm = R / mdir / f"{name}-musique.mp4"
+            if folder == "pubs/9x16":
+                fm = R / "pubs/4x5" / f"{name.replace('-9x16', '-4x5')}.mp4"
             thumb = V / f"{name}.jpg"
             if not thumb.exists():
                 subprocess.run(["ffmpeg", "-nostdin", "-y", "-loglevel", "error", "-ss", "1.5", "-i", str(f), "-frames:v", "1", "-vf", "scale=270:480", "-q:v", "4", str(thumb)], check=True)
@@ -127,7 +137,7 @@ def main():
     for folder, title, status, desc, items in rows:
         md += [f"## {title}", "", f"**{status}** · {desc}", "", "| Aperçu | Vidéo | Durée | Accroche / contenu | Fin | Musique |", "|---|---|---|---|---|---|"]
         for it in items:
-            mus = f"[▶ musique]({it['music']})" if it["music"] else "—"
+            mus = (f"[▶ 4:5]({it['music']})" if "pub-" in it["name"] else f"[▶ musique]({it['music']})") if it["music"] else "—"
             md.append(f"| <img src=\"{it['thumb']}\" width=\"90\"> | [{it['name']}]({it['file']}) | {it['d']:.1f} s | {it['hook']} | {it['cta']} | {mus} |")
         md.append("")
     (R / "CATALOGUE.md").write_text("\n".join(md), encoding="utf-8")
@@ -140,7 +150,7 @@ def main():
             f"""<article class="c"><video src="{e(it['file'])}" poster="{e(it['thumb'])}" controls preload="none" playsinline></video>
 <div class="b"><h3>{e(it['name'].replace('LIMO-', ''))}</h3><p class="h">{e(it['hook'])}</p>
 <p class="m"><span>{it['d']:.1f} s</span><span class="cta">{e(it['cta'])}</span></p>
-<p class="l"><a href="{e(it['file'])}" download>Bruitages</a>{f'<a href="{e(it["music"])}" download>Musique</a>' if it['music'] else ''}</p></div></article>"""
+<p class="l"><a href="{e(it['file'])}" download>{'9:16' if 'pub-' in it['name'] else 'Bruitages'}</a>{f'<a href="{e(it["music"])}" download>{"4:5" if "pub-" in it["name"] else "Musique"}</a>' if it['music'] else ''}</p></div></article>"""
             for it in items)
         tag = "prio" if "priorit" in status else ("old" if "Obsol" in status or "ancien" in status else "ok")
         secs.append(f"""<section><h2>{e(title)} <em class="{tag}">{e(status)}</em></h2><p class="d">{e(desc)} · dossier <code>{e(folder)}/</code></p><div class="g">{cards}</div></section>""")

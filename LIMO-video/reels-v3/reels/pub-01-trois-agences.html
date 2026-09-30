@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — Ton vendeur a appelé 3 agences</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/naturel.css" />
+    <style>
+      @font-face { font-family: "Anton"; src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Source Serif 4"; src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; }
+      @font-face { font-family: "Montserrat Hook"; src: url("assets/fonts/montserrat-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-style: normal; }
+      .ag { left: 90px; width: 900px; height: 170px; display: flex; align-items: center; gap: 28px; padding: 0 40px; }
+      .ag .av { flex: none; width: 88px; height: 88px; border-radius: 24px; display: flex; align-items: center; justify-content: center; color: #fff; font-family: Montserrat, sans-serif; font-weight: 800; font-size: 36px; }
+      .ag b { display: block; font-size: 38px; font-weight: 700; color: #1c1c1e; }
+      .ag small { display: block; margin-top: 6px; font-size: 30px; font-weight: 600; }
+      .ag .tm { margin-left: auto; font-family: Montserrat, sans-serif; font-weight: 800; font-size: 40px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="15.2" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="15.2" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/pub-01-trois-agences.wav" data-start="0" data-duration="15.2" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/naturel.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 15.2;
+        N.init(tl, root, D);
+        const chip = N.chip(`${K.icon("phone")}19 h 12 · UNE DEMANDE D’ESTIMATION`, { top: "300px" });
+        const hk = N.hook(["TON VENDEUR", "A APPELÉ", "<span class='hl'>3 AGENCES.</span>"], { top: "440px", fontSize: "106px" });
+        const s1 = N.text("ctr n-body", "<b>Devine laquelle il a choisie.</b>", { top: "860px", fontSize: "54px" }, 1.1);
+        N.out([chip, hk, s1], 2.9, { y: -40 });
+        const cap = N.cap("Même demande. Même soir.", { top: "150px" }, 3.1);
+        const A = [["A", "#5f6477", "Agence du centre", "Rappelle 2 jours après", "J+2", "#c0282d"], ["B", "#5f6477", "Agence de la gare", "Rappelle le lendemain", "+14 h", "#9a5400"], ["L", "#6b4fe0", "Toi + LIMO", "Réponse prête, envoyée", "4 min", "#15877d"]];
+        const rows = A.map((a, i) => {
+          const r = N.ab("n-card ag", `<div class="av" style="background:${a[1]}">${a[0]}</div><div><b>${a[2]}</b><small style="color:${a[5]}">${a[3]}</small></div><span class="tm" style="color:${a[5]}">${a[4]}</span>`, { top: 440 + i * 210 + "px" });
+          N.hide(r);
+          K.fin(r, 3.4 + i * 0.45, { y: 30, d: 0.4 });
+          K.sfx(3.4 + i * 0.45, "pop", 0.14, 0, { f: 600 + i * 120 });
+          return r;
+        });
+        tl.to([rows[0], rows[1]], { opacity: 0.8, scale: 0.97, duration: 0.35 }, 5.3);
+        tl.to(rows[2], { scale: 1.04, boxShadow: "0 24px 60px rgba(107,79,224,.35)", duration: 0.35, ease: "back.out(2)" }, 5.3);
+        K.sfx(5.3, "success", 0.26);
+        const ok = N.chip(`${K.icon("check")}Rendez-vous d’estimation calé`, { top: "1130px" }, 5.7);
+        N.out(cap, 5.9, { y: -10, d: 0.2 });
+        const c2 = N.cap("La première qui répond.<br>C’est tout.", { top: "150px" }, 6.1, { dark: true });
+        K.sfx(6.1, "thump", 0.28);
+        N.out([c2, ...rows, ok], 8.0, { y: 40 });
+        const h = N.head(["LIMO PRÉPARE", "TA RÉPONSE<span class='v'>.</span>"], { top: "190px", fontSize: "92px" }, 8.3);
+        const ph = N.phoneLimo({ left: "213px", top: "580px" }, 8.6);
+        const n1 = N.notif({ title: "NOUVEAU VENDEUR", time: "19:12", text: "Mme Garnier veut faire estimer sa maison. Réponse prête : tu valides, c’est envoyé." }, { left: "90px", top: "700px" }, 9.4);
+        N.out([h, ph, n1], 11.4, { y: -30 });
+        window.__TE = 11.6;
+        N.outro(11.6, "pub");
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

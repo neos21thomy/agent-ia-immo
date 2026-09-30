@@ -73,6 +73,12 @@ PRESETS = {
     "mascotte-08-duel": ("speed", 140, 0.3),
     "mascotte-09-pov-installation": ("pop", 124, 0.3),
     "mascotte-10-mieux-que-ton-stagiaire": ("house", 122, 0.3),
+    "pub-01-trois-agences": ("house", 122, 0.3),
+    "pub-02-ton-concurrent": ("epic", 100, 0.3, 3.3),
+    "pub-03-qui-va-vendre": ("house", 122, 0.3),
+    "pub-04-entretien-embauche": ("house", 122, 0.3),
+    "pub-05-mieux-que-ton-stagiaire": ("house", 122, 0.3),
+    "pub-06-rappelez-moi-en-mars": ("lofi", 88, 0.8),
 }
 
 # progressions (MIDI) : accords (3-4 notes) et fondamentale de basse
