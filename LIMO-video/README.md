@@ -14,6 +14,14 @@ Tout le matériel des Reels de l'application **LIMO** (app.leadengineai.fr), ré
 | `sources/` | Fichiers fournis : `images/` (affiche robot, logo, pubs, landing mobile) et `videos/` (pub « Analyseur de dossier », vidéo UGC IA) |
 | `archives/` | Sources de la V1 (zip) |
 
+## 🗂️ Dossier de tri (`A-TRIER/`) : toutes les vidéos au même endroit
+
+- `1-cette-discussion/` : les 120 fichiers de cette discussion, à plat, préfixés par série (`01-pub_…`, `02-mascotte_…`, `03-hook_…`…).
+- `2-autre-discussion-limo-app/` : les vidéos de l'autre discussion (voir son `LISEZ-MOI.md` pour en ajouter).
+- `3-A-PUBLIER/` et `4-A-JETER/` : pour ranger à la main.
+- **`TRI.html`** : page de tri (lecture, boutons Publier / Peut-être / Non, filtres, « Copier ma sélection »). `LISTE-DE-TRI.md` : même liste en cases à cocher.
+- Mise à jour : `cd reels-v3 && python3 outils/tri.py`.
+
 ## 📣 Publicités Meta : 6 pubs prêtes (`rendus/pubs/`)
 
 - `9x16/` : Reels et Stories ; `4x5/` : fil Instagram et Facebook. Musique intégrée.
