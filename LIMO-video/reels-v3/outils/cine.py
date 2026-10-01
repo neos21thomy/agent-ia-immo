@@ -26,7 +26,7 @@ FILMS["cine-01-manifeste"] = ("LIMO, le manifeste", 30.0, """
         C.cam(0, { scale: 1.07 }, 11.4, "none");
         // ---- acte 1 : ce que le métier n'est pas
         const t1 = C.title("Ton métier,", { top: "700px", fontSize: "104px" }, 0.02, { color: "#ffffff", st: 0.12 });
-        const t2 = C.title("c’est <span style='color:#b9a6ff'>les</span> <span style='color:#b9a6ff'>gens.</span>", { top: "830px", fontSize: "104px" }, 0.8, { color: "#ffffff" });
+        const t2 = C.title("c’est [les] [gens.]", { top: "830px", fontSize: "104px" }, 0.8, { color: "#ffffff", accent: "#b9a6ff" });
         C.leak(0.3, 2.6, { max: 0.5 });
         C.out([t1, t2], 2.5);
         const t3 = C.title("Pas les papiers.", { top: "820px", fontSize: "96px" }, 2.9, { color: "#ffffff" });
@@ -47,6 +47,7 @@ FILMS["cine-01-manifeste"] = ("LIMO, le manifeste", 30.0, """
           tl.set(p, { opacity: 0 }, 0);
           tl.fromTo(p, { opacity: 0, y: -200, rotation: (i % 2 ? 8 : -8) }, { opacity: 1, y: 0, rotation: (i % 2 ? 4 : -5), duration: 0.45, ease: "bounce.out" }, t);
           tl.to(p, { y: 1400, rotation: (i % 2 ? 40 : -40), duration: 0.9, ease: "power2.in" }, 7.9 + i * 0.08);
+          tl.set(p, { opacity: 0 }, 9.0);
           K.sfx(t + 0.15, "drop", 0.12);
         });
         C.out(t4, 8.4);
@@ -138,9 +139,10 @@ FILMS["cine-02-une-journee"] = ("Une journée avec LIMO", 30.0, """
         // ---- ouverture
         const t1 = C.title("Une journée", { top: "640px", fontSize: "110px" }, 0.02, { st: 0.12 });
         const t2 = C.title("d’agent immobilier", { top: "780px", fontSize: "76px" }, 0.5, { color: "#3a3f6b" });
-        const t3 = C.title("<span style='color:#6b4fe0'>avec</span> <span style='color:#6b4fe0'>LIMO.</span>", { top: "890px", fontSize: "110px" }, 1.0);
+        const t3 = C.title("[avec] [LIMO.]", { top: "890px", fontSize: "110px" }, 1.0);
         C.leak(0.2, 2.6, { max: 0.55 });
         C.out([t1, t2, t3], 2.3);
+        C.bars(2.2, true, 1.0);
         // ---- l'horloge et le téléphone
         const HRS = ["7:30", "9:30", "11:00", "14:00", "16:00", "18:00", "19:00"];
         const hr = C.ab({ left: "0", right: "0", top: "190px", height: "140px" }, `<div class="hr">${HRS.map((h) => `<span>${h}</span>`).join("")}</div>`);
@@ -170,7 +172,7 @@ FILMS["cine-02-une-journee"] = ("Une journée avec LIMO", 30.0, """
         A.leave(ph, 20.4);
         // ---- le soir
         const n1 = C.title("Tu rentres.", { top: "640px", fontSize: "110px" }, 21.0, { color: "#ffffff" });
-        const n2 = C.title("<span style='color:#b9a6ff'>Tout</span> <span style='color:#b9a6ff'>est</span> <span style='color:#b9a6ff'>fait.</span>", { top: "780px", fontSize: "110px" }, 21.6, { color: "#ffffff" });
+        const n2 = C.title("[Tout] [est] [fait.]", { top: "780px", fontSize: "110px" }, 21.6, { color: "#ffffff", accent: "#b9a6ff" });
         const M = N.mascot({ left: "370px", top: "1000px", width: "340px" }, { expr: "sleep" });
         M.enter(22.0);
         M.expr("wink", 23.4);
@@ -198,7 +200,7 @@ FILMS["cine-03-le-calcul"] = ("Le calcul", 30.0, """
         const dark = C.bg({ background: "radial-gradient(ellipse at 50% 35%, #262a66 0%, #0d0f2a 75%)" });
         C.cam(0, { scale: 1.05 }, 15, "none");
         const t1 = C.title("Combien te coûte", { top: "660px", fontSize: "96px" }, 0.02, { color: "#ffffff", st: 0.1 });
-        const t2 = C.title("<span style='color:#ff8f8f'>l’administratif</span> ?", { top: "790px", fontSize: "96px" }, 0.7, { color: "#ffffff" });
+        const t2 = C.title("[l’administratif] ?", { top: "790px", fontSize: "96px" }, 0.7, { color: "#ffffff", accent: "#ff8f8f" });
         const t0 = C.title("Agent immobilier,", { top: "560px", fontSize: "50px" }, 0.02, { color: "#b9a6ff", snd: false });
         C.leak(0.3, 2.4, { max: 0.45, c1: "rgba(255,120,120,.6)" });
         C.out([t0, t1, t2], 2.5);
@@ -229,7 +231,7 @@ FILMS["cine-03-le-calcul"] = ("Le calcul", 30.0, """
         tl.set(y2, { opacity: 0 }, 0);
         tl.set(y2, { opacity: 1 }, 9.0);
         K.count(K.$("span", y2), 368, 9.0, 1.2, (v) => Math.round(v) + " h", { ticks: 12 });
-        const y3 = C.title("= <span style='color:#ff8f8f'>46</span> <span style='color:#ff8f8f'>jours</span> de travail par an.", { top: "1040px", fontSize: "62px" }, 10.6, { color: "#ffffff" });
+        const y3 = C.title("= [46] [jours] de travail par an.", { top: "1040px", fontSize: "62px" }, 10.6, { color: "#ffffff", accent: "#ff8f8f" });
         K.sfx(10.6, "thump", 0.32);
         C.out([y1, y2, y3], 12.6);
         // ---- avec LIMO

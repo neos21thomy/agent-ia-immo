@@ -85,6 +85,9 @@ PRESETS = {
     "pub30-04-qui-va-vendre": ("house", 122, 0.3),
     "pub30-05-crm-dort": ("pop", 124, 0.3),
     "pub30-06-avis-google": ("house", 122, 0.3),
+    "cine-01-manifeste": ("epic", 100, 0.3, 11.5),
+    "cine-02-une-journee": ("pop", 124, 0.3),
+    "cine-03-le-calcul": ("epic", 100, 0.3, 13.0),
 }
 
 # progressions (MIDI) : accords (3-4 notes) et fondamentale de basse

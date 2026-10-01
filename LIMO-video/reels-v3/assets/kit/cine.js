@@ -72,11 +72,14 @@
     tl.fromTo(el, { clipPath: `circle(0px at ${x}px ${y}px)` }, { clipPath: `circle(1500px at ${x}px ${y}px)`, duration: d, ease: "power3.inOut" }, t);
     K.sfx(t, "whoosh", 0.22, 0, { d: d, f0: 200, f1: 2600, pk: 0.5 });
   };
-  // grand titre cinéma : chaque mot sort du flou
+  // grand titre cinéma : chaque mot sort du flou ; [mot] = mot en couleur d’accent (o.accent)
   C.title = (html, css, t, o = {}) => {
     const words = html.split(" ");
     const el = ab(scene, Object.assign({ left: "60px", right: "60px", textAlign: "center", fontFamily: o.serif ? "'Source Serif 4', serif" : "Montserrat, sans-serif", fontWeight: o.serif ? "600" : "800", lineHeight: "1.12", color: o.color || "#1b1f4b", letterSpacing: o.serif ? "0" : "-0.01em" }, css),
-      words.map((w) => `<span style="display:inline-block;margin:0 .14em">${w}</span>`).join(""));
+      words.map((w) => {
+        const acc = /^\[.*\]$/.test(w);
+        return `<span style="display:inline-block;margin:0 .14em${acc ? ";color:" + (o.accent || "#6b4fe0") : ""}">${acc ? w.slice(1, -1) : w}</span>`;
+      }).join(""));
     const ws = K.$$("span", el);
     tl.set(el, { opacity: 0 }, 0);
     tl.set(el, { opacity: 1 }, t);
@@ -92,5 +95,9 @@
     K.sfx(t, "sparkle", 0.1);
     return s;
   };
-  C.ab = (css, html, parent) => ab(parent || scene, css, html);
+  C.ab = (css, html, parent) => {
+    const e = ab(parent || scene, css, html);
+    K.$$("*", e).forEach((x) => ["data-layout-allow-overlap", "data-layout-allow-occlusion"].forEach((a) => x.setAttribute(a, "")));
+    return e;
+  };
 })();
