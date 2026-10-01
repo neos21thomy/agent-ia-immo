@@ -52,7 +52,7 @@ URL de destination (à suivre dans les statistiques) :
 
 ### PUB 01 · « Ton vendeur a appelé 3 agences » (`LIMO-pub-01-trois-agences`)
 - **Texte principal :** Ton vendeur a demandé une estimation à 3 agences hier soir. Il signera avec celle qui répond en premier. 📲
-LIMO, ton chef de cabinet IA, te prépare la réponse en quelques minutes, même quand tu es en visite.
+LIMO, le bras droit du conseiller immo, te prépare la réponse en quelques minutes, même quand tu es en visite.
 ✅ 14 jours offerts · sans carte bancaire · sans engagement
 - **Titre :** Réponds avant les autres agences
 - **Description :** Essai gratuit 14 jours
@@ -60,7 +60,7 @@ LIMO, ton chef de cabinet IA, te prépare la réponse en quelques minutes, même
 
 ### PUB 02 · « Ton concurrent utilise déjà ça » (`LIMO-pub-02-ton-concurrent`)
 - **Texte principal :** Ton concurrent a déjà son brief du matin, ses relances prêtes et ses annonces rédigées avant 9 h. Il ne te le dira pas. 🤫
-LIMO, c'est le chef de cabinet IA des conseillers immobiliers.
+LIMO, c'est le bras droit du conseiller immobilier.
 ✅ Teste-le 14 jours gratuitement, sans carte bancaire.
 - **Titre :** Le secret des agents qui signent plus
 - **Description :** 14 jours offerts, sans CB

@@ -77,8 +77,8 @@
     const words = html.split(" ");
     const el = ab(scene, Object.assign({ left: "60px", right: "60px", textAlign: "center", fontFamily: o.serif ? "'Source Serif 4', serif" : "Montserrat, sans-serif", fontWeight: o.serif ? "600" : "800", lineHeight: "1.12", color: o.color || "#1b1f4b", letterSpacing: o.serif ? "0" : "-0.01em" }, css),
       words.map((w) => {
-        const acc = /^\[.*\]$/.test(w);
-        return `<span style="display:inline-block;margin:0 .14em${acc ? ";color:" + (o.accent || "#6b4fe0") : ""}">${acc ? w.slice(1, -1) : w}</span>`;
+        const m = /^\[(.*)\]([.,;:!?…]*)$/.exec(w);
+        return `<span style="display:inline-block;margin:0 .14em">${m ? `<b style="font-weight:inherit;color:${o.accent || "#6b4fe0"}">${m[1]}</b>${m[2]}` : w}</span>`;
       }).join(""));
     const ws = K.$$("span", el);
     tl.set(el, { opacity: 0 }, 0);

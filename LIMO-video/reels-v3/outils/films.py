@@ -226,7 +226,7 @@ FILMS["film-04-fais-le-test"] = ("Film 4 · Fais le test", """
           return e;
         });
         P.out([t1, ...its], 6.9);
-        const t2 = P.title(["5 SUR 5 ?", "<em>IL TE FAUT UN</em>", "<em>CHEF DE CABINET.</em>"], { top: "420px", fontSize: "96px" }, 7.2, { slam: 0.4 });
+        const t2 = P.title(["5 SUR 5 ?", "<em>IL TE FAUT</em>", "<em>UN BRAS DROIT.</em>"], { top: "420px", fontSize: "96px" }, 7.2, { slam: 0.4 });
         const robo = K.h("img", "ab", null, root);
         robo.id = "robo";
         robo.src = "assets/img/limo-robot.png";

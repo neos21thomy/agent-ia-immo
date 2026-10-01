@@ -72,7 +72,7 @@
   P.outro = (t, kind = "essai", o = {}) => {
     const house = P.ab("p-house", `<img src="assets/img/limo-house.png" alt="Logo LIMO" />`, { left: "390px", top: "180px", width: "300px", height: "265px" });
     const wm = P.ab("ctr p-wm", "LIMO", { top: "460px", fontSize: "92px" });
-    const tag = P.ab("ctr p-kick", "CHEF DE CABINET IMMO", { top: "590px", fontSize: "22px" });
+    const tag = P.ab("ctr p-kick", "LE BRAS DROIT DU CONSEILLER IMMO", { top: "590px", fontSize: "22px" });
     tl.set([house, wm, tag], { opacity: 0 }, 0);
     tl.fromTo(house, { opacity: 0, scale: 0.6, filter: "blur(16px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.7, ease: "power3.out" }, t);
     tl.fromTo(wm, { opacity: 0, scaleX: 1.3 }, { opacity: 1, scaleX: 1, duration: 0.7, ease: "power3.out" }, t + 0.2);

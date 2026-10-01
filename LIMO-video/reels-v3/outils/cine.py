@@ -70,7 +70,7 @@ FILMS["cine-01-manifeste"] = ("LIMO, le manifeste", 30.0, """
         tl.fromTo(logo, { opacity: 0, scale: 1.35, filter: "blur(20px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 1.0, ease: "power3.out" }, 12.6);
         K.sfx(12.7, "thump", 0.42);
         C.sweep(logo, 13.4, 1.0);
-        const t7 = C.title("Ton chef de cabinet immo.", { top: "1080px", fontSize: "48px" }, 13.6, { color: "#1b1f4b", snd: false });
+        const t7 = C.title("Le bras droit du conseiller immo.", { top: "1080px", fontSize: "48px" }, 13.6, { color: "#1b1f4b", snd: false });
         C.out([t6, t7], 14.8, 0.4);
         tl.to(logo, { y: -620, scale: 0.5, duration: 0.8, ease: "power3.inOut" }, 14.8);
         // ---- montage produit
@@ -278,8 +278,103 @@ FILMS["cine-03-le-calcul"] = ("Le calcul", 30.0, """
         fin(26.0);
 """)
 
+# ---------------------------------------------------------------- 4 · prestige (plans Higgsfield de la villa)
+PRE = {}
+PRE["cine-04-prestige"] = """      <video id="v1" class="clip" src="assets/video/villa-A.mp4" data-start="0" data-duration="5" data-track-index="1" muted playsinline style="position:absolute;left:0;top:0;width:1080px;height:1920px;object-fit:cover"></video>
+      <video id="v2" class="clip" src="assets/video/villa-recul-lent.mp4" data-start="5" data-duration="9.9" data-track-index="2" muted playsinline style="position:absolute;left:0;top:0;width:1080px;height:1920px;object-fit:cover"></video>
+"""
+FILMS["cine-04-prestige"] = ("LIMO, prestige", 30.0, """
+      #s-main { background: transparent; }
+      .glass { border-radius: 40px; background: rgba(14, 16, 40, 0.42); backdrop-filter: blur(22px) saturate(1.3); -webkit-backdrop-filter: blur(22px) saturate(1.3);
+        border: 1.5px solid rgba(255,255,255,.28); box-shadow: 0 30px 80px rgba(0,0,0,.35); color: #fff; font-family: Inter, sans-serif; }
+      .gchip { display: inline-flex; align-items: center; gap: 10px; height: 52px; padding: 0 22px; border-radius: 26px; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.3); color: #fff; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 24px; white-space: nowrap; }
+      .gchip svg.i { width: 26px; height: 26px; stroke-width: 2.6; }
+      .shade { text-shadow: 0 4px 30px rgba(0,0,0,.55); }
+""", r"""
+        // le fond lavande du kit reste caché pendant les plans réels
+        tl.set([K.$(".n-bg", root), ...K.$$(".n-arc", root)], { opacity: 0 }, 0);
+        const sh = C.ab({ left: "0", top: "0", width: "1080px", height: "1920px", background: "linear-gradient(180deg, rgba(5,6,15,.55) 0%, rgba(5,6,15,0) 30%, rgba(5,6,15,0) 52%, rgba(5,6,15,.7) 100%)" });
+        C.bars(4.6, true, 1.2);
+        const t0 = C.title("Agent immobilier,", { top: "330px", fontSize: "54px" }, 0.02, { color: "#d9ceff", snd: false });
+        const t1 = C.title("tu vends des [biens] [d’exception].", { top: "410px", fontSize: "84px" }, 0.25, { color: "#ffffff", accent: "#d9ceff" });
+        [t0, t1].forEach((e) => e.classList.add("shade"));
+        C.out([t0, t1], 2.6);
+        const t2 = C.title("Tes [annonces] doivent l’être [aussi].", { top: "1380px", fontSize: "80px" }, 2.9, { color: "#ffffff", accent: "#d9ceff" });
+        t2.classList.add("shade");
+        C.out(t2, 4.8);
+        // ---- LIMO rédige l'annonce de cette villa, par-dessus le plan
+        const chip = C.ab({ left: "0", right: "0", top: "280px", textAlign: "center" }, `<span class="gchip">${K.icon("sparkles")}LIMO rédige l’annonce</span>`);
+        tl.set(chip, { opacity: 0 }, 0);
+        K.pop(chip, 5.2, { s: 0.7 });
+        K.sfx(5.2, "chirp", 0.12);
+        const card = C.ab({ left: "70px", top: "1000px", width: "940px", padding: "40px 44px" }, `<div class="ti" style="font-family:'Source Serif 4',serif;font-weight:600;font-size:52px;line-height:1.15;min-height:120px"></div>
+<div class="bo" style="margin-top:16px;font-size:31px;line-height:1.45;color:rgba(255,255,255,.88);min-height:180px"></div>
+<div class="lg" style="margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,.25);font-size:22px;line-height:1.4;color:rgba(255,255,255,.72)">Prix honoraires inclus · part des honoraires à la charge de l’acquéreur indiquée · DPE et GES affichés</div>
+<div class="cs" style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap"><span class="gchip">${K.icon("check")}Mentions légales</span><span class="gchip">${K.icon("check")}Prête à publier</span></div>`);
+        card.classList.add("glass");
+        tl.set(card, { opacity: 0 }, 0);
+        tl.fromTo(card, { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 5.5);
+        K.sfx(5.5, "whoosh", 0.16, 0, { d: 0.5, f0: 300, f1: 2000, pk: 0.6 });
+        K.type(K.$(".ti", card), "Villa d’architecte entre béton et forêt", 6.2, 1.1, 0.05);
+        K.type(K.$(".bo", card), "Volumes généreux, baies vitrées toute hauteur et cheminée suspendue face à la canopée. Une adresse rare, au calme absolu.", 7.4, 2.6, 0.04);
+        tl.set(K.$(".lg", card), { opacity: 0 }, 0);
+        K.fin(K.$(".lg", card), 10.2, { y: 8 });
+        tl.set(K.$(".cs", card), { opacity: 0 }, 0);
+        tl.set(K.$(".cs", card), { opacity: 1 }, 10.7);
+        K.pop(K.$$(".cs .gchip", card), 10.7, { st: 0.12 });
+        K.sfx(10.7, "success", 0.24);
+        const tm = C.ab({ left: "0", right: "0", top: "370px", textAlign: "center" }, `<span class="gchip" style="background:rgba(44,196,181,.35);border-color:rgba(44,196,181,.7)">${K.icon("timer")}Rédigée en 2 minutes</span>`);
+        tl.set(tm, { opacity: 0 }, 0);
+        K.pop(tm, 11.2, { s: 0.7 });
+        C.out([chip, tm, card], 12.6, 0.5);
+        const t3 = C.title("Toi, tu fais [visiter].", { top: "1460px", fontSize: "84px" }, 12.9, { color: "#ffffff", accent: "#d9ceff" });
+        t3.classList.add("shade");
+        C.out([t3, sh], 14.4, 0.4);
+        // ---- l'application
+        C.flash(14.7, "#ffffff", 0.95);
+        const light = C.bg({ background: "linear-gradient(180deg, #f5f3fe 0%, #ece7fb 100%)" });
+        tl.set(light, { clipPath: "circle(0px at 540px 960px)" }, 0);
+        C.iris(light, 14.7, 0.8);
+        C.leak(14.8, 2.6);
+        const h = N.head(["TON BRAS DROIT", "S’OCCUPE DU RESTE<span class='v'>.</span>"], { top: "150px", fontSize: "70px" }, 15.3, { bar: false });
+        glow(140, 520, 800, 15.3);
+        const ph = A.phone({ left: "260px", top: "470px", width: "560px" }, { time: "10:05", tab: 3 });
+        const p1 = A.page(ph, `<div class="a-back">${K.icon("chev")}Annonce</div><div class="a-ph" style="height:230px;margin-bottom:14px"><img src="assets/img/villa-photo.jpg" alt="Villa" style="width:100%;height:100%;object-fit:cover" /></div>
+<div class="a-card" style="padding:20px 22px"><div style="font-family:'Source Serif 4',serif;font-size:30px;font-weight:600;line-height:1.2">Villa d’architecte entre béton et forêt</div><div style="margin-top:10px;font-size:20px;line-height:1.45;color:#3a3a3c">Volumes généreux, baies vitrées toute hauteur et cheminée suspendue face à la canopée.</div></div>
+<div style="display:flex;gap:10px;margin-top:14px"><span class="a-tag t">${K.icon("check")}Mentions légales</span><span class="a-tag">${K.icon("check")}Prête à publier</span></div>
+<div class="a-btn" style="margin-top:16px"><span class="bt">${K.icon("send")}Publier partout</span></div>`);
+        const p2 = A.page(ph, A.S.relances());
+        A.enter(ph, 15.4, { flatAt: 0.9 });
+        A.tap(ph, 264, 900, 17.4);
+        const btn = K.$(".a-btn", p1);
+        tl.to(btn, { backgroundColor: "#2cc4b5", duration: 0.25 }, 17.5);
+        tl.set(K.$(".bt", btn), { innerHTML: `${K.icon("check")}Publiée` }, 17.5);
+        K.sfx(17.5, "success", 0.24);
+        const n1 = A.over(N.notif({ title: "LINKEDIN", time: "10:07", text: "Post « Villa d’architecte » publié." }, { left: "90px", top: "600px" }, 18.0));
+        tl.to(n1, { opacity: 0, y: -40, duration: 0.25 }, 19.3);
+        A.go(ph, p1, p2, 19.4);
+        const f1 = A.float(A.gain("users", "v", "12 acquéreurs", "relancés pour cette villa"), { left: "30px", top: "760px" }, 19.9);
+        N.out([h, f1], 21.4, { y: -30 });
+        A.leave(ph, 21.4);
+        // ---- la mascotte
+        const M = N.mascot({ left: "280px", top: "760px", width: "520px" });
+        M.enter(21.9);
+        M.glow(22.3, 1.2);
+        M.wave(22.6);
+        const b = N.say("Moi, c’est LIMO.<br><span class='v'>Ton bras droit.</span>", { left: "190px", top: "520px", width: "700px" }, 22.8);
+        M.expr("wink", 24.0);
+        N.out(b, 25.6, { y: -10, d: 0.2 });
+        window.__TE = 26.0;
+        N.outro(26.0, "contact");
+        M.move(25.9, { x: 0, y: 1370 - (760 + 314), scale: 200 / 520 }, 0.7);
+        M.expr("happy", 26.0, false);
+        M.wave(27.2);
+""")
+
 if __name__ == "__main__":
     for name, (title, dur, css, body) in FILMS.items():
         html = SHELL.format(title=title, faces=FACES, css=css.strip("\n"), body=(COMMON + body).strip("\n"), dur=dur, name=name)
+        if name in PRE:
+            html = html.replace('      <section id="s-main"', PRE[name] + '      <section id="s-main"', 1)
         pathlib.Path(f"reels/{name}.html").write_text(html, encoding="utf-8")
         print("reels/" + name + ".html")

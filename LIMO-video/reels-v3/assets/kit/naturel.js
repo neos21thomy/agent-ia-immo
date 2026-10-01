@@ -198,7 +198,7 @@
     N.hide(logo);
     tl.fromTo(logo, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, t);
     K.sfx(t + 0.05, "thump", 0.3);
-    const tag = N.text("ctr n-body", "Ton chef de cabinet immo.", { top: Y(600), fontSize: "40px", fontWeight: "600", color: "#1b1f4b" }, t + 0.3);
+    const tag = N.text("ctr n-body", "Le bras droit du conseiller immo.", { top: Y(600), fontSize: "40px", fontWeight: "600", color: "#1b1f4b" }, t + 0.3);
     const C = {
       dm: ["ÉCRIS-MOI <span class='n-kw'>LIMO</span>", "EN MESSAGE PRIVÉ<span class='v'>.</span>", K.icon("send") + "Je t’ouvre ton accès"],
       comment: ["COMMENTE <span class='n-kw'>LIMO</span>", "JE T’ENVOIE L’ACCÈS<span class='v'>.</span>", K.icon("msg") + "Accès offert 14 jours"],

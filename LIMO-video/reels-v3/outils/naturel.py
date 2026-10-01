@@ -451,7 +451,7 @@ FILMS["nat-10-ton-collegue"] = ("POV : ton collègue part à 18 h", 16.0, """
         N.hide(lg);
         tl.fromTo(lg, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.7, ease: "power3.out" }, 7.5);
         K.sfx(7.55, "thump", 0.4);
-        const s = N.text("ctr n-body", "Son chef de cabinet immo.<br><b>Et bientôt le tien.</b>", { top: "960px", fontSize: "44px" }, 8.3);
+        const s = N.text("ctr n-body", "Son bras droit, c’est LIMO.<br><b>Et bientôt le tien.</b>", { top: "960px", fontSize: "44px" }, 8.3);
         N.out([lg, s], 10.8);
         window.__TE = 11.2;
         N.outro(11.2, "dm");
