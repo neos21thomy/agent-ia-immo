@@ -89,6 +89,9 @@ PRESETS = {
     "cine-02-une-journee": ("pop", 124, 0.3),
     "cine-03-le-calcul": ("epic", 100, 0.3, 13.0),
     "cine-04-prestige": ("epic", 100, 0.3, 14.7),
+    "cine-05-chalet": ("epic", 100, 0.3, 14.7),
+    "cine-06-bord-de-mer": ("house", 122, 0.3),
+    "cine-07-trois-biens": ("epic", 100, 0.3, 14.7),
 }
 
 # progressions (MIDI) : accords (3-4 notes) et fondamentale de basse

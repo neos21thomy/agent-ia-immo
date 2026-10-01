@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — LIMO, le chalet</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/naturel.css" />
+    <link rel="stylesheet" href="assets/kit/app.css" />
+    <style>
+      @font-face { font-family: "Anton"; src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Source Serif 4"; src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; }
+      @font-face { font-family: "Montserrat Hook"; src: url("assets/fonts/montserrat-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-style: normal; }
+      #s-main { background: transparent; }
+      .glass { border-radius: 40px; background: rgba(14, 16, 40, 0.42); backdrop-filter: blur(22px) saturate(1.3); -webkit-backdrop-filter: blur(22px) saturate(1.3);
+        border: 1.5px solid rgba(255,255,255,.28); box-shadow: 0 30px 80px rgba(0,0,0,.35); color: #fff; font-family: Inter, sans-serif; }
+      .gchip { display: inline-flex; align-items: center; gap: 10px; height: 52px; padding: 0 22px; border-radius: 26px; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.3); color: #fff; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 24px; white-space: nowrap; }
+      .gchip.ok { background: rgba(44,196,181,.35); border-color: rgba(44,196,181,.75); }
+      .gchip svg.i { width: 26px; height: 26px; stroke-width: 2.6; }
+      .grow { display: flex; align-items: center; gap: 18px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.16); font-size: 30px; }
+      .grow b { font-weight: 600; }
+      .grow em { margin-left: auto; font-style: normal; font-family: Montserrat, sans-serif; font-weight: 800; color: #7ff0e3; }
+      .gav { flex: none; width: 58px; height: 58px; border-radius: 50%; background: rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 22px; }
+      .shade { text-shadow: 0 4px 30px rgba(0,0,0,.55); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="30.0" data-width="1080" data-height="1920">
+      <video id="v1" class="clip" src="assets/video/chalet-A.mp4" data-start="0" data-duration="5" data-track-index="1" muted playsinline style="position:absolute;left:0;top:0;width:1080px;height:1920px;object-fit:cover"></video>
+      <video id="v2" class="clip" src="assets/video/chalet-recul-lent.mp4" data-start="5" data-duration="9.9" data-track-index="2" muted playsinline style="position:absolute;left:0;top:0;width:1080px;height:1920px;object-fit:cover"></video>
+      <section id="s-main" class="clip" data-start="0" data-duration="30.0" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/cine-05-chalet.wav" data-start="0" data-duration="30.0" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/naturel.js"></script>
+    <script src="assets/kit/app.js"></script>
+    <script src="assets/kit/cine.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 30.0;
+        N.init(tl, root, D);
+        A.init(tl, root);
+        C.init(tl, root, D);
+        const glow = (x, y, s, t) => { const g = N.ab("n-glow", null, { left: x + "px", top: y + "px", width: s + "px", height: s + "px" }); g.setAttribute("data-layout-allow-overflow", ""); N.hide(g); tl.fromTo(g, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 1.2, ease: "power2.out" }, t); return g; };
+        const gains = (t, G, note) => {
+          const h = N.head(["CE QUE ÇA", "TE RAPPORTE<span class='v'>.</span>"], { top: "170px", fontSize: "86px" }, t);
+          const els = G.map((g, i) => {
+            const c = N.ab("g-card", `<div class="k">${g.k}</div><div class="v ${g.c || ""}"><span>${g.v0 || ""}</span></div><div class="d">${g.d}</div>`, { left: "90px", top: 480 + i * 330 + "px", width: "900px" });
+            N.hide(c);
+            const tt = t + 0.5 + i * 0.7;
+            tl.fromTo(c, { opacity: 0, x: i % 2 ? 120 : -120 }, { opacity: 1, x: 0, duration: 0.55, ease: "power3.out" }, tt);
+            K.sfx(tt, "whoosh", 0.12, 0, { d: 0.35, f0: 600, f1: 3000, pk: 0.6 });
+            if (g.n != null) K.count(K.$(".v span", c), g.n, tt + 0.2, 1.0, g.f, { ticks: 10 }); else K.$(".v span", c).innerHTML = g.v;
+            if (g.n != null) K.sfx(tt + 1.2, "success", 0.18);
+            return c;
+          });
+          const nt = N.text("ctr g-note", note || "Exemples indicatifs", { top: "1490px" }, t + 2.4);
+          return [h, ...els, nt];
+        };
+        const fin = (t, M) => {
+          N.outro(t, "contact");
+          const m = N.mascot({ left: "440px", top: "1240px", width: "200px" });
+          m.enter(t + 1.6);
+          m.wave(t + 2.3);
+          m.blink(t + 3.2);
+        };
+
+        const L1 = "ton vendeur veut [un] [prix].", L2 = "Tu lui réponds [en] [2] [minutes].", L3 = "Toi, tu [convaincs].";
+
+        tl.set([K.$(".n-bg", root), ...K.$$(".n-arc", root)], { opacity: 0 }, 0);
+        const sh = C.ab({ left: "0", top: "0", width: "1080px", height: "1920px", background: "linear-gradient(180deg, rgba(5,6,15,.55) 0%, rgba(5,6,15,0) 30%, rgba(5,6,15,0) 52%, rgba(5,6,15,.7) 100%)" });
+        C.bars(4.6, true, 1.2);
+        const t0 = C.title("Agent immobilier,", { top: "330px", fontSize: "54px" }, 0.02, { color: "#d9ceff", snd: false });
+        const t1 = C.title(L1, { top: "410px", fontSize: "84px" }, 0.25, { color: "#ffffff", accent: "#d9ceff" });
+        [t0, t1].forEach((e) => e.classList.add("shade"));
+        C.out([t0, t1], 2.6);
+        const t2 = C.title(L2, { top: "1380px", fontSize: "80px" }, 2.9, { color: "#ffffff", accent: "#d9ceff" });
+        t2.classList.add("shade");
+        C.out(t2, 4.8);
+
+        const chip = C.ab({ left: "0", right: "0", top: "280px", textAlign: "center" }, `<span class="gchip">${K.icon("calc")}LIMO estime le bien</span>`);
+        tl.set(chip, { opacity: 0 }, 0);
+        K.pop(chip, 5.2, { s: 0.7 });
+        K.sfx(5.2, "chirp", 0.12);
+        const card = C.ab({ left: "70px", top: "960px", width: "940px", padding: "40px 44px" }, `<div style="font-family:'Source Serif 4',serif;font-weight:600;font-size:50px;line-height:1.15">Chalet contemporain, vue montagne</div>
+<div class="grow"><b>Surface</b><em>160 m² · 2 000 m² de terrain</em></div><div class="grow"><b>Ventes comparables</b><em>3 dans le secteur</em></div>
+<div style="margin-top:24px;font-size:26px;color:rgba(255,255,255,.75);font-weight:600;letter-spacing:.06em">FOURCHETTE ESTIMÉE</div>
+<div style="font-family:'Montserrat Hook',Montserrat,sans-serif;font-weight:800;font-size:70px;line-height:1.1;white-space:nowrap"><span class="a">0 €</span> – <span class="b">0 €</span></div>
+<div class="cs" style="display:flex;gap:12px;margin-top:20px"><span class="gchip ok">${K.icon("check")}Avis de valeur prêt</span><span class="gchip">Exemple fictif</span></div>`);
+        card.classList.add("glass");
+        tl.set(card, { opacity: 0 }, 0);
+        tl.fromTo(card, { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 5.5);
+        K.sfx(5.5, "whoosh", 0.16, 0, { d: 0.5, f0: 300, f1: 2000, pk: 0.6 });
+        K.$$(".grow", card).forEach((r, i) => { tl.set(r, { opacity: 0 }, 0); K.fin(r, 6.3 + i * 0.5, { y: 12, d: 0.35 }); K.sfx(6.3 + i * 0.5, "tick", 0.16); });
+        K.count(K.$(".a", card), 685000, 7.8, 1.6, K.eur, { ticks: 14 });
+        K.count(K.$(".b", card), 735000, 7.8, 1.6, K.eur, { ticks: 0 });
+        tl.set(K.$(".cs", card), { opacity: 0 }, 0);
+        tl.set(K.$(".cs", card), { opacity: 1 }, 10.2);
+        K.pop(K.$$(".cs .gchip", card), 10.2, { st: 0.12 });
+        K.sfx(10.2, "success", 0.24);
+        const tm = C.ab({ left: "0", right: "0", top: "370px", textAlign: "center" }, `<span class="gchip ok">${K.icon("timer")}Estimé en 2 minutes</span>`);
+        tl.set(tm, { opacity: 0 }, 0);
+        K.pop(tm, 11.0, { s: 0.7 });
+        C.out([chip, tm, card], 12.6, 0.5);
+        const HEAD = ["TON BRAS DROIT", "PRÉPARE LE MANDAT<span class='v'>.</span>"], TAB = 3, DONE = "Envoyé au vendeur";
+        const P1 = `<div class="a-back">${K.icon("chev")}Avis de valeur</div><div class="a-ph" style="height:230px;margin-bottom:14px"><img src="assets/img/chalet-photo.jpg" alt="Chalet" style="width:100%;height:100%;object-fit:cover" /></div>` +
+          A.row("calc", "v", "685 000 € – 735 000 €", "Fourchette estimée") + A.row("home", "t", "3 ventes comparables", "Dans le secteur, moins de 12 mois") +
+          `<div class="a-btn" style="margin-top:16px"><span class="bt">${K.icon("send")}Envoyer au vendeur</span></div>`;
+        const P2 = `<div class="a-back">${K.icon("chev")}Agenda</div><div class="a-h2">Jeudi</div>` + A.row("pen", "v", "Signature du mandat", "Chalet · M. et Mme Faure", "10:00", `<span class="a-tag t">Confirmé</span>`) + A.row("camera", "t", "Photos du chalet", "Avec le photographe", "14:00");
+        const NOTIF = { title: "MESSAGES", time: "10:12", text: "M. Faure : « Merci pour l’avis de valeur, on signe jeudi ! »", snd: "receive", g: 0.28 };
+        const FLOAT = A.gain("pen", "v", "+ 1 mandat", "exclusif");
+
+        const t3 = C.title(L3, { top: "1460px", fontSize: "84px" }, 12.9, { color: "#ffffff", accent: "#d9ceff" });
+        t3.classList.add("shade");
+        C.out([t3, sh], 14.4, 0.4);
+        C.flash(14.7, "#ffffff", 0.95);
+        const light = C.bg({ background: "linear-gradient(180deg, #f5f3fe 0%, #ece7fb 100%)" });
+        tl.set(light, { clipPath: "circle(0px at 540px 960px)" }, 0);
+        C.iris(light, 14.7, 0.8);
+        C.leak(14.8, 2.6);
+        const h = N.head(HEAD, { top: "150px", fontSize: "70px" }, 15.3, { bar: false });
+        glow(140, 520, 800, 15.3);
+        const ph = A.phone({ left: "260px", top: "470px", width: "560px" }, { time: "10:05", tab: TAB });
+        const p1 = A.page(ph, P1);
+        const p2 = A.page(ph, P2);
+        A.enter(ph, 15.4, { flatAt: 0.9 });
+        A.tap(ph, 264, 900, 17.4);
+        const btn = K.$(".a-btn", p1);
+        tl.to(btn, { backgroundColor: "#2cc4b5", duration: 0.25 }, 17.5);
+        tl.set(K.$(".bt", btn), { innerHTML: `${K.icon("check")}${DONE}` }, 17.5);
+        K.sfx(17.5, "success", 0.24);
+        const n1 = A.over(N.notif(NOTIF, { left: "90px", top: "600px" }, 18.0));
+        tl.to(n1, { opacity: 0, y: -40, duration: 0.25 }, 19.3);
+        A.go(ph, p1, p2, 19.4);
+        const f1 = A.float(FLOAT, { left: "30px", top: "760px" }, 19.9);
+        N.out([h, f1], 21.4, { y: -30 });
+        A.leave(ph, 21.4);
+        const M = N.mascot({ left: "280px", top: "760px", width: "520px" });
+        M.enter(21.9);
+        M.glow(22.3, 1.2);
+        M.wave(22.6);
+        const b = N.say("Moi, c’est LIMO, ton bras droit.<br><span class='v'>Teste-moi 14 jours !</span>", { left: "140px", top: "520px", width: "800px" }, 22.8);
+        M.expr("wink", 24.0);
+        N.out(b, 25.6, { y: -10, d: 0.2 });
+        window.__TE = 26.0;
+        N.outro(26.0, "pub");
+        M.move(25.9, { x: 0, y: 1370 - (760 + 314), scale: 200 / 520 }, 0.7);
+        M.expr("happy", 26.0, false);
+        M.wave(27.2);
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>
