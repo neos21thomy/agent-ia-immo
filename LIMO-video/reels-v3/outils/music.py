@@ -92,6 +92,7 @@ PRESETS = {
     "cine-05-chalet": ("epic", 100, 0.3, 14.7),
     "cine-06-bord-de-mer": ("house", 122, 0.3),
     "cine-07-trois-biens": ("epic", 100, 0.3, 14.7),
+    "agents-01-les-12-agents": ("house", 122, 0.3),
 }
 
 # progressions (MIDI) : accords (3-4 notes) et fondamentale de basse

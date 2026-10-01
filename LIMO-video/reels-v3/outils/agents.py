@@ -1,0 +1,129 @@
+"""« Les 12 agents de LIMO » : l'écran « Mes agents » de l'application (capture fournie :
+sources/images/limo-mes-agents.png) recréé, puis chaque agent mis en avant avec un résultat concret.
+Noms et descriptions repris de l'écran réel ; résultats = exemples fictifs.
+
+Usage : python3 outils/agents.py   (réécrit reels/agents-*.html)
+"""
+import pathlib
+
+from pub30 import COMMON, FACES, SHELL as _SHELL
+
+SHELL = _SHELL.replace('<script src="assets/kit/app.js"></script>', '<script src="assets/kit/app.js"></script>\n    <script src="assets/kit/cine.js"></script>')
+SHELL = SHELL.replace("A.init(tl, root);", "A.init(tl, root);\n        C.init(tl, root, D, {{ grain: 0.12 }});\n        C.bars(0, true, 0.01);")
+
+CSS = """
+      .pan { border-radius: 40px; background: #13132a; border: 1px solid #2a2a46; box-shadow: 0 40px 100px rgba(0,0,0,.45); font-family: Inter, sans-serif; }
+      .agc { position: absolute; width: 300px; height: 270px; border-radius: 28px; background: #1c1c33; border: 1.5px solid #2c2c4a; padding: 22px; font-family: Inter, sans-serif; color: #fff; }
+      .agc .ic { width: 66px; height: 66px; border-radius: 18px; background: #26263f; display: flex; align-items: center; justify-content: center; }
+      .agc .ic svg.i { width: 36px; height: 36px; stroke-width: 2.2; }
+      .agc b { display: block; margin-top: 18px; font-size: 25px; line-height: 1.15; font-weight: 700; }
+      .agc small { display: block; margin-top: 8px; font-size: 18px; line-height: 1.35; color: #a9abc9; }
+      .agc .new { position: absolute; right: 18px; top: 18px; height: 34px; padding: 0 14px; border-radius: 17px; background: #7c5cff; color: #fff; font-size: 17px; font-weight: 800; display: flex; align-items: center; }
+      .agc.on { border-color: #8f6bff; box-shadow: 0 0 0 3px rgba(143,107,255,.35), 0 30px 70px rgba(0,0,0,.5); }
+      .res { border-radius: 36px; background: #ffffff; box-shadow: 0 30px 80px rgba(0,0,0,.4); padding: 30px 36px; font-family: Inter, sans-serif; color: #1b1f4b; }
+      .res .k { font-family: Montserrat, sans-serif; font-weight: 700; font-size: 22px; letter-spacing: .08em; color: #6b4fe0; }
+      .res .t { margin-top: 10px; font-size: 36px; line-height: 1.3; font-weight: 600; }
+      .res .t b { color: #0a5a52; }
+      .cnt { font-family: Montserrat, sans-serif; font-weight: 800; font-size: 28px; color: #c9c9e8; letter-spacing: .08em; }
+      .room { position: relative; width: 340px; height: 200px; border-radius: 20px; overflow: hidden; background: linear-gradient(180deg, #efe7dc 0 64%, #c9a983 64% 100%); }
+      .room i { position: absolute; display: block; }
+"""
+
+FILMS = {}
+FILMS["agents-01-les-12-agents"] = ("Les 12 agents de LIMO", 37.4, CSS, r"""
+        const dark = C.bg({ background: "radial-gradient(ellipse at 50% 35%, #23264f 0%, #0c0d22 75%)" });
+        tl.set([K.$(".n-bg", root), ...K.$$(".n-arc", root)], { opacity: 0 }, 0);
+        // ---- accroche
+        const hk = N.hook(["<span class='kk' style='color:#b9a6ff'>AGENT IMMOBILIER,</span>", "TU AS 12 AGENTS", "<span class='hl'>QUI BOSSENT POUR TOI.</span>"], { top: "640px", fontSize: "70px", color: "#ffffff" });
+        C.leak(0.2, 2.6, { max: 0.5 });
+        N.out(hk, 2.7, { y: -40 });
+        // ---- l'écran « Mes agents »
+        const AG = [
+          ["target", "#ff5d5d", "Détecteur de ventes", "Les diagnostics tout juste faits = les ventes de demain", 0, "DÉTECTEUR DE VENTES", "DPE réalisé hier, maison à Allassac : <b>vendeur probable</b>. Appelle-le avant les autres."],
+          ["search", "#5aa8ff", "Pige des particuliers", "Les annonces entre particuliers deviennent tes mandats", 0, "PIGE DES PARTICULIERS", "3 annonces de particuliers à Brive ce matin : <b>message d’approche prêt</b>."],
+          ["pin", "#ff5d5d", "Estimation & marché", "Relié au cadastre, aux ventes DVF et aux diagnostics officiels", 0, "ESTIMATION & MARCHÉ", "Cadastre + ventes DVF + diagnostics : <b>245 000 – 262 000 €</b>."],
+          ["pen", "#ffc94d", "Rédacteur d’annonce", "Annonce optimisée SEO : sortir en 1er sur Google, SeLoger…", 0, "RÉDACTEUR D’ANNONCE", "Annonce optimisée SEO, <b>mentions légales incluses</b>, prête à publier."],
+          ["clip", "#e8d7b5", "Analyseur de dossier", "Un PDF déposé, la fiche remplie toute seule", 0, "ANALYSEUR DE DOSSIER", "Compromis.pdf déposé : <b>la fiche se remplit toute seule</b>."],
+          ["image", "#6fd38a", "Habilleur de photos", "Tes photos signées, prêtes à publier", 0, "HABILLEUR DE PHOTOS", "12 photos <b>signées à ton nom</b>, prêtes à publier."],
+          ["car", "#ff6b6b", "Frais kilométriques", "Tes trajets notés au fil de l’eau, prêts pour le comptable", 0, "FRAIS KILOMÉTRIQUES", "Ce mois : 1 240 km notés, <b>prêts pour le comptable</b>."],
+          ["magnet", "#ff5d5d", "Matcheur acheteurs", "Le bon acheteur pour ce bien, tout de suite", 0, "MATCHEUR ACHETEURS", "Famille Lambert : <b>96 % compatible</b> avec ce bien."],
+          ["megaphone", "#c9c9e8", "Diffuseur réseaux", "3 posts prêts à publier depuis un lien", 0, "DIFFUSEUR RÉSEAUX", "Un lien collé : <b>3 posts prêts</b> pour Instagram, Facebook et LinkedIn."],
+          ["sofa", "#7fb2ff", "Home staging virtuel", "Meubler, vider ou repeindre une pièce", 1, "HOME STAGING VIRTUEL", ""],
+          ["wrench", "#c9c9e8", "Mes artisans", "Le bon artisan près du bien, choisi sur ses avis", 1, "MES ARTISANS", "Plombier à 4 km, <b>4,8 ★</b>, disponible jeudi."],
+          ["msg", "#ffffff", "Messages Insta & Facebook", "Tes DM Instagram & Messenger relevés : prospects repérés", 1, "MESSAGES INSTA & FACEBOOK", "14 messages relevés : <b>3 vendeurs potentiels</b> repérés."],
+        ];
+        const card = (a) => `<div class="ic">${K.icon(a[0])}</div>${a[4] ? '<span class="new">NEW</span>' : ""}<b>${a[2]}</b><small>${a[3]}</small>`;
+        const pan = C.ab({ left: "40px", top: "230px", width: "1000px", height: "1400px" }, `<div style="padding:44px 50px 0"><div style="font-size:40px;font-weight:600;color:#fff">Mes agents</div><div style="margin-top:8px;font-size:28px;color:#c9c9e8">Ils travaillent, tu signes.</div></div>`);
+        pan.classList.add("pan");
+        tl.set(pan, { opacity: 0 }, 0);
+        tl.fromTo(pan, { opacity: 0, y: 120, scale: 0.94, rotationX: 12, transformPerspective: 2400 }, { opacity: 1, y: 0, scale: 1, rotationX: 0, duration: 0.8, ease: "power3.out" }, 2.9);
+        K.sfx(2.9, "whoosh", 0.22, 0, { d: 0.6, f0: 200, f1: 1600, pk: 0.6 });
+        const pos = AG.map((a, i) => [80 + (i % 3) * 320 - 40, 200 + Math.floor(i / 3) * 290]);
+        const cards = AG.map((a, i) => {
+          const c = C.ab({ left: pos[i][0] + "px", top: pos[i][1] + "px", width: "300px", height: "270px" }, card(a), pan);
+          c.className = "agc";
+          K.$("svg.i", c).style.color = a[1];
+          tl.set(c, { opacity: 0 }, 0);
+          K.fin(c, 3.3 + i * 0.07, { y: 24, d: 0.35 });
+          return c;
+        });
+        K.sfx(3.3, "sparkle", 0.12);
+        const cnt = C.ab({ left: "0", right: "0", top: "1660px", textAlign: "center" }, `<span class="cnt">${AG.map((a, i) => `<em style="font-style:normal;position:absolute;left:0;right:0">${i + 1} / 12</em>`).join("")}</span>`);
+        const cs = K.$$(".cnt em", cnt);
+        // ---- chaque agent au premier plan
+        const T0 = 4.8, P = 2.0;
+        tl.to(cards, { opacity: 0.22, duration: 0.3 }, T0 - 0.2);
+        AG.forEach((a, i) => {
+          const t = T0 + i * P;
+          const ox = 40 + pos[i][0], oy = 230 + pos[i][1];
+          const big = C.ab({ left: "210px", top: "300px", width: "300px", height: "270px", transformOrigin: "0 0" }, card(a));
+          big.className = "agc on";
+          K.$("svg.i", big).style.color = a[1];
+          tl.set(big, { opacity: 0 }, 0);
+          tl.fromTo(big, { opacity: 1, x: ox - 210, y: oy - 300, scale: 1 }, { opacity: 1, x: 0, y: 0, scale: 2.2, duration: 0.45, ease: "power3.inOut" }, t);
+          K.sfx(t, "whoosh", 0.14, (i % 3 - 1) * 0.4, { d: 0.35, f0: 500, f1: 3000, pk: 0.6 });
+          const html = a[0] === "sofa"
+            ? `<div class="k">${a[5]}</div><div style="display:flex;gap:20px;margin-top:14px"><div><div class="room"></div><div style="margin-top:8px;font-size:22px;color:#6e6e80;font-weight:600">Avant</div></div><div><div class="room"><i style="left:60px;bottom:24px;width:220px;height:64px;border-radius:18px;background:#6b4fe0"></i><i style="left:70px;bottom:78px;width:200px;height:44px;border-radius:16px;background:#8f6bff"></i><i style="left:110px;top:30px;width:120px;height:80px;border-radius:8px;background:#2cc4b5;opacity:.7"></i><i style="left:20px;bottom:24px;width:40px;height:80px;border-radius:20px;background:#5aa86b"></i></div><div style="margin-top:8px;font-size:22px;color:#0a5a52;font-weight:700">Après</div></div></div>`
+            : `<div class="k">${a[5]}</div><div class="t">${a[6]}</div>`;
+          const r = C.ab({ left: "90px", top: "960px", width: "900px" }, html);
+          r.className = "res";
+          r.style.position = "absolute";
+          tl.set(r, { opacity: 0 }, 0);
+          tl.fromTo(r, { opacity: 0, y: 50, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: "back.out(1.6)" }, t + 0.45);
+          K.sfx(t + 0.5, "success", 0.16);
+          tl.to([big, r], { opacity: 0, scale: (k) => (k ? 0.95 : 2.0), duration: 0.25, ease: "power2.in" }, t + P - 0.3);
+          tl.set(cs[i], { opacity: 0 }, 0);
+          tl.set(cs[i], { opacity: 1 }, t);
+          tl.set(cs[i], { opacity: 0 }, t + P);
+          tl.set(cards[i], { opacity: 1 }, t + P - 0.05);
+        });
+        const TE0 = T0 + 12 * P;
+        tl.to(cards, { opacity: 1, duration: 0.3 }, TE0 - 0.1);
+        tl.to(pan, { opacity: 0, scale: 0.9, y: -80, duration: 0.5, ease: "power2.in" }, TE0 + 0.3);
+        // ---- la signature
+        C.flash(TE0 + 0.7, "#ffffff", 0.9);
+        const light = C.bg({ background: "linear-gradient(180deg, #f5f3fe 0%, #ece7fb 100%)" });
+        tl.set(light, { clipPath: "circle(0px at 540px 960px)" }, 0);
+        C.iris(light, TE0 + 0.7, 0.8);
+        const s1 = C.title("Ils [travaillent].", { top: "330px", fontSize: "104px" }, TE0 + 1.0);
+        const s2 = C.title("Tu [signes].", { top: "470px", fontSize: "104px" }, TE0 + 1.5);
+        K.sfx(TE0 + 1.5, "thump", 0.36);
+        const M = N.mascot({ left: "280px", top: "760px", width: "520px" });
+        M.enter(TE0 + 1.8);
+        M.glow(TE0 + 2.2, 1.2);
+        M.wave(TE0 + 2.5);
+        const b = N.say("12 agents, 1 seul bras droit :<br><span class='v'>LIMO.</span>", { left: "190px", top: "615px", width: "700px" }, TE0 + 2.6);
+        C.out([s1, s2], TE0 + 4.3, 0.4);
+        N.out(b, TE0 + 4.3, { y: -10, d: 0.2 });
+        window.__TE = TE0 + 4.6;
+        N.outro(TE0 + 4.6, "pub");
+        M.move(TE0 + 4.5, { x: 0, y: 1370 - (760 + 314), scale: 200 / 520 }, 0.7);
+        M.expr("happy", TE0 + 4.6, false);
+        M.wave(TE0 + 5.8);
+""")
+
+if __name__ == "__main__":
+    for name, (title, dur, css, body) in FILMS.items():
+        html = SHELL.format(title=title, faces=FACES, css=css.strip("\n"), body=(COMMON + body).strip("\n"), dur=dur, name=name)
+        pathlib.Path(f"reels/{name}.html").write_text(html, encoding="utf-8")
+        print("reels/" + name + ".html")
