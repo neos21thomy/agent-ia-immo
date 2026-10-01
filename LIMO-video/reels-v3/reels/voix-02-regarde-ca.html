@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — LIMO, regarde ça</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/naturel.css" />
+    <link rel="stylesheet" href="assets/kit/app.css" />
+    <style>
+      @font-face { font-family: "Anton"; src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Source Serif 4"; src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; }
+      @font-face { font-family: "Montserrat Hook"; src: url("assets/fonts/montserrat-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-style: normal; }
+      #s-main { background: transparent; }
+      .glass { border-radius: 40px; background: rgba(14, 16, 40, 0.42); backdrop-filter: blur(22px) saturate(1.3); -webkit-backdrop-filter: blur(22px) saturate(1.3);
+        border: 1.5px solid rgba(255,255,255,.28); box-shadow: 0 30px 80px rgba(0,0,0,.35); color: #fff; font-family: Inter, sans-serif; }
+      .gchip { display: inline-flex; align-items: center; gap: 10px; height: 52px; padding: 0 22px; border-radius: 26px; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.3); color: #fff; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 24px; white-space: nowrap; }
+      .gchip.ok { background: rgba(44,196,181,.35); border-color: rgba(44,196,181,.75); }
+      .gchip svg.i { width: 26px; height: 26px; stroke-width: 2.6; }
+      .grow { display: flex; align-items: center; gap: 18px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.16); font-size: 30px; }
+      .grow b { font-weight: 600; }
+      .grow em { margin-left: auto; font-style: normal; font-family: Montserrat, sans-serif; font-weight: 800; color: #7ff0e3; }
+      .gav { flex: none; width: 58px; height: 58px; border-radius: 50%; background: rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 22px; }
+      .shade { text-shadow: 0 4px 30px rgba(0,0,0,.55); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="29.8" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="29.8" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/voix-02-regarde-ca.wav" data-start="0" data-duration="29.8" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/naturel.js"></script>
+    <script src="assets/kit/app.js"></script>
+    <script src="assets/kit/cine.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 29.8;
+        N.init(tl, root, D);
+        A.init(tl, root);
+        C.init(tl, root, D);
+        const glow = (x, y, s, t) => { const g = N.ab("n-glow", null, { left: x + "px", top: y + "px", width: s + "px", height: s + "px" }); g.setAttribute("data-layout-allow-overflow", ""); N.hide(g); tl.fromTo(g, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 1.2, ease: "power2.out" }, t); return g; };
+        const gains = (t, G, note) => {
+          const h = N.head(["CE QUE ÇA", "TE RAPPORTE<span class='v'>.</span>"], { top: "170px", fontSize: "86px" }, t);
+          const els = G.map((g, i) => {
+            const c = N.ab("g-card", `<div class="k">${g.k}</div><div class="v ${g.c || ""}"><span>${g.v0 || ""}</span></div><div class="d">${g.d}</div>`, { left: "90px", top: 480 + i * 330 + "px", width: "900px" });
+            N.hide(c);
+            const tt = t + 0.5 + i * 0.7;
+            tl.fromTo(c, { opacity: 0, x: i % 2 ? 120 : -120 }, { opacity: 1, x: 0, duration: 0.55, ease: "power3.out" }, tt);
+            K.sfx(tt, "whoosh", 0.12, 0, { d: 0.35, f0: 600, f1: 3000, pk: 0.6 });
+            if (g.n != null) K.count(K.$(".v span", c), g.n, tt + 0.2, 1.0, g.f, { ticks: 10 }); else K.$(".v span", c).innerHTML = g.v;
+            if (g.n != null) K.sfx(tt + 1.2, "success", 0.18);
+            return c;
+          });
+          const nt = N.text("ctr g-note", note || "Exemples indicatifs", { top: "1490px" }, t + 2.4);
+          return [h, ...els, nt];
+        };
+        const fin = (t, M) => {
+          N.outro(t, "contact");
+          const m = N.mascot({ left: "440px", top: "1240px", width: "200px" });
+          m.enter(t + 1.6);
+          m.wave(t + 2.3);
+          m.blink(t + 3.2);
+        };
+
+        tl.set([K.$(".n-bg", root), ...K.$$(".n-arc", root)], { opacity: 0 }, 0);
+        const shade = (t0, t1) => { const s = C.ab({ left: "0", top: "0", width: "1080px", height: "1920px", background: "linear-gradient(180deg, rgba(5,6,15,.6) 0%, rgba(5,6,15,0) 32%, rgba(5,6,15,0) 55%, rgba(5,6,15,.6) 100%)" }); tl.set(s, { opacity: 0 }, 0); tl.set(s, { opacity: 1 }, t0); tl.set(s, { opacity: 0 }, t1); return s; };
+        const photo = (src, t0, t1, z = [1.0, 1.12], x = [0, -60]) => {
+          const p = C.ab({ left: "-67px", top: "-120px", width: "1215px", height: "2160px" }, `<img src="assets/img/${src}.jpg" alt="" style="width:100%;height:100%;object-fit:cover" />`);
+          tl.set(p, { opacity: 0 }, 0);
+          tl.fromTo(p, { opacity: 0, scale: z[0], x: x[0] }, { opacity: 1, duration: 0.4, ease: "power1.out" }, t0);
+          tl.fromTo(p, { scale: z[0], x: x[0] }, { scale: z[1], x: x[1], duration: t1 - t0 + 0.4, ease: "none", immediateRender: false }, t0);
+          tl.to(p, { opacity: 0, duration: 0.4, ease: "power1.in" }, t1);
+          return p;
+        };
+        const gchip = (html, top, t, t1, cls = "") => {
+          const c = C.ab({ left: "0", right: "0", top: top + "px", textAlign: "center" }, `<span class="gchip ${cls}">${html}</span>`);
+          tl.set(c, { opacity: 0 }, 0);
+          K.pop(c, t, { s: 0.7 });
+          K.sfx(t, "pop", 0.14, 0, { f: 800 });
+          if (t1) tl.to(c, { opacity: 0, duration: 0.25 }, t1);
+          return c;
+        };
+        const gcard = (ic, big, small, top, t, t1) => {
+          const c = C.ab({ left: "120px", width: "840px", top: top + "px", padding: "26px 32px", display: "flex", alignItems: "center", gap: "22px" }, `<span style="flex:none;width:80px;height:80px;border-radius:22px;background:rgba(44,196,181,.4);display:flex;align-items:center;justify-content:center">${K.icon(ic)}</span><span style="min-width:0"><b style="display:block;font-family:Montserrat,sans-serif;font-weight:800;font-size:40px;line-height:1.1">${big}</b><span style="font-size:27px;color:rgba(255,255,255,.85)">${small}</span></span><span style="margin-left:auto;flex:none;width:54px;height:54px;border-radius:50%;background:#2cc4b5;display:flex;align-items:center;justify-content:center">${K.icon("check")}</span>`);
+          c.classList.add("glass");
+          K.$$("svg.i", c).forEach((g) => (g.style.cssText = "width:42px;height:42px;color:#fff"));
+          tl.set(c, { opacity: 0 }, 0);
+          tl.fromTo(c, { opacity: 0, y: 50, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "back.out(1.6)" }, t);
+          K.sfx(t, "success", 0.2);
+          if (t1) tl.to(c, { opacity: 0, y: -20, duration: 0.25 }, t1);
+          return c;
+        };
+        const sms = (html, side, top, t, t1) => {
+          const out = side === "out";
+          const b = C.ab({ left: out ? "260px" : "90px", width: "730px", top: top + "px", padding: "22px 28px", borderRadius: "34px", background: out ? "#0a84ff" : "rgba(255,255,255,.96)", color: out ? "#fff" : "#111", fontFamily: "Inter, sans-serif", fontSize: "34px", lineHeight: "1.32", boxShadow: "0 20px 50px rgba(0,0,0,.3)" }, html);
+          tl.set(b, { opacity: 0 }, 0);
+          tl.fromTo(b, { opacity: 0, y: 30, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(1.8)" }, t);
+          K.sfx(t, out ? "send" : "receive", 0.26);
+          if (t1) tl.to(b, { opacity: 0, duration: 0.25 }, t1);
+          return b;
+        };
+        C.bars(2.6, true, 0.9);
+        const lightEnd = (t) => {
+          C.flash(t, "#ffffff", 0.95);
+          const light = C.bg({ background: "linear-gradient(180deg, #f5f3fe 0%, #ece7fb 100%)" });
+          tl.set(light, { clipPath: "circle(0px at 540px 960px)" }, 0);
+          C.iris(light, t, 0.8);
+          C.leak(t + 0.1, 2.4);
+        };
+
+        const layer = (bg, t0, t1, fade = 0.25) => {
+          const l = C.ab({ left: "-200px", top: "-200px", width: "1480px", height: "2320px", background: bg });
+          tl.set(l, { opacity: 0 }, 0);
+          tl.to(l, { opacity: 1, duration: fade }, t0);
+          if (t1) tl.to(l, { opacity: 0, duration: fade }, t1);
+          return l;
+        };
+        const DARK = "radial-gradient(ellipse at 50% 35%, #23264f 0%, #0c0d22 75%)", LIGHT = "linear-gradient(180deg, #f5f3fe 0%, #ece7fb 100%)";
+        const sub = (txt, t0, t1, o = {}) => {
+          const s = C.ab({ left: "70px", right: "70px", top: (o.top || 1330) + "px", textAlign: "center" }, `<span style="display:inline-block;padding:14px 26px;border-radius:22px;background:${o.light ? "rgba(255,255,255,.92)" : "rgba(8,9,24,.62)"};color:${o.light ? "#1b1f4b" : "#fff"};font-family:Montserrat,sans-serif;font-weight:700;font-size:${o.fs || 46}px;line-height:1.25;box-shadow:0 10px 30px rgba(0,0,0,.25)">${txt}</span>`);
+          A.over(s);
+          tl.set(s, { opacity: 0 }, 0);
+          tl.fromTo(s, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, t0);
+          tl.to(s, { opacity: 0, duration: 0.15 }, t1);
+          return s;
+        };
+        const front = (els) => [].concat(els).forEach((e) => root.appendChild(e));
+
+        const a = 0.2, b = 15.9;
+        layer(LIGHT, 0, null, 0.01);
+        const hk = N.hook(["<span class='kk'>CONSEILLER IMMO,</span>", "<span class='hl'>REGARDE ÇA.</span>"], { top: "300px", fontSize: "110px" });
+        N.out(hk, 2.6, { y: -40 });
+        sub("Si t’es conseiller immobilier, regarde ça.", 0 + a, 2.4 + a, { light: true });
+        const ph = A.phone({ left: "260px", top: "380px", width: "560px" }, { time: "18:12" });
+        const chat = A.page(ph, `<div class="a-back">${K.icon("chev")}Demander à LIMO</div><div style="display:flex;flex-direction:column;gap:14px;margin-top:10px">
+<div class="q" style="align-self:flex-end;max-width:86%;padding:16px 20px;border-radius:24px 24px 6px 24px;background:#6b4fe0;color:#fff;font-size:23px;line-height:1.35"><span class="ty"></span></div>
+<div class="r a-card" style="padding:16px;border-radius:24px 24px 24px 6px">
+<div class="a-ph" style="height:170px;margin-bottom:12px"><img src="assets/img/bien-mas-lavande.jpg" alt="" style="width:100%;height:100%;object-fit:cover;object-position:50% 40%" /></div>
+<b style="font-size:24px">Mas en pierre · 165 m²</b><div style="margin-top:6px;font-size:19px;color:#55586c;line-height:1.45">Terrain 2 400 m² · 5 chambres · DPE C<br>Propriétaires : M. et Mme T. · mandat exclusif<br>Diagnostics : 4 / 6 reçus · notaire : Me Faure</div></div></div>`);
+        A.enter(ph, 2.4, { flatAt: 0.7 });
+        K.type(K.$(".ty", chat), "Peux-tu me rappeler les infos du bien de M. et Mme T. ?", 2.9 + a, 3.4, 0.04);
+        const r = K.$(".r", chat);
+        tl.set(r, { opacity: 0 }, 0);
+        tl.fromTo(r, { opacity: 0, y: 30, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "back.out(1.6)" }, 7.0 + a);
+        K.sfx(7.0 + a, "success", 0.26);
+        sub("« Peux-tu me rappeler les informations du bien de M. et Mme T. ? »", 2.86 + a, 6.8 + a, { light: true, fs: 40 });
+        sub("Et hop, tout ressort.", 6.99 + a, 8.9 + a, { light: true });
+        const F = [["file", "v", "12 documents", "classés sur ce bien", 20, 260, 9.6], ["users", "t", "Propriétaires", "historique des échanges", 560, 1460, 10.6], ["calc", "v", "Estimation", "et ventes du secteur", 20, 1560, 11.6], ["shield", "t", "Diagnostics", "4 sur 6 reçus", 560, 300, 12.6]];
+        const fs = F.map((f) => A.float(A.gain(f[0], f[1], f[2], f[3]), { left: f[4] + "px", top: f[5] + "px" }, f[6] + a));
+        sub("Plus besoin d’aller chercher les informations partout.", 9.28 + a, 12.4 + a, { light: true });
+        sub("LIMO connaît tes biens et tes clients par cœur.", 12.5 + a, 15.6 + a, { light: true });
+        tl.to(fs, { opacity: 0, duration: 0.3 }, 15.6);
+        // relances acquéreurs, diagnostiqueur, paperasse
+        const n1 = A.over(N.notif({ title: "RELANCE ACQUÉREURS", time: "", text: "8 acquéreurs relancés pour le mas en pierre." }, { left: "90px", top: "600px" }, b + 0.8));
+        const n2 = A.over(N.notif({ title: "DIAGNOSTIQUEUR", time: "", text: "DPE et amiante manquants : demande envoyée.", g: 0.2 }, { left: "90px", top: "800px" }, b + 4.1));
+        const n3 = A.over(N.notif({ title: "DOSSIER", time: "", text: "Dossier notaire complété : 2 pièces ajoutées.", snd: "success", g: 0.26 }, { left: "90px", top: "1000px" }, b + 6.9));
+        sub("Et en plus, LIMO relance tes futurs acquéreurs…", b + 0, b + 3.9, { light: true });
+        sub("…le diagnostiqueur, s’il te manque des diags…", b + 4.08, b + 6.7, { light: true });
+        sub("Il s’occupe de la paperasse pendant que toi, tu vends.", b + 6.94, b + 9.9, { light: true });
+        N.out([n1, n2, n3], 25.6, { y: -30 });
+        A.leave(ph, 25.6);
+        window.__TE = 26.0;
+        N.outro(26.0, "pub");
+        const m = N.mascot({ left: "440px", top: "1240px", width: "200px" });
+        m.enter(27.6);
+        m.wave(28.3);
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

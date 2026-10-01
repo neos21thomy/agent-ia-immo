@@ -96,6 +96,9 @@ PRESETS = {
     "life-01-pendant-ce-temps": ("lofi", 88, 0.3),
     "life-02-pov-collegue": ("pop", 124, 0.3),
     "life-03-biens-exception": ("epic", 100, 0.3, 17.0),
+    "voix-01-julien": ("lofi", 84, 0.3),
+    "voix-02-regarde-ca": ("pop", 120, 0.3),
+    "voix-03-surcharge": ("house", 122, 0.3),
 }
 
 # progressions (MIDI) : accords (3-4 notes) et fondamentale de basse

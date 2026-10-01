@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — LIMO, l'histoire de Julien</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/naturel.css" />
+    <link rel="stylesheet" href="assets/kit/app.css" />
+    <style>
+      @font-face { font-family: "Anton"; src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Source Serif 4"; src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; }
+      @font-face { font-family: "Montserrat Hook"; src: url("assets/fonts/montserrat-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-style: normal; }
+      #s-main { background: transparent; }
+      .glass { border-radius: 40px; background: rgba(14, 16, 40, 0.42); backdrop-filter: blur(22px) saturate(1.3); -webkit-backdrop-filter: blur(22px) saturate(1.3);
+        border: 1.5px solid rgba(255,255,255,.28); box-shadow: 0 30px 80px rgba(0,0,0,.35); color: #fff; font-family: Inter, sans-serif; }
+      .gchip { display: inline-flex; align-items: center; gap: 10px; height: 52px; padding: 0 22px; border-radius: 26px; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.3); color: #fff; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 24px; white-space: nowrap; }
+      .gchip.ok { background: rgba(44,196,181,.35); border-color: rgba(44,196,181,.75); }
+      .gchip svg.i { width: 26px; height: 26px; stroke-width: 2.6; }
+      .grow { display: flex; align-items: center; gap: 18px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.16); font-size: 30px; }
+      .grow b { font-weight: 600; }
+      .grow em { margin-left: auto; font-style: normal; font-family: Montserrat, sans-serif; font-weight: 800; color: #7ff0e3; }
+      .gav { flex: none; width: 58px; height: 58px; border-radius: 50%; background: rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 22px; }
+      .shade { text-shadow: 0 4px 30px rgba(0,0,0,.55); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="59.4" data-width="1080" data-height="1920">
+      <video id="v1" class="clip" src="assets/video/agent-voiture.mp4" data-start="0" data-duration="3.7" data-track-index="1" muted playsinline style="position:absolute;left:0;top:0;width:1080px;height:1920px;object-fit:cover"></video>
+      <video id="v2" class="clip" src="assets/video/vendeuse-canape.mp4" data-start="3.7" data-duration="4.3" data-track-index="2" muted playsinline style="position:absolute;left:0;top:0;width:1080px;height:1920px;object-fit:cover"></video>
+      <video id="v3" class="clip" src="assets/video/vendeuse-canape.mp4" data-start="46.3" data-duration="4.2" data-media-start="0.8" data-track-index="3" muted playsinline style="position:absolute;left:0;top:0;width:1080px;height:1920px;object-fit:cover"></video>
+      <section id="s-main" class="clip" data-start="0" data-duration="59.4" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/voix-01-julien.wav" data-start="0" data-duration="59.4" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/naturel.js"></script>
+    <script src="assets/kit/app.js"></script>
+    <script src="assets/kit/cine.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 59.4;
+        N.init(tl, root, D);
+        A.init(tl, root);
+        C.init(tl, root, D);
+        const glow = (x, y, s, t) => { const g = N.ab("n-glow", null, { left: x + "px", top: y + "px", width: s + "px", height: s + "px" }); g.setAttribute("data-layout-allow-overflow", ""); N.hide(g); tl.fromTo(g, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 1.2, ease: "power2.out" }, t); return g; };
+        const gains = (t, G, note) => {
+          const h = N.head(["CE QUE ÇA", "TE RAPPORTE<span class='v'>.</span>"], { top: "170px", fontSize: "86px" }, t);
+          const els = G.map((g, i) => {
+            const c = N.ab("g-card", `<div class="k">${g.k}</div><div class="v ${g.c || ""}"><span>${g.v0 || ""}</span></div><div class="d">${g.d}</div>`, { left: "90px", top: 480 + i * 330 + "px", width: "900px" });
+            N.hide(c);
+            const tt = t + 0.5 + i * 0.7;
+            tl.fromTo(c, { opacity: 0, x: i % 2 ? 120 : -120 }, { opacity: 1, x: 0, duration: 0.55, ease: "power3.out" }, tt);
+            K.sfx(tt, "whoosh", 0.12, 0, { d: 0.35, f0: 600, f1: 3000, pk: 0.6 });
+            if (g.n != null) K.count(K.$(".v span", c), g.n, tt + 0.2, 1.0, g.f, { ticks: 10 }); else K.$(".v span", c).innerHTML = g.v;
+            if (g.n != null) K.sfx(tt + 1.2, "success", 0.18);
+            return c;
+          });
+          const nt = N.text("ctr g-note", note || "Exemples indicatifs", { top: "1490px" }, t + 2.4);
+          return [h, ...els, nt];
+        };
+        const fin = (t, M) => {
+          N.outro(t, "contact");
+          const m = N.mascot({ left: "440px", top: "1240px", width: "200px" });
+          m.enter(t + 1.6);
+          m.wave(t + 2.3);
+          m.blink(t + 3.2);
+        };
+
+        tl.set([K.$(".n-bg", root), ...K.$$(".n-arc", root)], { opacity: 0 }, 0);
+        const shade = (t0, t1) => { const s = C.ab({ left: "0", top: "0", width: "1080px", height: "1920px", background: "linear-gradient(180deg, rgba(5,6,15,.6) 0%, rgba(5,6,15,0) 32%, rgba(5,6,15,0) 55%, rgba(5,6,15,.6) 100%)" }); tl.set(s, { opacity: 0 }, 0); tl.set(s, { opacity: 1 }, t0); tl.set(s, { opacity: 0 }, t1); return s; };
+        const photo = (src, t0, t1, z = [1.0, 1.12], x = [0, -60]) => {
+          const p = C.ab({ left: "-67px", top: "-120px", width: "1215px", height: "2160px" }, `<img src="assets/img/${src}.jpg" alt="" style="width:100%;height:100%;object-fit:cover" />`);
+          tl.set(p, { opacity: 0 }, 0);
+          tl.fromTo(p, { opacity: 0, scale: z[0], x: x[0] }, { opacity: 1, duration: 0.4, ease: "power1.out" }, t0);
+          tl.fromTo(p, { scale: z[0], x: x[0] }, { scale: z[1], x: x[1], duration: t1 - t0 + 0.4, ease: "none", immediateRender: false }, t0);
+          tl.to(p, { opacity: 0, duration: 0.4, ease: "power1.in" }, t1);
+          return p;
+        };
+        const gchip = (html, top, t, t1, cls = "") => {
+          const c = C.ab({ left: "0", right: "0", top: top + "px", textAlign: "center" }, `<span class="gchip ${cls}">${html}</span>`);
+          tl.set(c, { opacity: 0 }, 0);
+          K.pop(c, t, { s: 0.7 });
+          K.sfx(t, "pop", 0.14, 0, { f: 800 });
+          if (t1) tl.to(c, { opacity: 0, duration: 0.25 }, t1);
+          return c;
+        };
+        const gcard = (ic, big, small, top, t, t1) => {
+          const c = C.ab({ left: "120px", width: "840px", top: top + "px", padding: "26px 32px", display: "flex", alignItems: "center", gap: "22px" }, `<span style="flex:none;width:80px;height:80px;border-radius:22px;background:rgba(44,196,181,.4);display:flex;align-items:center;justify-content:center">${K.icon(ic)}</span><span style="min-width:0"><b style="display:block;font-family:Montserrat,sans-serif;font-weight:800;font-size:40px;line-height:1.1">${big}</b><span style="font-size:27px;color:rgba(255,255,255,.85)">${small}</span></span><span style="margin-left:auto;flex:none;width:54px;height:54px;border-radius:50%;background:#2cc4b5;display:flex;align-items:center;justify-content:center">${K.icon("check")}</span>`);
+          c.classList.add("glass");
+          K.$$("svg.i", c).forEach((g) => (g.style.cssText = "width:42px;height:42px;color:#fff"));
+          tl.set(c, { opacity: 0 }, 0);
+          tl.fromTo(c, { opacity: 0, y: 50, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "back.out(1.6)" }, t);
+          K.sfx(t, "success", 0.2);
+          if (t1) tl.to(c, { opacity: 0, y: -20, duration: 0.25 }, t1);
+          return c;
+        };
+        const sms = (html, side, top, t, t1) => {
+          const out = side === "out";
+          const b = C.ab({ left: out ? "260px" : "90px", width: "730px", top: top + "px", padding: "22px 28px", borderRadius: "34px", background: out ? "#0a84ff" : "rgba(255,255,255,.96)", color: out ? "#fff" : "#111", fontFamily: "Inter, sans-serif", fontSize: "34px", lineHeight: "1.32", boxShadow: "0 20px 50px rgba(0,0,0,.3)" }, html);
+          tl.set(b, { opacity: 0 }, 0);
+          tl.fromTo(b, { opacity: 0, y: 30, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(1.8)" }, t);
+          K.sfx(t, out ? "send" : "receive", 0.26);
+          if (t1) tl.to(b, { opacity: 0, duration: 0.25 }, t1);
+          return b;
+        };
+        C.bars(2.6, true, 0.9);
+        const lightEnd = (t) => {
+          C.flash(t, "#ffffff", 0.95);
+          const light = C.bg({ background: "linear-gradient(180deg, #f5f3fe 0%, #ece7fb 100%)" });
+          tl.set(light, { clipPath: "circle(0px at 540px 960px)" }, 0);
+          C.iris(light, t, 0.8);
+          C.leak(t + 0.1, 2.4);
+        };
+
+        const layer = (bg, t0, t1, fade = 0.25) => {
+          const l = C.ab({ left: "-200px", top: "-200px", width: "1480px", height: "2320px", background: bg });
+          tl.set(l, { opacity: 0 }, 0);
+          tl.to(l, { opacity: 1, duration: fade }, t0);
+          if (t1) tl.to(l, { opacity: 0, duration: fade }, t1);
+          return l;
+        };
+        const DARK = "radial-gradient(ellipse at 50% 35%, #23264f 0%, #0c0d22 75%)", LIGHT = "linear-gradient(180deg, #f5f3fe 0%, #ece7fb 100%)";
+        const sub = (txt, t0, t1, o = {}) => {
+          const s = C.ab({ left: "70px", right: "70px", top: (o.top || 1330) + "px", textAlign: "center" }, `<span style="display:inline-block;padding:14px 26px;border-radius:22px;background:${o.light ? "rgba(255,255,255,.92)" : "rgba(8,9,24,.62)"};color:${o.light ? "#1b1f4b" : "#fff"};font-family:Montserrat,sans-serif;font-weight:700;font-size:${o.fs || 46}px;line-height:1.25;box-shadow:0 10px 30px rgba(0,0,0,.25)">${txt}</span>`);
+          A.over(s);
+          tl.set(s, { opacity: 0 }, 0);
+          tl.fromTo(s, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, t0);
+          tl.to(s, { opacity: 0, duration: 0.15 }, t1);
+          return s;
+        };
+        const front = (els) => [].concat(els).forEach((e) => root.appendChild(e));
+
+        const o = 0.3;
+        // 1 · Julien
+        shade(0, 8.0);
+        const lt = C.ab({ left: "70px", top: "1180px", padding: "18px 26px", borderRadius: "22px" }, `<b style="display:block;font-family:Montserrat,sans-serif;font-weight:800;font-size:44px">Julien</b><span style="font-size:28px;opacity:.85">conseiller immobilier</span>`);
+        lt.classList.add("glass");
+        tl.set(lt, { opacity: 0 }, 0);
+        tl.fromTo(lt, { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, 0.4);
+        tl.to(lt, { opacity: 0, duration: 0.25 }, 3.5);
+        sub("Ça, c’est Julien, conseiller immobilier.", 0 + o, 3.1 + o);
+        // 2 · chez Mme Martin
+        const lt2 = C.ab({ left: "70px", top: "1180px", padding: "18px 26px", borderRadius: "22px" }, `<b style="display:block;font-family:Montserrat,sans-serif;font-weight:800;font-size:44px">Mme Martin</b><span style="font-size:28px;opacity:.85">vendeuse · estimation ce soir</span>`);
+        lt2.classList.add("glass");
+        tl.set(lt2, { opacity: 0 }, 0);
+        tl.fromTo(lt2, { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, 4.0);
+        tl.to(lt2, { opacity: 0, duration: 0.25 }, 7.6);
+        sub("Ce soir-là, son estimation avec Mme Martin s’est très bien passée.", 3.65 + o, 7.4 + o);
+        // 3 · la note
+        layer(DARK, 7.9, 13.1);
+        const ip = N.iphone({ left: "160px", top: "300px", width: "760px", height: "1300px" }, "19:48");
+        N.hide(ip.el);
+        tl.fromTo(ip.el, { opacity: 0, y: 200 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 8.0);
+        const nt = K.h("div", "n-notes", `<h3>À faire</h3><div class="dt">Lundi 19:48</div><div style="font-size:46px;line-height:1.4"><span class="t"></span></div>`, ip.screen);
+        K.$$("*", nt).forEach((e) => e.setAttribute("data-layout-allow-occlusion", ""));
+        K.type(K.$(".t", nt), "Rappeler Mme Martin", 10.6 + o, 1.2, 0.06);
+        tl.to(ip.el, { opacity: 0, y: 100, duration: 0.35 }, 12.8);
+        sub("Avant de repartir, il se note simplement…", 7.9 + o, 10.5 + o);
+        sub("« Rappeler Mme Martin. »", 10.6 + o, 12.4 + o);
+        // 4 · la semaine l'engloutit
+        layer(DARK, 13.0, 21.3);
+        const W = [["APPEL MANQUÉ", "M. Vidal · 2 appels"], ["DOSSIER", "Compromis Roche : 3 pièces manquantes"], ["RELANCE", "Famille Durand attend ta réponse"], ["AGENDA", "Visite Vignols · 10:30"], ["MAIL", "Notaire : documents à envoyer"], ["APPEL MANQUÉ", "Mme Roy"], ["AGENDA", "Estimation Allassac · 14:00"], ["RELANCE", "M. Albert · mutation"]];
+        const ws = W.map((w, i) => {
+          const n = A.over(N.notif({ title: w[0], time: "", text: w[1], snd: "notif", g: 0.12 }, { left: (60 + (i % 3) * 20) + "px", top: 260 + i * 150 + "px", width: "900px" }, 13.5 + o + i * 0.55));
+          return n;
+        });
+        tl.to(ws, { opacity: 0, filter: "blur(10px)", y: 40, duration: 0.5, stagger: 0.03 }, 19.5);
+        sub("Mais la semaine reprend.", 13.26 + o, 14.4 + o);
+        sub("Les appels, les dossiers, les relances, les rendez-vous…", 14.7 + o, 18.4 + o);
+        sub("Et Julien oublie.", 19.27 + o, 21.0 + o);
+        // 5 · le panneau
+        photo("bien-pierre-balcon", 21.3, 26.6, [1.0, 1.1], [0, -30]);
+        shade(21.3, 26.6);
+        const sign = C.ab({ left: "520px", top: "860px", width: "460px", padding: "26px 30px", borderRadius: "14px", background: "#d93a3f", color: "#fff", textAlign: "center", fontFamily: "'Montserrat Hook', Montserrat, sans-serif", fontWeight: "800", boxShadow: "0 30px 60px rgba(0,0,0,.45)" }, `<div style="font-size:66px;line-height:1">À VENDRE</div><div style="margin-top:10px;font-family:Inter,sans-serif;font-weight:700;font-size:28px">Une autre agence</div>`);
+        tl.set(sign, { opacity: 0 }, 0);
+        tl.fromTo(sign, { opacity: 0, scale: 1.6, rotation: -8 }, { opacity: 1, scale: 1, rotation: -3, duration: 0.3, ease: "power4.in" }, 24.7 + o);
+        K.sfx(24.95 + o, "stamp", 0.42);
+        tl.to(sign, { opacity: 0, duration: 0.3 }, 26.4);
+        sub("Quelques jours plus tard, il repasse devant chez elle…", 21.47 + o, 24.4 + o);
+        sub("…et voit le panneau.", 24.7 + o, 26.3);
+        // 6 · perdu après
+        layer(DARK, 26.6, 35.0);
+        const line = C.ab({ left: "120px", top: "760px", width: "840px", height: "8px", borderRadius: "4px", background: "rgba(255,255,255,.2)" });
+        tl.set(line, { opacity: 0 }, 0); tl.set(line, { opacity: 1 }, 27.0);
+        const P = [["Estimation", "lundi", "#2cc4b5", 0], ["Relance", "oubliée", "#d93a3f", 0.5], ["Panneau", "J + 12", "#d93a3f", 1]];
+        const dots = [line];
+        P.forEach((p, i) => {
+          const d = C.ab({ left: 120 + p[3] * 840 - 40 + "px", top: "724px", width: "80px", textAlign: "center" }, `<div style="width:80px;height:80px;border-radius:50%;background:${p[2]};border:6px solid #0c0d22;box-shadow:0 0 0 4px ${p[2]}"></div><div style="margin-top:22px;font-family:Montserrat,sans-serif;font-weight:800;font-size:34px;color:#fff;white-space:nowrap;transform:translateX(-30%)">${p[0]}</div><div style="font-family:Inter,sans-serif;font-size:26px;color:rgba(255,255,255,.7);white-space:nowrap;transform:translateX(-30%)">${p[1]}</div>`);
+          tl.set(d, { opacity: 0 }, 0);
+          dots.push(d);
+          K.pop(d, 27.2 + i * 1.6, { s: 0.4 });
+          K.sfx(27.2 + i * 1.6, i ? "buzz" : "success", 0.16);
+        });
+        const big = C.title("Perdu [après].", { top: "330px", fontSize: "110px" }, 30.16 + o, { color: "#ffffff", accent: "#ff8f8f" });
+        sub("Le mandat n’a pas été perdu pendant l’estimation.", 26.71 + o, 29.9 + o);
+        sub("Il a été perdu après…", 30.16 + o, 32.1 + o);
+        sub("…à cause d’une relance oubliée.", 32.37 + o, 34.6 + o);
+        C.out(big, 34.4, 0.3);
+        tl.to(dots, { opacity: 0, duration: 0.3 }, 34.4);
+        // 7 · LIMO
+        const L1 = layer(LIGHT, 34.9, 46.0, 0.01);
+        C.iris(L1, 34.9, 0.8);
+        C.leak(35.0, 2.4);
+        const logo = C.ab({ left: "190px", top: "560px", width: "700px", height: "265px" }, `<img src="assets/img/limo-logo-ad.png" alt="LIMO" style="width:100%;height:100%" />`);
+        tl.set(logo, { opacity: 0 }, 0);
+        tl.fromTo(logo, { opacity: 0, scale: 1.3, filter: "blur(16px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.8, ease: "power3.out" }, 35.9 + o);
+        K.sfx(36.0 + o, "thump", 0.4);
+        C.sweep(logo, 36.8 + o, 0.9);
+        const tag = C.title("Le bras droit du [conseiller] [immo].", { top: "880px", fontSize: "52px" }, 37.74 + o, { snd: false });
+        sub("Depuis, nous lui avons installé LIMO…", 35.14 + o, 37.5 + o, { light: true });
+        sub("…le bras droit du conseiller immobilier.", 37.74 + o, 40.2 + o, { light: true });
+        tl.to([logo, tag], { opacity: 0, y: -30, duration: 0.35 }, 40.4);
+        const ph = A.phone({ left: "260px", top: "300px", width: "560px" }, { time: "8:00" });
+        const pg = A.page(ph, A.HD + `<div class="a-hello"><span>Bonjour Julien,</span><br>Voici tes priorités du jour.</div>` +
+          A.row("phone", "r", "Rappeler Mme Martin", "Estimation lundi · elle attend ton appel", "09:00", `<span class="a-tag t">Priorité</span>`) + A.row("refresh", "v", "Relancer 12 contacts", "Messages prêts", "09:30") + A.row("home", "t", "Suivre 2 visites", "Visites à suivre", "11:00"));
+        A.enter(ph, 40.6, { flatAt: 0.8 });
+        tl.fromTo(K.$(".a-row", pg), { boxShadow: "0 0 0 0 rgba(107,79,224,0)" }, { boxShadow: "0 0 0 6px rgba(107,79,224,.45)", duration: 0.4, yoyo: true, repeat: 3 }, 43.0);
+        K.sfx(44.1 + o, "notif", 0.2);
+        sub("Aujourd’hui, Julien ne compte plus seulement sur sa mémoire.", 40.62 + o, 43.9 + o, { light: true });
+        sub("LIMO garde le fil.", 44.14 + o, 46.0, { light: true });
+        A.leave(ph, 45.8);
+        // 8 · Mme Martin relancée
+        shade(46.2, 50.5);
+        const s1 = sms("Bonjour Madame Martin, je reviens vers vous suite à l’estimation : avez-vous pu y réfléchir ?", "out", 320, 46.6, 50.3);
+        const s2 = sms("Oui ! On aimerait signer avec vous 🙂".replace(" 🙂", ""), "in", 620, 48.3, 50.3);
+        sub("Et Mme Martin, cette fois…", 46.28 + o, 48.1 + o);
+        sub("…elle a bien été relancée.", 48.35 + o, 50.2);
+        // 9 · signature
+        layer(LIGHT, 50.4, null, 0.2);
+        const e1 = C.title("Même les meilleurs", { top: "560px", fontSize: "68px" }, 50.55 + o);
+        const e1b = C.title("conseillers", { top: "650px", fontSize: "68px" }, 51.0 + o, { snd: false });
+        const e2 = C.title("oublient parfois.", { top: "740px", fontSize: "68px" }, 51.6 + o, { snd: false });
+        const e3 = C.title("LIMO, [jamais].", { top: "900px", fontSize: "120px" }, 53.21 + o);
+        K.sfx(54.17 + o, "slam", 0.3);
+        C.out([e1, e1b, e2, e3], 55.2, 0.3);
+        window.__TE = 55.5;
+        N.outro(55.5, "demo");
+        const m = N.mascot({ left: "440px", top: "1240px", width: "200px" });
+        m.enter(57.0);
+        m.wave(57.7);
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>
