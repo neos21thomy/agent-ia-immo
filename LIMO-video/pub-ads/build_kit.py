@@ -395,7 +395,7 @@ with open("import-google-ads-mots-cles.csv", "w", newline="", encoding="utf-8") 
     w.writerow(["Campaign", "Ad group", "Keyword", "Criterion Type", "Max CPC"])
     for g, k, t, cpc in kw_rows:
         camp = "LIMO - Marque" if g == "Marque" else "LIMO - Search"
-        w.writerow([camp, g, k, t, f"{cpc:.2f}"])
+        w.writerow([camp, g, k, {"Exact": "Exact", "Expression": "Phrase"}[t], f"{cpc:.2f}"])
 with open("import-google-ads-exclusions.csv", "w", newline="", encoding="utf-8") as f:
     w = csv.writer(f)
     w.writerow(["Campaign", "Keyword", "Criterion Type"])

@@ -1,50 +1,50 @@
 Campaign,Ad group,Keyword,Criterion Type,Max CPC
 LIMO - Search,Logiciel métier,logiciel agent immobilier,Exact,2.00
-LIMO - Search,Logiciel métier,logiciel agent immobilier,Expression,2.00
+LIMO - Search,Logiciel métier,logiciel agent immobilier,Phrase,2.00
 LIMO - Search,Logiciel métier,logiciel conseiller immobilier,Exact,2.00
-LIMO - Search,Logiciel métier,logiciel conseiller immobilier,Expression,2.00
+LIMO - Search,Logiciel métier,logiciel conseiller immobilier,Phrase,2.00
 LIMO - Search,Logiciel métier,logiciel mandataire immobilier,Exact,2.00
-LIMO - Search,Logiciel métier,logiciel mandataire immobilier,Expression,2.00
+LIMO - Search,Logiciel métier,logiciel mandataire immobilier,Phrase,2.00
 LIMO - Search,Logiciel métier,crm immobilier,Exact,2.00
-LIMO - Search,Logiciel métier,crm immobilier,Expression,2.00
+LIMO - Search,Logiciel métier,crm immobilier,Phrase,2.00
 LIMO - Search,Logiciel métier,crm agent immobilier,Exact,2.00
-LIMO - Search,Logiciel métier,crm agent immobilier,Expression,2.00
+LIMO - Search,Logiciel métier,crm agent immobilier,Phrase,2.00
 LIMO - Search,Logiciel métier,logiciel immobilier indépendant,Exact,2.00
-LIMO - Search,Logiciel métier,logiciel immobilier indépendant,Expression,2.00
+LIMO - Search,Logiciel métier,logiciel immobilier indépendant,Phrase,2.00
 LIMO - Search,Logiciel métier,outil conseiller immobilier,Exact,2.00
-LIMO - Search,Logiciel métier,outil conseiller immobilier,Expression,2.00
+LIMO - Search,Logiciel métier,outil conseiller immobilier,Phrase,2.00
 LIMO - Search,Logiciel métier,application agent immobilier,Exact,2.00
-LIMO - Search,Logiciel métier,application agent immobilier,Expression,2.00
+LIMO - Search,Logiciel métier,application agent immobilier,Phrase,2.00
 LIMO - Search,Logiciel métier,logiciel gestion mandats immobilier,Exact,2.00
-LIMO - Search,Logiciel métier,logiciel gestion mandats immobilier,Expression,2.00
+LIMO - Search,Logiciel métier,logiciel gestion mandats immobilier,Phrase,2.00
 LIMO - Search,Logiciel métier,logiciel suivi vendeurs immobilier,Exact,2.00
-LIMO - Search,Logiciel métier,logiciel suivi vendeurs immobilier,Expression,2.00
+LIMO - Search,Logiciel métier,logiciel suivi vendeurs immobilier,Phrase,2.00
 LIMO - Search,Douleurs,relance vendeur immobilier,Exact,2.00
-LIMO - Search,Douleurs,relance vendeur immobilier,Expression,2.00
+LIMO - Search,Douleurs,relance vendeur immobilier,Phrase,2.00
 LIMO - Search,Douleurs,suivi mandat immobilier,Exact,2.00
-LIMO - Search,Douleurs,suivi mandat immobilier,Expression,2.00
+LIMO - Search,Douleurs,suivi mandat immobilier,Phrase,2.00
 LIMO - Search,Douleurs,logiciel estimation immobilière,Exact,2.00
-LIMO - Search,Douleurs,logiciel estimation immobilière,Expression,2.00
+LIMO - Search,Douleurs,logiciel estimation immobilière,Phrase,2.00
 LIMO - Search,Douleurs,rédiger annonce immobilière,Exact,2.00
-LIMO - Search,Douleurs,rédiger annonce immobilière,Expression,2.00
+LIMO - Search,Douleurs,rédiger annonce immobilière,Phrase,2.00
 LIMO - Search,Douleurs,outil relance prospects immobilier,Exact,2.00
-LIMO - Search,Douleurs,outil relance prospects immobilier,Expression,2.00
+LIMO - Search,Douleurs,outil relance prospects immobilier,Phrase,2.00
 LIMO - Search,Douleurs,organisation agent immobilier,Exact,2.00
-LIMO - Search,Douleurs,organisation agent immobilier,Expression,2.00
+LIMO - Search,Douleurs,organisation agent immobilier,Phrase,2.00
 LIMO - Search,Douleurs,gestion dossier vente immobilière,Exact,2.00
-LIMO - Search,Douleurs,gestion dossier vente immobilière,Expression,2.00
+LIMO - Search,Douleurs,gestion dossier vente immobilière,Phrase,2.00
 LIMO - Search,IA,ia agent immobilier,Exact,2.00
-LIMO - Search,IA,ia agent immobilier,Expression,2.00
+LIMO - Search,IA,ia agent immobilier,Phrase,2.00
 LIMO - Search,IA,intelligence artificielle immobilier,Exact,2.00
-LIMO - Search,IA,intelligence artificielle immobilier,Expression,2.00
+LIMO - Search,IA,intelligence artificielle immobilier,Phrase,2.00
 LIMO - Search,IA,assistant ia immobilier,Exact,2.00
-LIMO - Search,IA,assistant ia immobilier,Expression,2.00
+LIMO - Search,IA,assistant ia immobilier,Phrase,2.00
 LIMO - Search,IA,ia conseiller immobilier,Exact,2.00
-LIMO - Search,IA,ia conseiller immobilier,Expression,2.00
+LIMO - Search,IA,ia conseiller immobilier,Phrase,2.00
 LIMO - Search,IA,chatgpt agent immobilier,Exact,2.00
-LIMO - Search,IA,chatgpt agent immobilier,Expression,2.00
+LIMO - Search,IA,chatgpt agent immobilier,Phrase,2.00
 LIMO - Search,IA,outil ia immobilier,Exact,2.00
-LIMO - Search,IA,outil ia immobilier,Expression,2.00
+LIMO - Search,IA,outil ia immobilier,Phrase,2.00
 LIMO - Marque,Marque,limo immobilier,Exact,0.50
 LIMO - Marque,Marque,limo immo,Exact,0.50
 LIMO - Marque,Marque,leadengine ai,Exact,0.50
