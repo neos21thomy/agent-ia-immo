@@ -93,6 +93,9 @@ PRESETS = {
     "cine-06-bord-de-mer": ("house", 122, 0.3),
     "cine-07-trois-biens": ("epic", 100, 0.3, 14.7),
     "agents-01-les-12-agents": ("house", 122, 0.3),
+    "life-01-pendant-ce-temps": ("lofi", 88, 0.3),
+    "life-02-pov-collegue": ("pop", 124, 0.3),
+    "life-03-biens-exception": ("epic", 100, 0.3, 17.0),
 }
 
 # progressions (MIDI) : accords (3-4 notes) et fondamentale de basse
