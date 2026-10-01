@@ -70,5 +70,27 @@
     K.sfx(t, o.snd || "pop", o.g ?? 0.18, 0, { f: 900 });
     return e;
   };
+  // Écrans types de l'application (HTML), réutilisables
+  A.S = {
+    home: () => A.HD + `<div class="a-hello"><span>Bonjour,</span><br>Voici les actions prioritaires du jour.</div>
+<div class="a-card a-prio"><span class="n">5</span><span><b>Actions prioritaires</b><small>à traiter aujourd’hui</small></span></div>
+<div class="a-h2">Actions du jour</div>` + A.row("refresh", "v", "Relancer 32 contacts", "Relances programmées", "09:30") + A.row("home", "t", "Suivre 2 visites", "Visites à suivre", "11:00") + A.row("shield", "g", "Envoyer 1 proposition", "Mandat en préparation", "14:00") + A.row("star", "t", "Nouveau mandat détecté", "Opportunité à saisir", "15:30") + A.row("gift", "v", "Anniversaire client", "Message à personnaliser", "17:00"),
+    relances: () => `<div class="a-back">${K.icon("chev")}Relances du jour</div><div style="display:flex;gap:10px;margin:4px 0 16px"><span class="a-tag">${K.icon("refresh")}32 contacts</span><span class="a-tag t">${K.icon("check")}Messages prêts</span></div>` +
+      A.row("users", "v", "M. Vidal", "Estimation · il y a 47 j", "", `<span class="a-tag t">Prêt</span>`) + A.row("users", "v", "Famille Martin", "Vendre au printemps", "", `<span class="a-tag t">Prêt</span>`) + A.row("users", "v", "Mme Roy", "Succession en cours", "", `<span class="a-tag t">Prêt</span>`) + A.row("users", "v", "M. Albert", "Mutation en juin", "", `<span class="a-tag t">Prêt</span>`) +
+      `<div class="a-btn" style="margin-top:12px">${K.icon("check")}32 relances envoyées</div>`,
+    annonce: () => `<div class="a-back">${K.icon("chev")}Annonce</div><div class="a-ph" style="height:200px;margin-bottom:14px">${K.houseArt(480, 200, "as")}</div>
+<div class="a-card" style="padding:20px 22px"><div style="font-family:'Source Serif 4',serif;font-size:30px;font-weight:600;line-height:1.2">Maison familiale au calme avec grand terrain</div><div style="margin-top:10px;font-size:20px;line-height:1.45;color:#3a3a3c">À Vignols, 120 m² lumineux, 4 chambres, séjour traversant sur 1 500 m² de terrain.</div></div>
+<div style="display:flex;gap:10px;margin-top:14px"><span class="a-tag t">${K.icon("check")}Mentions légales</span><span class="a-tag">${K.icon("check")}Prête à publier</span></div>`,
+    detect: () => {
+      const roads = `<svg viewBox="0 0 480 380" width="100%" height="100%" style="position:absolute;inset:0"><rect width="480" height="380" fill="#eef0f7"/><path d="M0 110 C120 90 220 150 320 120 S440 60 480 70" stroke="#fff" stroke-width="22" fill="none"/><path d="M90 0 C120 120 80 240 150 380" stroke="#fff" stroke-width="16" fill="none"/><path d="M350 0 C320 130 380 250 330 380" stroke="#fff" stroke-width="16" fill="none"/><path d="M0 290 C150 260 300 310 480 260" stroke="#fff" stroke-width="14" fill="none"/></svg>`;
+      const P = [[70, 60, 0], [170, 180, 1], [260, 70, 0], [380, 190, 1], [120, 310, 0], [290, 270, 1], [440, 300, 0]];
+      return `<div class="a-back">${K.icon("chev")}Détecteur</div><div class="a-map">${roads}${P.map((q) => `<span class="a-pin${q[2] ? " hot" : ""}" style="left:${q[0]}px;top:${q[1]}px">${q[2] ? '<i class="rg"></i>' : ""}</span>`).join("")}</div><div class="a-h2">3 vendeurs probables</div>` +
+        A.row("home", "v", "Maison · Allassac", "Signaux de vente repérés", "", `<span class="a-tag t">Fort</span>`) + A.row("home", "v", "Longère · Voutezac", "Signaux de vente repérés", "", `<span class="a-tag t">Fort</span>`);
+    },
+    avis: () => `<div class="a-back">${K.icon("chev")}Avis Google</div><div class="a-card" style="display:flex;align-items:center;gap:20px;padding:22px 24px;margin-bottom:16px"><b style="font-size:58px;font-weight:700">4,8</b><span><span class="a-stars">${K.icon("star").repeat(5)}</span><small style="display:block;margin-top:6px;font-size:20px;color:#6e6e80">37 avis · tous répondus</small></span></div>` +
+      A.row("users", "o", "Marie L. · 5 étoiles", "Réponse publiée", "", `<span class="a-tag t">${K.icon("check")}</span>`) + A.row("users", "g", "Paul D. · 3 étoiles", "Réponse publiée", "", `<span class="a-tag t">${K.icon("check")}</span>`) + A.row("users", "t", "Julie R. · 5 étoiles", "Réponse publiée", "", `<span class="a-tag t">${K.icon("check")}</span>`),
+    dictee: () => `<div class="a-back">${K.icon("chev")}Compte rendu de visite</div><div class="a-card a-msg" style="display:flex;align-items:center;gap:14px;background:#6b4fe0;color:#fff">${K.icon("mic")}<span>Note vocale · 0:38</span></div>
+<div class="a-h2">Fiche mise à jour</div>` + A.row("users", "v", "Famille Durand", "Acheteurs · Vignols") + A.row("home", "t", "Coup de cœur jardin", "Hésitent sur la cuisine") + A.row("clock", "o", "Rappel jeudi 18 h", "Envoyer 2 biens similaires"),
+  };
   A.gain = (icon, c, big, small) => `<span class="a-ic ${c}">${K.icon(icon)}</span><span><b>${big}</b><small>${small}</small></span>`;
 })();
