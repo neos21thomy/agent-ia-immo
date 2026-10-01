@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — Agent immobilier, combien de soirées sur tes annonces ?</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/naturel.css" />
+    <link rel="stylesheet" href="assets/kit/app.css" />
+    <style>
+      @font-face { font-family: "Anton"; src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Source Serif 4"; src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; }
+      @font-face { font-family: "Montserrat Hook"; src: url("assets/fonts/montserrat-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-style: normal; }
+      .cur { display: inline-block; width: 4px; height: 44px; background: #f5b700; vertical-align: -8px; margin-left: 2px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="30.0" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="30.0" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/pub30-03-annonces.wav" data-start="0" data-duration="30.0" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/naturel.js"></script>
+    <script src="assets/kit/app.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 30.0;
+        N.init(tl, root, D);
+        A.init(tl, root);
+        const glow = (x, y, s, t) => { const g = N.ab("n-glow", null, { left: x + "px", top: y + "px", width: s + "px", height: s + "px" }); g.setAttribute("data-layout-allow-overflow", ""); N.hide(g); tl.fromTo(g, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 1.2, ease: "power2.out" }, t); return g; };
+        const gains = (t, G, note) => {
+          const h = N.head(["CE QUE ÇA", "TE RAPPORTE<span class='v'>.</span>"], { top: "170px", fontSize: "86px" }, t);
+          const els = G.map((g, i) => {
+            const c = N.ab("g-card", `<div class="k">${g.k}</div><div class="v ${g.c || ""}"><span>${g.v0 || ""}</span></div><div class="d">${g.d}</div>`, { left: "90px", top: 480 + i * 330 + "px", width: "900px" });
+            N.hide(c);
+            const tt = t + 0.5 + i * 0.7;
+            tl.fromTo(c, { opacity: 0, x: i % 2 ? 120 : -120 }, { opacity: 1, x: 0, duration: 0.55, ease: "power3.out" }, tt);
+            K.sfx(tt, "whoosh", 0.12, 0, { d: 0.35, f0: 600, f1: 3000, pk: 0.6 });
+            if (g.n != null) K.count(K.$(".v span", c), g.n, tt + 0.2, 1.0, g.f, { ticks: 10 }); else K.$(".v span", c).innerHTML = g.v;
+            if (g.n != null) K.sfx(tt + 1.2, "success", 0.18);
+            return c;
+          });
+          const nt = N.text("ctr g-note", note || "Exemples indicatifs", { top: "1490px" }, t + 2.4);
+          return [h, ...els, nt];
+        };
+        const fin = (t, M) => {
+          N.outro(t, "contact");
+          const m = N.mascot({ left: "440px", top: "1240px", width: "200px" });
+          m.enter(t + 1.6);
+          m.wave(t + 2.3);
+          m.blink(t + 3.2);
+        };
+
+        glow(-300, 300, 1100, 0);
+        const hk = N.hook(["<span class='kk'>AGENT IMMOBILIER,</span>", "COMBIEN DE", "SOIRÉES SUR", "<span class='hl'>TES ANNONCES ?</span>"], { top: "470px", fontSize: "90px" });
+        const s1 = N.text("ctr n-body", "45 minutes par annonce.<br><b>Fois 8 annonces par mois.</b>", { top: "980px", fontSize: "48px" }, 0.9);
+        N.out([hk, s1], 2.7, { y: -40 });
+        const cap = N.cap("22 h 47. Page blanche.", { top: "150px" }, 2.9);
+        const ip = N.iphone({ left: "110px", top: "400px", width: "860px", height: "1480px" }, "22:47");
+        N.hide(ip.el);
+        tl.fromTo(ip.el, { opacity: 0, y: 300 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 2.9);
+        const nt = K.h("div", "n-notes", `<h3>Annonce Vignols</h3><div class="dt">22:47</div><div style="font-size:40px;line-height:1.4"><span class="t"></span><span class="cur"></span></div>`, ip.screen);
+        const tt = K.$(".t", nt);
+        tl.fromTo(K.$(".cur", nt), { opacity: 1 }, { opacity: 0, duration: 0.3, repeat: 9, yoyo: true, ease: "steps(1)" }, 3.2);
+        let t0 = 3.4;
+        ["Charmante maison idéalement située…", "Belle maison familiale avec ter…"].forEach((d) => {
+          const P1 = { n: 0 }, P2 = { n: d.length };
+          tl.to(P1, { n: d.length, duration: 0.7, ease: "none", onUpdate: () => { tt.textContent = d.slice(0, Math.round(P1.n)); } }, t0);
+          for (let x = 0; x < 6; x++) K.sfx(t0 + x * 0.11, "type", 0.05, 0, { f: 2800 + x * 60 });
+          tl.to(P2, { n: 0, duration: 0.35, ease: "none", onUpdate: () => { tt.textContent = d.slice(0, Math.round(P2.n)); } }, t0 + 0.9);
+          t0 += 1.35;
+        });
+        N.out(cap, 5.8, { y: -10, d: 0.2 });
+        const c2 = N.cap("6 heures par mois.<br>Le soir.", { top: "150px" }, 6.0, { dark: true });
+        K.sfx(6.0, "thump", 0.3);
+        N.out([c2, ip.el], 7.6, { y: 60, d: 0.4 });
+        const h = N.head(["LIMO L’ÉCRIT", "EN 2 MINUTES<span class='v'>.</span>"], { top: "150px", fontSize: "70px" }, 7.9, { bar: false });
+        glow(140, 520, 800, 7.9);
+        const ph = A.phone({ left: "260px", top: "470px", width: "560px" }, { time: "10:05", tab: 3 });
+        const pics = [0, 1, 2].map((i) => `<div class="a-ph" style="flex:1;height:150px">${K.houseArt(160, 150, "pa" + i)}</div>`).join("");
+        const p1 = A.page(ph, `<div class="a-back">${K.icon("chev")}Nouvelle annonce</div><div style="display:flex;gap:10px;margin-bottom:16px">${pics}</div>` +
+          A.row("home", "v", "Maison · Vignols", "120 m² · 4 chambres") + A.row("pin", "t", "Terrain 1 500 m²", "Au calme, sans vis-à-vis") + A.row("euro", "o", "245 000 €", "Honoraires inclus · DPE D") +
+          `<div class="a-btn" style="margin-top:14px">${K.icon("sparkles")}Générer l’annonce</div>`);
+        const p2 = A.page(ph, `<div class="a-back">${K.icon("chev")}Annonce</div><div class="a-gen"><i></i><i></i><i></i>LIMO rédige…</div>
+<div class="a-card" style="padding:22px 24px;margin-top:12px"><div class="ti" style="font-family:'Source Serif 4',serif;font-size:32px;font-weight:600;line-height:1.2;min-height:76px"></div><div class="bo" style="margin-top:10px;font-size:21px;line-height:1.45;color:#3a3a3c;min-height:150px"></div>
+<div class="lg" style="margin-top:12px;padding-top:12px;border-top:1px solid #efeff4;font-size:17px;line-height:1.4;color:#6e6e80">245 000 € honoraires inclus, dont 5 % TTC à la charge de l’acquéreur (233 333 € hors honoraires) · DPE D · GES B</div></div>
+<div class="cs" style="display:flex;gap:10px;margin-top:14px"><span class="a-tag t">${K.icon("check")}Mentions légales</span><span class="a-tag">${K.icon("check")}Prête à publier</span></div>`);
+        A.enter(ph, 8.1);
+        K.$$(".a-row", p1).forEach((r, i) => K.fin(r, 9.0 + i * 0.15, { y: 16, d: 0.3 }));
+        A.tap(ph, 264, 890, 10.4);
+        A.go(ph, p1, p2, 10.6);
+        K.$$(".a-gen i", p2).forEach((d, i) => tl.fromTo(d, { opacity: 0.25 }, { opacity: 1, duration: 0.2, yoyo: true, repeat: 3 }, 10.9 + i * 0.1));
+        K.type(K.$(".ti", p2), "Maison familiale au calme avec grand terrain", 11.4, 0.8, 0.05);
+        K.type(K.$(".bo", p2), "À Vignols, 120 m² lumineux, 4 chambres, séjour traversant ouvert sur un terrain de 1 500 m² sans vis-à-vis. À 15 min de Brive.", 12.2, 1.6, 0.04);
+        N.hide(K.$(".lg", p2));
+        K.fin(K.$(".lg", p2), 13.9, { y: 8 });
+        N.hide(K.$(".cs", p2));
+        tl.set(K.$(".cs", p2), { opacity: 1 }, 14.3);
+        K.pop(K.$$(".cs .a-tag", p2), 14.3, { st: 0.12 });
+        K.sfx(14.3, "success", 0.24);
+        const f1 = A.float(A.gain("timer", "v", "2 min", "au lieu de 45"), { left: "30px", top: "760px" }, 14.8);
+        const f2 = A.float(A.gain("shield", "t", "Conforme", "mentions légales"), { left: "590px", top: "1420px" }, 15.4);
+        const n1 = A.over(N.notif({ title: "LINKEDIN", time: "10:08", text: "Post « Nouveauté à Vignols » publié.", snd: "success", g: 0.24 }, { left: "90px", top: "600px" }, 16.8));
+        N.out([h, f1, f2, n1], 19.2, { y: -30 });
+        A.leave(ph, 19.2);
+        const g = gains(19.9, [
+          { k: "TEMPS GAGNÉ", n: 344, f: (v) => { const m = Math.round(v); return m >= 60 ? Math.floor(m / 60) + ' h ' + String(m % 60).padStart(2, '0') : m + ' min'; }, d: "par mois (8 annonces × 43 min) : <b>tes soirées te reviennent</b>." },
+          { k: "TON TEMPS VAUT", c: "t", n: 860, f: (v) => "≈ " + Math.round(v / 10) * 10 + " €", d: "5 h 44 × 150 €/h, le taux horaire indicatif d’un agent." },
+          { k: "PRIX DE LIMO", v: "dès 49 €<small style='font-size:.4em'>/mois</small>", d: "Rentabilisé dès <b>le premier mandat</b>." },
+        ]);
+        N.out(g, 25.6, { y: -30 });
+        window.__TE = 26.0;
+        fin(26.0);
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

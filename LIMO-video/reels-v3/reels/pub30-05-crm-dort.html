@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — Agent immobilier, ton CRM dort. Pas toi.</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/naturel.css" />
+    <link rel="stylesheet" href="assets/kit/app.css" />
+    <style>
+      @font-face { font-family: "Anton"; src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Source Serif 4"; src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; }
+      @font-face { font-family: "Montserrat Hook"; src: url("assets/fonts/montserrat-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-style: normal; }
+      #big { top: 560px; font-family: "Montserrat Hook", Montserrat, sans-serif; font-weight: 800; font-size: 220px; color: var(--navy); line-height: 1; }
+      #big small { font-size: 70px; color: var(--mut); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="30.0" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="30.0" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/pub30-05-crm-dort.wav" data-start="0" data-duration="30.0" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/naturel.js"></script>
+    <script src="assets/kit/app.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 30.0;
+        N.init(tl, root, D);
+        A.init(tl, root);
+        const glow = (x, y, s, t) => { const g = N.ab("n-glow", null, { left: x + "px", top: y + "px", width: s + "px", height: s + "px" }); g.setAttribute("data-layout-allow-overflow", ""); N.hide(g); tl.fromTo(g, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 1.2, ease: "power2.out" }, t); return g; };
+        const gains = (t, G, note) => {
+          const h = N.head(["CE QUE ÇA", "TE RAPPORTE<span class='v'>.</span>"], { top: "170px", fontSize: "86px" }, t);
+          const els = G.map((g, i) => {
+            const c = N.ab("g-card", `<div class="k">${g.k}</div><div class="v ${g.c || ""}"><span>${g.v0 || ""}</span></div><div class="d">${g.d}</div>`, { left: "90px", top: 480 + i * 330 + "px", width: "900px" });
+            N.hide(c);
+            const tt = t + 0.5 + i * 0.7;
+            tl.fromTo(c, { opacity: 0, x: i % 2 ? 120 : -120 }, { opacity: 1, x: 0, duration: 0.55, ease: "power3.out" }, tt);
+            K.sfx(tt, "whoosh", 0.12, 0, { d: 0.35, f0: 600, f1: 3000, pk: 0.6 });
+            if (g.n != null) K.count(K.$(".v span", c), g.n, tt + 0.2, 1.0, g.f, { ticks: 10 }); else K.$(".v span", c).innerHTML = g.v;
+            if (g.n != null) K.sfx(tt + 1.2, "success", 0.18);
+            return c;
+          });
+          const nt = N.text("ctr g-note", note || "Exemples indicatifs", { top: "1490px" }, t + 2.4);
+          return [h, ...els, nt];
+        };
+        const fin = (t, M) => {
+          N.outro(t, "contact");
+          const m = N.mascot({ left: "440px", top: "1240px", width: "200px" });
+          m.enter(t + 1.6);
+          m.wave(t + 2.3);
+          m.blink(t + 3.2);
+        };
+
+        glow(-300, 300, 1100, 0);
+        const hk = N.hook(["<span class='kk'>AGENT IMMOBILIER,</span>", "TON CRM DORT<span class='v'>.</span>", "<span class='hl'>PAS TOI.</span>"], { top: "520px", fontSize: "100px" });
+        const s1 = N.text("ctr n-body", "Il stocke tes contacts.<br><b>Il ne te dit jamais quoi faire.</b>", { top: "940px", fontSize: "48px" }, 0.9);
+        N.out([hk, s1], 2.7, { y: -40 });
+        const cap = N.cap("842 contacts dans ton CRM.", { top: "150px" }, 2.9);
+        const big = N.ab("ctr", `<span>0</span><small> rappelés</small>`, {});
+        big.id = "big";
+        N.hide(big);
+        tl.set(big, { opacity: 1 }, 3.4);
+        K.count(K.$("span", big), 12, 3.4, 1.0, (v) => String(Math.round(v)), { ticks: 8 });
+        const bar = N.ab("a-bar", `<i></i>`, { left: "140px", top: "880px", width: "800px", height: "26px", borderRadius: "13px" });
+        N.hide(bar);
+        tl.set(bar, { opacity: 1 }, 3.4);
+        tl.fromTo(K.$("i", bar), { scaleX: 0 }, { scaleX: 0.014, duration: 1.0, ease: "power3.out" }, 3.4);
+        const s2 = N.text("ctr n-body", "ce mois-ci, sur 842.", { top: "950px", fontSize: "44px" }, 4.4);
+        N.out(cap, 5.4, { y: -10, d: 0.2 });
+        const c2 = N.cap("Les 830 autres attendent.<br>Et signent ailleurs.", { top: "150px" }, 5.6, { dark: true });
+        K.sfx(5.6, "thump", 0.3);
+        N.out([c2, big, bar, s2], 7.6, { y: 60, d: 0.4 });
+        const h = N.head(["CHAQUE MATIN, LIMO", "TE DIT QUOI FAIRE<span class='v'>.</span>"], { top: "150px", fontSize: "62px" }, 7.9, { bar: false });
+        glow(140, 520, 800, 7.9);
+        const ph = A.phone({ left: "260px", top: "470px", width: "560px" }, { time: "8:00" });
+        const ok = `<span class="ok">${K.icon("check")}</span>`;
+        const p1 = A.page(ph, A.HD + `<div class="a-hello"><span>Bonjour,</span><br>Voici les actions prioritaires du jour.</div>
+<div class="a-card a-prio"><span class="n">${[5, 4, 3, 2, 1, 0].map((n) => `<em style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-style:normal">${n}</em>`).join("")}</span><span><b>Actions prioritaires</b><small>à traiter aujourd’hui</small></span></div>
+<div class="a-h2">Actions du jour</div>` + A.row("refresh", "v", "Relancer 32 contacts", "Relances programmées", "09:30", ok) + A.row("home", "t", "Suivre 2 visites", "Visites à suivre", "11:00", ok) + A.row("shield", "g", "Envoyer 1 proposition", "Mandat en préparation", "14:00", ok) + A.row("star", "t", "Nouveau mandat détecté", "Opportunité à saisir", "15:30", ok) + A.row("gift", "v", "Anniversaire client", "Message à personnaliser", "17:00", ok));
+        K.$(".a-prio .n", p1).style.position = "relative";
+        A.enter(ph, 8.1);
+        K.$$(".a-row", p1).forEach((r, i) => { K.fin(r, 9.0 + i * 0.12, { y: 16, d: 0.3 }); tl.set(K.$(".ok", r), { scale: 0 }, 0); });
+        const nums = K.$$(".a-prio .n em", p1);
+        nums.forEach((e, k) => tl.set(e, { opacity: k === 0 ? 1 : 0 }, 0));
+        K.$$(".a-row", p1).forEach((r, i) => {
+          const t = 10.8 + i * 0.9;
+          A.tap(ph, 264, 590 + i * 92, t);
+          tl.to(K.$(".ok", r), { scale: 1, duration: 0.25, ease: "back.out(2.4)" }, t + 0.1);
+          tl.to(r, { opacity: 0.55, duration: 0.25 }, t + 0.3);
+          tl.set(nums[i], { opacity: 0 }, t + 0.1);
+          tl.set(nums[i + 1], { opacity: 1 }, t + 0.1);
+          K.sfx(t + 0.1, "success", 0.14);
+        });
+        tl.to(K.$$(".a-pg > *", p1), { y: -130, duration: 0.5, ease: "power2.inOut" }, 13.7);
+        const f1 = A.float(A.gain("timer", "v", "45 min", "gagnées chaque matin"), { left: "30px", top: "760px" }, 12.6);
+        const n1 = A.over(N.notif({ title: "ANNIVERSAIRE", time: "17:00", text: "SMS prêt pour Mme Roy. Tu veux l’envoyer ?" }, { left: "90px", top: "600px" }, 15.2));
+        const f2 = A.float(A.gain("check", "t", "5 / 5", "actions faites"), { left: "590px", top: "1420px" }, 15.6);
+        N.out([h, f1, f2, n1], 19.2, { y: -30 });
+        A.leave(ph, 19.2);
+        const g = gains(19.9, [
+          { k: "TEMPS GAGNÉ", n: 225, f: (v) => { const m = Math.round(v); return m >= 60 ? Math.floor(m / 60) + ' h ' + String(m % 60).padStart(2, '0') : m + ' min'; }, d: "par semaine : fini les 45 min par jour <b>à chercher quoi faire</b>." },
+          { k: "ARGENT", c: "t", n: 7500, f: (v) => "+ " + K.eur(v), d: "si ce suivi te fait signer <b>1 mandat de plus par trimestre</b>." },
+          { k: "PRIX DE LIMO", v: "dès 49 €<small style='font-size:.4em'>/mois</small>", d: "Rentabilisé dès <b>le premier mandat</b>." },
+        ]);
+        N.out(g, 25.6, { y: -30 });
+        window.__TE = 26.0;
+        fin(26.0);
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

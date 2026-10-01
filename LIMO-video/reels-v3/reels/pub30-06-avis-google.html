@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — Agent immobilier, tes avis Google te coûtent des clients</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/naturel.css" />
+    <link rel="stylesheet" href="assets/kit/app.css" />
+    <style>
+      @font-face { font-family: "Anton"; src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Source Serif 4"; src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; }
+      @font-face { font-family: "Montserrat Hook"; src: url("assets/fonts/montserrat-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-style: normal; }
+
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="30.0" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="30.0" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/pub30-06-avis-google.wav" data-start="0" data-duration="30.0" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/naturel.js"></script>
+    <script src="assets/kit/app.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 30.0;
+        N.init(tl, root, D);
+        A.init(tl, root);
+        const glow = (x, y, s, t) => { const g = N.ab("n-glow", null, { left: x + "px", top: y + "px", width: s + "px", height: s + "px" }); g.setAttribute("data-layout-allow-overflow", ""); N.hide(g); tl.fromTo(g, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 1.2, ease: "power2.out" }, t); return g; };
+        const gains = (t, G, note) => {
+          const h = N.head(["CE QUE ÇA", "TE RAPPORTE<span class='v'>.</span>"], { top: "170px", fontSize: "86px" }, t);
+          const els = G.map((g, i) => {
+            const c = N.ab("g-card", `<div class="k">${g.k}</div><div class="v ${g.c || ""}"><span>${g.v0 || ""}</span></div><div class="d">${g.d}</div>`, { left: "90px", top: 480 + i * 330 + "px", width: "900px" });
+            N.hide(c);
+            const tt = t + 0.5 + i * 0.7;
+            tl.fromTo(c, { opacity: 0, x: i % 2 ? 120 : -120 }, { opacity: 1, x: 0, duration: 0.55, ease: "power3.out" }, tt);
+            K.sfx(tt, "whoosh", 0.12, 0, { d: 0.35, f0: 600, f1: 3000, pk: 0.6 });
+            if (g.n != null) K.count(K.$(".v span", c), g.n, tt + 0.2, 1.0, g.f, { ticks: 10 }); else K.$(".v span", c).innerHTML = g.v;
+            if (g.n != null) K.sfx(tt + 1.2, "success", 0.18);
+            return c;
+          });
+          const nt = N.text("ctr g-note", note || "Exemples indicatifs", { top: "1490px" }, t + 2.4);
+          return [h, ...els, nt];
+        };
+        const fin = (t, M) => {
+          N.outro(t, "contact");
+          const m = N.mascot({ left: "440px", top: "1240px", width: "200px" });
+          m.enter(t + 1.6);
+          m.wave(t + 2.3);
+          m.blink(t + 3.2);
+        };
+
+        glow(-300, 300, 1100, 0);
+        const hk = N.hook(["<span class='kk'>AGENT IMMOBILIER,</span>", "TES AVIS GOOGLE", "TE COÛTENT", "<span class='hl'>DES CLIENTS.</span>"], { top: "470px", fontSize: "88px" });
+        const s1 = N.text("ctr n-body", "Un vendeur lit tes avis<br><b>avant de t’appeler.</b>", { top: "980px", fontSize: "48px" }, 0.9);
+        N.out([hk, s1], 2.7, { y: -40 });
+        const cap = N.cap("Ce qu’il voit en ce moment :", { top: "150px" }, 2.9);
+        const R = [["ML", "#b86e00", "Marie L.", 5, "Maison vendue en 3 semaines, merci !", "il y a 12 jours"], ["PD", "#5f6477", "Paul D.", 3, "Bon suivi, mais j’ai attendu le compte rendu de visite.", "il y a 3 semaines"]];
+        const rv = R.map((r, i) => {
+          const c = N.ab("n-card", `<div style="padding:30px 36px"><div style="display:flex;align-items:center;gap:20px"><div style="width:76px;height:76px;border-radius:50%;background:${r[1]};color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:30px">${r[0]}</div><div><b style="font-size:34px">${r[2]}</b><div style="display:flex;align-items:center;gap:12px;margin-top:4px"><span class="n-stars">${K.icon("star").repeat(r[3])}</span><span style="font-size:24px;color:#6e6e73">${r[5]}</span></div></div></div><div style="margin-top:18px;font-size:34px;line-height:1.35">« ${r[4]} »</div><div class="nr" style="margin-top:16px;font-size:26px;color:#c0392b;font-weight:600">Aucune réponse du propriétaire</div></div>`, { left: "90px", top: 440 + i * 470 + "px", width: "900px" });
+          N.hide(c);
+          K.fin(c, 3.2 + i * 0.6, { y: 40, d: 0.45 });
+          return c;
+        });
+        K.$$(".nr", rv[0].parentNode).forEach((n, i) => { tl.fromTo(n, { opacity: 1 }, { opacity: 0.3, duration: 0.25, yoyo: true, repeat: 3 }, 4.6 + i * 0.2); });
+        K.sfx(4.6, "buzz", 0.12);
+        N.out(cap, 5.4, { y: -10, d: 0.2 });
+        const c2 = N.cap("Sans réponse,<br>tu as l’air absent.", { top: "150px" }, 5.6, { dark: true });
+        K.sfx(5.6, "thump", 0.3);
+        N.out([c2, ...rv], 7.6, { y: 60, d: 0.4 });
+        const h = N.head(["LIMO RÉPOND À TES", "AVIS EN 1 MINUTE<span class='v'>.</span>"], { top: "150px", fontSize: "62px" }, 7.9, { bar: false });
+        glow(140, 520, 800, 7.9);
+        const ph = A.phone({ left: "260px", top: "470px", width: "560px" }, { time: "12:30", tab: 4 });
+        const st = (n) => `<span class="a-stars">${K.icon("star").repeat(n)}</span>`;
+        const p1 = A.page(ph, `<div class="a-back">${K.icon("chev")}Avis Google</div>
+<div class="a-card" style="display:flex;align-items:center;gap:20px;padding:22px 24px;margin-bottom:16px"><b style="font-size:58px;font-weight:700">4,8</b><span>${st(5)}<small style="display:block;margin-top:6px;font-size:20px;color:#6e6e80">37 avis · 3 sans réponse</small></span></div>` +
+          A.row("users", "o", "Marie L. · 5 étoiles", "Maison vendue en 3 semaines…", "", `<span class="a-tag">Prête</span>`) + A.row("users", "g", "Paul D. · 3 étoiles", "Bon suivi, mais j’ai attendu…", "", `<span class="a-tag">Prête</span>`) + A.row("users", "t", "Julie R. · 5 étoiles", "Très professionnel !", "", `<span class="a-tag">Prête</span>`) +
+          `<div class="a-btn" style="margin-top:14px"><span class="bt">${K.icon("send")}Publier les 3 réponses</span></div>`);
+        const p2 = A.page(ph, `<div class="a-back">${K.icon("chev")}Paul D.</div><div class="a-card a-msg">${st(3)}<div style="margin-top:8px">« Bon suivi, mais j’ai attendu le compte rendu de visite. »</div></div>
+<div class="a-h2">Réponse proposée par LIMO</div><div class="a-card a-msg" style="min-height:250px"><span class="ty"></span></div>
+<div class="a-btn" style="margin-top:16px"><span class="bt">${K.icon("send")}Publier la réponse</span></div>`);
+        A.enter(ph, 8.1);
+        K.$$(".a-row", p1).forEach((r, i) => K.fin(r, 9.0 + i * 0.15, { y: 16, d: 0.3 }));
+        A.tap(ph, 264, 520, 10.4);
+        A.go(ph, p1, p2, 10.6);
+        K.type(K.$(".ty", p2), "Merci Paul pour votre retour et votre confiance ! Vous avez raison : le compte rendu aurait dû vous parvenir plus vite. C’est corrigé, et je reste disponible pour la suite de votre projet.", 11.2, 2.2, 0.04);
+        A.tap(ph, 264, 900, 13.7);
+        const b2 = K.$(".a-btn", p2);
+        tl.to(b2, { backgroundColor: "#2cc4b5", duration: 0.25 }, 13.8);
+        tl.set(K.$(".bt", b2), { innerHTML: `${K.icon("check")}Réponse publiée` }, 13.8);
+        K.sfx(13.8, "success", 0.26);
+        const f1 = A.float(A.gain("timer", "v", "1 min", "par réponse"), { left: "30px", top: "760px" }, 14.3);
+        A.go(ph, p2, p1, 15.0, { back: true });
+        A.tap(ph, 264, 900, 15.9);
+        const b1 = K.$(".a-btn", p1);
+        tl.to(b1, { backgroundColor: "#2cc4b5", duration: 0.25 }, 16.0);
+        tl.set(K.$(".bt", b1), { innerHTML: `${K.icon("check")}3 réponses publiées` }, 16.0);
+        K.sfx(16.0, "success", 0.24);
+        const f2 = A.float(A.gain("star", "t", "100 %", "d’avis répondus"), { left: "590px", top: "1420px" }, 16.5);
+        N.out([h, f1, f2], 19.2, { y: -30 });
+        A.leave(ph, 19.2);
+        const g = gains(19.9, [
+          { k: "TEMPS GAGNÉ", n: 90, f: (v) => { const m = Math.round(v); return m >= 60 ? Math.floor(m / 60) + ' h ' + String(m % 60).padStart(2, '0') : m + ' min'; }, d: "par mois : des réponses <b>soignées, en 1 clic</b>." },
+          { k: "CONFIANCE", c: "t", v: "4,8 ★", d: "Des avis tous répondus : <b>le vendeur t’appelle, toi</b>." },
+          { k: "PRIX DE LIMO", v: "dès 49 €<small style='font-size:.4em'>/mois</small>", d: "Rentabilisé dès <b>le premier mandat</b>." },
+        ]);
+        N.out(g, 25.6, { y: -30 });
+        window.__TE = 26.0;
+        fin(26.0);
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

@@ -79,6 +79,12 @@ PRESETS = {
     "pub-04-entretien-embauche": ("house", 122, 0.3),
     "pub-05-mieux-que-ton-stagiaire": ("house", 122, 0.3),
     "pub-06-rappelez-moi-en-mars": ("lofi", 88, 0.8),
+    "pub30-01-mandats-perdus": ("house", 122, 0.3),
+    "pub30-02-trois-agences": ("pop", 124, 0.3),
+    "pub30-03-annonces": ("lofi", 88, 0.3),
+    "pub30-04-qui-va-vendre": ("house", 122, 0.3),
+    "pub30-05-crm-dort": ("pop", 124, 0.3),
+    "pub30-06-avis-google": ("house", 122, 0.3),
 }
 
 # progressions (MIDI) : accords (3-4 notes) et fondamentale de basse

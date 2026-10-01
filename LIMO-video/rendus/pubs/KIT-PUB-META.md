@@ -130,3 +130,22 @@ LIMO te rappelle qui relancer, et quand. Tu n'oublies plus personne.
 - Le prix « dès 49 €/mois » doit correspondre à la grille affichée sur le site.
 - Les pubs sont diffusées au nom de ta page LeadEngine AI / LIMO, pas au nom de Propriétés Privées : n'utilise pas leur logo ni leur marque.
 - Sources des vidéos : `reels-v3/reels/pub-*.html`, générées par `reels-v3/outils/pubs.py` à partir des Reels originaux.
+
+---
+
+## 🎬 5. Pubs 30 s « Agent immobilier, … » (`rendus/pubs-30s/`)
+
+Structure : **hook « Agent immobilier, … »** → problème vécu → **l'application LIMO en action** (écrans recréés) → **gains en temps et en argent** → « **Contacte-nous et découvre LIMO** » (14 jours offerts).
+Formats : `9x16/` (Reels, Stories) et `4x5/` (fil), musique intégrée ; `sans-musique/` pour poser un son tendance.
+Objectif conseillé : **Prospects** (formulaire Meta ou message) ou **Trafic** vers l'app. Bouton : « Contactez-nous » ou « Envoyer un message ».
+
+| Pub | Texte principal | Titre |
+|---|---|---|
+| `pub30-01-mandats-perdus` | Agent immobilier, combien de vendeurs « à rappeler » dorment dans tes notes ? 📝 LIMO prépare tes relances chaque matin, au bon moment, avec le bon message. Plus aucun mandat perdu par oubli. 👉 Contacte-nous et découvre LIMO : 14 jours offerts, sans carte bancaire. | Plus aucun mandat perdu par oubli |
+| `pub30-02-trois-agences` | Agent immobilier, ton vendeur a appelé 3 agences hier soir. Il signera avec la première qui répond. ⏱️ LIMO crée sa fiche et prépare ta réponse pendant que tu es en visite. 👉 Contacte-nous et découvre LIMO : 14 jours offerts. | Réponds en 4 minutes, pas le lendemain |
+| `pub30-03-annonces` | Agent immobilier, 45 minutes par annonce, 8 annonces par mois… le soir. 🌙 Avec LIMO, tu décris le bien, l'annonce est rédigée en 2 minutes, mentions légales incluses. 👉 Contacte-nous et découvre LIMO : 14 jours offerts. | Tes annonces en 2 minutes |
+| `pub30-04-qui-va-vendre` | Agent immobilier, et si tu savais qui va vendre dans ton secteur avant les autres ? 📍 Le détecteur LIMO te dit qui appeler cette semaine. Fini le boîtage au hasard. 👉 Contacte-nous et découvre LIMO : 14 jours offerts. | Appelle avant les autres agences |
+| `pub30-05-crm-dort` | Agent immobilier, ton CRM stocke 842 contacts… et ne te dit jamais quoi faire. 😴 Chaque matin, LIMO te donne tes 5 actions prioritaires : relances, visites, mandats, anniversaires. 👉 Contacte-nous et découvre LIMO : 14 jours offerts. | Ton CRM dort. LIMO travaille. |
+| `pub30-06-avis-google` | Agent immobilier, un vendeur lit tes avis Google avant de t'appeler. ⭐ LIMO rédige une réponse soignée à chaque avis, en 1 minute. 👉 Contacte-nous et découvre LIMO : 14 jours offerts. | Réponds à tous tes avis en 1 minute |
+
+Les gains affichés (temps, honoraires) sont des **exemples indicatifs**, signalés comme tels à l'écran.

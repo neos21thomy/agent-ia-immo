@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — Agent immobilier, ton vendeur a appelé 3 agences</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/naturel.css" />
+    <link rel="stylesheet" href="assets/kit/app.css" />
+    <style>
+      @font-face { font-family: "Anton"; src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Source Serif 4"; src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; }
+      @font-face { font-family: "Montserrat Hook"; src: url("assets/fonts/montserrat-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-style: normal; }
+
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="30.0" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="30.0" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/pub30-02-trois-agences.wav" data-start="0" data-duration="30.0" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/naturel.js"></script>
+    <script src="assets/kit/app.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 30.0;
+        N.init(tl, root, D);
+        A.init(tl, root);
+        const glow = (x, y, s, t) => { const g = N.ab("n-glow", null, { left: x + "px", top: y + "px", width: s + "px", height: s + "px" }); g.setAttribute("data-layout-allow-overflow", ""); N.hide(g); tl.fromTo(g, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 1.2, ease: "power2.out" }, t); return g; };
+        const gains = (t, G, note) => {
+          const h = N.head(["CE QUE ÇA", "TE RAPPORTE<span class='v'>.</span>"], { top: "170px", fontSize: "86px" }, t);
+          const els = G.map((g, i) => {
+            const c = N.ab("g-card", `<div class="k">${g.k}</div><div class="v ${g.c || ""}"><span>${g.v0 || ""}</span></div><div class="d">${g.d}</div>`, { left: "90px", top: 480 + i * 330 + "px", width: "900px" });
+            N.hide(c);
+            const tt = t + 0.5 + i * 0.7;
+            tl.fromTo(c, { opacity: 0, x: i % 2 ? 120 : -120 }, { opacity: 1, x: 0, duration: 0.55, ease: "power3.out" }, tt);
+            K.sfx(tt, "whoosh", 0.12, 0, { d: 0.35, f0: 600, f1: 3000, pk: 0.6 });
+            if (g.n != null) K.count(K.$(".v span", c), g.n, tt + 0.2, 1.0, g.f, { ticks: 10 }); else K.$(".v span", c).innerHTML = g.v;
+            if (g.n != null) K.sfx(tt + 1.2, "success", 0.18);
+            return c;
+          });
+          const nt = N.text("ctr g-note", note || "Exemples indicatifs", { top: "1490px" }, t + 2.4);
+          return [h, ...els, nt];
+        };
+        const fin = (t, M) => {
+          N.outro(t, "contact");
+          const m = N.mascot({ left: "440px", top: "1240px", width: "200px" });
+          m.enter(t + 1.6);
+          m.wave(t + 2.3);
+          m.blink(t + 3.2);
+        };
+
+        glow(-300, 300, 1100, 0);
+        const hk = N.hook(["<span class='kk'>AGENT IMMOBILIER,</span>", "TON VENDEUR A", "APPELÉ 3 AGENCES", "<span class='hl'>HIER SOIR.</span>"], { top: "470px", fontSize: "84px" });
+        const s1 = N.text("ctr n-body", "Il signera avec<br><b>la première qui répond.</b>", { top: "980px", fontSize: "48px" }, 0.9);
+        N.out([hk, s1], 2.7, { y: -40 });
+        const cap = N.cap("19 h 12. Tu es en visite.", { top: "150px" }, 2.9);
+        const ip = N.iphone({ left: "110px", top: "400px", width: "860px", height: "1480px" }, "19:58");
+        N.hide(ip.el);
+        tl.fromTo(ip.el, { opacity: 0, y: 300 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 2.9);
+        const notes = K.h("div", "n-notes", `<h3>Récents</h3><div class="dt">Téléphone</div>`, ip.screen);
+        notes.style.background = "#fff";
+        [["Mme Garnier", "Appel manqué · 19:12"], ["Mme Garnier", "Appel manqué · 19:14"], ["Messagerie", "Nouveau message (0:42)"]].forEach((l, i) => {
+          const r = K.h("div", "n-li", `<span class="c" style="border-color:#ff3b30"></span><span class="t" style="font-size:34px;color:#d93a3f">${l[0]}<br><small style="font-size:24px;color:#6e6e73">${l[1]}</small></span>`, notes);
+          N.hide(r);
+          K.fin(r, 3.3 + i * 0.35, { y: 14, d: 0.3 });
+          K.sfx(3.3 + i * 0.35, "buzz", 0.1);
+        });
+        K.$$("*", notes).forEach((e) => e.setAttribute("data-layout-allow-occlusion", ""));
+        N.out(cap, 5.4, { y: -10, d: 0.2 });
+        const c2 = N.cap("Le lendemain,<br>elle a déjà choisi une agence.", { top: "150px" }, 5.6, { dark: true });
+        K.sfx(5.6, "thump", 0.3);
+        N.out([c2, ip.el], 7.6, { y: 60, d: 0.4 });
+        const h = N.head(["LIMO RÉPOND PENDANT", "QUE TU TRAVAILLES<span class='v'>.</span>"], { top: "150px", fontSize: "62px" }, 7.9, { bar: false });
+        glow(140, 520, 800, 7.9);
+        const ph = A.phone({ left: "260px", top: "470px", width: "560px" }, { time: "19:16", tab: 1 });
+        const p1 = A.page(ph, `<div class="a-back">${K.icon("chev")}Mme Garnier</div>
+<div style="display:flex;gap:10px;margin:4px 0 16px"><span class="a-tag">${K.icon("sparkles")}Nouveau vendeur</span><span class="a-tag t">${K.icon("check")}Fiche créée</span></div>` +
+          A.row("home", "v", "Maison 120 m² · Brive", "Bien à estimer") + A.row("calc", "t", "Souhaite une estimation", "Projet : vendre cet été") +
+          `<div class="a-h2">SMS prêt à envoyer</div><div class="a-card a-msg"><span class="ty"></span></div><div class="a-btn" style="margin-top:16px"><span class="bt">${K.icon("send")}Valider et envoyer</span></div>`);
+        const p2 = A.page(ph, `<div class="a-back">${K.icon("chev")}Agenda</div><div class="a-h2">Jeudi</div>` +
+          A.row("calc", "v", "Estimation · Mme Garnier", "Maison 120 m² · Brive", "10:00", `<span class="a-tag t">Confirmé</span>`) + A.row("home", "t", "Visite · Vignols", "Famille Durand", "14:30") + A.row("users", "g", "Point mandat · M. Albert", "Appel", "17:00"));
+        A.enter(ph, 8.1);
+        K.type(K.$(".ty", p1), "Bonjour Madame Garnier, merci pour votre appel ! Je peux passer estimer votre maison jeudi à 10 h. Cela vous convient ?", 9.6, 1.9, 0.04);
+        A.tap(ph, 264, 1010, 11.9);
+        const btn = K.$(".a-btn", p1);
+        tl.to(btn, { backgroundColor: "#2cc4b5", duration: 0.25 }, 12.0);
+        tl.set(K.$(".bt", btn), { innerHTML: `${K.icon("check")}SMS envoyé à 19 h 16` }, 12.0);
+        K.sfx(12.0, "send", 0.24);
+        const f1 = A.float(A.gain("timer", "v", "4 min", "pour répondre"), { left: "30px", top: "760px" }, 12.6);
+        const n1 = A.over(N.notif({ title: "MESSAGES", time: "19:21", text: "Mme Garnier : « Jeudi 10 h, parfait ! Merci pour votre réactivité. »", snd: "receive", g: 0.28 }, { left: "90px", top: "600px" }, 13.8));
+        tl.to(n1, { opacity: 0, y: -40, duration: 0.25 }, 15.6);
+        A.go(ph, p1, p2, 15.7);
+        K.$$(".a-row", p2).forEach((r, i) => K.fin(r, 16.1 + i * 0.15, { y: 16, d: 0.3 }));
+        const f2 = A.float(A.gain("trophy", "t", "1re agence", "à répondre"), { left: "590px", top: "1420px" }, 16.8);
+        N.out([h, f1, f2], 19.2, { y: -30 });
+        A.leave(ph, 19.2);
+        const g = gains(19.9, [
+          { k: "TEMPS DE RÉPONSE", n: 4, f: (v) => Math.round(v) + " min", d: "au lieu du <b>lendemain</b> : tu réponds le premier." },
+          { k: "ARGENT", c: "t", n: 6000, f: (v) => "+ " + K.eur(v), d: "<b>1 estimation décrochée</b> = un mandat potentiel." },
+          { k: "PRIX DE LIMO", v: "dès 49 €<small style='font-size:.4em'>/mois</small>", d: "Rentabilisé dès <b>le premier mandat</b>." },
+        ]);
+        N.out(g, 25.6, { y: -30 });
+        window.__TE = 26.0;
+        fin(26.0);
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

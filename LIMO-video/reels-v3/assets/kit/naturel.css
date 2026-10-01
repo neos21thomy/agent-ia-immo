@@ -532,3 +532,4 @@ body {
 .n-bub2.vio { background: var(--vio); color: #fff; }
 .n-bub2.vio i.tl { background: var(--vio); }
 .n-bub2 small { display: block; margin-top: 8px; font-size: 30px; font-weight: 600; color: var(--mut); }
+.n-hook .kk { display: block; margin-bottom: 0.18em; font-size: 0.56em; letter-spacing: 0.05em; color: var(--vio); }
