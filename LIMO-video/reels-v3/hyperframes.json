@@ -9,5 +9,32 @@
   "media": {
     "autoProxy": true
   },
-  "authoringSkill": "general-video"
+  "authoringSkill": "general-video",
+  "registryItems": [
+    {
+      "name": "caption-pill-karaoke",
+      "type": "hyperframes:component",
+      "target": "compositions/components/caption-pill-karaoke.html"
+    },
+    {
+      "name": "parallax-device-dive",
+      "type": "hyperframes:component",
+      "target": "compositions/components/parallax-device-dive.html"
+    },
+    {
+      "name": "whip-pan",
+      "type": "hyperframes:block",
+      "target": "compositions/whip-pan.html"
+    },
+    {
+      "name": "light-leak",
+      "type": "hyperframes:block",
+      "target": "compositions/light-leak.html"
+    },
+    {
+      "name": "liquid-glass-notification",
+      "type": "hyperframes:block",
+      "target": "compositions/liquid-glass-notification.html"
+    }
+  ]
 }

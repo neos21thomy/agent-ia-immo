@@ -100,6 +100,7 @@ PRESETS = {
     "voix-02-regarde-ca": ("pop", 120, 0.3),
     "voix-03-surcharge": ("house", 122, 0.3),
     "sign-01-derriere-chaque-signature": ("epic", 100, 0.3, 17.2),
+    "prem-01-regarde-ca": ("pop", 120, 0.3),
 }
 
 # progressions (MIDI) : accords (3-4 notes) et fondamentale de basse

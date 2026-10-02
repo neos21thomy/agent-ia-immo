@@ -1,0 +1,9 @@
+{
+  "compositions/assets/hyperframes-logo-dark.svg": "f9f942c43b465616c3af2fb8b07daf1cc05a4776903bbb27beb2bb608060e6c7",
+  "compositions/components/caption-pill-karaoke.html": "cdbbc72af7fbac440c0bf5750cf9e3d4ded20f26588b00ac79399342ca60b3e3",
+  "compositions/components/parallax-device-dive.html": "45cdb2196398c2b0b76fde7c65a73d1da86075aee2c3399ecf808e78f3216b35",
+  "compositions/lib/liquid-glass.iife.js": "e960fc4e523aa639d37ebe80bebbd8da6dcb805488a77e45585e80aa9ab98e4c",
+  "compositions/light-leak.html": "6f3961d0b875f5c5e0ff5a423dab636613fad0d486e23c5da315ef5d1183359a",
+  "compositions/liquid-glass-notification.html": "ec3cc4d069175137dca08448b1df6e56803478e97c200cab1ebf5af9a3e28aca",
+  "compositions/whip-pan.html": "ecc645dcab00845e2008adb9c87486c2b873341a53d4711d20da6285093f80ac"
+}
