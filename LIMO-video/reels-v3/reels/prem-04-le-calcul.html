@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — LIMO, le calcul</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/naturel.css" />
+    <link rel="stylesheet" href="assets/kit/app.css" />
+    <style>
+      @font-face { font-family: "Anton"; src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Source Serif 4"; src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; }
+      @font-face { font-family: "Montserrat Hook"; src: url("assets/fonts/montserrat-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-style: normal; }
+      #s-main { background: transparent; }
+      .glass { border-radius: 40px; background: rgba(14, 16, 40, 0.42); backdrop-filter: blur(22px) saturate(1.3); -webkit-backdrop-filter: blur(22px) saturate(1.3);
+        border: 1.5px solid rgba(255,255,255,.28); box-shadow: 0 30px 80px rgba(0,0,0,.35); color: #fff; font-family: Inter, sans-serif; }
+      .gchip { display: inline-flex; align-items: center; gap: 10px; height: 52px; padding: 0 22px; border-radius: 26px; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.3); color: #fff; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 24px; white-space: nowrap; }
+      .gchip.ok { background: rgba(44,196,181,.35); border-color: rgba(44,196,181,.75); }
+      .gchip svg.i { width: 26px; height: 26px; stroke-width: 2.6; }
+      .grow { display: flex; align-items: center; gap: 18px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.16); font-size: 30px; }
+      .grow b { font-weight: 600; }
+      .grow em { margin-left: auto; font-style: normal; font-family: Montserrat, sans-serif; font-weight: 800; color: #7ff0e3; }
+      .gav { flex: none; width: 58px; height: 58px; border-radius: 50%; background: rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 22px; }
+      .shade { text-shadow: 0 4px 30px rgba(0,0,0,.55); }
+
+      .note { position: absolute; padding: 22px 26px 26px; width: 330px; background: #ffe98a; color: #3b3000; font-family: Caveat, cursive; font-weight: 700; font-size: 46px; line-height: 1.05; box-shadow: 0 18px 40px rgba(0,0,0,.45); }
+      .note::before { content: ""; position: absolute; left: 50%; top: -14px; width: 90px; height: 28px; margin-left: -45px; background: rgba(255,255,255,.55); transform: rotate(-3deg); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="27.6" data-width="1080" data-height="1920">
+      <video id="v1" class="clip" src="assets/video/agent-voiture-grade.mp4" data-start="14.85" data-duration="5.0" data-track-index="1" muted playsinline style="position:absolute;left:0;top:0;width:1080px;height:1920px;object-fit:cover"></video>
+      <section id="s-main" class="clip" data-start="0" data-duration="27.6" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/prem-04-le-calcul.wav" data-start="0" data-duration="27.6" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/naturel.js"></script>
+    <script src="assets/kit/app.js"></script>
+    <script src="assets/kit/cine.js"></script>
+    <script src="assets/kit/fx.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 27.6;
+        N.init(tl, root, D);
+        A.init(tl, root);
+        C.init(tl, root, D);
+        FX.init(tl);
+        const glow = (x, y, s, t) => { const g = N.ab("n-glow", null, { left: x + "px", top: y + "px", width: s + "px", height: s + "px" }); g.setAttribute("data-layout-allow-overflow", ""); N.hide(g); tl.fromTo(g, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 1.2, ease: "power2.out" }, t); return g; };
+        const gains = (t, G, note) => {
+          const h = N.head(["CE QUE ÇA", "TE RAPPORTE<span class='v'>.</span>"], { top: "170px", fontSize: "86px" }, t);
+          const els = G.map((g, i) => {
+            const c = N.ab("g-card", `<div class="k">${g.k}</div><div class="v ${g.c || ""}"><span>${g.v0 || ""}</span></div><div class="d">${g.d}</div>`, { left: "90px", top: 480 + i * 330 + "px", width: "900px" });
+            N.hide(c);
+            const tt = t + 0.5 + i * 0.7;
+            tl.fromTo(c, { opacity: 0, x: i % 2 ? 120 : -120 }, { opacity: 1, x: 0, duration: 0.55, ease: "power3.out" }, tt);
+            K.sfx(tt, "whoosh", 0.12, 0, { d: 0.35, f0: 600, f1: 3000, pk: 0.6 });
+            if (g.n != null) K.count(K.$(".v span", c), g.n, tt + 0.2, 1.0, g.f, { ticks: 10 }); else K.$(".v span", c).innerHTML = g.v;
+            if (g.n != null) K.sfx(tt + 1.2, "success", 0.18);
+            return c;
+          });
+          const nt = N.text("ctr g-note", note || "Exemples indicatifs", { top: "1490px" }, t + 2.4);
+          return [h, ...els, nt];
+        };
+        const fin = (t, M) => {
+          N.outro(t, "contact");
+          const m = N.mascot({ left: "440px", top: "1240px", width: "200px" });
+          m.enter(t + 1.6);
+          m.wave(t + 2.3);
+          m.blink(t + 3.2);
+        };
+
+        tl.set([K.$(".n-bg", root), ...K.$$(".n-arc", root)], { opacity: 0 }, 0);
+        C.bars(0.5, true, 1.0);
+        const LIGHT = "linear-gradient(180deg, #f5f3fe 0%, #ece7fb 100%)";
+        const O = 0.3;
+        const shade = (p) => FX.ab(p, { inset: "0", background: "linear-gradient(180deg, rgba(5,6,15,.62) 0%, rgba(5,6,15,.05) 36%, rgba(5,6,15,.08) 62%, rgba(5,6,15,.72) 100%)" });
+        const num = (p, txt, t, css = {}) => {
+          const e = FX.ab(p, Object.assign({ left: "56px", top: "110px", fontFamily: "Montserrat, sans-serif", fontWeight: "800", fontSize: "200px", lineHeight: "1", color: "rgba(255,255,255,.1)", WebkitTextStroke: "3px rgba(255,255,255,.5)" }, css), txt);
+          tl.set(e, { opacity: 0 }, 0);
+          tl.fromTo(e, { opacity: 0, x: -90 }, { opacity: 1, x: 0, duration: 0.8, ease: "expo.out" }, t);
+          return e;
+        };
+        const chip = (p, html, css, t, o = {}) => {
+          const g = FX.glass(p, Object.assign({ padding: "18px 28px", borderRadius: "28px", fontFamily: "Montserrat, sans-serif", fontWeight: "700", fontSize: "34px", whiteSpace: "nowrap", display: "flex", alignItems: "center", gap: "16px" }, css), html);
+          K.$$("svg.i", g).forEach((s) => (s.style.cssText = "width:38px;height:38px;color:#fff;flex:none"));
+          tl.set(g, { opacity: 0 }, 0);
+          tl.fromTo(g, { opacity: 0, scale: 0.7, y: 30 }, { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: "back.out(1.7)" }, t);
+          if (o.snd !== false) K.sfx(t, o.snd || "pop", o.g ?? 0.14, 0, { f: 900 });
+          return g;
+        };
+        const card = (p, ic, big, small, css, t, o = {}) => {
+          const g = FX.glass(p, Object.assign({ left: "90px", width: "900px", display: "flex", alignItems: "center", gap: "22px" }, css),
+            `<span style="flex:none;width:80px;height:80px;border-radius:22px;background:${o.bg || "rgba(44,196,181,.38)"};display:flex;align-items:center;justify-content:center">${K.icon(ic)}</span><span style="min-width:0"><b style="display:block;font-family:Montserrat,sans-serif;font-weight:800;font-size:38px;line-height:1.12">${big}</b><span style="font-size:27px;color:rgba(255,255,255,.88)">${small}</span></span>${o.check ? `<span class="ok" style="margin-left:auto;flex:none;width:58px;height:58px;border-radius:50%;background:#2cc4b5;display:flex;align-items:center;justify-content:center">${K.icon("check")}</span>` : ""}`);
+          K.$$("svg.i", g).forEach((s) => (s.style.cssText = "width:42px;height:42px;color:#fff"));
+          tl.set(g, { opacity: 0 }, 0);
+          tl.fromTo(g, { opacity: 0, y: 70, scale: 0.94, filter: "blur(8px)" }, { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", duration: 0.6, ease: "expo.out" }, t);
+          FX.sheen(g, t + 0.3);
+          K.sfx(t, o.snd || "pop", o.g ?? 0.16, 0, { f: 900 });
+          if (o.check) {
+            const ok = K.$(".ok", g);
+            tl.set(ok, { scale: 0 }, 0);
+            tl.to(ok, { scale: 1, duration: 0.35, ease: "back.out(2.4)" }, t + 0.45);
+            K.sfx(t + 0.45, "success", 0.2);
+          }
+          return g;
+        };
+        const tag = (p, txt, t, sub = "") => {
+          const g = FX.glass(p, { left: "0", right: "0", margin: "0 auto", width: "430px", top: "110px", padding: "16px 26px", borderRadius: "999px", display: "flex", alignItems: "center", justifyContent: "center", gap: "16px", fontFamily: "Montserrat, sans-serif", fontWeight: "800", fontSize: "54px" },
+            `${K.icon("clock")}<span>${txt}</span>${sub ? `<small style="font-size:26px;font-weight:600;opacity:.75">${sub}</small>` : ""}`);
+          K.$$("svg.i", g).forEach((s) => (s.style.cssText = "width:46px;height:46px;color:#2cc4b5"));
+          tl.set(g, { opacity: 0 }, 0);
+          tl.fromTo(g, { opacity: 0, y: -40 }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, t);
+          K.sfx(t, "tick", 0.2, 0, { f: 1800 });
+          return g;
+        };
+        const kar = (segs) => FX.karaoke(segs.map((s) => [s[0] + O, s[1] + O, s[2]]), { keys: ["limo", "mandats", "tard", "tête", "pleine", "terrain", "trois", "dimanches", "secret", "calcul", "deux", "temps", "clients", "estimation"] });
+        const phoneIn = (p, css, html, t, o = {}) => {
+          const ph = A.phone(css, { time: o.time || "8:00" });
+          p.appendChild(ph.wrap);
+          const pg = A.page(ph, html);
+          A.enter(ph, t, { flatAt: 0.7 });
+          return { ph, pg };
+        };
+        const outro = (t) => {
+          FX.layer(t - 0.25, null, { background: LIGHT }, "", true);
+          C.flash(t - 0.25, "#ffffff", 0.95);
+          C.leak(t - 0.2, 2.4);
+          window.__TE = t;
+          N.outro(t, "essai");
+          const m = N.mascot({ left: "440px", top: "1500px", width: "190px" });
+          m.enter(t + 1.4);
+          m.wave(t + 2.1);
+        };
+
+        // A · le calcul
+        const sA = FX.layer(0, 7.2);
+        FX.aurora(sA, 0, 7.3);
+        const a1 = FX.rise(sA, "Fais le [calcul].", { top: "260px", fontSize: "100px" }, 0.2);
+        const box = FX.glass(sA, { left: "0", right: "0", margin: "0 auto", width: "820px", top: "560px", padding: "40px 0 34px", textAlign: "center", borderRadius: "48px" },
+          `<b class="big" style="display:block;font-family:Montserrat,sans-serif;font-weight:800;font-size:200px;line-height:1">1 h</b><span class="lab" style="display:block;margin-top:14px;font-family:Montserrat,sans-serif;font-weight:700;font-size:44px;color:#2cc4b5">par jour</span>`);
+        tl.set(box, { opacity: 0 }, 0);
+        tl.fromTo(box, { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.55, ease: "expo.out" }, 1.45);
+        K.sfx(1.45, "pop", 0.2);
+        K.count(K.$(".big", box), 220, 4.0, 1.4, (v) => Math.round(v) + " h", { from: 1, ticks: 14 });
+        tl.set(K.$(".lab", box), { textContent: "par an" }, 4.0);
+        const note = FX.ab(sA, { left: "0", right: "0", top: "980px", textAlign: "center", fontFamily: "Inter, sans-serif", fontSize: "30px", color: "rgba(255,255,255,.7)" }, "1 h × 220 jours travaillés");
+        tl.set(note, { opacity: 0 }, 0);
+        tl.to(note, { opacity: 1, duration: 0.4 }, 4.6);
+        tl.to(box, { scale: 1.08, duration: 0.15, yoyo: true, repeat: 1, ease: "power2.out" }, 6.0);
+        K.sfx(6.0, "slam", 0.28);
+        // B · des dizaines de rendez-vous
+        const sB = FX.layer(7.2, 10.3);
+        FX.aurora(sB, 7.1, 10.4, { colors: ["#6b4fe0", "#2cc4b5", "#3a2a9a"] });
+        FX.whip(sA, sB, 7.05);
+        FX.rise(sB, "= des dizaines de|[RDV] [vendeurs].", { top: "230px", fontSize: "84px" }, 7.3, { snd: false });
+        for (let i = 0; i < 30; i++) {
+          const c = FX.glass(sB, { left: 95 + (i % 5) * 182 + "px", top: 560 + Math.floor(i / 5) * 118 + "px", width: "160px", height: "100px", padding: "0", borderRadius: "20px", display: "flex", alignItems: "center", justifyContent: "center" },
+            `<span style="font-family:Montserrat,sans-serif;font-weight:800;font-size:26px;color:#fff">RDV</span>`);
+          tl.set(c, { opacity: 0 }, 0);
+          tl.fromTo(c, { opacity: 0, scale: 0.4, background: "rgba(107,79,224,.0)" }, { opacity: 1, scale: 1, background: "rgba(107,79,224,.55)", duration: 0.3, ease: "back.out(2)" }, 7.6 + i * 0.065);
+        }
+        K.sfx(7.6, "riser", 0.12, 0, { d: 1.9 });
+        // C · Limo s'occupe du reste
+        const sC = FX.layer(10.3, 15.0);
+        FX.aurora(sC, 10.2, 15.1, { colors: ["#2cc4b5", "#6b4fe0", "#1d6f8a"] });
+        FX.whip(sB, sC, 10.1);
+        FX.rise(sC, "Limo s’occupe|du [reste].", { top: "200px", fontSize: "100px" }, 10.3, { snd: false });
+        card(sC, "refresh", "Les relances", "Messages prêts à envoyer", { top: "540px" }, 11.0, { check: true });
+        card(sC, "note", "Les comptes rendus", "Dictés, rédigés, classés", { top: "700px" }, 11.75, { check: true });
+        card(sC, "pen", "Les annonces", "Rédigées en 2 minutes", { top: "860px" }, 12.85, { check: true });
+        card(sC, "file", "Le suivi des dossiers", "Jusqu’au notaire", { top: "1020px" }, 13.75, { check: true });
+        // D · sur le terrain
+        const v1 = document.getElementById("v1");
+        const sD = FX.layer(14.85, 19.85);
+        shade(sD);
+        FX.whip(sC, [v1, sD], 14.7);
+        tl.fromTo(v1, { scale: 1.0 }, { scale: 1.08, duration: 5, ease: "none" }, 14.85);
+        const d1 = FX.rise(sD, "Toi, tu récupères|ton [temps]…", { top: "300px", fontSize: "92px", textShadow: "0 6px 30px rgba(0,0,0,.5)" }, 14.95, { snd: false });
+        FX.fall(d1, 16.5);
+        FX.rise(sD, "…et tu le passes|sur le [terrain].", { top: "300px", fontSize: "92px", textShadow: "0 6px 30px rgba(0,0,0,.5)" }, 16.65, { snd: false });
+        outro(19.75);
+        const price = FX.ab(root, { left: "0", right: "0", top: "1400px", textAlign: "center", zIndex: 30 }, `<span style="display:inline-block;padding:14px 30px;border-radius:999px;background:#1b1f4b;color:#fff;font-family:Montserrat,sans-serif;font-weight:800;font-size:36px">Dès 49 €/mois</span>`);
+        tl.set(price, { opacity: 0 }, 0);
+        tl.fromTo(price, { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 20.0);
+        kar([
+          [0.0, 0.85, "Fais le calcul."], [1.24, 2.98, "Une heure d’administratif par jour…"], [3.66, 5.37, "c’est plus de deux cents heures par an."],
+          [5.69, 6.74, "Deux cents heures."], [7.09, 9.7, "C’est des dizaines de rendez-vous vendeurs que tu ne fais pas."],
+          [9.91, 14.25, "Limo s’occupe des relances, des comptes rendus, des annonces et du suivi des dossiers."],
+          [14.6, 16.06, "Toi, tu récupères ton temps…"], [16.36, 18.81, "et tu le passes là où ça rapporte : sur le terrain."],
+        ]);
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

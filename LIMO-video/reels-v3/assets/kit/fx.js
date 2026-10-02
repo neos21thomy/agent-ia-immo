@@ -75,10 +75,10 @@
     const lines = html.split("|");
     const el = ab(parent, Object.assign({ left: "60px", right: "60px", textAlign: "center", fontFamily: "Montserrat, sans-serif", fontWeight: "800", color: o.color || "#fff", lineHeight: "1.06", letterSpacing: "-0.015em" }, css),
       lines.map((ln) => `<div style="overflow:hidden;padding:0 .06em .08em">${ln.split(" ").map((w) => {
-        const m = /^\[(.*)\]([.,;:!?…]*)$/.exec(w);
-        const word = m ? m[1] : w, tail = m ? m[2] : "";
+        const m = /^([^\[]*)\[(.*)\]([.,;:!?…]*)$/.exec(w);
+        const pre = m ? m[1] : "", word = m ? m[2] : w, tail = m ? m[3] : "";
         const ch = (s, acc) => [...s].map((c) => `<span class="fx-c" style="display:inline-block${acc ? ";color:" + (o.accent || "#2cc4b5") : ""}">${c}</span>`).join("");
-        return `<span style="display:inline-block;white-space:nowrap;margin:0 .13em">${ch(word, !!m)}${ch(tail, false)}</span>`;
+        return `<span style="display:inline-block;white-space:nowrap;margin:0 .13em">${ch(pre, false)}${ch(word, !!m)}${ch(tail, false)}</span>`;
       }).join("")}</div>`).join(""));
     const cs = el.querySelectorAll(".fx-c");
     tl.set(cs, { yPercent: 115, opacity: 0 }, 0);
@@ -144,12 +144,12 @@
       const tw = words.map((w, i) => { const s = acc; acc += (t1 - t0) * w8[i] / tot; return [s, acc]; });
       for (let i = 0; i < words.length; i += maxW) {
         const gw = words.slice(i, i + maxW), gt = tw.slice(i, i + maxW);
-        const g0 = gt[0][0], g1 = Math.min(gt[gt.length - 1][1] + 0.12, i + maxW < words.length ? tw[i + maxW][0] : t1 + 0.25);
+        const g0 = gt[0][0], g1 = Math.min(gt[gt.length - 1][1] + 0.12, i + maxW < words.length ? tw[i + maxW][0] - 0.08 : t1 + 0.25);
         const box = ab(root, { left: "0", right: "0", top: top + "px", textAlign: "center", zIndex: 36 },
           `<span class="fx-pill" style="display:inline-block;padding:16px 30px 18px;border-radius:26px;background:${o.light ? "rgba(255,255,255,.94)" : "rgba(10,10,30,.72)"};box-shadow:0 14px 34px rgba(0,0,0,.28);font-family:Montserrat,sans-serif;font-weight:800;font-size:${o.fs || 54}px;line-height:1.15;white-space:nowrap">${gw.map((w) => `<span class="fx-w" style="display:inline-block;margin:0 .17em;color:${o.light ? "#a6a8c2" : "rgba(255,255,255,.45)"}">${w}</span>`).join("")}</span>`);
         tl.set(box, { opacity: 0 }, 0);
         tl.fromTo(box, { opacity: 0, y: 18, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.16, ease: "power2.out", immediateRender: false }, g0);
-        tl.to(box, { opacity: 0, duration: 0.1 }, g1);
+        tl.to(box, { opacity: 0, duration: 0.06 }, g1);
         box.querySelectorAll(".fx-w").forEach((s, j) => {
           const key = keys.some((k) => gw[j].toLowerCase().includes(k));
           const on = key ? (o.accent || "#2cc4b5") : (o.light ? "#1b1f4b" : "#ffffff");

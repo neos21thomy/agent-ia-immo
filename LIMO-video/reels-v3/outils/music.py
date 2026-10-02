@@ -101,6 +101,10 @@ PRESETS = {
     "voix-03-surcharge": ("house", 122, 0.3),
     "sign-01-derriere-chaque-signature": ("epic", 100, 0.3, 17.2),
     "prem-01-regarde-ca": ("pop", 120, 0.3),
+    "prem-02-trois-erreurs": ("epic", 100, 0.3, 26.1),
+    "prem-03-dimanche-soir": ("lofi", 84, 0.3),
+    "prem-04-le-calcul": ("house", 122, 0.3),
+    "prem-05-une-journee": ("pop", 118, 0.3),
 }
 
 # progressions (MIDI) : accords (3-4 notes) et fondamentale de basse
