@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — LIMO, tu peux tout lui dire</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/naturel.css" />
+    <link rel="stylesheet" href="assets/kit/app.css" />
+    <style>
+      @font-face { font-family: "Anton"; src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Source Serif 4"; src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; }
+      @font-face { font-family: "Montserrat Hook"; src: url("assets/fonts/montserrat-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-style: normal; }
+      #s-main { background: transparent; }
+      .glass { border-radius: 40px; background: rgba(14, 16, 40, 0.42); backdrop-filter: blur(22px) saturate(1.3); -webkit-backdrop-filter: blur(22px) saturate(1.3);
+        border: 1.5px solid rgba(255,255,255,.28); box-shadow: 0 30px 80px rgba(0,0,0,.35); color: #fff; font-family: Inter, sans-serif; }
+      .gchip { display: inline-flex; align-items: center; gap: 10px; height: 52px; padding: 0 22px; border-radius: 26px; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.3); color: #fff; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 24px; white-space: nowrap; }
+      .gchip.ok { background: rgba(44,196,181,.35); border-color: rgba(44,196,181,.75); }
+      .gchip svg.i { width: 26px; height: 26px; stroke-width: 2.6; }
+      .grow { display: flex; align-items: center; gap: 18px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.16); font-size: 30px; }
+      .grow b { font-weight: 600; }
+      .grow em { margin-left: auto; font-style: normal; font-family: Montserrat, sans-serif; font-weight: 800; color: #7ff0e3; }
+      .gav { flex: none; width: 58px; height: 58px; border-radius: 50%; background: rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 22px; }
+      .shade { text-shadow: 0 4px 30px rgba(0,0,0,.55); }
+
+      .note { position: absolute; padding: 22px 26px 26px; width: 330px; background: #ffe98a; color: #3b3000; font-family: Caveat, cursive; font-weight: 700; font-size: 46px; line-height: 1.05; box-shadow: 0 18px 40px rgba(0,0,0,.45); }
+      .note::before { content: ""; position: absolute; left: 50%; top: -14px; width: 90px; height: 28px; margin-left: -45px; background: rgba(255,255,255,.55); transform: rotate(-3deg); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="42.6" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="42.6" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/long-05-tout-lui-dire.wav" data-start="0" data-duration="42.6" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/naturel.js"></script>
+    <script src="assets/kit/app.js"></script>
+    <script src="assets/kit/cine.js"></script>
+    <script src="assets/kit/fx.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 42.6;
+        N.init(tl, root, D);
+        A.init(tl, root);
+        C.init(tl, root, D);
+        FX.init(tl);
+        const glow = (x, y, s, t) => { const g = N.ab("n-glow", null, { left: x + "px", top: y + "px", width: s + "px", height: s + "px" }); g.setAttribute("data-layout-allow-overflow", ""); N.hide(g); tl.fromTo(g, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 1.2, ease: "power2.out" }, t); return g; };
+        const gains = (t, G, note) => {
+          const h = N.head(["CE QUE ÇA", "TE RAPPORTE<span class='v'>.</span>"], { top: "170px", fontSize: "86px" }, t);
+          const els = G.map((g, i) => {
+            const c = N.ab("g-card", `<div class="k">${g.k}</div><div class="v ${g.c || ""}"><span>${g.v0 || ""}</span></div><div class="d">${g.d}</div>`, { left: "90px", top: 480 + i * 330 + "px", width: "900px" });
+            N.hide(c);
+            const tt = t + 0.5 + i * 0.7;
+            tl.fromTo(c, { opacity: 0, x: i % 2 ? 120 : -120 }, { opacity: 1, x: 0, duration: 0.55, ease: "power3.out" }, tt);
+            K.sfx(tt, "whoosh", 0.12, 0, { d: 0.35, f0: 600, f1: 3000, pk: 0.6 });
+            if (g.n != null) K.count(K.$(".v span", c), g.n, tt + 0.2, 1.0, g.f, { ticks: 10 }); else K.$(".v span", c).innerHTML = g.v;
+            if (g.n != null) K.sfx(tt + 1.2, "success", 0.18);
+            return c;
+          });
+          const nt = N.text("ctr g-note", note || "Exemples indicatifs", { top: "1490px" }, t + 2.4);
+          return [h, ...els, nt];
+        };
+        const fin = (t, M) => {
+          N.outro(t, "contact");
+          const m = N.mascot({ left: "440px", top: "1240px", width: "200px" });
+          m.enter(t + 1.6);
+          m.wave(t + 2.3);
+          m.blink(t + 3.2);
+        };
+
+        tl.set([K.$(".n-bg", root), ...K.$$(".n-arc", root)], { opacity: 0 }, 0);
+        C.bars(0.5, true, 1.0);
+        const LIGHT = "linear-gradient(180deg, #f5f3fe 0%, #ece7fb 100%)";
+        const O = 0.3;
+        const shade = (p) => FX.ab(p, { inset: "0", background: "linear-gradient(180deg, rgba(5,6,15,.62) 0%, rgba(5,6,15,.05) 36%, rgba(5,6,15,.08) 62%, rgba(5,6,15,.72) 100%)" });
+        const num = (p, txt, t, css = {}) => {
+          const e = FX.ab(p, Object.assign({ left: "56px", top: "110px", fontFamily: "Montserrat, sans-serif", fontWeight: "800", fontSize: "200px", lineHeight: "1", color: "rgba(255,255,255,.1)", WebkitTextStroke: "3px rgba(255,255,255,.5)" }, css), txt);
+          tl.set(e, { opacity: 0 }, 0);
+          tl.fromTo(e, { opacity: 0, x: -90 }, { opacity: 1, x: 0, duration: 0.8, ease: "expo.out" }, t);
+          return e;
+        };
+        const chip = (p, html, css, t, o = {}) => {
+          const g = FX.glass(p, Object.assign({ padding: "18px 28px", borderRadius: "28px", fontFamily: "Montserrat, sans-serif", fontWeight: "700", fontSize: "34px", whiteSpace: "nowrap", display: "flex", alignItems: "center", gap: "16px" }, css), html);
+          K.$$("svg.i", g).forEach((s) => (s.style.cssText = "width:38px;height:38px;color:#fff;flex:none"));
+          tl.set(g, { opacity: 0 }, 0);
+          tl.fromTo(g, { opacity: 0, scale: 0.7, y: 30 }, { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: "back.out(1.7)" }, t);
+          if (o.snd !== false) K.sfx(t, o.snd || "pop", o.g ?? 0.14, 0, { f: 900 });
+          return g;
+        };
+        const card = (p, ic, big, small, css, t, o = {}) => {
+          const g = FX.glass(p, Object.assign({ left: "90px", width: "900px", display: "flex", alignItems: "center", gap: "22px" }, css),
+            `<span style="flex:none;width:80px;height:80px;border-radius:22px;background:${o.bg || "rgba(44,196,181,.38)"};display:flex;align-items:center;justify-content:center">${K.icon(ic)}</span><span style="min-width:0"><b style="display:block;font-family:Montserrat,sans-serif;font-weight:800;font-size:38px;line-height:1.12">${big}</b><span style="font-size:27px;color:rgba(255,255,255,.88)">${small}</span></span>${o.check ? `<span class="ok" style="margin-left:auto;flex:none;width:58px;height:58px;border-radius:50%;background:#2cc4b5;display:flex;align-items:center;justify-content:center">${K.icon("check")}</span>` : ""}`);
+          K.$$("svg.i", g).forEach((s) => (s.style.cssText = "width:42px;height:42px;color:#fff"));
+          tl.set(g, { opacity: 0 }, 0);
+          tl.fromTo(g, { opacity: 0, y: 70, scale: 0.94, filter: "blur(8px)" }, { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", duration: 0.6, ease: "expo.out" }, t);
+          FX.sheen(g, t + 0.3);
+          K.sfx(t, o.snd || "pop", o.g ?? 0.16, 0, { f: 900 });
+          if (o.check) {
+            const ok = K.$(".ok", g);
+            tl.set(ok, { scale: 0 }, 0);
+            tl.to(ok, { scale: 1, duration: 0.35, ease: "back.out(2.4)" }, t + 0.45);
+            K.sfx(t + 0.45, "success", 0.2);
+          }
+          return g;
+        };
+        const tag = (p, txt, t, sub = "") => {
+          const g = FX.glass(p, { left: "0", right: "0", margin: "0 auto", width: "430px", top: "110px", padding: "16px 26px", borderRadius: "999px", display: "flex", alignItems: "center", justifyContent: "center", gap: "16px", fontFamily: "Montserrat, sans-serif", fontWeight: "800", fontSize: "54px" },
+            `${K.icon("clock")}<span>${txt}</span>${sub ? `<small style="font-size:26px;font-weight:600;opacity:.75">${sub}</small>` : ""}`);
+          K.$$("svg.i", g).forEach((s) => (s.style.cssText = "width:46px;height:46px;color:#2cc4b5"));
+          tl.set(g, { opacity: 0 }, 0);
+          tl.fromTo(g, { opacity: 0, y: -40 }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, t);
+          K.sfx(t, "tick", 0.2, 0, { f: 1800 });
+          return g;
+        };
+        const kar = (segs) => FX.karaoke(segs.map((s) => [s[0] + O, s[1] + O, s[2]]), { keys: ["limo", "mandats", "tard", "tête", "pleine", "terrain", "trois", "dimanches", "secret", "calcul", "deux", "temps", "clients", "estimation"] });
+        const phoneIn = (p, css, html, t, o = {}) => {
+          const ph = A.phone(css, { time: o.time || "8:00" });
+          p.appendChild(ph.wrap);
+          const pg = A.page(ph, html);
+          A.enter(ph, t, { flatAt: 0.7 });
+          return { ph, pg };
+        };
+        const outro = (t) => {
+          FX.layer(t - 0.25, null, { background: LIGHT }, "", true);
+          C.flash(t - 0.25, "#ffffff", 0.95);
+          C.leak(t - 0.2, 2.4);
+          window.__TE = t;
+          N.outro(t, "essai");
+          const m = N.mascot({ left: "440px", top: "1500px", width: "190px" });
+          m.enter(t + 1.4);
+          m.wave(t + 2.1);
+        };
+
+        const KEYS = ["limo", "tout", "jamais", "rien", "anniversaire", "anniversaires", "mails", "kilométriques", "relance", "relances", "oubli", "travaille", "métier", "collègue", "agit", "terrain", "clients", "vocal"];
+        const kar2 = (segs) => FX.karaoke(segs.map((s) => [s[0] + O, s[1] + O, s[2]]), { keys: KEYS });
+        const lay = (t0, t1, prev, o = {}) => {
+          const l = FX.layer(t0, t1);
+          if (o.colors !== false) FX.aurora(l, t0 - 0.1, t1 + 0.1, o.colors ? { colors: o.colors, a: o.a } : {});
+          if (prev) FX.whip(prev, l, t0 - 0.15);
+          return l;
+        };
+        const foot = (id, t0, t1, prev) => {
+          const v = document.getElementById(id);
+          const l = FX.layer(t0, t1);
+          shade(l);
+          if (prev) FX.whip(prev, [v, l], t0 - 0.15);
+          tl.fromTo(v, { scale: 1.0 }, { scale: 1.08, duration: t1 - t0, ease: "none" }, t0);
+          return l;
+        };
+        const web = (p, items, t) => {
+          const c = FX.glass(p, { left: "390px", top: "760px", width: "300px", height: "300px", borderRadius: "50%", padding: "0", display: "flex", alignItems: "center", justifyContent: "center" }, `<img src="assets/img/limo-house-ad.png" alt="" style="width:130px;height:130px;background:#fff;border-radius:34px;padding:16px" />`);
+          tl.set(c, { opacity: 0 }, 0);
+          tl.fromTo(c, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.6)" }, t);
+          const P = [[80, 470], [600, 520], [50, 1150], [610, 1120], [30, 830], [720, 840]];
+          const els = [c];
+          items.forEach((it, i) => {
+            const g = chip(p, `${K.icon(it[0])}${it[1]}`, { left: P[i % 6][0] + "px", top: P[i % 6][1] + "px" }, it[2]);
+            tl.to(g, { y: "-=16", duration: 1.5, ease: "sine.inOut", yoyo: true, repeat: 1 }, it[2] + 0.5);
+            els.push(g);
+          });
+          return els;
+        };
+        const msgCard = (p, label, txt, btn, css, t) => {
+          const m = FX.glass(p, Object.assign({ left: "90px", width: "900px", padding: "24px 28px" }, css),
+            `<span style="display:block;font-size:24px;letter-spacing:.06em;color:rgba(255,255,255,.75)">${label}</span><span style="display:block;margin-top:10px;font-size:31px;line-height:1.35">${txt}</span>${btn ? `<span class="snd" style="display:inline-block;margin-top:16px;padding:12px 28px;border-radius:999px;background:#6b4fe0;font-family:Montserrat,sans-serif;font-weight:800;font-size:28px">${btn}</span>` : ""}`);
+          tl.set(m, { opacity: 0 }, 0);
+          tl.fromTo(m, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, t);
+          FX.sheen(m, t + 0.3);
+          return m;
+        };
+        const tapSend = (m, t) => { tl.to(K.$(".snd", m), { scale: 0.88, duration: 0.08, yoyo: true, repeat: 1 }, t); tl.set(K.$(".snd", m), { textContent: "Envoyé ✓", background: "#2cc4b5" }, t + 0.18); K.sfx(t, "send", 0.3); };
+        const bday = (p, name, t, top = 520) => [
+          card(p, "cake", `Anniversaire · ${name}`, "Aujourd’hui · client fidèle", { top: top + "px" }, t, { bg: "rgba(255,143,143,.5)", snd: "notif" }),
+          msgCard(p, "LIMO · MESSAGE PRÊT", `« Joyeux anniversaire ${name} ! Je vous souhaite une très belle journée. »`, "Envoyer", { top: top + 170 + "px" }, t + 0.8),
+        ];
+        const inbox = (p, t, top = 480) => {
+          const R = [["Newsletter d’un portail", 0], ["Mme Roy · question sur le compromis", 1], ["Offre partenaire", 0], ["Me Faure · pièces du dossier", 1], ["Publicité logiciel", 0]];
+          const box = FX.glass(p, { left: "90px", width: "900px", top: top + "px", padding: "22px 26px" },
+            `<span style="display:block;font-size:24px;letter-spacing:.06em;color:rgba(255,255,255,.75);margin-bottom:8px">BOÎTE MAIL · TRIÉE PAR LIMO</span>` +
+            R.map((r) => `<div class="mr ${r[1] ? "imp" : "pro"}" style="display:flex;align-items:center;gap:16px;padding:13px 0;border-top:1px solid rgba(255,255,255,.15);font-size:28px">${K.icon("mail")}<span style="flex:1;white-space:nowrap;overflow:hidden">${r[0]}</span><span class="tg" style="flex:none;padding:6px 16px;border-radius:999px;font-size:21px;font-weight:700;background:${r[1] ? "#2cc4b5" : "rgba(255,255,255,.18)"}">${r[1] ? "Réponse prête" : "Archivé"}</span></div>`).join(""));
+          K.$$("svg.i", box).forEach((s) => (s.style.cssText = "width:30px;height:30px;color:#fff;flex:none"));
+          tl.set(box, { opacity: 0 }, 0);
+          tl.fromTo(box, { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, t);
+          K.$$(".tg", box).forEach((g) => { tl.set(g, { opacity: 0 }, 0); tl.to(g, { opacity: 1, duration: 0.2 }, t + 0.8); });
+          K.$$(".mr.pro", box).forEach((r, i) => { tl.to(r, { opacity: 0.35, x: 30, duration: 0.35, ease: "power2.in" }, t + 1.0 + i * 0.25); K.sfx(t + 1.0 + i * 0.25, "swipe", 0.1); });
+          return box;
+        };
+        const km = (p, t, top = 600) => {
+          const g = FX.glass(p, { left: "0", right: "0", margin: "0 auto", width: "780px", height: "380px", boxSizing: "border-box", top: top + "px", padding: "28px 0 0", textAlign: "center", borderRadius: "44px" },
+            `<span style="display:inline-flex;align-items:center;gap:14px;font-family:Montserrat,sans-serif;font-weight:700;font-size:32px;color:#2cc4b5">${K.icon("car")}Frais kilométriques · octobre</span><b class="kv" style="display:block;width:100%;text-align:center;margin-top:10px;font-family:Montserrat,sans-serif;font-weight:800;font-size:110px;line-height:1.05;white-space:nowrap">0 km</b><span class="ok" style="position:absolute;left:0;right:0;bottom:30px;margin:0 auto;width:fit-content;padding:10px 26px;border-radius:999px;background:#2cc4b5;font-family:Montserrat,sans-serif;font-weight:800;font-size:28px">Calculé automatiquement</span>`);
+          K.$$("svg.i", g).forEach((s) => (s.style.cssText = "width:40px;height:40px;color:#2cc4b5"));
+          tl.set(g, { opacity: 0 }, 0);
+          tl.fromTo(g, { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.5, ease: "expo.out" }, t);
+          K.count(K.$(".kv", g), 1248, t + 0.3, 1.5, (v) => { const n = Math.round(v); return (n >= 1000 ? Math.floor(n / 1000) + " " + String(n % 1000).padStart(3, "0") : n) + " km"; }, { ticks: 12 });
+          const ok = K.$(".ok", g);
+          tl.set(ok, { opacity: 0 }, 0);
+          tl.fromTo(ok, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.2)" }, t + 1.9);
+          K.sfx(t + 1.9, "success", 0.22);
+          return g;
+        };
+        const post = (p, t, top = 420) => {
+          const g = FX.glass(p, { left: "215px", width: "650px", top: top + "px", padding: "20px" },
+            `<div style="display:flex;align-items:center;gap:14px;margin-bottom:14px"><img src="assets/img/limo-house-ad.png" alt="" style="width:56px;height:56px;border-radius:50%;background:#fff;padding:6px" /><b style="font-size:28px">ton.agence.immo</b></div><div style="height:430px;border-radius:18px;overflow:hidden"><img src="assets/img/bien-terrasse-mer.jpg" alt="" style="width:100%;height:100%;object-fit:cover" /></div><div style="margin-top:14px;font-size:27px;line-height:1.35">Nouveau mandat : villa vue mer, 4 chambres. Visites dès samedi.</div><span class="pr" style="display:inline-block;margin-top:12px;padding:10px 24px;border-radius:999px;background:#2cc4b5;font-family:Montserrat,sans-serif;font-weight:800;font-size:26px">Publication prête</span>`);
+          tl.set(g, { opacity: 0 }, 0);
+          tl.fromTo(g, { opacity: 0, y: 60, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: "expo.out" }, t);
+          const pr = K.$(".pr", g);
+          tl.set(pr, { opacity: 0 }, 0);
+          tl.fromTo(pr, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.2)" }, t + 1.0);
+          K.sfx(t + 1.0, "success", 0.2);
+          return g;
+        };
+        const ask = (p, q, r, t, tr, top = 520) => {
+          const qb = FX.ab(p, { right: "90px", width: "760px", top: top + "px", padding: "22px 28px", borderRadius: "34px 34px 8px 34px", background: "#6b4fe0", color: "#fff", fontFamily: "Inter, sans-serif", fontSize: "34px", lineHeight: "1.32", boxShadow: "0 20px 50px rgba(0,0,0,.3)" }, `<span style="display:inline-flex;align-items:center;gap:10px;font-size:22px;opacity:.85;margin-bottom:6px">${K.icon("mic")}Message vocal</span><br>${q}`);
+          K.$$("svg.i", qb).forEach((s) => (s.style.cssText = "width:26px;height:26px;color:#fff"));
+          tl.set(qb, { opacity: 0 }, 0);
+          tl.fromTo(qb, { opacity: 0, y: 30, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(1.8)" }, t);
+          K.sfx(t, "send", 0.24);
+          const rb = FX.glass(p, { left: "90px", width: "760px", top: top + 200 + "px", padding: "22px 28px", borderRadius: "34px 34px 34px 8px", fontSize: "33px", lineHeight: "1.32" }, `<span style="display:inline-flex;align-items:center;gap:10px;font-size:22px;color:#2cc4b5;font-weight:700;margin-bottom:6px">${K.icon("check")}Limo</span><br>${r}`);
+          K.$$("svg.i", rb).forEach((s) => (s.style.cssText = "width:26px;height:26px;color:#2cc4b5"));
+          tl.set(rb, { opacity: 0 }, 0);
+          tl.fromTo(rb, { opacity: 0, y: 30, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(1.8)" }, tr);
+          K.sfx(tr, "receive", 0.24);
+          return [qb, rb];
+        };
+        const logoCard = (p, t, top = 760) => {
+          const g = FX.ab(p, { left: "240px", top: top + "px", width: "600px", padding: "40px 0", borderRadius: "44px", background: "#ffffff", boxShadow: "0 30px 80px rgba(0,0,0,.45)", textAlign: "center" }, `<img src="assets/img/limo-logo-ad.png" alt="LIMO" style="width:440px" />`);
+          tl.set(g, { opacity: 0 }, 0);
+          tl.fromTo(g, { opacity: 0, scale: 1.3, filter: "blur(14px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.7, ease: "power3.out" }, t);
+          K.sfx(t + 0.1, "thump", 0.4);
+          C.sweep(g, t + 0.7, 0.9);
+          return g;
+        };
+
+        const sA = lay(0, 4.2);
+        FX.rise(sA, "Tu peux [tout]|lui dire.", { top: "620px", fontSize: "116px" }, 0.3);
+        C.leak(0.3, 2.4);
+        const sB = lay(4.2, 21.8, sA, { colors: ["#2cc4b5", "#6b4fe0", "#1d6f8a"] });
+        const hd = FX.glass(sB, { left: "0", right: "0", margin: "0 auto", width: "520px", top: "250px", padding: "16px 26px", borderRadius: "999px", display: "flex", alignItems: "center", justifyContent: "center", gap: "14px", fontFamily: "Montserrat, sans-serif", fontWeight: "800", fontSize: "38px" }, `${K.icon("mic")}Demander à Limo`);
+        K.$$("svg.i", hd).forEach((s) => (s.style.cssText = "width:40px;height:40px;color:#2cc4b5"));
+        const Q = [
+          ["« Limo, rappelle-moi de relancer Mme Roy jeudi. »", "C’est noté : relance jeudi à 9 h.", 4.25, 7.2, 8.15],
+          ["« Limo, qui cherche un appartement avec terrasse ? »", "3 acquéreurs correspondent : Durand, Vidal, Faure.", 8.3, 11.1, 13.55],
+          ["« Limo, prépare un mail pour le notaire du dossier Martin. »", "C’est rédigé. Tu veux le relire ?", 13.7, 16.5, 17.7],
+          ["« Limo, combien j’ai fait de kilomètres ce mois-ci ? »", "1 248 km en octobre. Frais calculés.", 17.85, 20.1, 21.6],
+        ];
+        Q.forEach((q) => { const e = ask(sB, q[0], q[1], q[2], q[3], 520); tl.to(e, { opacity: 0, y: -40, duration: 0.25 }, q[4]); });
+        const sC = lay(21.8, 27.75, sB, { colors: ["#6b4fe0", "#2cc4b5", "#3a2a9a"] });
+        FX.rise(sC, "Il retient [tout].", { top: "170px", fontSize: "100px" }, 21.75, { snd: false });
+        web(sC, [["home", "Mandats", 23.1], ["users", "Vendeurs", 24.0], ["target", "Acquéreurs", 24.8], ["refresh", "Chaque relance", 25.9], ["msg", "Chaque demande", 26.8]], 22.3);
+        const sD = lay(27.75, 31.75, sC, { colors: ["#2cc4b5", "#6b4fe0", "#1d6f8a"] });
+        card(sD, "cake", "Anniversaires", "Message prêt pour chaque client", { top: "470px" }, 27.7, { check: true, bg: "rgba(255,143,143,.5)" });
+        card(sD, "mail", "Mails triés", "Les importants en premier", { top: "630px" }, 28.95, { check: true });
+        card(sD, "camera", "Réseaux sociaux", "Publications prêtes", { top: "790px" }, 30.1, { check: true });
+        const sE = lay(31.75, 35.55, sD, { colors: ["#3a2a9a", "#6b4fe0", "#0f3d6a"] });
+        FX.rise(sE, "Tu [parles].", { top: "480px", fontSize: "116px" }, 31.8);
+        FX.rise(sE, "Il [agit].", { top: "620px", fontSize: "116px" }, 32.75, { snd: false });
+        FX.rise(sE, "Rien ne tombe|dans l’[oubli].", { top: "800px", fontSize: "84px" }, 33.6, { snd: false, color: "#d9ceff" });
+        outro(35.5);
+        kar2([
+          [0, 3.43, "Et si tu pouvais tout dire à ton assistant… comme à un collègue ?"],
+          [3.92, 6.21, "« Limo, rappelle-moi de relancer Mme Roy jeudi. »"], [6.91, 7.5, "C’est noté."],
+          [7.97, 10.37, "« Limo, qui cherche un appartement avec terrasse en ce moment ? »"], [10.78, 12.97, "Il te sort les trois acquéreurs qui correspondent."],
+          [13.41, 15.74, "« Limo, prépare un mail pour le notaire du dossier Martin. »"], [16.2, 17.21, "C’est rédigé."],
+          [17.56, 19.41, "« Limo, combien j’ai fait de kilomètres ce mois-ci ? »"], [19.82, 21.08, "Il a déjà fait le calcul."],
+          [21.41, 22.24, "Il retient tout."], [22.69, 27.02, "Tes mandats, tes clients, vendeurs comme acquéreurs, chaque relance, chaque demande."],
+          [27.33, 31.08, "Il pense aux anniversaires. Il trie tes mails. Il t’aide sur les réseaux sociaux."], [31.5, 34.61, "Tu parles. Il agit. Et rien ne tombe dans l’oubli."],
+        ]);
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

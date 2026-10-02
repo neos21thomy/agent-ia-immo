@@ -105,6 +105,11 @@ PRESETS = {
     "prem-03-dimanche-soir": ("lofi", 84, 0.3),
     "prem-04-le-calcul": ("house", 122, 0.3),
     "prem-05-une-journee": ("pop", 118, 0.3),
+    "long-02-imagine": ("pop", 118, 0.3),
+    "long-03-crm-qui-travaille": ("house", 122, 0.3, 11.2),
+    "long-04-une-semaine": ("lofi", 88, 0.3),
+    "long-05-tout-lui-dire": ("pop", 120, 0.3),
+    "long-06-par-des-agents": ("epic", 100, 0.3, 15.8),
 }
 
 # progressions (MIDI) : accords (3-4 notes) et fondamentale de basse
