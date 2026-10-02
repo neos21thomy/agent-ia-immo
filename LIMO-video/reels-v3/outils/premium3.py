@@ -14,9 +14,9 @@ from premium2 import SHELL
 
 O = 0.3  # décalage de la voix dans chaque film
 VOICE = {
-    "prem-02-trois-erreurs": [["v4/Marie_-07h34.mp3", O]],
+    "prem-02-trois-erreurs": [["v4/Marie_-07h34-cut.mp3", O]],
     "prem-03-dimanche-soir": [["v4/Lucie_-07h35.mp3", O]],
-    "prem-04-le-calcul": [["v4/Paul_K_-07h36.mp3", O]],
+    "prem-04-le-calcul": [["v4/Paul_K_-07h36-cut.mp3", O]],
     "prem-05-une-journee": [["v4/Lucie_-07h40.mp3", O]],
 }
 PRE, FILMS = {}, {}

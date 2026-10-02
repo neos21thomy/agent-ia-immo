@@ -49,7 +49,7 @@ def body(ws, r0, r1, c1):
 ws = wb.active
 ws.title = "Mode d'emploi"
 ws["A1"] = "KIT PUB LIMO — Meta Ads + Google Ads"; ws["A1"].font = T
-ws["A2"] = "Le bras droit du conseiller immo · Essai 14 jours sans CB · Dès 49 €/mois"; ws["A2"].font = Font(name=F, italic=True, size=10, color="6B4FE0")
+ws["A2"] = "Le bras droit du conseiller immo · Essai 14 jours · Dès 49 €/mois"; ws["A2"].font = Font(name=F, italic=True, size=10, color="6B4FE0")
 rows = [
     ("Onglet", "À quoi il sert", "Quand l'utiliser"),
     ("Checklist", "Tout ce qu'il faut installer AVANT de dépenser 1 €", "Jour 1, une seule fois"),
@@ -80,7 +80,7 @@ ck = wb.create_sheet("Checklist")
 ck["A1"] = "Checklist d'installation — à faire avant de lancer"; ck["A1"].font = T
 header(ck, 3, ["#", "Domaine", "Étape (où / comment)", "Pourquoi", "Statut"], [5, 16, 80, 50, 14])
 steps = [
-    ("Landing page", "Remplacer toute mention « 1 mois » par « 14 jours, sans carte bancaire » (titre, bouton, FAQ)", "Même promesse pub = page, sinon conversion en chute et refus Meta possible"),
+    ("Landing page", "Remplacer toute mention « 1 mois » par « essai gratuit de 14 jours » (titre, bouton, FAQ)", "Même promesse pub = page, sinon conversion en chute et refus Meta possible"),
     ("Landing page", "Bouton « Réserver une démo de 15 min » visible + formulaire d'essai en moins de 3 champs", "Chaque champ en plus fait perdre des inscrits"),
     ("Landing page", "Mentions légales, politique de confidentialité et CGV accessibles en bas de page", "Obligatoire + vérifié par Meta et Google"),
     ("Cookies", "Bandeau de consentement compatible Consent Mode v2 (ex. Axeptio, Didomi, Cookiebot)", "Obligatoire en Europe (RGPD/CNIL) ; sans lui Google limite le suivi"),
@@ -222,40 +222,40 @@ header(me, 4, ["#", "Campagne", "Vidéo (fichier)", "Angle", "Texte principal", 
 L = "\n"
 ads = [
     ("A – Premium", "premium-pack/prem-02-trois-erreurs.mp4", "Liste · 3 erreurs (40 s)",
-     f"Conseiller immo, voici 3 erreurs qui te font perdre des mandats 👇{L}{L}1️⃣ Tu rappelles trop tard après l'estimation{L}2️⃣ Tes relances sont dans ta tête{L}3️⃣ Tes soirées partent dans l'administratif{L}{L}Limo corrige les trois. Essai gratuit 14 jours, sans carte bancaire.",
+     f"Conseiller immo, voici 3 erreurs qui te font perdre des mandats 👇{L}{L}1️⃣ Tu rappelles trop tard après l'estimation{L}2️⃣ Tes relances sont dans ta tête{L}3️⃣ Tes soirées partent dans l'administratif{L}{L}Limo corrige les trois. Essai gratuit 14 jours.",
      "Ne perds plus un mandat par oubli", "Le bras droit du conseiller immo", "S'inscrire", "prem-trois-erreurs"),
     ("A – Premium", "premium-pack/prem-03-dimanche-soir.mp4", "POV · dimanche soir (23 s)",
-     f"Dimanche, 22 h. Tu ressors tes notes pour savoir qui rappeler… 😩{L}{L}Ton collègue, lui, regarde un film. Son secret ? Limo prépare sa semaine : relances, rendez-vous, dossiers.{L}{L}Reprends tes dimanches. 14 jours offerts, sans CB.",
+     f"Dimanche, 22 h. Tu ressors tes notes pour savoir qui rappeler… 😩{L}{L}Ton collègue, lui, regarde un film. Son secret ? Limo prépare sa semaine : relances, rendez-vous, dossiers.{L}{L}Reprends tes dimanches. 14 jours offerts.",
      "Reprends tes dimanches", "Essai gratuit 14 jours", "S'inscrire", "prem-dimanche-soir"),
     ("A – Premium", "premium-pack/prem-04-le-calcul.mp4", "Rationnel · le calcul (28 s)",
-     f"Fais le calcul : 1 h d'administratif par jour, c'est plus de 200 h par an ⏱️{L}{L}Limo s'occupe des relances, des comptes rendus, des annonces et du suivi des dossiers. Toi, tu retournes sur le terrain.{L}{L}Dès 49 €/mois · essai 14 jours sans carte bancaire.",
+     f"Fais le calcul : 1 h d'administratif par jour, c'est plus de 200 h par an ⏱️{L}{L}Limo s'occupe des relances, des comptes rendus, des annonces et du suivi des dossiers. Toi, tu retournes sur le terrain.{L}{L}Dès 49 €/mois · essai 14 jours.",
      "Récupère tes heures d'admin", "Dès 49 €/mois · sans engagement", "S'inscrire", "prem-le-calcul"),
     ("A – Premium (vague 2)", "premium-pack/prem-01-regarde-ca.mp4", "Démo · regarde ça (30 s)",
-     f"Conseiller immo, regarde ça 👀{L}{L}Tu demandes « rappelle-moi le bien de M. et Mme T. »… et Limo te sort tout : documents, propriétaires, estimation, diagnostics.{L}{L}Pendant ce temps, il relance tes acquéreurs, ton diagnostiqueur et complète le dossier notaire.{L}{L}Teste-le 14 jours, sans carte bancaire.",
+     f"Conseiller immo, regarde ça 👀{L}{L}Tu demandes « rappelle-moi le bien de M. et Mme T. »… et Limo te sort tout : documents, propriétaires, estimation, diagnostics.{L}{L}Pendant ce temps, il relance tes acquéreurs, ton diagnostiqueur et complète le dossier notaire.{L}{L}Teste-le 14 jours.",
      "Ton assistant connaît tes biens", "Essai gratuit 14 jours", "S'inscrire", "prem-regarde-ca"),
     ("A – Premium (vague 2)", "premium-pack/prem-05-une-journee.mp4", "Démo · une journée (34 s)",
      f"8 h : tes priorités sont prêtes.{L}10 h : tu dictes ton compte rendu dans la voiture, la fiche est créée.{L}14 h : nouveau mandat ? L'annonce est rédigée en 2 minutes.{L}18 h : diagnostiqueur relancé, notaire servi.{L}{L}Et toi ? Tu as passé ta journée avec tes clients. 🏡{L}{L}Limo, le bras droit du conseiller immo. Essai gratuit 14 jours.",
      "Une journée avec Limo", "Le bras droit du conseiller immo", "S'inscrire", "prem-une-journee"),
     ("A – Acquisition", "voix/voix-03-surcharge.mp4", "Surcharge (10 s)",
-     f"Conseiller immo, surchargé ?{L}{L}Appels manqués, relances oubliées, dossiers incomplets… LIMO s'en occupe pour toi.{L}{L}✅ Relances automatiques{L}✅ Dossiers suivis jusqu'au notaire{L}✅ Estimations et annonces en quelques minutes{L}{L}Essai gratuit 14 jours, sans carte bancaire.",
+     f"Conseiller immo, surchargé ?{L}{L}Appels manqués, relances oubliées, dossiers incomplets… LIMO s'en occupe pour toi.{L}{L}✅ Relances automatiques{L}✅ Dossiers suivis jusqu'au notaire{L}✅ Estimations et annonces en quelques minutes{L}{L}Essai gratuit 14 jours.",
      "LIMO, le bras droit du conseiller", "Dès 49 €/mois · sans engagement", "S'inscrire", "surcharge"),
     ("A – Acquisition", "voix/voix-01-julien.mp4", "Storytelling (59 s)",
      f"Julien a fait une super estimation. Puis il a oublié de rappeler.{L}{L}Quelques jours plus tard, un autre panneau était sur la maison.{L}{L}Le mandat ne se perd pas pendant l'estimation. Il se perd APRÈS.{L}{L}LIMO garde le fil de chaque vendeur, chaque relance, chaque dossier.{L}{L}👉 Réserve ta démo de 15 min.",
      "Ne perds plus un mandat par oubli", "Démo gratuite de 15 min", "Réserver", "julien"),
     ("A – Acquisition", "voix/voix-02-regarde-ca.mp4", "Démo produit (30 s)",
-     f"Conseiller immo, regarde ça 👀{L}{L}Tu demandes « rappelle-moi le bien de M. et Mme T. » → LIMO te sort la fiche complète : documents, diagnostics, propriétaires, estimation.{L}{L}Et pendant ce temps, il relance tes acquéreurs et ton diagnostiqueur.{L}{L}Teste-le 14 jours, sans CB.",
+     f"Conseiller immo, regarde ça 👀{L}{L}Tu demandes « rappelle-moi le bien de M. et Mme T. » → LIMO te sort la fiche complète : documents, diagnostics, propriétaires, estimation.{L}{L}Et pendant ce temps, il relance tes acquéreurs et ton diagnostiqueur.{L}{L}Teste-le 14 jours.",
      "Toute ton activité, au même endroit", "Essai gratuit 14 jours", "S'inscrire", "regarde-ca"),
     ("A – Acquisition", "pubs-30s/LIMO-pub30-01-mandats-perdus-9x16.mp4", "Perte de mandats (30 s)",
-     f"Combien de mandats as-tu perdus cette année… juste par manque de suivi ?{L}{L}LIMO relance tes vendeurs au bon moment, prépare tes estimations et garde tous tes dossiers à jour.{L}{L}Plus de temps sur le terrain, moins de temps sur l'administratif.{L}{L}Essai gratuit 14 jours, sans carte bancaire.",
+     f"Combien de mandats as-tu perdus cette année… juste par manque de suivi ?{L}{L}LIMO relance tes vendeurs au bon moment, prépare tes estimations et garde tous tes dossiers à jour.{L}{L}Plus de temps sur le terrain, moins de temps sur l'administratif.{L}{L}Essai gratuit 14 jours.",
      "Arrête de perdre des mandats", "Dès 49 €/mois", "S'inscrire", "mandats-perdus"),
     ("A – Acquisition", "lifestyle/LIMO-life-02-pov-collegue-9x16.mp4", "POV / humour",
-     f"POV : ton collègue a l'air moins débordé que toi… et il rentre plus tôt 😅{L}{L}Son secret ? LIMO, le bras droit du conseiller immo.{L}{L}Relances, dossiers, annonces, estimations : c'est fait.{L}{L}14 jours pour tester, sans CB.",
+     f"POV : ton collègue a l'air moins débordé que toi… et il rentre plus tôt 😅{L}{L}Son secret ? LIMO, le bras droit du conseiller immo.{L}{L}Relances, dossiers, annonces, estimations : c'est fait.{L}{L}14 jours pour tester.",
      "Son secret ? LIMO.", "Essai gratuit 14 jours", "En savoir plus", "pov-collegue"),
     ("B – Relance", "signatures/sign-01-derriere-chaque-signature.mp4", "Émotion (32 s)",
      f"Le jour de la signature, on oublie tout le reste.{L}{L}Les appels du soir, les relances, les compromis, les diagnostics, les échanges avec le notaire…{L}{L}LIMO s'occupe du reste, pour un suivi ultra pro du mandat à la signature.{L}{L}👉 Réserve ta démo de 15 min.",
      "Du mandat à la signature, sans oubli", "Démo gratuite de 15 min", "Réserver", "signatures"),
     ("B – Relance", "cine/LIMO-cine-03-le-calcul-9x16.mp4", "Rationnel (temps/argent)",
-     f"Fais le calcul : combien d'heures par semaine passes-tu sur l'administratif ?{L}{L}LIMO te les rend : relances, dossiers, annonces et estimations automatisés.{L}{L}Tu as déjà vu LIMO passer. Il ne te reste qu'à l'essayer : 14 jours, sans carte bancaire.",
+     f"Fais le calcul : combien d'heures par semaine passes-tu sur l'administratif ?{L}{L}LIMO te les rend : relances, dossiers, annonces et estimations automatisés.{L}{L}Tu as déjà vu LIMO passer. Il ne te reste qu'à l'essayer : 14 jours.",
      "Récupère tes heures d'admin", "Dès 49 €/mois · sans engagement", "S'inscrire", "le-calcul"),
 ]
 for i, a in enumerate(ads):
@@ -285,7 +285,7 @@ heads = [
     ("LIMO, logiciel immo IA", "Position 1"),
     ("Le bras droit du conseiller", ""),
     ("Essai gratuit 14 jours", ""),
-    ("Sans carte bancaire", ""),
+    ("Prise en main immédiate", ""),
     ("Dès 49 €/mois", ""),
     ("Relances vendeurs auto", ""),
     ("Ne perdez plus un mandat", ""),
@@ -299,7 +299,7 @@ heads = [
     ("Sans engagement", ""),
 ]
 descs = [
-    "Relances, dossiers, estimations, annonces : LIMO s'occupe du reste. 14 jours sans CB.",
+    "Relances, dossiers, estimations, annonces : LIMO s'occupe du reste. Essai 14 jours offert.",
     "Le bras droit des conseillers immobiliers indépendants. Dès 49 €/mois, sans engagement.",
     "Ne perdez plus un vendeur par oubli : LIMO vous rappelle qui relancer, quand et comment.",
     "Réservez une démo de 15 min et découvrez comment gagner des heures d'admin chaque semaine.",
@@ -335,8 +335,8 @@ ext = [
     ("Lien annexe", "Réserver une démo", 25, "Démo de 15 min en visio · " + URL + "/demo"),
     ("Lien annexe", "Tarifs", 25, "Dès 49 €/mois, sans engagement · " + URL + "/tarifs"),
     ("Lien annexe", "Fonctionnalités", 25, "Relances, dossiers, estimations · " + URL + "/fonctionnalites"),
-    ("Lien annexe", "Essai gratuit 14 jours", 25, "Sans carte bancaire · " + URL + "/inscription"),
-    ("Accroche", "Sans carte bancaire", 25, ""),
+    ("Lien annexe", "Essai gratuit 14 jours", 25, "Créer mon compte · " + URL + "/inscription"),
+    ("Accroche", "Prise en main rapide", 25, ""),
     ("Accroche", "Sans engagement", 25, ""),
     ("Accroche", "Support en français", 25, ""),
     ("Accroche", "Prêt en 2 minutes", 25, ""),

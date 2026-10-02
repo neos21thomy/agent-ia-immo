@@ -16,7 +16,7 @@ Toutes les pubs ont la musique intégrée. La carte de fin « **ESSAIE LIMO, 14 
 La landing `app.leadengineai.fr` affiche **« Essayer gratuitement 1 mois »**. Ce site n'est pas dans le dépôt auquel j'ai accès, donc la correction est à faire de ton côté :
 
 - [ ] Remplacer le texte du bouton : « Essayer gratuitement 1 mois » → **« Essayer gratuitement 14 jours »**.
-- [ ] Ajouter la mention sous le bouton : **« Sans carte bancaire · Sans engagement »**.
+- [ ] Ajouter la mention sous le bouton : **« · Sans engagement »**.
 - [ ] Vérifier la durée d'essai réellement paramétrée dans l'outil de paiement ou d'inscription (ex. Stripe : `trial_period_days = 14`).
 - [ ] Vérifier la même mention dans les e-mails de bienvenue, la page tarifs et les CGV.
 - [ ] Installer le **pixel Meta** (ou l'API Conversions) sur l'app, avec l'événement **`CompleteRegistration`** à la création du compte d'essai.
@@ -53,7 +53,7 @@ URL de destination (à suivre dans les statistiques) :
 ### PUB 01 · « Ton vendeur a appelé 3 agences » (`LIMO-pub-01-trois-agences`)
 - **Texte principal :** Ton vendeur a demandé une estimation à 3 agences hier soir. Il signera avec celle qui répond en premier. 📲
 LIMO, le bras droit du conseiller immo, te prépare la réponse en quelques minutes, même quand tu es en visite.
-✅ 14 jours offerts · sans carte bancaire · sans engagement
+✅ 14 jours offerts · sans engagement
 - **Titre :** Réponds avant les autres agences
 - **Description :** Essai gratuit 14 jours
 - **Bouton :** S'inscrire
@@ -61,15 +61,15 @@ LIMO, le bras droit du conseiller immo, te prépare la réponse en quelques minu
 ### PUB 02 · « Ton concurrent utilise déjà ça » (`LIMO-pub-02-ton-concurrent`)
 - **Texte principal :** Ton concurrent a déjà son brief du matin, ses relances prêtes et ses annonces rédigées avant 9 h. Il ne te le dira pas. 🤫
 LIMO, c'est le bras droit du conseiller immobilier.
-✅ Teste-le 14 jours gratuitement, sans carte bancaire.
+✅ Teste-le 14 jours gratuitement.
 - **Titre :** Le secret des agents qui signent plus
-- **Description :** 14 jours offerts, sans CB
+- **Description :** 14 jours offerts
 - **Bouton :** En savoir plus
 
 ### PUB 03 · « Qui va vendre dans ta rue ? » (`LIMO-pub-03-qui-va-vendre`)
 - **Texte principal :** Et si tu savais qui va vendre dans ton secteur avant les autres agences ? 📍
 Le détecteur de LIMO repère les signaux de vente autour de toi et te dit qui appeler.
-✅ Essai gratuit 14 jours · sans carte bancaire · sans engagement
+✅ Essai gratuit 14 jours · sans engagement
 - **Titre :** Appelle avant les autres agences
 - **Description :** Détecteur de vendeurs inclus
 - **Bouton :** S'inscrire
@@ -78,7 +78,7 @@ Le détecteur de LIMO repère les signaux de vente autour de toi et te dit qui a
 - **Texte principal :** On a fait passer un entretien à ton futur assistant. 🤖
 Horaires : 24 h/24. Congés : jamais. Salaire : dès 49 €/mois.
 Il écrit tes annonces, relance tes vendeurs et prépare ta journée.
-✅ Embauche-le 14 jours gratuitement, sans carte bancaire.
+✅ Embauche-le 14 jours gratuitement.
 - **Titre :** Ton assistant immo pour 49 €/mois
 - **Description :** 14 jours offerts
 - **Bouton :** S'inscrire
@@ -86,7 +86,7 @@ Il écrit tes annonces, relance tes vendeurs et prépare ta journée.
 ### PUB 05 · Mascotte « Mieux que ton stagiaire » (`LIMO-pub-05-mieux-que-ton-stagiaire`)
 - **Texte principal :** 3 trucs que LIMO fait mieux que ton stagiaire : il ne dort jamais, il n'oublie aucune relance et il ne demande pas d'augmentation. 😄
 (Garde quand même ton stagiaire : il fait très bien le café.)
-✅ 14 jours gratuits · sans carte bancaire · sans engagement
+✅ 14 jours gratuits · sans engagement
 - **Titre :** L'assistant IA des agents immo
 - **Description :** Essai gratuit 14 jours
 - **Bouton :** En savoir plus
@@ -95,7 +95,7 @@ Il écrit tes annonces, relance tes vendeurs et prépare ta journée.
 - **Texte principal :** « Rappelez-moi en mars. » En avril : « On a signé avec une autre agence. » 😬
 Ce n'est pas le prix qui t'a fait perdre ce mandat, c'est l'oubli.
 LIMO te rappelle qui relancer, et quand. Tu n'oublies plus personne.
-✅ 14 jours offerts, sans carte bancaire.
+✅ 14 jours offerts.
 - **Titre :** Plus aucun mandat perdu par oubli
 - **Description :** Essai gratuit 14 jours
 - **Bouton :** S'inscrire
@@ -124,7 +124,7 @@ LIMO te rappelle qui relancer, et quand. Tu n'oublies plus personne.
 
 ## ⚖️ 4. Conformité
 
-- L'offre annoncée (14 jours, sans CB, sans engagement) doit être **exactement** celle de la page d'inscription (voir la section 0).
+- L'offre annoncée (14 jours, sans engagement) doit être **exactement** celle de la page d'inscription (voir la section 0).
 - Les noms, chiffres et situations des vidéos sont **fictifs**. Les écrans d'estimation et de carte portent la mention « Exemple fictif », et les temps du duel sont « indicatifs ».
 - N'ajoute pas de faux témoignages ni de résultats chiffrés non prouvés (« +40 % de mandats »…) dans les textes.
 - Le prix « dès 49 €/mois » doit correspondre à la grille affichée sur le site.
@@ -141,7 +141,7 @@ Objectif conseillé : **Prospects** (formulaire Meta ou message) ou **Trafic** v
 
 | Pub | Texte principal | Titre |
 |---|---|---|
-| `pub30-01-mandats-perdus` | Agent immobilier, combien de vendeurs « à rappeler » dorment dans tes notes ? 📝 LIMO prépare tes relances chaque matin, au bon moment, avec le bon message. Plus aucun mandat perdu par oubli. 👉 Contacte-nous et découvre LIMO : 14 jours offerts, sans carte bancaire. | Plus aucun mandat perdu par oubli |
+| `pub30-01-mandats-perdus` | Agent immobilier, combien de vendeurs « à rappeler » dorment dans tes notes ? 📝 LIMO prépare tes relances chaque matin, au bon moment, avec le bon message. Plus aucun mandat perdu par oubli. 👉 Contacte-nous et découvre LIMO : 14 jours offerts. | Plus aucun mandat perdu par oubli |
 | `pub30-02-trois-agences` | Agent immobilier, ton vendeur a appelé 3 agences hier soir. Il signera avec la première qui répond. ⏱️ LIMO crée sa fiche et prépare ta réponse pendant que tu es en visite. 👉 Contacte-nous et découvre LIMO : 14 jours offerts. | Réponds en 4 minutes, pas le lendemain |
 | `pub30-03-annonces` | Agent immobilier, 45 minutes par annonce, 8 annonces par mois… le soir. 🌙 Avec LIMO, tu décris le bien, l'annonce est rédigée en 2 minutes, mentions légales incluses. 👉 Contacte-nous et découvre LIMO : 14 jours offerts. | Tes annonces en 2 minutes |
 | `pub30-04-qui-va-vendre` | Agent immobilier, et si tu savais qui va vendre dans ton secteur avant les autres ? 📍 Le détecteur LIMO te dit qui appeler cette semaine. Fini le boîtage au hasard. 👉 Contacte-nous et découvre LIMO : 14 jours offerts. | Appelle avant les autres agences |

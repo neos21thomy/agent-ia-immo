@@ -129,7 +129,7 @@ def main():
           f"Toutes les vidéos Instagram (1080×1920, 30 i/s) de LIMO, au même endroit : **{total} fichiers MP4**.",
           "Chaque vidéo existe en version **bruitages seuls** (pour poser un son tendance dans Instagram) et, le plus souvent, en version **`-musique`**.",
           "Ouvre `CATALOGUE.html` dans ce dossier pour les regarder toutes directement dans ton navigateur.", "",
-          "**Rappels :** essai **14 jours sans CB** (la landing indique encore « 1 mois » : à corriger) · noms et chiffres fictifs · prix « dès 49 €/mois ».", ""]
+          "**Rappels :** essai **14 jours** (la landing indique encore « 1 mois » : à corriger) · noms et chiffres fictifs · prix « dès 49 €/mois ».", ""]
     md.append("| Série | Statut | Vidéos |\n|---|---|---|")
     for folder, title, status, desc, items in rows:
         md.append(f"| {title} | {status} | {len(items)} |")
@@ -170,7 +170,7 @@ video{{width:100%;aspect-ratio:9/16;display:block;background:#000}} .b{{padding:
 .cta{{color:var(--vio);font-weight:600}} .l a{{display:inline-block;margin-right:8px;font-size:13px;color:var(--vio)}}
 </style></head><body><header><h1>🎬 Catalogue des vidéos LIMO</h1>
 <p class="intro">{total} fichiers MP4 (1080×1920, 30 i/s). Clique sur une vidéo pour la lire. Les séries marquées « À publier en priorité » sont les plus récentes.
-Essai <b>14 jours sans CB</b> · noms et chiffres fictifs.</p></header>{''.join(secs)}</body></html>"""
+Essai <b>14 jours</b> · noms et chiffres fictifs.</p></header>{''.join(secs)}</body></html>"""
     (R / "CATALOGUE.html").write_text(page, encoding="utf-8")
     print(f"{total} vidéos → {R / 'CATALOGUE.md'} et CATALOGUE.html")
 

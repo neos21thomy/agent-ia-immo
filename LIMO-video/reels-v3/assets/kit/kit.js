@@ -573,7 +573,7 @@
     const spkR = K.sparkles(parent, 540, 540, 14, 250, 250, 1);
     const wm = K.h("div", "k-wm kend-wm", `<span class="t"><span class="lm" data-layout-allow-overflow><span data-layout-allow-occlusion>L</span></span><span class="lm" data-layout-allow-overflow><span data-layout-allow-occlusion>I</span></span><span class="lm" data-layout-allow-overflow><span data-layout-allow-occlusion>M</span></span></span><svg viewBox="0 0 128 128"><circle cx="64" cy="64" r="52" fill="none" style="stroke:var(--cyan)" stroke-width="23" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" transform="rotate(-90 64 64)"/></svg>`, parent);
     const tag = K.h("div", "kend-tag", o.tag || "Le bras droit du conseiller immo.", parent);
-    const cta = K.h("div", "kend-cta", `<span class="kend-sheen"></span><span class="t">${o.cta || "14 jours gratuits · sans CB"}</span>`, parent);
+    const cta = K.h("div", "kend-cta", `<span class="kend-sheen"></span><span class="t">${o.cta || "14 jours gratuits"}</span>`, parent);
     cta.setAttribute("data-layout-allow-overflow", "");
     const spkC = K.sparkles(parent, 540, 1174, 16, 380, 120, 3);
     const url = K.h("div", "kend-url", "app.leadengineai.fr", parent);

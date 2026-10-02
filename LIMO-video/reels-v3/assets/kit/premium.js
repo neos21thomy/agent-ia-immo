@@ -94,7 +94,7 @@
     tl.fromTo(K.$("i.sh", cta), { x: -160 }, { x: 960, duration: 0.9, ease: "power2.inOut" }, t + 1.6);
     tl.to(cta, { scale: 1.05, duration: 0.35, ease: "sine.inOut", yoyo: true, repeat: 3 }, t + 1.7);
     const top2 = three ? 1340 : kind === "demo" ? 1170 : 1280;
-    const chips = P.ab("ctr p-chips", `<span>${K.icon("check")}Sans carte bancaire</span><span>${K.icon("check")}Sans engagement</span>`, { top: top2 + "px" });
+    const chips = P.ab("ctr p-chips", `<span>${K.icon("check")}Sans engagement</span>`, { top: top2 + "px" });
     tl.set(chips, { opacity: 0 }, 0);
     tl.set(chips, { opacity: 1 }, t + 1.35);
     K.fin(K.$$("span", chips), t + 1.35, { y: 12, st: 0.1 });

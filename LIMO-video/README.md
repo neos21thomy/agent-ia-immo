@@ -148,7 +148,7 @@ Il y a quatre fichiers : 22 s et 15 s, chacun en version bruitages seuls et en v
 | 6,4 – 13,3 s | Le vrai écran LIMO : notification « M. Albert attend ton rappel aujourd'hui », zoom sur « Nouveau mandat détecté » puis « Anniversaire client » |
 | 13,3 – 16,4 s | « TON CRM STOCKE. LIMO TRAVAILLE. Plus aucune vente ne se perd par oubli. » |
 | 16,4 – 18,4 s | La maison lumineuse, LIMO, chef de cabinet immo |
-| 18,4 – 22,5 s | « Essaie-le 14 jours. » Bouton « Commencer gratuitement », sans carte bancaire, sans engagement |
+| 18,4 – 22,5 s | « Essaie-le 14 jours. » Bouton « Commencer gratuitement », sans engagement |
 
 Sources : `reels-v3/reels/premium-hero.html` et `premium-15s.html`. Nouveaux visuels dans `reels-v3/assets/img/` : `phone-limo.png`, `limo-house.png`, `bureau-robot.jpg`.
 
@@ -156,7 +156,7 @@ Sources : `reels-v3/reels/premium-hero.html` et `premium-15s.html`. Nouveaux vis
 
 Chaque Reel montre **les 11 outils en situation** (brief du jour, dictée → fiche, compromis PDF → fiche,
 estimation, annonce, posts réseaux, photo « VENDU », SMS anniversaire, avis Google, détecteur de ventes,
-question juridique) et finit sur « 14 jours gratuits · sans CB ».
+question juridique) et finit sur « 14 jours gratuits ».
 
 | Fichier (`rendus/v3/`) | Format | Durée | Ce qui accroche |
 |---|---|---|---|
@@ -226,7 +226,7 @@ Refaire une version : `python3 reels-v3/outils/music.py <reel> reels-v3/.sfx/<re
 | 11 – 14,5 s | 03 · Estimation : 389 000 €, fourchette, confiance 86 %, sources DVF / IGN / ADEME |
 | 14,5 – 17,5 s | 04 · Détecteur de ventes : carte, 3 nouveaux DPE (F, G, E), nouvelle piste |
 | 17,5 – 20,5 s | Avec LIMO : « Moins d'admin. Plus de terrain. » sur la photo du robot au bureau vue mer |
-| 20,5 – 24,5 s | Fin : le logo se dessine et se pose sur le ventre du robot, LIMO, « 14 jours gratuits · sans CB » |
+| 20,5 – 24,5 s | Fin : le logo se dessine et se pose sur le ventre du robot, LIMO, « 14 jours gratuits » |
 
 ## 🔁 Refaire le rendu
 
@@ -248,7 +248,7 @@ npx hyperframes@0.8.96 render -o renders/LIMO-reel.mp4 -q delivery -f 30
 ## ⚖️ À savoir
 
 - Données affichées **100 % fictives** (compte démo « Jean & Marie TYPE », noms d'exemple).
-- Offre affichée dans les Reels : **14 jours gratuits, sans CB**. La landing page indiquait encore « Essayer gratuitement 1 mois » :
+- Offre affichée dans les Reels : **14 jours gratuits**. La landing page indiquait encore « Essayer gratuitement 1 mois » :
   à aligner avant de publier, sinon l'écart entre la pub et le site peut être reproché (publicité trompeuse).
 - Posts réseaux : seul LinkedIn apparaît « Publié » (publication directe réelle) ; Instagram et Facebook sont « Prêts à publier ».
 - Speedrun : la mention « Vidéo accélérée ×4 » reste affichée sous le chrono.

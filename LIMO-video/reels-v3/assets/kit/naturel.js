@@ -213,7 +213,7 @@
     tl.set(cta, { opacity: 1 }, t + 1.1);
     K.pop(K.$("span", cta), t + 1.1, { s: 0.8, d: 0.45, e: "back.out(1.6)" });
     K.sfx(t + 1.1, "cta", 0.18);
-    const sub = N.text("ctr n-body", (kind === "demo" ? "<b>Lien en bio</b><br>" : "") + (kind === "contact" ? "<b>14 jours offerts</b> · " : "") + "Sans carte bancaire · Sans engagement<br><b>app.leadengineai.fr</b>", { top: Y(1290), fontSize: "30px" }, t + 1.35);
+    const sub = N.text("ctr n-body", (kind === "demo" ? "<b>Lien en bio</b><br>" : "") + (kind === "contact" ? "<b>14 jours offerts</b> · " : "") + "Sans engagement<br><b>app.leadengineai.fr</b>", { top: Y(1290), fontSize: "30px" }, t + 1.35);
     return t + 3.6;
   };
 })();

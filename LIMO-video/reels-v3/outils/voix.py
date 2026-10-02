@@ -151,7 +151,7 @@ FILMS["voix-01-julien"] = ("LIMO, l'histoire de Julien", 59.4, GLASS, TOOLS + VT
         C.out([e1, e1b, e2, e3], 55.2, 0.3);
         window.__TE = 55.5;
         N.outro(55.5, "demo");
-        const m = N.mascot({ left: "440px", top: "1240px", width: "200px" });
+        const m = N.mascot({ left: "445px", top: "1500px", width: "190px" });
         m.enter(57.0);
         m.wave(57.7);
 """)

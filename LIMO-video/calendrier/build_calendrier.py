@@ -19,7 +19,7 @@ WEEK = [PatternFill("solid", fgColor=c) for c in ("FFFFFF", "F4F1FD", "FFFFFF", 
 H1 = "#conseillerimmobilier #agentimmobilier #immobilier #mandataireimmobilier #limo"
 H2 = "#immobilierfrance #negociateurimmobilier #prospectionimmobilier #productivite #limo"
 H3 = "#agentimmo #immo #estimationimmobiliere #mandatexclusif #outilsimmo #limo"
-CTA = "👉 Essai gratuit 14 jours, sans carte bancaire : lien en bio."
+CTA = "👉 Essai gratuit 14 jours : lien en bio."
 N = "\n"
 
 # (fichier, thème, légende, commentaire épinglé, hashtags)

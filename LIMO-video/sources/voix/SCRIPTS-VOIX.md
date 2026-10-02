@@ -25,7 +25,7 @@ Erreur numéro deux : tes relances sont dans ta tête. [chuckles] Et ta tête…
 
 [confident] Limo corrige les trois. Il te dit qui relancer, quand, et prépare le message pour toi.
 
-[warmly] Limo, le bras droit du conseiller immo. Essaie-le quatorze jours, sans carte bancaire.
+[warmly] Limo, le bras droit du conseiller immo. Essaie-le quatorze jours.
 
 ## S2 · POV dimanche soir (20 s) · Lucie
 [tired] Dimanche, vingt-deux heures… [sighs] Toi, tu ressors tes notes pour savoir qui tu devais rappeler cette semaine.
@@ -45,7 +45,7 @@ Erreur numéro deux : tes relances sont dans ta tête. [chuckles] Et ta tête…
 
 Toi, tu récupères ton temps… [excited] et tu le passes là où ça rapporte : sur le terrain.
 
-[warmly] Limo, dès quarante-neuf euros par mois. Teste-le quatorze jours, sans carte bancaire.
+[warmly] Limo, dès quarante-neuf euros par mois. Teste-le quatorze jours.
 
 ## S4 · La vendeuse qui attendait (30 s) · Marie
 [nostalgic] Je m'appelle Mme Roy. J'ai vendu ma maison l'an dernier.
@@ -87,4 +87,4 @@ Pas de balises : c'est toi qui joues. Notes de jeu entre parenthèses, à ne pas
 
 (le sourire revient) Alors j'ai créé Limo : l'outil que j'aurais voulu avoir. Relances, estimations, dossiers… tout est suivi.
 
-(énergique) Je l'ai fait pour nous, les conseillers. Teste-le quatorze jours, c'est gratuit, sans carte bancaire.
+(énergique) Je l'ai fait pour nous, les conseillers. Teste-le quatorze jours, c'est gratuit.

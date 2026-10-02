@@ -13,7 +13,7 @@ chacun dans un format viral différent. Les MP4 finaux sont dans `../rendus/v3/`
 
 Versions 15 s ciblées agents immo : `reels/short-1-pov.html` à `reels/short-5-top3.html` (3 à 4 outils métier, carte de fin « L'IA des agents immo. »).
 
-Chaque Reel finit sur la même carte : robot LIMO, « Ton chef de cabinet IA. », **« 14 jours gratuits · sans CB »**, app.leadengineai.fr.
+Chaque Reel finit sur la même carte : robot LIMO, « Ton chef de cabinet IA. », **« 14 jours gratuits »**, app.leadengineai.fr.
 
 ## Les 11 outils montrés (données fictives)
 
