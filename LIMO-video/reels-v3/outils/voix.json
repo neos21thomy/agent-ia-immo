@@ -84,5 +84,35 @@
    "longs/Yariq-17h13c.mp3",
    0.3
   ]
+ ],
+ "punch-01-ce-quon-ne-voit-pas": [
+  [
+   "emotion/Emilie-10h50m58.mp3",
+   0.3
+  ]
+ ],
+ "punch-02-23-heures": [
+  [
+   "emotion/Emilie-10h52m01.mp3",
+   0.3
+  ]
+ ],
+ "punch-03-le-mandat-da-cote": [
+  [
+   "emotion/Yariq-10h52m37.mp3",
+   0.3
+  ]
+ ],
+ "punch-04-pas-tout-seul": [
+  [
+   "emotion/Emilie-10h53m35.mp3",
+   0.3
+  ]
+ ],
+ "punch-05-lettre-a-un-conseiller": [
+  [
+   "emotion/Yariq-10h54m31.mp3",
+   0.3
+  ]
  ]
 }
