@@ -115,6 +115,8 @@ PRESETS = {
     "long-04-une-semaine": ("lofi", 88, 0.3),
     "long-05-tout-lui-dire": ("pop", 120, 0.3),
     "long-06-par-des-agents": ("epic", 100, 0.3, 15.8),
+    "viral-01-il-te-lache-plus": ("pop", 122, 0.3, 23.8),
+    "viral-02-limo-tappelle": ("pop", 122, 0.3, 17.0),
 }
 
 # progressions (MIDI) : accords (3-4 notes) et fondamentale de basse

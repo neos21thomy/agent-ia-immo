@@ -244,6 +244,41 @@ def chirp(n=4, seed=1):
     return y
 
 
+def ring(d=2.0):
+    """Sonnerie de téléphone (marimba, motif original)."""
+    notes = [659.3, 987.8, 1318.5, 987.8, 1174.7, 987.8, 1318.5, 1568.0]
+    y = np.zeros(int((d + 0.6) * SR))
+    i, at = 0, 0.0
+    while at < d:
+        t = t_axis(0.5)
+        f = notes[i % len(notes)]
+        b = (np.sin(2 * np.pi * f * t) + 0.25 * np.sin(2 * np.pi * 4 * f * t) * np.exp(-t / 0.03)) * np.exp(-t / 0.16) * np.clip(t / 0.002, 0, 1)
+        a = int(at * SR)
+        y[a : a + len(b)] += b
+        i += 1
+        at += 0.125 if (i % 8) else 0.5
+    return y
+
+
+def boom():
+    """Gros « boum » de mème (impact grave saturé)."""
+    t = t_axis(1.3)
+    f = 70 + 90 * np.exp(-t / 0.06)
+    s = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / 0.45)
+    s = np.tanh(2.6 * s)
+    s[: int(0.03 * SR)] += 0.4 * bp(noise(0.03), 200, 3000)
+    return lp(s, 2500)
+
+
+def scratch():
+    """Scratch de vinyle (arrêt net)."""
+    d = 0.42
+    t = t_axis(d)
+    f = 600 + 1800 * np.abs(np.sin(2 * np.pi * 3.2 * t))
+    s = bp(noise(d), 300, 5000) * 0.6 + 0.5 * np.sign(np.sin(2 * np.pi * np.cumsum(f) / SR))
+    return lp(s, 4000) * np.minimum(1, (d - t) / 0.05) * np.minimum(1, t / 0.005) * 0.6
+
+
 SOUNDS = {
     "chirp": lambda e: chirp(e.get("n", 4), int(e["t"] * 100) % 997 + 1),
     "tick": lambda e: tick(e.get("f", 2600)),
@@ -277,6 +312,9 @@ SOUNDS = {
     "buzz": lambda e: buzz(e.get("d", 0.28)),
     "slam": lambda e: slam(),
     "clack": lambda e: clack(),
+    "ring": lambda e: ring(e.get("d", 2.0)),
+    "boom": lambda e: boom(),
+    "scratch": lambda e: scratch(),
 }
 
 
