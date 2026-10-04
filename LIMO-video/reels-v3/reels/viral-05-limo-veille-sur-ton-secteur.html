@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — LIMO veille sur ton secteur</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/naturel.css" />
+    <link rel="stylesheet" href="assets/kit/app.css" />
+    <style>
+      @font-face { font-family: "Anton"; src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Source Serif 4"; src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; }
+      @font-face { font-family: "Montserrat Hook"; src: url("assets/fonts/montserrat-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-style: normal; }
+      #s-main { background: transparent; }
+      .glass { border-radius: 40px; background: rgba(14, 16, 40, 0.42); backdrop-filter: blur(22px) saturate(1.3); -webkit-backdrop-filter: blur(22px) saturate(1.3);
+        border: 1.5px solid rgba(255,255,255,.28); box-shadow: 0 30px 80px rgba(0,0,0,.35); color: #fff; font-family: Inter, sans-serif; }
+      .gchip { display: inline-flex; align-items: center; gap: 10px; height: 52px; padding: 0 22px; border-radius: 26px; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.3); color: #fff; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 24px; white-space: nowrap; }
+      .gchip.ok { background: rgba(44,196,181,.35); border-color: rgba(44,196,181,.75); }
+      .gchip svg.i { width: 26px; height: 26px; stroke-width: 2.6; }
+      .grow { display: flex; align-items: center; gap: 18px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.16); font-size: 30px; }
+      .grow b { font-weight: 600; }
+      .grow em { margin-left: auto; font-style: normal; font-family: Montserrat, sans-serif; font-weight: 800; color: #7ff0e3; }
+      .gav { flex: none; width: 58px; height: 58px; border-radius: 50%; background: rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 22px; }
+      .shade { text-shadow: 0 4px 30px rgba(0,0,0,.55); }
+
+      .note { position: absolute; padding: 22px 26px 26px; width: 330px; background: #ffe98a; color: #3b3000; font-family: Caveat, cursive; font-weight: 700; font-size: 46px; line-height: 1.05; box-shadow: 0 18px 40px rgba(0,0,0,.45); }
+      .note::before { content: ""; position: absolute; left: 50%; top: -14px; width: 90px; height: 28px; margin-left: -45px; background: rgba(255,255,255,.55); transform: rotate(-3deg); }
+
+      .vo { display: inline-block; max-width: 900px; padding: 16px 28px; border-radius: 26px; background: rgba(10,10,30,.42); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); color: #fff; font-family: Inter, sans-serif; font-weight: 600; font-size: 40px; line-height: 1.3; text-shadow: 0 2px 10px rgba(0,0,0,.35); }
+      .hd2 { font-family: Inter, sans-serif; font-size: 25px; letter-spacing: .08em; color: rgba(255,255,255,.78); }
+      .big { display: block; margin-top: 8px; font-family: Montserrat, sans-serif; font-weight: 800; font-size: 54px; line-height: 1.12; }
+      .ln { display: flex; align-items: center; gap: 18px; margin-top: 20px; font-family: Inter, sans-serif; font-size: 36px; line-height: 1.3; }
+      .ln svg { flex: none; width: 40px; height: 40px; color: #2cc4b5; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="37.9" data-width="1080" data-height="1920">
+      <video id="v1" class="clip" src="assets/video/agent-deborde.mp4" data-start="0" data-duration="4.0" data-track-index="1" muted playsinline style="position:absolute;left:0;top:0;width:1080px;height:1920px;object-fit:cover"></video>
+      <video id="v2" class="clip" src="assets/video/maison-contemporaine.mp4" data-start="22.5" data-duration="5.0" data-track-index="2" muted playsinline style="position:absolute;left:0;top:0;width:1080px;height:1920px;object-fit:cover"></video>
+      <video id="v3" class="clip" src="assets/video/piscine-liberte.mp4" data-start="27.5" data-duration="2.7" data-track-index="3" muted playsinline style="position:absolute;left:0;top:0;width:1080px;height:1920px;object-fit:cover"></video>
+      <video id="v3b" class="clip" src="assets/video/piscine-liberte.mp4" data-start="30.2" data-duration="2.4" data-media-start="4.65" data-playback-rate="0.75" data-track-index="4" muted playsinline style="position:absolute;left:0;top:0;width:1080px;height:1920px;object-fit:cover"></video>
+      <section id="s-main" class="clip" data-start="0" data-duration="37.9" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/viral-05-limo-veille-sur-ton-secteur.wav" data-start="0" data-duration="37.9" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/naturel.js"></script>
+    <script src="assets/kit/app.js"></script>
+    <script src="assets/kit/cine.js"></script>
+    <script src="assets/kit/fx.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 37.9;
+        N.init(tl, root, D);
+        A.init(tl, root);
+        C.init(tl, root, D);
+        FX.init(tl);
+        const glow = (x, y, s, t) => { const g = N.ab("n-glow", null, { left: x + "px", top: y + "px", width: s + "px", height: s + "px" }); g.setAttribute("data-layout-allow-overflow", ""); N.hide(g); tl.fromTo(g, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 1.2, ease: "power2.out" }, t); return g; };
+        const gains = (t, G, note) => {
+          const h = N.head(["CE QUE ÇA", "TE RAPPORTE<span class='v'>.</span>"], { top: "170px", fontSize: "86px" }, t);
+          const els = G.map((g, i) => {
+            const c = N.ab("g-card", `<div class="k">${g.k}</div><div class="v ${g.c || ""}"><span>${g.v0 || ""}</span></div><div class="d">${g.d}</div>`, { left: "90px", top: 480 + i * 330 + "px", width: "900px" });
+            N.hide(c);
+            const tt = t + 0.5 + i * 0.7;
+            tl.fromTo(c, { opacity: 0, x: i % 2 ? 120 : -120 }, { opacity: 1, x: 0, duration: 0.55, ease: "power3.out" }, tt);
+            K.sfx(tt, "whoosh", 0.12, 0, { d: 0.35, f0: 600, f1: 3000, pk: 0.6 });
+            if (g.n != null) K.count(K.$(".v span", c), g.n, tt + 0.2, 1.0, g.f, { ticks: 10 }); else K.$(".v span", c).innerHTML = g.v;
+            if (g.n != null) K.sfx(tt + 1.2, "success", 0.18);
+            return c;
+          });
+          const nt = N.text("ctr g-note", note || "Exemples indicatifs", { top: "1490px" }, t + 2.4);
+          return [h, ...els, nt];
+        };
+        const fin = (t, M) => {
+          N.outro(t, "contact");
+          const m = N.mascot({ left: "440px", top: "1240px", width: "200px" });
+          m.enter(t + 1.6);
+          m.wave(t + 2.3);
+          m.blink(t + 3.2);
+        };
+        const SC = [[0, 4.0], [4.0, 8.8], [8.8, 13.3], [13.3, 18.3], [18.3, 22.8], [22.8, 27.8], [27.8, 32.6]];
+        const VO = [["tts/v5-01.wav", 0.6, 1.54, "Avant, tu courais après tout."], ["tts/v5-02.wav", 4.6, 2.07, "Maintenant, je veille sur ton secteur."], ["tts/v5-03.wav", 9.3, 2.35, "La maison de bourg ? L’annonce est prête."], ["tts/v5-04.wav", 13.8, 3.31, "Au bord de la rivière, 3 acquéreurs ont été relancés."], ["tts/v5-05.wav", 18.8, 2.41, "Ton estimation de 14 h est prête."], ["tts/v5-06.wav", 23.3, 2.82, "Pour le compromis, tous les diagnostics sont arrivés."], ["tts/v5-07.wav", 28.7, 1.47, null], ["tts/v4-08.wav", 33.3, 2.5, null]];
+
+        tl.set([K.$(".n-bg", root), ...K.$$(".n-arc", root)], { opacity: 0 }, 0);
+        C.bars(0.5, true, 1.0);
+        const LIGHT = "linear-gradient(180deg, #f5f3fe 0%, #ece7fb 100%)";
+        const O = 0.3;
+        const shade = (p) => FX.ab(p, { inset: "0", background: "linear-gradient(180deg, rgba(5,6,15,.62) 0%, rgba(5,6,15,.05) 36%, rgba(5,6,15,.08) 62%, rgba(5,6,15,.72) 100%)" });
+        const num = (p, txt, t, css = {}) => {
+          const e = FX.ab(p, Object.assign({ left: "56px", top: "110px", fontFamily: "Montserrat, sans-serif", fontWeight: "800", fontSize: "200px", lineHeight: "1", color: "rgba(255,255,255,.1)", WebkitTextStroke: "3px rgba(255,255,255,.5)" }, css), txt);
+          tl.set(e, { opacity: 0 }, 0);
+          tl.fromTo(e, { opacity: 0, x: -90 }, { opacity: 1, x: 0, duration: 0.8, ease: "expo.out" }, t);
+          return e;
+        };
+        const chip = (p, html, css, t, o = {}) => {
+          const g = FX.glass(p, Object.assign({ padding: "18px 28px", borderRadius: "28px", fontFamily: "Montserrat, sans-serif", fontWeight: "700", fontSize: "34px", whiteSpace: "nowrap", display: "flex", alignItems: "center", gap: "16px" }, css), html);
+          K.$$("svg.i", g).forEach((s) => (s.style.cssText = "width:38px;height:38px;color:#fff;flex:none"));
+          tl.set(g, { opacity: 0 }, 0);
+          tl.fromTo(g, { opacity: 0, scale: 0.7, y: 30 }, { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: "back.out(1.7)" }, t);
+          if (o.snd !== false) K.sfx(t, o.snd || "pop", o.g ?? 0.14, 0, { f: 900 });
+          return g;
+        };
+        const card = (p, ic, big, small, css, t, o = {}) => {
+          const g = FX.glass(p, Object.assign({ left: "90px", width: "900px", display: "flex", alignItems: "center", gap: "22px" }, css),
+            `<span style="flex:none;width:80px;height:80px;border-radius:22px;background:${o.bg || "rgba(44,196,181,.38)"};display:flex;align-items:center;justify-content:center">${K.icon(ic)}</span><span style="min-width:0"><b style="display:block;font-family:Montserrat,sans-serif;font-weight:800;font-size:38px;line-height:1.12">${big}</b><span style="font-size:27px;color:rgba(255,255,255,.88)">${small}</span></span>${o.check ? `<span class="ok" style="margin-left:auto;flex:none;width:58px;height:58px;border-radius:50%;background:#2cc4b5;display:flex;align-items:center;justify-content:center">${K.icon("check")}</span>` : ""}`);
+          K.$$("svg.i", g).forEach((s) => (s.style.cssText = "width:42px;height:42px;color:#fff"));
+          tl.set(g, { opacity: 0 }, 0);
+          tl.fromTo(g, { opacity: 0, y: 70, scale: 0.94, filter: "blur(8px)" }, { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", duration: 0.6, ease: "expo.out" }, t);
+          FX.sheen(g, t + 0.3);
+          K.sfx(t, o.snd || "pop", o.g ?? 0.16, 0, { f: 900 });
+          if (o.check) {
+            const ok = K.$(".ok", g);
+            tl.set(ok, { scale: 0 }, 0);
+            tl.to(ok, { scale: 1, duration: 0.35, ease: "back.out(2.4)" }, t + 0.45);
+            K.sfx(t + 0.45, "success", 0.2);
+          }
+          return g;
+        };
+        const tag = (p, txt, t, sub = "") => {
+          const g = FX.glass(p, { left: "0", right: "0", margin: "0 auto", width: "430px", top: "110px", padding: "16px 26px", borderRadius: "999px", display: "flex", alignItems: "center", justifyContent: "center", gap: "16px", fontFamily: "Montserrat, sans-serif", fontWeight: "800", fontSize: "54px" },
+            `${K.icon("clock")}<span>${txt}</span>${sub ? `<small style="font-size:26px;font-weight:600;opacity:.75">${sub}</small>` : ""}`);
+          K.$$("svg.i", g).forEach((s) => (s.style.cssText = "width:46px;height:46px;color:#2cc4b5"));
+          tl.set(g, { opacity: 0 }, 0);
+          tl.fromTo(g, { opacity: 0, y: -40 }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, t);
+          K.sfx(t, "tick", 0.2, 0, { f: 1800 });
+          return g;
+        };
+        const kar = (segs) => FX.karaoke(segs.map((s) => [s[0] + O, s[1] + O, s[2]]), { keys: ["limo", "mandats", "tard", "tête", "pleine", "terrain", "trois", "dimanches", "secret", "calcul", "deux", "temps", "clients", "estimation"] });
+        const phoneIn = (p, css, html, t, o = {}) => {
+          const ph = A.phone(css, { time: o.time || "8:00" });
+          p.appendChild(ph.wrap);
+          const pg = A.page(ph, html);
+          A.enter(ph, t, { flatAt: 0.7 });
+          return { ph, pg };
+        };
+        const outro = (t) => {
+          FX.layer(t - 0.25, null, { background: LIGHT }, "", true);
+          C.flash(t - 0.25, "#ffffff", 0.95);
+          C.leak(t - 0.2, 2.4);
+          window.__TE = t;
+          N.outro(t, "essai");
+          const m = N.mascot({ left: "440px", top: "1500px", width: "190px" });
+          m.enter(t + 1.4);
+          m.wave(t + 2.1);
+        };
+
+        const KEYS = ["limo", "tout", "jamais", "rien", "anniversaire", "anniversaires", "mails", "kilométriques", "relance", "relances", "oubli", "travaille", "métier", "collègue", "agit", "terrain", "clients", "vocal"];
+        const kar2 = (segs) => FX.karaoke(segs.map((s) => [s[0] + O, s[1] + O, s[2]]), { keys: KEYS });
+        const lay = (t0, t1, prev, o = {}) => {
+          const l = FX.layer(t0, t1);
+          if (o.colors !== false) FX.aurora(l, t0 - 0.1, t1 + 0.1, o.colors ? { colors: o.colors, a: o.a } : {});
+          if (prev) FX.whip(prev, l, t0 - 0.15);
+          return l;
+        };
+        const foot = (id, t0, t1, prev) => {
+          const v = document.getElementById(id);
+          const l = FX.layer(t0, t1);
+          shade(l);
+          if (prev) FX.whip(prev, [v, l], t0 - 0.15);
+          tl.fromTo(v, { scale: 1.0 }, { scale: 1.08, duration: t1 - t0, ease: "none" }, t0);
+          return l;
+        };
+        const web = (p, items, t) => {
+          const c = FX.glass(p, { left: "390px", top: "760px", width: "300px", height: "300px", borderRadius: "50%", padding: "0", display: "flex", alignItems: "center", justifyContent: "center" }, `<img src="assets/img/limo-house-ad.png" alt="" style="width:130px;height:130px;background:#fff;border-radius:34px;padding:16px" />`);
+          tl.set(c, { opacity: 0 }, 0);
+          tl.fromTo(c, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.6)" }, t);
+          const P = [[80, 470], [600, 520], [50, 1150], [610, 1120], [30, 830], [720, 840]];
+          const els = [c];
+          items.forEach((it, i) => {
+            const g = chip(p, `${K.icon(it[0])}${it[1]}`, { left: P[i % 6][0] + "px", top: P[i % 6][1] + "px" }, it[2]);
+            tl.to(g, { y: "-=16", duration: 1.5, ease: "sine.inOut", yoyo: true, repeat: 1 }, it[2] + 0.5);
+            els.push(g);
+          });
+          return els;
+        };
+        const msgCard = (p, label, txt, btn, css, t) => {
+          const m = FX.glass(p, Object.assign({ left: "90px", width: "900px", padding: "24px 28px" }, css),
+            `<span style="display:block;font-size:24px;letter-spacing:.06em;color:rgba(255,255,255,.75)">${label}</span><span style="display:block;margin-top:10px;font-size:31px;line-height:1.35">${txt}</span>${btn ? `<span class="snd" style="display:inline-block;margin-top:16px;padding:12px 28px;border-radius:999px;background:#6b4fe0;font-family:Montserrat,sans-serif;font-weight:800;font-size:28px">${btn}</span>` : ""}`);
+          tl.set(m, { opacity: 0 }, 0);
+          tl.fromTo(m, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, t);
+          FX.sheen(m, t + 0.3);
+          return m;
+        };
+        const tapSend = (m, t) => { tl.to(K.$(".snd", m), { scale: 0.88, duration: 0.08, yoyo: true, repeat: 1 }, t); tl.set(K.$(".snd", m), { textContent: "Envoyé ✓", background: "#2cc4b5" }, t + 0.18); K.sfx(t, "send", 0.3); };
+        const bday = (p, name, t, top = 520) => [
+          card(p, "cake", `Anniversaire · ${name}`, "Aujourd’hui · client fidèle", { top: top + "px" }, t, { bg: "rgba(255,143,143,.5)", snd: "notif" }),
+          msgCard(p, "LIMO · MESSAGE PRÊT", `« Joyeux anniversaire ${name} ! Je vous souhaite une très belle journée. »`, "Envoyer", { top: top + 170 + "px" }, t + 0.8),
+        ];
+        const inbox = (p, t, top = 480) => {
+          const R = [["Newsletter d’un portail", 0], ["Mme Roy · question sur le compromis", 1], ["Offre partenaire", 0], ["Me Faure · pièces du dossier", 1], ["Publicité logiciel", 0]];
+          const box = FX.glass(p, { left: "90px", width: "900px", top: top + "px", padding: "22px 26px" },
+            `<span style="display:block;font-size:24px;letter-spacing:.06em;color:rgba(255,255,255,.75);margin-bottom:8px">BOÎTE MAIL · TRIÉE PAR LIMO</span>` +
+            R.map((r) => `<div class="mr ${r[1] ? "imp" : "pro"}" style="display:flex;align-items:center;gap:16px;padding:13px 0;border-top:1px solid rgba(255,255,255,.15);font-size:28px">${K.icon("mail")}<span style="flex:1;white-space:nowrap;overflow:hidden">${r[0]}</span><span class="tg" style="flex:none;padding:6px 16px;border-radius:999px;font-size:21px;font-weight:700;background:${r[1] ? "#2cc4b5" : "rgba(255,255,255,.18)"}">${r[1] ? "Réponse prête" : "Archivé"}</span></div>`).join(""));
+          K.$$("svg.i", box).forEach((s) => (s.style.cssText = "width:30px;height:30px;color:#fff;flex:none"));
+          tl.set(box, { opacity: 0 }, 0);
+          tl.fromTo(box, { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, t);
+          K.$$(".tg", box).forEach((g) => { tl.set(g, { opacity: 0 }, 0); tl.to(g, { opacity: 1, duration: 0.2 }, t + 0.8); });
+          K.$$(".mr.pro", box).forEach((r, i) => { tl.to(r, { opacity: 0.35, x: 30, duration: 0.35, ease: "power2.in" }, t + 1.0 + i * 0.25); K.sfx(t + 1.0 + i * 0.25, "swipe", 0.1); });
+          return box;
+        };
+        const km = (p, t, top = 600) => {
+          const g = FX.glass(p, { left: "0", right: "0", margin: "0 auto", width: "780px", height: "380px", boxSizing: "border-box", top: top + "px", padding: "28px 0 0", textAlign: "center", borderRadius: "44px" },
+            `<span style="display:inline-flex;align-items:center;gap:14px;font-family:Montserrat,sans-serif;font-weight:700;font-size:32px;color:#2cc4b5">${K.icon("car")}Frais kilométriques · octobre</span><b class="kv" style="display:block;width:100%;text-align:center;margin-top:10px;font-family:Montserrat,sans-serif;font-weight:800;font-size:110px;line-height:1.05;white-space:nowrap">0 km</b><span class="ok" style="position:absolute;left:0;right:0;bottom:30px;margin:0 auto;width:fit-content;padding:10px 26px;border-radius:999px;background:#2cc4b5;font-family:Montserrat,sans-serif;font-weight:800;font-size:28px">Calculé automatiquement</span>`);
+          K.$$("svg.i", g).forEach((s) => (s.style.cssText = "width:40px;height:40px;color:#2cc4b5"));
+          tl.set(g, { opacity: 0 }, 0);
+          tl.fromTo(g, { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.5, ease: "expo.out" }, t);
+          K.count(K.$(".kv", g), 1248, t + 0.3, 1.5, (v) => { const n = Math.round(v); return (n >= 1000 ? Math.floor(n / 1000) + " " + String(n % 1000).padStart(3, "0") : n) + " km"; }, { ticks: 12 });
+          const ok = K.$(".ok", g);
+          tl.set(ok, { opacity: 0 }, 0);
+          tl.fromTo(ok, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.2)" }, t + 1.9);
+          K.sfx(t + 1.9, "success", 0.22);
+          return g;
+        };
+        const post = (p, t, top = 420) => {
+          const g = FX.glass(p, { left: "215px", width: "650px", top: top + "px", padding: "20px" },
+            `<div style="display:flex;align-items:center;gap:14px;margin-bottom:14px"><img src="assets/img/limo-house-ad.png" alt="" style="width:56px;height:56px;border-radius:50%;background:#fff;padding:6px" /><b style="font-size:28px">ton.agence.immo</b></div><div style="height:430px;border-radius:18px;overflow:hidden"><img src="assets/img/bien-terrasse-mer.jpg" alt="" style="width:100%;height:100%;object-fit:cover" /></div><div style="margin-top:14px;font-size:27px;line-height:1.35">Nouveau mandat : villa vue mer, 4 chambres. Visites dès samedi.</div><span class="pr" style="display:inline-block;margin-top:12px;padding:10px 24px;border-radius:999px;background:#2cc4b5;font-family:Montserrat,sans-serif;font-weight:800;font-size:26px">Publication prête</span>`);
+          tl.set(g, { opacity: 0 }, 0);
+          tl.fromTo(g, { opacity: 0, y: 60, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: "expo.out" }, t);
+          const pr = K.$(".pr", g);
+          tl.set(pr, { opacity: 0 }, 0);
+          tl.fromTo(pr, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.2)" }, t + 1.0);
+          K.sfx(t + 1.0, "success", 0.2);
+          return g;
+        };
+        const ask = (p, q, r, t, tr, top = 520) => {
+          const qb = FX.ab(p, { right: "90px", width: "760px", top: top + "px", padding: "22px 28px", borderRadius: "34px 34px 8px 34px", background: "#6b4fe0", color: "#fff", fontFamily: "Inter, sans-serif", fontSize: "34px", lineHeight: "1.32", boxShadow: "0 20px 50px rgba(0,0,0,.3)" }, `<span style="display:inline-flex;align-items:center;gap:10px;font-size:22px;opacity:.85;margin-bottom:6px">${K.icon("mic")}Message vocal</span><br>${q}`);
+          K.$$("svg.i", qb).forEach((s) => (s.style.cssText = "width:26px;height:26px;color:#fff"));
+          tl.set(qb, { opacity: 0 }, 0);
+          tl.fromTo(qb, { opacity: 0, y: 30, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(1.8)" }, t);
+          K.sfx(t, "send", 0.24);
+          const rb = FX.glass(p, { left: "90px", width: "760px", top: top + 200 + "px", padding: "22px 28px", borderRadius: "34px 34px 34px 8px", fontSize: "33px", lineHeight: "1.32" }, `<span style="display:inline-flex;align-items:center;gap:10px;font-size:22px;color:#2cc4b5;font-weight:700;margin-bottom:6px">${K.icon("check")}Limo</span><br>${r}`);
+          K.$$("svg.i", rb).forEach((s) => (s.style.cssText = "width:26px;height:26px;color:#2cc4b5"));
+          tl.set(rb, { opacity: 0 }, 0);
+          tl.fromTo(rb, { opacity: 0, y: 30, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(1.8)" }, tr);
+          K.sfx(tr, "receive", 0.24);
+          return [qb, rb];
+        };
+        const logoCard = (p, t, top = 760) => {
+          const g = FX.ab(p, { left: "240px", top: top + "px", width: "600px", padding: "40px 0", borderRadius: "44px", background: "#ffffff", boxShadow: "0 30px 80px rgba(0,0,0,.45)", textAlign: "center" }, `<img src="assets/img/limo-logo-ad.png" alt="LIMO" style="width:440px" />`);
+          tl.set(g, { opacity: 0 }, 0);
+          tl.fromTo(g, { opacity: 0, scale: 1.3, filter: "blur(14px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.7, ease: "power3.out" }, t);
+          K.sfx(t + 0.1, "thump", 0.4);
+          C.sweep(g, t + 0.7, 0.9);
+          return g;
+        };
+
+        const TOP = document.getElementById("root");
+        tl.set([C.barT, C.barB], { opacity: 0 }, 0);
+        const EZ = "power2.inOut", EO = "power2.out";
+        const WARM = (tint) => `<img src="assets/img/bien-mas-lavande.jpg" alt="" style="position:absolute;left:-120px;top:-120px;width:1320px;height:2160px;object-fit:cover;filter:blur(36px) brightness(.55) saturate(1.2)" /><div style="position:absolute;inset:0;background:${tint}"></div>`;
+        // scène en fondu enchaîné (0,6 s), légère dérive de caméra
+        const scene = (t0, t1, html = "", css = {}) => {
+          const l = FX.ab(TOP, Object.assign({ left: "0", top: "0", width: "1080px", height: "1920px", overflow: "hidden" }, css), html);
+          tl.set(l, { opacity: 0 }, 0);
+          tl.to(l, { opacity: 1, duration: 0.6, ease: EZ }, Math.max(0, t0 - 0.3));
+          tl.to(l, { opacity: 0, duration: 0.6, ease: EZ }, t1 - 0.3);
+          return l;
+        };
+        const drift = (id, t0, t1) => tl.fromTo(document.getElementById(id), { scale: 1.06 }, { scale: 1.0, duration: t1 - t0 + 0.6, ease: "none" }, t0 - 0.3);
+        const shadeIn = (l) => FX.ab(l, { inset: "0", background: "linear-gradient(180deg, rgba(5,6,15,.6) 0%, rgba(5,6,15,.1) 34%, rgba(5,6,15,.15) 58%, rgba(5,6,15,.7) 100%)" });
+        // carte héros : entre en douceur, puis ses lignes une à une (60 ms de décalage, sans rebond)
+        const hero = (p, t, head, big, lines, top = 430) => {
+          const g = FX.glass(p, { left: "70px", width: "940px", top: top + "px", padding: "30px 36px 34px", boxSizing: "border-box" },
+            `<span class="hd2">${head}</span><b class="big">${big}</b>` + lines.map((l) => `<div class="ln">${K.icon(l[0])}<span>${l[1]}</span></div>`).join(""));
+          tl.set(g, { opacity: 0 }, 0);
+          tl.fromTo(g, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: EO, immediateRender: false }, t);
+          K.$$(".ln", g).forEach((r, i) => { tl.set(r, { opacity: 0 }, 0); tl.fromTo(r, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: EO, immediateRender: false }, t + 0.7 + i * 0.55); K.sfx(t + 0.7 + i * 0.55, "sparkle", 0.05); });
+          FX.sheen(g, t + 0.5, 1.4);
+          return g;
+        };
+        // sous-titre de la voix (doux, en bas)
+        const vo = (t, d, txt) => {
+          const e = FX.ab(TOP, { left: "60px", right: "60px", top: "1150px", textAlign: "center", zIndex: 34 }, `<span class="vo">${txt}</span>`);
+          tl.set(e, { opacity: 0 }, 0);
+          tl.fromTo(e, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: EO, immediateRender: false }, t - 0.1);
+          tl.to(e, { opacity: 0, duration: 0.4, ease: EZ }, t + d + 0.3);
+        };
+
+
+        // photo de village en panoramique lent (image 1920 px de haut, on glisse de x0 à x1)
+        const pano = (src, x0, x1, t0, t1) => {
+          const l = scene(t0, t1, `<img src="assets/img/${src}.jpg" alt="" style="position:absolute;left:0;top:0;height:1920px" />`);
+          tl.fromTo(K.$("img", l), { x: -x0, scale: 1.04 }, { x: -x1, scale: 1.0, duration: t1 - t0 + 0.6, ease: "none" }, t0 - 0.3);
+          shadeIn(l);
+          return l;
+        };
+
+        // ── fil rouge : compteur de tâches faites
+        const DONE = [0, 3, 7, 12, 16, 21];
+        const hud = FX.ab(TOP, { left: "0", right: "0", top: "150px", textAlign: "center", zIndex: 35 },
+          `<div style="display:inline-flex;align-items:center;gap:16px;padding:16px 30px;border-radius:999px;background:rgba(255,255,255,.16);border:1.5px solid rgba(255,255,255,.38);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 14px 40px rgba(0,0,0,.25);font-family:Inter,sans-serif;font-size:38px;color:#fff"><span style="width:46px;height:46px;border-radius:50%;background:#2cc4b5;display:flex;align-items:center;justify-content:center">${K.icon("check")}</span><b class="n" style="font-weight:800;font-size:46px">0</b><span>tâches faites pour toi</span></div>`);
+        K.$$("svg.i", hud).forEach((s) => (s.style.cssText = "width:28px;height:28px;color:#fff"));
+        tl.set(hud, { opacity: 0 }, 0); tl.to(hud, { opacity: 1, duration: 0.6, ease: EO }, SC[1][0] + 0.2);
+        for (let i = 1; i < 6; i++) { K.count(K.$(".n", hud), DONE[i], SC[i][0] + 1.6, 0.8, (v) => String(Math.round(v)), {}); K.sfx(SC[i][0] + 2.3, "success", 0.07); }
+        tl.to(hud, { opacity: 0, duration: 0.5, ease: EZ }, SC[6][0] - 0.4);
+
+        // ── avant : au bureau, débordé (désaturé, sans interface)
+        const s0 = scene(...SC[0]); drift("v1", ...SC[0]);
+        FX.ab(s0, { inset: "0", background: "linear-gradient(180deg, rgba(5,6,15,.55) 0%, rgba(5,6,15,.1) 40%, rgba(5,6,15,.55) 100%)" });
+        // ── avec LIMO : le tour du secteur
+        const s1 = pano("correze-pont", 1300, 1650, ...SC[1]); C.leak(4.0, 3.0);
+        hero(s1, 4.9, "LIMO · TON SECTEUR", "12 mandats suivis", [["users", "38 acquéreurs actifs, chacun avec ses critères"], ["bell", "Aucune relance oubliée"], ["pin", "Tout ton secteur, en un coup d’œil"]]);
+        const s2 = pano("correze-ruelle", 1050, 1450, ...SC[2]);
+        hero(s2, 9.2, "LIMO · ANNONCE PRÊTE", "Maison de bourg en pierre", [["home", "4 pièces · 110&nbsp;m² · cour intérieure"], ["image", "Photos classées, texte rédigé"], ["check", "Prête à publier"]]);
+        const s3 = pano("correze-riviere", 1000, 1350, ...SC[3]);
+        hero(s3, 13.7, "LIMO · RELANCES", "Maison au bord de la rivière", [["send", "3 acquéreurs correspondants relancés"], ["clock", "1 visite calée samedi 10:00"], ["msg", "Message personnalisé pour chacun"]]);
+        const s4 = pano("correze-halle", 650, 950, ...SC[4]);
+        hero(s4, 18.7, "LIMO · ESTIMATION DE 14:00", "Maison de ville, près de la halle", [["calc", "4 ventes comparables du secteur"], ["file", "Rapport prêt à présenter"], ["note", "Tes notes de la 1re visite, résumées"]]);
+        const s5 = scene(...SC[5]); shadeIn(s5); drift("v2", ...SC[5]);
+        hero(s5, 23.2, "LIMO · COMPROMIS", "Maison contemporaine", [["shield", "Diagnostics : 6 / 6 reçus"], ["scale", "Notaire prévenu"], ["clock", "Signature mardi 15:00"]]);
+        // ── le moment fort : plus d'interface, juste la vie
+        const s6 = scene(...SC[6]); drift("v3", ...SC[6]); tl.fromTo(document.getElementById("v3b"), { scale: 1.04 }, { scale: 1.0, duration: 2.4, ease: "none" }, 30.2);
+        FX.ab(s6, { inset: "0", background: "linear-gradient(180deg, rgba(5,6,15,.4) 0%, rgba(5,6,15,0) 38%, rgba(5,6,15,0) 70%, rgba(5,6,15,.35) 100%)" });
+        C.leak(27.9, 3.6);
+        FX.rise(s6, "Et toi…", { top: "300px", fontSize: "88px", fontWeight: "700", textShadow: "0 6px 30px rgba(0,0,0,.4)" }, 28.4, { snd: false, st: 0.04 });
+        FX.rise(s6, "tu [profites.]", { top: "410px", fontSize: "120px", textShadow: "0 8px 36px rgba(0,0,0,.45)" }, 29.1, { snd: false, st: 0.04, accent: "#ffe2b8" });
+
+        VO.forEach(([, t, d, txt]) => { if (txt) vo(t, d, txt); });
+
+        // ── la mascotte : arrive après le « avant », douce, l'antenne s'allume quand elle parle
+        const M = N.mascot({ left: "390px", top: "760px", width: "300px" }, { expr: "happy" });
+        TOP.appendChild(M.el); M.el.style.zIndex = "30";
+        const ant = K.$(".ant", M.el);
+        const speak = (t, d) => { const n = Math.max(1, Math.round(d / 0.36)); tl.fromTo(ant, { opacity: 0.2 }, { opacity: 1, duration: 0.18, ease: "sine.inOut", yoyo: true, repeat: n * 2 - 1, immediateRender: false }, t); tl.set(ant, { opacity: 0 }, t + n * 0.36 + 0.05); };
+        VO.forEach(([, t, d], i) => { if (i > 0 && t < 32.6) speak(t, d); });
+        tl.set(M.el, { opacity: 0, x: 340, y: 480, scale: 0.55 }, 0);
+        tl.to(M.el, { opacity: 1, duration: 0.7, ease: EO }, SC[1][0]);
+        M.float(4.2, 23.0, 8);
+        [6.6, 11.6, 16.4, 21.2, 25.8].forEach((t) => M.blink(t));
+        M.expr("wink", 12.2, false); M.expr("happy", 13.3, false); M.expr("heart", 26.2, false);
+        tl.to(M.el, { opacity: 0, duration: 0.5, ease: EZ }, SC[6][0] - 0.4);
+        outro(32.6);
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

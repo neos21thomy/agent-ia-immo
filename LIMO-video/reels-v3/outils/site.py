@@ -1,0 +1,185 @@
+"""Vidéo « site internet » 16:9 (1920×1080) : tout ce que LIMO fait, en 8 chapitres + les 12 agents + appel à l'action.
+Texte à gauche, l'application LIMO (téléphone, écrans recréés d'après l'appli) à droite, barre de chapitres en bas.
+Sans voix ni musique (lecture automatique muette sur le site), direction calme : fondus, pas de rebond.
+Fonctions = liste officielle de l'appli (écran « Mes agents » + écrans accueil, relances, dictée, détecteur, annonce).
+Données affichées = exemples fictifs.
+
+Usage : python3 outils/site.py   (réécrit reels/site-01-tout-ce-que-fait-limo.html)
+"""
+import pathlib
+import sys
+
+HERE = pathlib.Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+from cine import FACES  # noqa: E402
+
+NAME = "site-01-tout-ce-que-fait-limo"
+DUR = 86.0
+SHELL16 = """<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>LIMO — tout ce qu'il fait pour toi</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/naturel.css" />
+    <link rel="stylesheet" href="assets/kit/app.css" />
+    <style>
+{faces}
+      html, body {{ width: 1920px; height: 1080px; overflow: hidden; background: #f4f2fc; }}
+      #root {{ position: relative; width: 1920px; height: 1080px; overflow: hidden; }}
+      #s-main {{ position: absolute; inset: 0; background: radial-gradient(ellipse at 78% 40%, #ffffff 0%, #f1eefc 45%, #e9e4fa 100%); }}
+      .ab {{ position: absolute; }}
+      .kick {{ font-family: Montserrat, sans-serif; font-weight: 700; font-size: 26px; letter-spacing: .14em; color: #15877d; }}
+      .ttl {{ font-family: Montserrat, sans-serif; font-weight: 800; font-size: 76px; line-height: 1.06; color: #1b1f4b; letter-spacing: -.01em; }}
+      .ttl em {{ font-style: normal; color: #6b4fe0; }}
+      .bl {{ display: flex; align-items: center; gap: 20px; font-family: Inter, sans-serif; font-size: 33px; line-height: 1.3; color: #3a3f6b; }}
+      .bl .ck {{ flex: none; width: 46px; height: 46px; border-radius: 50%; background: #e2f7f4; color: #15877d; display: flex; align-items: center; justify-content: center; }}
+      .bl .ck svg.i {{ width: 26px; height: 26px; stroke-width: 3; }}
+      .nav {{ display: flex; gap: 14px; font-family: Inter, sans-serif; font-size: 21px; font-weight: 600; color: #4f5378; }}
+      .nav span {{ padding: 10px 18px; border-radius: 999px; background: rgba(255,255,255,.7); border: 1px solid #e4e0f6; white-space: nowrap; }}
+      .flo {{ display: flex; align-items: center; gap: 18px; padding: 20px 26px; border-radius: 28px; background: #fff; box-shadow: 0 24px 60px rgba(27,31,75,.18); font-family: Inter, sans-serif; color: #1b1f4b; }}
+      .flo b {{ display: block; font-family: Montserrat, sans-serif; font-weight: 800; font-size: 36px; line-height: 1.05; }}
+      .flo small {{ display: block; margin-top: 4px; font-size: 21px; color: #5d6285; font-weight: 600; }}
+      .tile {{ width: 380px; height: 150px; display: flex; align-items: center; gap: 20px; padding: 0 26px; border-radius: 28px; background: #fff; border: 1px solid #ece9f8; box-shadow: 0 14px 34px rgba(27,31,75,.08); font-family: Inter, sans-serif; color: #1b1f4b; }}
+      .tile .ic {{ flex: none; width: 70px; height: 70px; border-radius: 20px; background: #efeafe; color: #6b4fe0; display: flex; align-items: center; justify-content: center; }}
+      .tile .ic svg.i {{ width: 38px; height: 38px; stroke-width: 2.2; }}
+      .tile b {{ display: block; font-size: 27px; font-weight: 700; line-height: 1.15; }}
+      .tile small {{ display: block; margin-top: 4px; font-size: 19px; color: #6e6e80; line-height: 1.3; }}
+      .cta {{ display: inline-flex; align-items: center; gap: 14px; padding: 26px 46px; border-radius: 999px; background: #6b4fe0; color: #fff; font-family: Montserrat, sans-serif; font-weight: 800; font-size: 36px; box-shadow: 0 20px 50px rgba(107,79,224,.35); }}
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="{dur}" data-width="1920" data-height="1080">
+      <section id="s-main" class="clip" data-start="0" data-duration="{dur}" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/{name}.wav" data-start="0" data-duration="{dur}" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/naturel.js"></script>
+    <script src="assets/kit/app.js"></script>
+    <script>
+      (function () {{
+        const tl = gsap.timeline({{ paused: true }});
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = {dur};
+        N.init(tl, root, D);
+        A.init(tl, root);
+{body}
+        window.__timelines["main"] = tl;
+      }})();
+    </script>
+  </body>
+</html>
+"""
+
+BODY = r"""
+        tl.set([K.$(".n-bg", root), ...K.$$(".n-arc", root)], { opacity: 0 }, 0);
+        const EZ = "power2.inOut", EO = "power2.out";
+        const ab = (css, html, parent = root) => { const e = N.ab("", html, css, parent); [e, ...K.$$("*", e)].forEach((x) => ["data-layout-allow-overflow", "data-layout-allow-overlap", "data-layout-allow-occlusion"].forEach((a) => x.setAttribute(a, ""))); return e; };
+        const fin = (e, t, d = 0.6, y = 24) => { tl.set(e, { opacity: 0 }, 0); tl.fromTo(e, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: EO, immediateRender: false }, t); };
+        const fout = (e, t, d = 0.45) => tl.to(e, { opacity: 0, y: -16, duration: d, ease: EZ }, t);
+
+        // ── chapitres : [début, fin, kicker, titre, puces, page du téléphone, carte flottante]
+        const CH = [
+          [5.5, 14.0, "01 · IL ORGANISE", "Chaque matin,<br>ta journée <em>est prête.</em>", ["Tes actions prioritaires, dans l’ordre", "Visites, relances, propositions, anniversaires", "Tu ouvres l’appli, tu sais quoi faire"], "home", ["clock", "t", "5 actions", "prioritaires aujourd’hui"]],
+          [14.0, 22.5, "02 · IL SE SOUVIENT", "Il n’oublie <em>rien.</em><br>Ni personne.", ["Chaque mandat, chaque vendeur, chaque acquéreur", "Tu dictes après la visite : la fiche se met à jour", "Il te rappelle quoi faire, et quand"], "dictee", ["mic", "v", "0:38", "note vocale → fiche à jour"]],
+          [22.5, 31.0, "03 · IL LIT À TA PLACE", "Il lit tes dossiers<br><em>en quelques secondes.</em>", ["Un compromis en PDF : la fiche se remplit seule", "Tes messages Instagram et Messenger relevés", "Les prospects repérés, rien ne t’échappe"], "doc", ["msg", "o", "3 vendeurs", "repérés dans tes messages"]],
+          [31.0, 39.5, "04 · IL RELANCE", "Il relance<br><em>au bon moment.</em>", ["Les contacts à relancer, messages déjà écrits", "Les anniversaires de tes clients, jamais oubliés", "Tu valides, c’est envoyé"], "relances", ["refresh", "v", "32 relances", "prêtes en 1 clic"]],
+          [39.5, 48.0, "05 · IL TROUVE", "Il trouve<br><em>tes prochains mandats.</em>", ["Détecteur de ventes : les diagnostics d’hier", "Pige des particuliers, chaque matin", "Matcheur : le bon acheteur pour chaque bien"], "detect", ["magnet", "t", "96 %", "compatible · Famille Lambert"]],
+          [48.0, 56.5, "06 · IL ESTIME", "Il estime avec<br><em>les vraies données.</em>", ["Cadastre, ventes DVF, diagnostics officiels", "Les comparables de ton secteur", "Une fourchette claire à présenter"], "estim", ["pin", "v", "3 ventes", "comparables analysées"]],
+          [56.5, 65.0, "07 · IL RÉDIGE ET PUBLIE", "Il écrit, tu<br><em>n’as plus qu’à publier.</em>", ["Annonces optimisées, mentions légales incluses", "3 posts Instagram, Facebook, LinkedIn depuis un lien", "Photos signées, home staging virtuel, avis Google répondus"], "annonce", ["megaphone", "o", "3 posts", "prêts à publier"]],
+          [65.0, 73.5, "08 · IL GÈRE L’ADMINISTRATIF", "Et la paperasse ?<br><em>Il s’en occupe.</em>", ["Frais kilométriques notés au fil de l’eau", "Le bon artisan près du bien, choisi sur ses avis", "Tout est prêt pour ton comptable"], "admin", ["car", "t", "1 240 km", "prêts pour le comptable"]],
+        ];
+        const NAVL = ["Organise", "Se souvient", "Lit", "Relance", "Trouve", "Estime", "Rédige & publie", "Gère"];
+
+        // ── écrans supplémentaires de l'appli (même style que les écrans de A.S)
+        const PG = {
+          doc: () => `<div class="a-back">${K.icon("chev")}Analyseur de dossier</div><div class="a-card" style="display:flex;align-items:center;gap:16px;padding:18px 20px;margin-bottom:14px"><span class="a-ic r">${K.icon("file")}</span><span><b style="font-size:23px">Compromis.pdf</b><small style="display:block;font-size:19px;color:#6e6e80">12 pages · déposé</small></span></div><div class="a-h2">Fiche remplie automatiquement</div>` +
+            A.row("users", "v", "Vendeurs : M. et Mme T.", "Acquéreurs : Famille Lambert", "", `<span class="ok">${K.icon("check")}</span>`) + A.row("euro", "t", "Prix : 245 000 €", "Dépôt de garantie 5 %", "", `<span class="ok">${K.icon("check")}</span>`) + A.row("scale", "g", "Notaire : Me Faure", "Signature prévue le 14/11", "", `<span class="ok">${K.icon("check")}</span>`) + A.row("alert", "o", "Prêt : 60 jours", "Condition suspensive", "", `<span class="ok">${K.icon("check")}</span>`),
+          estim: () => `<div class="a-back">${K.icon("chev")}Estimation</div><div class="a-card" style="padding:24px 24px 26px;margin-bottom:14px"><small style="font-size:20px;color:#6e6e80">Maison · Allassac · 120 m²</small><div style="margin-top:6px;font-family:Montserrat,sans-serif;font-weight:800;font-size:46px;color:#6b4fe0">239 – 252 k€</div><div class="a-bar" style="margin-top:16px"><i class="eb" style="width:100%"></i></div></div>` +
+            A.row("pin", "v", "Cadastre · 1 250 m²", "Parcelle vérifiée") + A.row("bank", "t", "3 ventes DVF comparables", "Dans un rayon de 2 km") + A.row("zap", "o", "DPE C", "Diagnostic officiel"),
+          admin: () => `<div class="a-back">${K.icon("chev")}Frais kilométriques</div><div class="a-card" style="padding:24px;margin-bottom:14px;text-align:center"><small style="font-size:20px;color:#6e6e80">Octobre</small><div class="km" style="margin-top:4px;font-family:Montserrat,sans-serif;font-weight:800;font-size:64px;color:#1b1f4b">0 km</div><span class="a-tag t" style="margin-top:10px">${K.icon("check")}Prêt pour le comptable</span></div>` +
+            A.row("car", "v", "Brive → Allassac", "Visite · 18 km", "9:40") + A.row("car", "v", "Allassac → Voutezac", "Estimation · 11 km", "14:10") + `<div class="a-h2">Mes artisans</div>` + A.row("wrench", "t", "Plombier à 4 km", "4,8 ★ · disponible jeudi"),
+        };
+
+        // ── texte de gauche
+        const TX = CH.map(([t0, t1, k, ttl, bl]) => {
+          const box = ab({ left: "140px", top: "190px", width: "900px" }, `<div class="kick">${k}</div><div class="ttl" style="margin-top:22px">${ttl}</div><div class="bls" style="margin-top:44px;display:flex;flex-direction:column;gap:24px">${bl.map((b) => `<div class="bl"><span class="ck">${K.icon("check")}</span><span>${b}</span></div>`).join("")}</div>`);
+          tl.set(box, { opacity: 0 }, 0);
+          tl.to(box, { opacity: 1, duration: 0.01 }, t0);
+          const kk = K.$(".kick", box), tt = K.$(".ttl", box), bs = K.$$(".bl", box);
+          fin(kk, t0 + 0.1, 0.5, 14); fin(tt, t0 + 0.25, 0.7, 26);
+          bs.forEach((b, i) => { fin(b, t0 + 1.2 + i * 0.6, 0.5, 14); K.sfx(t0 + 1.2 + i * 0.6, "tick", 0.06, 0, { f: 2200 }); });
+          fout(box, t1 - 0.5);
+          return box;
+        });
+
+        // ── barre de chapitres
+        const nav = ab({ left: "140px", top: "975px" }, `<div class="nav">${NAVL.map((n) => `<span>${n}</span>`).join("")}</div>`);
+        fin(nav, 5.6, 0.6, 10); fout(nav, 73.1);
+        const navS = K.$$(".nav span", nav);
+        CH.forEach(([t0, t1], i) => {
+          tl.to(navS[i], { backgroundColor: "#6b4fe0", color: "#ffffff", borderColor: "#6b4fe0", duration: 0.4, ease: EZ }, t0);
+          tl.to(navS[i], { backgroundColor: "rgba(255,255,255,0.7)", color: "#4f5378", borderColor: "#e4e0f6", duration: 0.4, ease: EZ }, t1);
+        });
+
+        // ── le téléphone (taille d'origine 560 px, réduit à 82 %)
+        const ph = A.phone({ left: "1250px", top: "64px", width: "560px" }, { time: "8:00" });
+        tl.set(ph.wrap, { scale: 0.82, transformOrigin: "0 0" }, 0);
+        const pages = CH.map(([, , , , , p]) => A.page(ph, A.S[p] ? A.S[p]() : PG[p]()));
+        A.enter(ph, 5.2, { ry: -24, ry2: -10, flatAt: 0.9 });
+        CH.forEach(([t0], i) => { if (i) A.go(ph, pages[i - 1], pages[i], t0 + 0.1); });
+        tl.to(ph.wrap, { opacity: 0, y: 40, duration: 0.6, ease: EZ }, 73.1);
+        // petites animations dans les écrans
+        const rel = pages[3]; A.tap(ph, 280, 900, 36.0); tl.fromTo(K.$(".a-btn", rel), { scale: 1 }, { scale: 0.96, duration: 0.1, yoyo: true, repeat: 1, immediateRender: false }, 36.0);
+        const eb = K.$(".eb", pages[5]); tl.set(eb, { scaleX: 0 }, 0); tl.to(eb, { scaleX: 1, duration: 1.4, ease: EO }, 49.4);
+        K.count(K.$(".km", pages[7]), 1240, 66.0, 1.6, (v) => { const n = Math.round(v); return (n >= 1000 ? Math.floor(n / 1000) + " " + String(n % 1000).padStart(3, "0") : n) + " km"; }, { ticks: 10 });
+        K.$$(".a-row .ok", pages[2]).forEach((o, i) => { tl.set(o, { scale: 0 }, 0); tl.to(o, { scale: 1, duration: 0.3, ease: EO }, 24.0 + i * 0.5); K.sfx(24.0 + i * 0.5, "tick", 0.06, 0, { f: 2400 }); });
+
+        // ── carte flottante à côté du téléphone (calme, sans rebond)
+        CH.forEach(([t0, t1, , , , , f]) => {
+          const c = ab({ left: "1040px", top: "720px" }, `<div class="flo"><span class="a-ic ${f[1]}">${K.icon(f[0])}</span><span><b>${f[2]}</b><small>${f[3]}</small></span></div>`);
+          fin(c, t0 + 2.2, 0.6, 20); K.sfx(t0 + 2.2, "pop", 0.06, 0, { f: 900 }); fout(c, t1 - 0.5);
+        });
+
+        // ── la mascotte
+        const M = N.mascot({ left: "885px", top: "330px", width: "150px" }, { expr: "happy" });
+        // intro : logo + mascotte au centre
+        const lg = ab({ left: "0", right: "0", top: "250px", textAlign: "center" }, `<img src="assets/img/limo-logo-ad.png" alt="LIMO" style="height:150px" /><div style="margin-top:26px;font-family:Montserrat,sans-serif;font-weight:700;font-size:44px;color:#1b1f4b">Le bras droit du conseiller immo.</div><div style="margin-top:18px;font-family:Inter,sans-serif;font-size:32px;color:#5d6285">Tout ce que LIMO fait pour toi, en 1 minute 30.</div>`);
+        fin(lg, 0.4, 0.8, 20); fout(lg, 4.9, 0.5);
+        tl.set(M.el, { opacity: 0, x: 0, y: 340, scale: 1.3 }, 0);
+        tl.to(M.el, { opacity: 1, duration: 0.6, ease: EO }, 1.4); M.wave(2.0);
+        tl.to(M.el, { x: 0, y: 0, scale: 1, duration: 0.8, ease: EZ }, 4.9);
+        tl.set(M.el, { x: 850, y: 420, scale: 0.9 }, 5.45);
+        M.float(5.6, 67, 8);
+        [9, 17.5, 26, 34.5, 43, 51.5, 60, 68.5].forEach((t) => M.blink(t));
+        M.expr("wink", 16.5, false); M.expr("happy", 18.0, false); M.expr("euro", 50.0, false); M.expr("happy", 56.0, false); M.expr("heart", 70.0, false);
+        tl.to(M.el, { opacity: 0, duration: 0.5, ease: EZ }, 73.1);
+
+        // ── récap : les 12 agents
+        const AG = [["target", "Détecteur de ventes", "Les diagnostics d’hier, les ventes de demain"], ["search", "Pige des particuliers", "Leurs annonces deviennent tes mandats"], ["pin", "Estimation & marché", "Cadastre, DVF, diagnostics"], ["pen", "Rédacteur d’annonce", "Optimisée, mentions incluses"],
+          ["clip", "Analyseur de dossier", "Un PDF, la fiche remplie"], ["image", "Habilleur de photos", "Tes photos signées"], ["car", "Frais kilométriques", "Prêts pour le comptable"], ["magnet", "Matcheur acheteurs", "Le bon acheteur, tout de suite"],
+          ["megaphone", "Diffuseur réseaux", "3 posts depuis un lien"], ["sofa", "Home staging virtuel", "Meubler, vider, repeindre"], ["wrench", "Mes artisans", "Le bon artisan, près du bien"], ["msg", "Messages Insta & Facebook", "Prospects repérés"]];
+        const rt = ab({ left: "0", right: "0", top: "70px", textAlign: "center" }, `<div class="ttl" style="font-size:64px">12 agents. <em>Un seul assistant.</em></div>`);
+        fin(rt, 74.0, 0.7, 20); fout(rt, 79.6);
+        AG.forEach((a, i) => {
+          const x = 140 + (i % 4) * 420, y = 250 + Math.floor(i / 4) * 190;
+          const tE = ab({ left: x + "px", top: y + "px" }, `<div class="tile"><span class="ic">${K.icon(a[0])}</span><span><b>${a[1]}</b><small>${a[2]}</small></span></div>`);
+          fin(tE, 74.4 + i * 0.12, 0.5, 18); fout(tE, 79.6);
+        });
+        K.sfx(74.4, "sparkle", 0.08);
+
+        // ── fin : appel à l'action
+        const end = ab({ left: "0", right: "0", top: "150px", textAlign: "center" }, `<div class="ttl" style="font-size:88px">Toi, tu fais le terrain.<br><em>LIMO fait le reste.</em></div><div style="margin-top:46px"><img src="assets/img/limo-logo-ad.png" alt="LIMO" style="height:120px" /></div><div style="margin-top:44px"><span class="cta" style="font-size:44px;padding:30px 56px">Essai gratuit 14 jours →</span></div><div style="margin-top:32px;font-family:Inter,sans-serif;font-size:36px;color:#4f5378">Sans engagement · dès 49 €/mois · <b style="color:#1b1f4b">app.leadengineai.fr</b></div>`);
+        fin(end, 80.2, 0.8, 24);
+        const M2 = N.mascot({ left: "1560px", top: "640px", width: "210px" }, { expr: "happy" });
+        tl.set(M2.el, { opacity: 0 }, 0); tl.to(M2.el, { opacity: 1, duration: 0.6, ease: EO }, 81.0); M2.wave(81.6); M2.blink(84.0);
+        K.sfx(80.3, "success", 0.1);
+"""
+
+if __name__ == "__main__":
+    html = SHELL16.format(faces=FACES, dur=DUR, name=NAME, body=BODY.strip("\n"))
+    (HERE.parent / "reels" / f"{NAME}.html").write_text(html, encoding="utf-8")
+    print("reels/" + NAME + ".html")

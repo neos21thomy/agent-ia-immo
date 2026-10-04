@@ -114,5 +114,73 @@
    "emotion/Yariq-10h54m31.mp3",
    0.3
   ]
+ ],
+ "viral-04-ta-journee-avec-limo": [
+  [
+   "tts/v4-01.wav",
+   0.7
+  ],
+  [
+   "tts/v4-02.wav",
+   4.9
+  ],
+  [
+   "tts/v4-03.wav",
+   9.0
+  ],
+  [
+   "tts/v4-04.wav",
+   14.1
+  ],
+  [
+   "tts/v4-05.wav",
+   19.1
+  ],
+  [
+   "tts/v4-06.wav",
+   25.4
+  ],
+  [
+   "tts/v4-07.wav",
+   29.3
+  ],
+  [
+   "tts/v4-08.wav",
+   33.6
+  ]
+ ],
+ "viral-05-limo-veille-sur-ton-secteur": [
+  [
+   "tts/v5-01.wav",
+   0.6
+  ],
+  [
+   "tts/v5-02.wav",
+   4.6
+  ],
+  [
+   "tts/v5-03.wav",
+   9.3
+  ],
+  [
+   "tts/v5-04.wav",
+   13.8
+  ],
+  [
+   "tts/v5-05.wav",
+   18.8
+  ],
+  [
+   "tts/v5-06.wav",
+   23.3
+  ],
+  [
+   "tts/v5-07.wav",
+   28.7
+  ],
+  [
+   "tts/v4-08.wav",
+   33.3
+  ]
  ]
 }
