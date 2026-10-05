@@ -120,6 +120,12 @@ PRESETS = {
     "viral-03-jai-prepare-ta-journee": ("lofi", 84, 0.3),
     "viral-04-ta-journee-avec-limo": ("lofi", 84, 0.3),
     "viral-05-limo-veille-sur-ton-secteur": ("lofi", 84, 0.3),
+    "meme2-01-le-sms-de-22h47": ("pop", 118, 0.3),
+    "meme2-02-rappelez-moi-en-mars": ("pop", 118, 0.3),
+    "meme2-03-ma-maison-vaut-plus": ("pop", 118, 0.3),
+    "meme2-04-frais-km": ("pop", 118, 0.3),
+    "meme2-05-le-compromis-du-dimanche": ("pop", 118, 0.3),
+    "meme2-06-dautres-biens-comme-ca": ("pop", 118, 0.3),
 }
 
 # progressions (MIDI) : accords (3-4 notes) et fondamentale de basse

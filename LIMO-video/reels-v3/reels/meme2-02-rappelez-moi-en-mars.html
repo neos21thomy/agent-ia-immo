@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>LIMO — meme2-02-rappelez-moi-en-mars</title>
+    <script src="assets/lib/gsap.min.js"></script>
+    <link rel="stylesheet" href="assets/kit/kit.css" />
+    <link rel="stylesheet" href="assets/kit/naturel.css" />
+    <link rel="stylesheet" href="assets/kit/app.css" />
+    <style>
+      @font-face { font-family: "Anton"; src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Source Serif 4"; src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+      @font-face { font-family: "Caveat"; src: url("assets/fonts/caveat-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; }
+      @font-face { font-family: "Montserrat Hook"; src: url("assets/fonts/montserrat-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-style: normal; }
+      #s-main { background: transparent; }
+      .glass { border-radius: 40px; background: rgba(14, 16, 40, 0.42); backdrop-filter: blur(22px) saturate(1.3); -webkit-backdrop-filter: blur(22px) saturate(1.3);
+        border: 1.5px solid rgba(255,255,255,.28); box-shadow: 0 30px 80px rgba(0,0,0,.35); color: #fff; font-family: Inter, sans-serif; }
+      .gchip { display: inline-flex; align-items: center; gap: 10px; height: 52px; padding: 0 22px; border-radius: 26px; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.3); color: #fff; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 24px; white-space: nowrap; }
+      .gchip.ok { background: rgba(44,196,181,.35); border-color: rgba(44,196,181,.75); }
+      .gchip svg.i { width: 26px; height: 26px; stroke-width: 2.6; }
+      .grow { display: flex; align-items: center; gap: 18px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.16); font-size: 30px; }
+      .grow b { font-weight: 600; }
+      .grow em { margin-left: auto; font-style: normal; font-family: Montserrat, sans-serif; font-weight: 800; color: #7ff0e3; }
+      .gav { flex: none; width: 58px; height: 58px; border-radius: 50%; background: rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 22px; }
+      .shade { text-shadow: 0 4px 30px rgba(0,0,0,.55); }
+
+      .note { position: absolute; padding: 22px 26px 26px; width: 330px; background: #ffe98a; color: #3b3000; font-family: Caveat, cursive; font-weight: 700; font-size: 46px; line-height: 1.05; box-shadow: 0 18px 40px rgba(0,0,0,.45); }
+      .note::before { content: ""; position: absolute; left: 50%; top: -14px; width: 90px; height: 28px; margin-left: -45px; background: rgba(255,255,255,.55); transform: rotate(-3deg); }
+
+      .ig { display: inline; padding: 6px 18px; line-height: 1.6; border-radius: 12px; background: rgba(0,0,0,.78); color: #fff; font-family: Inter, sans-serif; font-weight: 700; font-size: 46px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+      .ig.w { background: #6b4fe0; }
+      .xch { position: absolute; inset: 0; background: #fff; font-family: Inter, sans-serif; overflow: hidden; }
+      .xch .xhd { z-index: 5; position: absolute; left: 0; right: 0; top: 0; height: 330px; background: #f6f6f8; border-bottom: 1px solid #e0e0e6; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding-bottom: 22px; }
+      .xch .xst { position: absolute; left: 70px; right: 60px; top: 30px; display: flex; justify-content: space-between; font-size: 34px; font-weight: 600; color: #111; }
+      .xch .xbk { position: absolute; left: 40px; top: 170px; font-size: 60px; color: #0a84ff; }
+      .xch .xav { width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(160deg,#a9afbd,#7f8596); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 46px; font-weight: 600; }
+      .xch .xnm { margin-top: 10px; font-size: 30px; font-weight: 500; color: #111; }
+      .xch .xlst { position: absolute; left: 36px; right: 36px; top: 500px; display: flex; flex-direction: column; gap: 12px; }
+      .xch .xtm { text-align: center; font-size: 24px; color: #8a8a90; margin-bottom: 8px; }
+      .xbb { position: relative; max-width: 80%; padding: 20px 28px; border-radius: 38px; font-size: 37px; line-height: 1.3; }
+      .xbb.xin { align-self: flex-start; background: #e9e9eb; color: #111; border-bottom-left-radius: 10px; }
+      .xbb.xout { align-self: flex-end; background: #0a84ff; color: #fff; border-bottom-right-radius: 10px; }
+      .xbb .xtb { position: absolute; top: -34px; width: 62px; height: 62px; border-radius: 50%; background: #e9e9eb; border: 4px solid #fff; display: flex; align-items: center; justify-content: center; font-size: 32px; }
+      .xbb.xout .xtb { left: -30px; } .xbb.xin .xtb { right: -30px; background: #0a84ff; }
+      .xlu { align-self: flex-end; font-size: 23px; color: #8a8a90; margin-top: -4px; }
+      .xatt { display: flex; align-items: center; gap: 18px; }
+      .xatt i { flex: none; width: 70px; height: 84px; border-radius: 10px; background: #fff; color: #e5484d; font-style: normal; font-weight: 800; font-size: 22px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 8px; }
+      .xdt { align-self: flex-start; display: flex; gap: 9px; padding: 24px 28px; border-radius: 38px; background: #e9e9eb; }
+      .xdt i { width: 15px; height: 15px; border-radius: 50%; background: #9a9aa0; display: block; }
+      .xkb { position: absolute; left: 0; right: 0; bottom: 0; height: 760px; }
+      .xkb .xbar { position: absolute; left: 0; right: 0; top: 0; height: 120px; background: #fff; display: flex; align-items: center; gap: 18px; padding: 0 30px; }
+      .xkb .xpl { flex: none; width: 70px; height: 70px; border-radius: 50%; background: #e9e9eb; color: #8a8a90; display: flex; align-items: center; justify-content: center; font-size: 46px; }
+      .xkb .xin { flex: 1; min-height: 76px; border: 2px solid #d6d6dc; border-radius: 40px; padding: 14px 26px; font-size: 34px; color: #111; display: flex; align-items: center; }
+      .xkb .xin .xph { color: #a0a0a6; }
+      .xkb .xkeys { position: absolute; left: 0; right: 0; top: 120px; bottom: 0; background: #d3d5db; padding: 22px 8px 0; display: flex; flex-direction: column; gap: 22px; }
+      .xkb .xr { display: flex; justify-content: center; gap: 12px; }
+      .xkb .xr span { width: 92px; height: 104px; border-radius: 12px; background: #fff; box-shadow: 0 2px 0 #9ea1a8; display: flex; align-items: center; justify-content: center; font-size: 42px; color: #111; }
+      .xkb .xr span.xw { width: 520px; font-size: 32px; color: #333; } .xkb .xr span.xg { background: #adb1ba; width: 140px; font-size: 30px; }
+      .xsg { position: absolute; left: 30px; right: 30px; padding: 22px 26px; border-radius: 30px; background: #f3effe; border: 3px solid #6b4fe0; box-shadow: 0 18px 40px rgba(107,79,224,.25); font-family: Inter, sans-serif; color: #1b1f4b; }
+      .xsg .xlg { display: flex; align-items: center; gap: 12px; font-size: 25px; font-weight: 700; color: #6b4fe0; margin-bottom: 10px; }
+      .xsg .xlg img { height: 40px; }
+      .xsg p { font-size: 33px; line-height: 1.32; margin: 0; }
+      .xtap { position: absolute; width: 90px; height: 90px; margin: -45px 0 0 -45px; border-radius: 50%; background: rgba(10,132,255,.25); border: 4px solid rgba(10,132,255,.6); z-index: 50; }
+      .xbn { position: absolute; left: 24px; right: 24px; top: 24px; display: flex; gap: 20px; align-items: center; padding: 24px 26px; border-radius: 36px; background: rgba(245,245,248,.97); box-shadow: 0 18px 50px rgba(0,0,0,.25); font-family: Inter, sans-serif; color: #111; z-index: 40; }
+      .xbn img { flex: none; width: 84px; height: 84px; border-radius: 20px; background: #fff; padding: 8px; }
+      .end { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 35%, #ffffff 0%, #f1eefc 60%, #e7e1fa 100%); text-align: center; font-family: Inter, sans-serif; color: #1b1f4b; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="16.4" data-width="1080" data-height="1920">
+      <section id="s-main" class="clip" data-start="0" data-duration="16.4" data-track-index="0"></section>
+      <audio id="sfx" src="assets/audio/meme2-02-rappelez-moi-en-mars.wav" data-start="0" data-duration="16.4" data-track-index="10" data-volume="1"></audio>
+    </div>
+    <script src="assets/kit/kit.js"></script>
+    <script src="assets/kit/naturel.js"></script>
+    <script src="assets/kit/app.js"></script>
+    <script src="assets/kit/cine.js"></script>
+    <script src="assets/kit/fx.js"></script>
+    <script>
+      (function () {
+        const tl = gsap.timeline({ paused: true });
+        K.init(tl);
+        const root = document.getElementById("s-main");
+        const D = 16.4;
+        N.init(tl, root, D);
+        A.init(tl, root);
+        C.init(tl, root, D);
+        FX.init(tl);
+        const glow = (x, y, s, t) => { const g = N.ab("n-glow", null, { left: x + "px", top: y + "px", width: s + "px", height: s + "px" }); g.setAttribute("data-layout-allow-overflow", ""); N.hide(g); tl.fromTo(g, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 1.2, ease: "power2.out" }, t); return g; };
+        const gains = (t, G, note) => {
+          const h = N.head(["CE QUE ÇA", "TE RAPPORTE<span class='v'>.</span>"], { top: "170px", fontSize: "86px" }, t);
+          const els = G.map((g, i) => {
+            const c = N.ab("g-card", `<div class="k">${g.k}</div><div class="v ${g.c || ""}"><span>${g.v0 || ""}</span></div><div class="d">${g.d}</div>`, { left: "90px", top: 480 + i * 330 + "px", width: "900px" });
+            N.hide(c);
+            const tt = t + 0.5 + i * 0.7;
+            tl.fromTo(c, { opacity: 0, x: i % 2 ? 120 : -120 }, { opacity: 1, x: 0, duration: 0.55, ease: "power3.out" }, tt);
+            K.sfx(tt, "whoosh", 0.12, 0, { d: 0.35, f0: 600, f1: 3000, pk: 0.6 });
+            if (g.n != null) K.count(K.$(".v span", c), g.n, tt + 0.2, 1.0, g.f, { ticks: 10 }); else K.$(".v span", c).innerHTML = g.v;
+            if (g.n != null) K.sfx(tt + 1.2, "success", 0.18);
+            return c;
+          });
+          const nt = N.text("ctr g-note", note || "Exemples indicatifs", { top: "1490px" }, t + 2.4);
+          return [h, ...els, nt];
+        };
+        const fin = (t, M) => {
+          N.outro(t, "contact");
+          const m = N.mascot({ left: "440px", top: "1240px", width: "200px" });
+          m.enter(t + 1.6);
+          m.wave(t + 2.3);
+          m.blink(t + 3.2);
+        };
+
+        tl.set([K.$(".n-bg", root), ...K.$$(".n-arc", root)], { opacity: 0 }, 0);
+        C.bars(0.5, true, 1.0);
+        const LIGHT = "linear-gradient(180deg, #f5f3fe 0%, #ece7fb 100%)";
+        const O = 0.3;
+        const shade = (p) => FX.ab(p, { inset: "0", background: "linear-gradient(180deg, rgba(5,6,15,.62) 0%, rgba(5,6,15,.05) 36%, rgba(5,6,15,.08) 62%, rgba(5,6,15,.72) 100%)" });
+        const num = (p, txt, t, css = {}) => {
+          const e = FX.ab(p, Object.assign({ left: "56px", top: "110px", fontFamily: "Montserrat, sans-serif", fontWeight: "800", fontSize: "200px", lineHeight: "1", color: "rgba(255,255,255,.1)", WebkitTextStroke: "3px rgba(255,255,255,.5)" }, css), txt);
+          tl.set(e, { opacity: 0 }, 0);
+          tl.fromTo(e, { opacity: 0, x: -90 }, { opacity: 1, x: 0, duration: 0.8, ease: "expo.out" }, t);
+          return e;
+        };
+        const chip = (p, html, css, t, o = {}) => {
+          const g = FX.glass(p, Object.assign({ padding: "18px 28px", borderRadius: "28px", fontFamily: "Montserrat, sans-serif", fontWeight: "700", fontSize: "34px", whiteSpace: "nowrap", display: "flex", alignItems: "center", gap: "16px" }, css), html);
+          K.$$("svg.i", g).forEach((s) => (s.style.cssText = "width:38px;height:38px;color:#fff;flex:none"));
+          tl.set(g, { opacity: 0 }, 0);
+          tl.fromTo(g, { opacity: 0, scale: 0.7, y: 30 }, { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: "back.out(1.7)" }, t);
+          if (o.snd !== false) K.sfx(t, o.snd || "pop", o.g ?? 0.14, 0, { f: 900 });
+          return g;
+        };
+        const card = (p, ic, big, small, css, t, o = {}) => {
+          const g = FX.glass(p, Object.assign({ left: "90px", width: "900px", display: "flex", alignItems: "center", gap: "22px" }, css),
+            `<span style="flex:none;width:80px;height:80px;border-radius:22px;background:${o.bg || "rgba(44,196,181,.38)"};display:flex;align-items:center;justify-content:center">${K.icon(ic)}</span><span style="min-width:0"><b style="display:block;font-family:Montserrat,sans-serif;font-weight:800;font-size:38px;line-height:1.12">${big}</b><span style="font-size:27px;color:rgba(255,255,255,.88)">${small}</span></span>${o.check ? `<span class="ok" style="margin-left:auto;flex:none;width:58px;height:58px;border-radius:50%;background:#2cc4b5;display:flex;align-items:center;justify-content:center">${K.icon("check")}</span>` : ""}`);
+          K.$$("svg.i", g).forEach((s) => (s.style.cssText = "width:42px;height:42px;color:#fff"));
+          tl.set(g, { opacity: 0 }, 0);
+          tl.fromTo(g, { opacity: 0, y: 70, scale: 0.94, filter: "blur(8px)" }, { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", duration: 0.6, ease: "expo.out" }, t);
+          FX.sheen(g, t + 0.3);
+          K.sfx(t, o.snd || "pop", o.g ?? 0.16, 0, { f: 900 });
+          if (o.check) {
+            const ok = K.$(".ok", g);
+            tl.set(ok, { scale: 0 }, 0);
+            tl.to(ok, { scale: 1, duration: 0.35, ease: "back.out(2.4)" }, t + 0.45);
+            K.sfx(t + 0.45, "success", 0.2);
+          }
+          return g;
+        };
+        const tag = (p, txt, t, sub = "") => {
+          const g = FX.glass(p, { left: "0", right: "0", margin: "0 auto", width: "430px", top: "110px", padding: "16px 26px", borderRadius: "999px", display: "flex", alignItems: "center", justifyContent: "center", gap: "16px", fontFamily: "Montserrat, sans-serif", fontWeight: "800", fontSize: "54px" },
+            `${K.icon("clock")}<span>${txt}</span>${sub ? `<small style="font-size:26px;font-weight:600;opacity:.75">${sub}</small>` : ""}`);
+          K.$$("svg.i", g).forEach((s) => (s.style.cssText = "width:46px;height:46px;color:#2cc4b5"));
+          tl.set(g, { opacity: 0 }, 0);
+          tl.fromTo(g, { opacity: 0, y: -40 }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, t);
+          K.sfx(t, "tick", 0.2, 0, { f: 1800 });
+          return g;
+        };
+        const kar = (segs) => FX.karaoke(segs.map((s) => [s[0] + O, s[1] + O, s[2]]), { keys: ["limo", "mandats", "tard", "tête", "pleine", "terrain", "trois", "dimanches", "secret", "calcul", "deux", "temps", "clients", "estimation"] });
+        const phoneIn = (p, css, html, t, o = {}) => {
+          const ph = A.phone(css, { time: o.time || "8:00" });
+          p.appendChild(ph.wrap);
+          const pg = A.page(ph, html);
+          A.enter(ph, t, { flatAt: 0.7 });
+          return { ph, pg };
+        };
+        const outro = (t) => {
+          FX.layer(t - 0.25, null, { background: LIGHT }, "", true);
+          C.flash(t - 0.25, "#ffffff", 0.95);
+          C.leak(t - 0.2, 2.4);
+          window.__TE = t;
+          N.outro(t, "essai");
+          const m = N.mascot({ left: "440px", top: "1500px", width: "190px" });
+          m.enter(t + 1.4);
+          m.wave(t + 2.1);
+        };
+
+        const KEYS = ["limo", "tout", "jamais", "rien", "anniversaire", "anniversaires", "mails", "kilométriques", "relance", "relances", "oubli", "travaille", "métier", "collègue", "agit", "terrain", "clients", "vocal"];
+        const kar2 = (segs) => FX.karaoke(segs.map((s) => [s[0] + O, s[1] + O, s[2]]), { keys: KEYS });
+        const lay = (t0, t1, prev, o = {}) => {
+          const l = FX.layer(t0, t1);
+          if (o.colors !== false) FX.aurora(l, t0 - 0.1, t1 + 0.1, o.colors ? { colors: o.colors, a: o.a } : {});
+          if (prev) FX.whip(prev, l, t0 - 0.15);
+          return l;
+        };
+        const foot = (id, t0, t1, prev) => {
+          const v = document.getElementById(id);
+          const l = FX.layer(t0, t1);
+          shade(l);
+          if (prev) FX.whip(prev, [v, l], t0 - 0.15);
+          tl.fromTo(v, { scale: 1.0 }, { scale: 1.08, duration: t1 - t0, ease: "none" }, t0);
+          return l;
+        };
+        const web = (p, items, t) => {
+          const c = FX.glass(p, { left: "390px", top: "760px", width: "300px", height: "300px", borderRadius: "50%", padding: "0", display: "flex", alignItems: "center", justifyContent: "center" }, `<img src="assets/img/limo-house-ad.png" alt="" style="width:130px;height:130px;background:#fff;border-radius:34px;padding:16px" />`);
+          tl.set(c, { opacity: 0 }, 0);
+          tl.fromTo(c, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.6)" }, t);
+          const P = [[80, 470], [600, 520], [50, 1150], [610, 1120], [30, 830], [720, 840]];
+          const els = [c];
+          items.forEach((it, i) => {
+            const g = chip(p, `${K.icon(it[0])}${it[1]}`, { left: P[i % 6][0] + "px", top: P[i % 6][1] + "px" }, it[2]);
+            tl.to(g, { y: "-=16", duration: 1.5, ease: "sine.inOut", yoyo: true, repeat: 1 }, it[2] + 0.5);
+            els.push(g);
+          });
+          return els;
+        };
+        const msgCard = (p, label, txt, btn, css, t) => {
+          const m = FX.glass(p, Object.assign({ left: "90px", width: "900px", padding: "24px 28px" }, css),
+            `<span style="display:block;font-size:24px;letter-spacing:.06em;color:rgba(255,255,255,.75)">${label}</span><span style="display:block;margin-top:10px;font-size:31px;line-height:1.35">${txt}</span>${btn ? `<span class="snd" style="display:inline-block;margin-top:16px;padding:12px 28px;border-radius:999px;background:#6b4fe0;font-family:Montserrat,sans-serif;font-weight:800;font-size:28px">${btn}</span>` : ""}`);
+          tl.set(m, { opacity: 0 }, 0);
+          tl.fromTo(m, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, t);
+          FX.sheen(m, t + 0.3);
+          return m;
+        };
+        const tapSend = (m, t) => { tl.to(K.$(".snd", m), { scale: 0.88, duration: 0.08, yoyo: true, repeat: 1 }, t); tl.set(K.$(".snd", m), { textContent: "Envoyé ✓", background: "#2cc4b5" }, t + 0.18); K.sfx(t, "send", 0.3); };
+        const bday = (p, name, t, top = 520) => [
+          card(p, "cake", `Anniversaire · ${name}`, "Aujourd’hui · client fidèle", { top: top + "px" }, t, { bg: "rgba(255,143,143,.5)", snd: "notif" }),
+          msgCard(p, "LIMO · MESSAGE PRÊT", `« Joyeux anniversaire ${name} ! Je vous souhaite une très belle journée. »`, "Envoyer", { top: top + 170 + "px" }, t + 0.8),
+        ];
+        const inbox = (p, t, top = 480) => {
+          const R = [["Newsletter d’un portail", 0], ["Mme Roy · question sur le compromis", 1], ["Offre partenaire", 0], ["Me Faure · pièces du dossier", 1], ["Publicité logiciel", 0]];
+          const box = FX.glass(p, { left: "90px", width: "900px", top: top + "px", padding: "22px 26px" },
+            `<span style="display:block;font-size:24px;letter-spacing:.06em;color:rgba(255,255,255,.75);margin-bottom:8px">BOÎTE MAIL · TRIÉE PAR LIMO</span>` +
+            R.map((r) => `<div class="mr ${r[1] ? "imp" : "pro"}" style="display:flex;align-items:center;gap:16px;padding:13px 0;border-top:1px solid rgba(255,255,255,.15);font-size:28px">${K.icon("mail")}<span style="flex:1;white-space:nowrap;overflow:hidden">${r[0]}</span><span class="tg" style="flex:none;padding:6px 16px;border-radius:999px;font-size:21px;font-weight:700;background:${r[1] ? "#2cc4b5" : "rgba(255,255,255,.18)"}">${r[1] ? "Réponse prête" : "Archivé"}</span></div>`).join(""));
+          K.$$("svg.i", box).forEach((s) => (s.style.cssText = "width:30px;height:30px;color:#fff;flex:none"));
+          tl.set(box, { opacity: 0 }, 0);
+          tl.fromTo(box, { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, t);
+          K.$$(".tg", box).forEach((g) => { tl.set(g, { opacity: 0 }, 0); tl.to(g, { opacity: 1, duration: 0.2 }, t + 0.8); });
+          K.$$(".mr.pro", box).forEach((r, i) => { tl.to(r, { opacity: 0.35, x: 30, duration: 0.35, ease: "power2.in" }, t + 1.0 + i * 0.25); K.sfx(t + 1.0 + i * 0.25, "swipe", 0.1); });
+          return box;
+        };
+        const km = (p, t, top = 600) => {
+          const g = FX.glass(p, { left: "0", right: "0", margin: "0 auto", width: "780px", height: "380px", boxSizing: "border-box", top: top + "px", padding: "28px 0 0", textAlign: "center", borderRadius: "44px" },
+            `<span style="display:inline-flex;align-items:center;gap:14px;font-family:Montserrat,sans-serif;font-weight:700;font-size:32px;color:#2cc4b5">${K.icon("car")}Frais kilométriques · octobre</span><b class="kv" style="display:block;width:100%;text-align:center;margin-top:10px;font-family:Montserrat,sans-serif;font-weight:800;font-size:110px;line-height:1.05;white-space:nowrap">0 km</b><span class="ok" style="position:absolute;left:0;right:0;bottom:30px;margin:0 auto;width:fit-content;padding:10px 26px;border-radius:999px;background:#2cc4b5;font-family:Montserrat,sans-serif;font-weight:800;font-size:28px">Calculé automatiquement</span>`);
+          K.$$("svg.i", g).forEach((s) => (s.style.cssText = "width:40px;height:40px;color:#2cc4b5"));
+          tl.set(g, { opacity: 0 }, 0);
+          tl.fromTo(g, { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.5, ease: "expo.out" }, t);
+          K.count(K.$(".kv", g), 1248, t + 0.3, 1.5, (v) => { const n = Math.round(v); return (n >= 1000 ? Math.floor(n / 1000) + " " + String(n % 1000).padStart(3, "0") : n) + " km"; }, { ticks: 12 });
+          const ok = K.$(".ok", g);
+          tl.set(ok, { opacity: 0 }, 0);
+          tl.fromTo(ok, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.2)" }, t + 1.9);
+          K.sfx(t + 1.9, "success", 0.22);
+          return g;
+        };
+        const post = (p, t, top = 420) => {
+          const g = FX.glass(p, { left: "215px", width: "650px", top: top + "px", padding: "20px" },
+            `<div style="display:flex;align-items:center;gap:14px;margin-bottom:14px"><img src="assets/img/limo-house-ad.png" alt="" style="width:56px;height:56px;border-radius:50%;background:#fff;padding:6px" /><b style="font-size:28px">ton.agence.immo</b></div><div style="height:430px;border-radius:18px;overflow:hidden"><img src="assets/img/bien-terrasse-mer.jpg" alt="" style="width:100%;height:100%;object-fit:cover" /></div><div style="margin-top:14px;font-size:27px;line-height:1.35">Nouveau mandat : villa vue mer, 4 chambres. Visites dès samedi.</div><span class="pr" style="display:inline-block;margin-top:12px;padding:10px 24px;border-radius:999px;background:#2cc4b5;font-family:Montserrat,sans-serif;font-weight:800;font-size:26px">Publication prête</span>`);
+          tl.set(g, { opacity: 0 }, 0);
+          tl.fromTo(g, { opacity: 0, y: 60, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: "expo.out" }, t);
+          const pr = K.$(".pr", g);
+          tl.set(pr, { opacity: 0 }, 0);
+          tl.fromTo(pr, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.2)" }, t + 1.0);
+          K.sfx(t + 1.0, "success", 0.2);
+          return g;
+        };
+        const ask = (p, q, r, t, tr, top = 520) => {
+          const qb = FX.ab(p, { right: "90px", width: "760px", top: top + "px", padding: "22px 28px", borderRadius: "34px 34px 8px 34px", background: "#6b4fe0", color: "#fff", fontFamily: "Inter, sans-serif", fontSize: "34px", lineHeight: "1.32", boxShadow: "0 20px 50px rgba(0,0,0,.3)" }, `<span style="display:inline-flex;align-items:center;gap:10px;font-size:22px;opacity:.85;margin-bottom:6px">${K.icon("mic")}Message vocal</span><br>${q}`);
+          K.$$("svg.i", qb).forEach((s) => (s.style.cssText = "width:26px;height:26px;color:#fff"));
+          tl.set(qb, { opacity: 0 }, 0);
+          tl.fromTo(qb, { opacity: 0, y: 30, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(1.8)" }, t);
+          K.sfx(t, "send", 0.24);
+          const rb = FX.glass(p, { left: "90px", width: "760px", top: top + 200 + "px", padding: "22px 28px", borderRadius: "34px 34px 34px 8px", fontSize: "33px", lineHeight: "1.32" }, `<span style="display:inline-flex;align-items:center;gap:10px;font-size:22px;color:#2cc4b5;font-weight:700;margin-bottom:6px">${K.icon("check")}Limo</span><br>${r}`);
+          K.$$("svg.i", rb).forEach((s) => (s.style.cssText = "width:26px;height:26px;color:#2cc4b5"));
+          tl.set(rb, { opacity: 0 }, 0);
+          tl.fromTo(rb, { opacity: 0, y: 30, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(1.8)" }, tr);
+          K.sfx(tr, "receive", 0.24);
+          return [qb, rb];
+        };
+        const logoCard = (p, t, top = 760) => {
+          const g = FX.ab(p, { left: "240px", top: top + "px", width: "600px", padding: "40px 0", borderRadius: "44px", background: "#ffffff", boxShadow: "0 30px 80px rgba(0,0,0,.45)", textAlign: "center" }, `<img src="assets/img/limo-logo-ad.png" alt="LIMO" style="width:440px" />`);
+          tl.set(g, { opacity: 0 }, 0);
+          tl.fromTo(g, { opacity: 0, scale: 1.3, filter: "blur(14px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.7, ease: "power3.out" }, t);
+          K.sfx(t + 0.1, "thump", 0.4);
+          C.sweep(g, t + 0.7, 0.9);
+          return g;
+        };
+
+        const TOP = document.getElementById("root");
+        tl.set([C.barT, C.barB], { opacity: 0 }, 0);
+        const EO = "power2.out", EZ = "power2.inOut";
+        const cap = (t0, t1, html, top = 360, w = false) => {
+          const e = FX.ab(TOP, { left: "50px", right: "50px", top: top + "px", textAlign: "center", zIndex: 45 }, `<span class="ig${w ? " w" : ""}">${html}</span>`);
+          tl.set(e, { opacity: 0 }, 0);
+          tl.fromTo(e, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.18, ease: EO, immediateRender: false }, t0);
+          tl.set(e, { opacity: 0 }, t1);
+          return e;
+        };
+        // la conversation
+        const conv = (who, ini, time) => {
+          const l = FX.ab(TOP, { left: "0", top: "0", width: "1080px", height: "1920px" }, `<div class="xch"><div class="xhd"><div class="xst"><span>${time}</span><span>●●● 5G ▮</span></div><div class="xbk">‹</div><div class="xav">${ini}</div><div class="xnm">${who} ›</div></div><div class="xlst"><div class="xtm">${"Aujourd’hui " + time}</div></div>
+<div class="xkb"><div class="xbar"><span class="xpl">+</span><div class="xin"><span class="xph">iMessage</span><span class="xdr"></span></div></div><div class="xkeys">
+<div class="xr">${"AZERTYUIOP".split("").map((k) => `<span>${k}</span>`).join("")}</div><div class="xr">${"QSDFGHJKLM".split("").map((k) => `<span>${k}</span>`).join("")}</div><div class="xr"><span class="xg">⇧</span>${"WXCVBN".split("").map((k) => `<span>${k}</span>`).join("")}<span class="xg">⌫</span></div><div class="xr"><span class="xg">123</span><span class="xw">espace</span><span class="xg">envoyer</span></div></div></div></div>`);
+          const kb = K.$(".xkb", l);
+          tl.set(kb, { y: 640 }, 0);
+          return { l, lst: K.$(".xlst", l), kb, dr: K.$(".xdr", l), ph: K.$(".xph", l) };
+        };
+        const msg = (c, t, html, side, o = {}) => {
+          if (side === "in" && !o.nodots) {
+            const d = K.h("div", "xdt", "<i></i><i></i><i></i>", c.lst);
+            tl.set(d, { display: "none" }, 0); tl.set(d, { display: "flex" }, t - 1.0); tl.set(d, { display: "none" }, t);
+            K.$$("i", d).forEach((i, k) => tl.fromTo(i, { opacity: 0.3 }, { opacity: 1, duration: 0.25, yoyo: true, repeat: 3, ease: "sine.inOut", immediateRender: false }, t - 1.0 + k * 0.12));
+          }
+          const b = K.h("div", "xbb x" + side, html, c.lst);
+          [b, ...K.$$("*", b)].forEach((x) => { x.setAttribute("data-layout-allow-occlusion", ""); x.setAttribute("data-layout-allow-overlap", ""); });
+          tl.set(b, { display: "none" }, 0); tl.set(b, { display: "block" }, t);
+          tl.fromTo(b, { opacity: 0, y: 24, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.28, ease: "back.out(1.6)", immediateRender: false }, t);
+          K.sfx(t, side === "in" ? "receive" : "send", 0.32);
+          return b;
+        };
+        const tapback = (b, t, emo) => {
+          const e = K.h("span", "xtb", emo, b);
+          tl.set(e, { opacity: 0, scale: 0 }, 0); tl.to(e, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.4)" }, t); K.sfx(t, "pop", 0.2, 0, { f: 900 });
+        };
+        const lu = (c, t, txt) => { const e = K.h("div", "xlu", txt, c.lst); tl.set(e, { display: "none" }, 0); tl.set(e, { display: "block" }, t); };
+        const kbUp = (c, t) => { tl.to(c.kb, { y: 0, duration: 0.35, ease: EO }, t); tl.to(c.lst, { y: -160, duration: 0.35, ease: EO }, t); };
+        const kbDown = (c, t) => { tl.to(c.kb, { y: 640, duration: 0.35, ease: EZ }, t); tl.to(c.lst, { y: 0, duration: 0.35, ease: EZ }, t); };
+        // brouillon tapé puis effacé
+        const draft = (c, t, txt, dur = 1.8) => {
+          tl.set(c.ph, { display: "none" }, t);
+          K.type(c.dr, txt, t, dur, 0.05);
+          tl.to(c.dr, { clipPath: "inset(0% 100% 0% 0%)", duration: 0.6, ease: "power1.in" }, t + dur + 0.6);
+          tl.set(c.dr, { textContent: "", clipPath: "inset(0% 0% 0% 0%)" }, t + dur + 1.25);
+          tl.set(c.ph, { display: "inline" }, t + dur + 1.25);
+          for (let k = 0; k < 5; k++) K.sfx(t + dur + 0.6 + k * 0.11, "type", 0.12, 0, { f: 2000 });
+        };
+        // suggestion LIMO au-dessus du clavier, puis tap → envoyé
+        const sugg = (c, t, tTap, html) => {
+          const s = FX.ab(c.l, { top: "790px" }, `<div class="xlg"><img src="assets/img/limo-logo-ad.png" alt="LIMO" />Réponse préparée par LIMO ✨</div><p>${html}</p>`);
+          s.classList.add("xsg");
+          tl.set(s, { opacity: 0 }, 0);
+          tl.fromTo(s, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.35, ease: EO, immediateRender: false }, t);
+          K.sfx(t, "success", 0.18);
+          const tp = FX.ab(c.l, { left: "540px", top: "950px" }); tp.classList.add("xtap");
+          tl.set(tp, { opacity: 0 }, 0);
+          tl.fromTo(tp, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 0.8, duration: 0.1, ease: "none", immediateRender: false }, tTap);
+          tl.to(tp, { opacity: 0, scale: 1.8, duration: 0.45, ease: EO }, tTap + 0.1);
+          K.sfx(tTap, "tap", 0.35);
+          tl.to(s, { opacity: 0, y: -60, scale: 0.9, duration: 0.25, ease: "power2.xin" }, tTap + 0.15);
+          return s;
+        };
+        const endc = (t0) => {
+          window.__TE = t0;
+          const l = FX.ab(TOP, { left: "0", top: "0", width: "1080px", height: "1920px", zIndex: 60 }, `<div class="end"><div style="margin-top:560px"><img src="assets/img/limo-logo-ad.png" alt="LIMO" style="height:150px" /></div><div style="margin-top:26px;font-family:Montserrat,sans-serif;font-weight:700;font-size:44px">Le bras droit du conseiller immo.</div><div style="margin-top:60px"><span style="display:inline-block;padding:28px 54px;border-radius:999px;background:#6b4fe0;color:#fff;font-family:Montserrat,sans-serif;font-weight:800;font-size:46px">Essai gratuit 14 jours</span></div><div style="margin-top:26px;font-size:34px;color:#4f5378">Sans engagement · lien en bio</div></div>`);
+          tl.set(l, { opacity: 0 }, 0); tl.to(l, { opacity: 1, duration: 0.3, ease: EO }, t0);
+          const M = N.mascot({ left: "440px", top: "1340px", width: "200px" }, { expr: "happy" });
+          TOP.appendChild(M.el); M.el.style.zIndex = "61";
+          tl.set(M.el, { opacity: 0 }, 0); tl.to(M.el, { opacity: 1, duration: 0.3 }, t0 + 0.3); M.wave(t0 + 0.6); M.expr("wink", t0 + 1.6, false);
+          K.sfx(t0, "whoosh", 0.12, 0, { d: 0.3, f0: 400, f1: 2400, pk: 0.4 });
+        };
+        const pdf = (name, sub) => `<div class="xatt"><i>PDF</i><span><b style="display:block">${name}</b><span style="font-size:27px;opacity:.85">${sub}</span></span></div>`;
+        // déroulé commun : hook, 2 messages, brouillon, suggestion, envoi, réponse, chute
+        const story = (o) => {
+          const c = conv(o.who, o.ini, o.time);
+          cap(0.15, 2.9, o.hook);
+          o.ins.forEach((m, i) => msg(c, 0.9 + i * 1.3, m, "in"));
+          kbUp(c, 3.4);
+          cap(3.5, 6.6, "Ce que j’ai envie de répondre :", 820);
+          draft(c, 3.7, o.want, 1.7);
+          cap(6.7, 9.0, "Ce que LIMO m’a préparé :", 690, true);
+          sugg(c, 6.8, 8.6, o.limo);
+          const me = msg(c, 8.8, o.limoOut || o.limo, "out");
+          kbDown(c, 9.0);
+          lu(c, 9.4, "Lu " + o.time2);
+          const r = msg(c, 10.8, o.reply, "in");
+          tapback(me, 11.3, o.xtb || "❤️");
+          cap(12.0, 13.9, o.punch, 1500, true);
+          endc(13.9);
+        };
+        story({"who": "Mme Leroy", "ini": "ML", "time": "09:12", "time2": "09:13", "hook": "Elle avait dit : « rappelez-moi en mars ». 🙂", "ins": ["Bonjour ! Vous vous souvenez de nous ? 😊", "On avait parlé de vendre au printemps…"], "want": "Euh… c’était quelle maison déjà ? 😬", "limo": "Bonjour Madame Leroy ! Bien sûr : la maison d’Allassac, 4 chambres, vente au printemps. On passe l’estimer jeudi ?", "reply": "Oh vous vous en souvenez ! Jeudi c’est parfait 🥰", "tb": "😍", "punch": "Le post-it, lui, aurait oublié. 🟨"});
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>
