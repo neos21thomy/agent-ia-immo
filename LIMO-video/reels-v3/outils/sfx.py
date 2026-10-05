@@ -279,6 +279,21 @@ def scratch():
     return lp(s, 4000) * np.minimum(1, (d - t) / 0.05) * np.minimum(1, t / 0.005) * 0.6
 
 
+def marker(d=1.2):
+    """Feutre sur papier : souffle filtré, traits irréguliers."""
+    t = t_axis(d)
+    n = bp(noise(d), 1800, 7000)
+    r = np.random.default_rng(int(d * 1000) % 97 + 3)
+    env = np.zeros_like(t)
+    at = 0.0
+    while at < d:
+        L = r.uniform(0.08, 0.28)
+        seg = (t >= at) & (t < at + L)
+        env[seg] = np.sin(np.pi * (t[seg] - at) / L) ** 0.6 * r.uniform(0.5, 1.0)
+        at += L + r.uniform(0.02, 0.07)
+    return n * env * 0.5
+
+
 SOUNDS = {
     "chirp": lambda e: chirp(e.get("n", 4), int(e["t"] * 100) % 997 + 1),
     "tick": lambda e: tick(e.get("f", 2600)),
@@ -313,6 +328,7 @@ SOUNDS = {
     "slam": lambda e: slam(),
     "clack": lambda e: clack(),
     "ring": lambda e: ring(e.get("d", 2.0)),
+    "marker": lambda e: marker(e.get("d", 1.2)),
     "boom": lambda e: boom(),
     "scratch": lambda e: scratch(),
 }
