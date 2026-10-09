@@ -125,6 +125,7 @@ PRESETS = {
     "tsc-03-piece-manquante-compromis": ("pop", 112, 0.3),
     "tsc-04-urbanisme-cadastre": ("pop", 112, 0.3),
     "tsc-05-audit-energetique": ("pop", 112, 0.3),
+    "hero-01-ton-metier-cest-vendre": ("epic", 100, 0.3, 6.4),
     "motion-01-la-vraie-vie": ("pop", 118, 0.3),
     "draw-01-la-vie-dun-conseiller": ("lofi", 84, 0.3),
     "meme2-01-le-sms-de-22h47": ("pop", 118, 0.3),
